@@ -6,13 +6,27 @@
     android:layout_height="match_parent"
     tools:context="com.example.yuru.baseballscorekeeper.MainActivity">
 
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="65dp"
-        android:layout_marginTop="78dp"
+    <ImageView
+        android:id="@+id/title"
+        android:layout_width="332dp"
+        android:layout_height="107dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="84dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/n1" />
+        app:srcCompat="@drawable/all" />
+
+    <ImageView
+        android:id="@+id/image_ball"
+        android:layout_width="109dp"
+        android:layout_height="101dp"
+        android:layout_marginEnd="138dp"
+        android:layout_marginStart="138dp"
+        android:layout_marginTop="34dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:srcCompat="@drawable/baseball" />
 </android.support.constraint.ConstraintLayout>
