@@ -45,6 +45,7 @@
 
         <ImageButton
             android:id="@+id/btn_player"
+            android:onClick="fn_player"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="#00000000"
@@ -53,6 +54,7 @@
 
         <ImageButton
             android:id="@+id/btn_record"
+            android:onClick="fn_record"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="#00000000"
