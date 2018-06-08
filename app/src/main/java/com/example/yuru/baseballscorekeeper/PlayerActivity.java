@@ -37,25 +37,13 @@ public class PlayerActivity extends AppCompatActivity {
         rLayoutManager = new LinearLayoutManager(this);
         item_list.setLayoutManager(rLayoutManager);
 
-/*        // 建立RecyclerView元件的資料來源物件
+        // 建立RecyclerView元件的資料來源物件
         itemAdapter = new PlayerAdapter(item_player, this) {
             @Override
             public void onBindViewHolder(final ViewHolder holder, final int Position) {
                 super.onBindViewHolder(holder, Position);
-
-                // 建立與註冊項目點擊監聽物件
-                holder.rootView.setOnClickListener(
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                // 讀取選擇位置的項目物件
-                                Player player = item_player.get(Position);
-                            }
-                        }
-                );
-
             }
-        };*/
+        };
 
         // 設定RecyclerView使用的資料來源物件
         item_list.setAdapter(itemAdapter);

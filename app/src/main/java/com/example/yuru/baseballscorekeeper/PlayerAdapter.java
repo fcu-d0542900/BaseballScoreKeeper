@@ -18,8 +18,10 @@ import java.util.List;
 
 public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder> implements ItemTouchHelperAdapter {
 
+    // 儲存項目資料的 List 物件
     private List<Player> item_player;
 
+    // 儲存最後一個項目的位置
     private int lastPosition = -1;
     private Context context;
 
@@ -29,8 +31,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(
-            ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // 建立項目使用的畫面配置元件
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_item01, parent, false);
         // 建立與回傳包裝好的畫面配置元件
@@ -53,7 +54,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
             super(view);
 
             // 使用父類別 ViewHolder 宣告的「itemView」欄位變數，
-            //   取得編號、名稱、說明與是否選擇元件
+            // 取得背號、名稱
             id_text = (TextView) itemView.findViewById(R.id.id_text);
             name_text = (TextView) itemView.findViewById(R.id.name_text);
             position_text = (TextView) itemView.findViewById(R.id.position_text);
@@ -103,11 +104,11 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
     }
 
     // 刪除一個項目
-    public void remove(int position) {
-        item_player.remove(position);
+    public void remove(int Position) {
+        item_player.remove(Position);
         // 通知資料項目已經刪除
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, item_player.size());
+        notifyItemRemoved(Position);
+        notifyItemRangeChanged(Position, item_player.size());
     }
 
     // 實作 ItemTouchHelperAdapter 介面的方法
