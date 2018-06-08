@@ -55,7 +55,7 @@ public class PlayerActivity extends AppCompatActivity {
     }
 
 
-    public void clickAdd(View view) {
+    public void clickAddPlayer(View view) {
         // 決定新項目的編號
         int newId = item_player.size() + 1;
         // 建立新增項目物件

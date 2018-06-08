@@ -35,10 +35,10 @@
             android:scrollbars="vertical" />
 
         <Button
-            android:id="@+id/btn_add"
+            android:id="@+id/btn_add_player"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="clickAdd"
+            android:onClick="clickAddPlayer"
             android:text="ADD" />
 
 
