@@ -27,9 +27,9 @@ public class PlayerActivity extends AppCompatActivity {
 
         item_player = new ArrayList<>();
 
-        item_player.add(new Player(35, "黃弘承", 8));
-        item_player.add(new Player(16, "董育汝", 10));
-        item_player.add(new Player(34, "林哲旭", 7));
+        item_player.add(new Player(35, "弘承", 8));
+        item_player.add(new Player(16, "YURU", 10));
+        item_player.add(new Player(56, "童", 7));
 
         // 執行RecyclerView元件的設定
         item_list.setHasFixedSize(true);
@@ -40,8 +40,8 @@ public class PlayerActivity extends AppCompatActivity {
         // 建立RecyclerView元件的資料來源物件
         itemAdapter = new PlayerAdapter(item_player, this) {
             @Override
-            public void onBindViewHolder(final ViewHolder holder, final int Position) {
-                super.onBindViewHolder(holder, Position);
+            public void onBindViewHolder(final ViewHolder holder, final int position) {
+                super.onBindViewHolder(holder, position);
             }
         };
 
@@ -59,7 +59,7 @@ public class PlayerActivity extends AppCompatActivity {
         // 決定新項目的編號
         int newId = item_player.size() + 1;
         // 建立新增項目物件
-        Player player = new Player(newId, "NewName" + newId, 0);
+        Player player = new Player(newId, "New" + newId, 0);
         // 新增一個項目
         itemAdapter.add(player);
         // 控制列表元件移到最後一個項目
