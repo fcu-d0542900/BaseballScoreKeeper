@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".PlayerActivity" />
-        <activity android:name=".RecordActivity"></activity>
+        <activity android:name=".RecordActivity" />
     </application>
 
 </manifest>
