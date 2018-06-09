@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="25sp"
     android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/new_record" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,9 +21,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="比賽名稱:" />
+
         <EditText
             android:id="@+id/editText_gameName"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
@@ -31,9 +40,53 @@
 
         <EditText
             android:id="@+id/editText_gameDate"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content" />
+            android:layout_width="459dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="date" />
 
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:scaleType="centerInside"
+            android:onClick="fn_choose_date"
+            app:srcCompat="@drawable/calendar" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="客場(先攻)隊伍:" />
+
+        <EditText
+            android:id="@+id/editText_awayTeam"
+            android:layout_width="164dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="主場(先守)隊伍:" />
+
+        <EditText
+            android:id="@+id/editText_homeTeam"
+            android:layout_width="164dp"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </LinearLayout>
