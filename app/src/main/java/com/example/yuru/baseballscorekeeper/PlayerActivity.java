@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -23,9 +24,10 @@ public class PlayerActivity extends AppCompatActivity {
     private RecyclerView item_list;
     private PlayerAdapter itemAdapter;
     private RecyclerView.LayoutManager rLayoutManager;
-    private Spinner playSpinner;
     private List<Player> item_player;
+
     private View view_new_player;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +35,6 @@ public class PlayerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_player);
 
         item_list = (RecyclerView) findViewById(R.id.player_list);
-
-        view_new_player = LayoutInflater.from(PlayerActivity.this).inflate(R.layout.dialog_new_player, null);
-        view_new_player.setPadding(3,0,3,0);
 
         item_player = new ArrayList<>();
 
@@ -71,8 +70,10 @@ public class PlayerActivity extends AppCompatActivity {
 
 
     public void clickAddPlayer(View view) {
-        AlertDialog.Builder dialog_addPlayer = new AlertDialog.Builder(this);
+        view_new_player = LayoutInflater.from(PlayerActivity.this).inflate(R.layout.dialog_new_player, null);
+        view_new_player.setPadding(3,0,3,0);
 
+        AlertDialog.Builder dialog_addPlayer = new AlertDialog.Builder(this);
         ArrayAdapter adapter_position = new ArrayAdapter(dialog_addPlayer.getContext(),android.R.layout.simple_spinner_item,new String[]{"","P","C","1B","2B","3B","SS","LF","CF","RF"});
         adapter_position.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spinner_home = (Spinner) view_new_player.findViewById(R.id.spinner_position);

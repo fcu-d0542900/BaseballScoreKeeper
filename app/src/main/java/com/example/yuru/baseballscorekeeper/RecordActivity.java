@@ -25,18 +25,17 @@ public class RecordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
 
-        view_new_record = LayoutInflater.from(RecordActivity.this).inflate(R.layout.dialog_new_record, null);
-        view_new_record.setPadding(3,0,3,0);
-
-        editText_awayTeam = view_new_record.findViewById(R.id.editText_awayTeam);
-        editText_homeTeam = view_new_record.findViewById(R.id.editText_homeTeam);
-        editText_gameDate = view_new_record.findViewById(R.id.editText_gameDate);
-
 
     }
 
 
     public void clickAddRecord(View view) {
+
+        view_new_record = LayoutInflater.from(RecordActivity.this).inflate(R.layout.dialog_new_record, null);
+        view_new_record.setPadding(3,0,3,0);
+        editText_awayTeam = view_new_record.findViewById(R.id.editText_awayTeam);
+        editText_homeTeam = view_new_record.findViewById(R.id.editText_homeTeam);
+
         AlertDialog.Builder dialog_addRecord = new AlertDialog.Builder(this);
 
         //建立一個ArrayAdapter物件，並放置下拉選單的內容
@@ -93,6 +92,8 @@ public class RecordActivity extends AppCompatActivity {
     }
 
     public void fn_choose_date(View view) {
+        editText_gameDate = view_new_record.findViewById(R.id.editText_gameDate);
+
         AlertDialog.Builder dialog_chooseDate = new AlertDialog.Builder(this);
         final DatePicker datePicker_gameDate=new DatePicker(RecordActivity.this);
         dialog_chooseDate.setView(datePicker_gameDate);
