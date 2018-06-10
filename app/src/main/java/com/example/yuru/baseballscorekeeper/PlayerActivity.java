@@ -91,6 +91,7 @@ public class PlayerActivity extends AppCompatActivity {
         dialog_addPlayer.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                //*****背號沒寫會錯誤 直接跳回主頁*****
                 playerName = editText_playerName.getText().toString();
                 playerNum = Integer.valueOf(editText_playerNum.getText().toString());
                 playerPosition = (int) spinner_position.getSelectedItemId();
