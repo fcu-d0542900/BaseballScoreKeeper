@@ -27,7 +27,12 @@ public class PlayerActivity extends AppCompatActivity {
     private List<Player> item_player;
 
     private View view_new_player;
-    
+    private EditText editText_playerName,editText_playerNum;
+    Spinner spinner_position;
+
+    String playerName;
+    int playerNum,playerPosition;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,30 +78,32 @@ public class PlayerActivity extends AppCompatActivity {
         view_new_player = LayoutInflater.from(PlayerActivity.this).inflate(R.layout.dialog_new_player, null);
         view_new_player.setPadding(3,0,3,0);
 
+        editText_playerName = view_new_player.findViewById(R.id.editText_playerName);
+        editText_playerNum = view_new_player.findViewById(R.id.editText_playerNum);
+        spinner_position = view_new_player.findViewById(R.id.spinner_position);
+
         AlertDialog.Builder dialog_addPlayer = new AlertDialog.Builder(this);
         ArrayAdapter adapter_position = new ArrayAdapter(dialog_addPlayer.getContext(),android.R.layout.simple_spinner_item,new String[]{"","P","C","1B","2B","3B","SS","LF","CF","RF"});
         adapter_position.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner spinner_home = (Spinner) view_new_player.findViewById(R.id.spinner_position);
-        spinner_home.setAdapter(adapter_position);
+        spinner_position.setAdapter(adapter_position);
         
         dialog_addPlayer.setView(view_new_player);
         dialog_addPlayer.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-            Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_SHORT).show();
+                playerName = editText_playerName.getText().toString();
+                playerNum = Integer.valueOf(editText_playerNum.getText().toString());
+                playerPosition = (int) spinner_position.getSelectedItemId();
+
+                Player player = new Player(playerNum,playerName, playerPosition);  // 建立新增項目物件
+                itemAdapter.add(player);  // 新增一個項目
+                item_list.scrollToPosition(item_player.size() - 1);  // 控制列表元件移到最後一個項目
+
+                Toast.makeText(getApplicationContext(), "ADD: "+playerName+" "+playerNum+" "+playerPosition, Toast.LENGTH_SHORT).show();
             }
         });
-
         dialog_addPlayer.show();
 
-        /// 決定新項目的編號
-        int newId = item_player.size() + 1;
-        // 建立新增項目物件
-        Player player = new Player(newId, "New" + newId, 0);
-        // 新增一個項目
-        itemAdapter.add(player);
-        // 控制列表元件移到最後一個項目
-        item_list.scrollToPosition(item_player.size() - 1);
     }
 
 
