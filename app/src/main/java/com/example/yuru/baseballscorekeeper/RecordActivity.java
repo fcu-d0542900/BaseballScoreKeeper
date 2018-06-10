@@ -18,6 +18,7 @@ import android.widget.Toast;
 public class RecordActivity extends AppCompatActivity {
 
     private View item;
+    private EditText editText_awayTeam,editText_homeTeam;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +33,9 @@ public class RecordActivity extends AppCompatActivity {
 
 
     public void clickAddRecord(View view) {
-
         AlertDialog.Builder dialog_addRecord = new AlertDialog.Builder(this);
+        editText_awayTeam = item.findViewById(R.id.editText_awayTeam);
+        editText_homeTeam = item.findViewById(R.id.editText_homeTeam);
 
         //建立一個ArrayAdapter物件，並放置下拉選單的內容
         ArrayAdapter adapter_away = new ArrayAdapter(dialog_addRecord.getContext(),android.R.layout.simple_spinner_item,new String[]{"我的隊伍","自訂"});
@@ -50,21 +52,31 @@ public class RecordActivity extends AppCompatActivity {
         spinner_away.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView adapterView, View view, int position, long id) {
-                Toast.makeText(RecordActivity.this, "您選擇"+adapterView.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
+                if(adapterView.getSelectedItemId() == 1) {
+                    editText_awayTeam.setVisibility(View.VISIBLE);
+                }
+                else {
+                    editText_awayTeam.setVisibility(View.GONE);
+                }
             }
             @Override
             public void onNothingSelected(AdapterView parentView) {
-                Toast.makeText(RecordActivity.this, "您沒有選擇任何項目", Toast.LENGTH_LONG).show();
+                Toast.makeText(RecordActivity.this, "您沒有選擇任何項目", Toast.LENGTH_SHORT).show();
             }
         });
         spinner_home.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView adapterView, View view, int position, long id) {
-                Toast.makeText(RecordActivity.this, "您選擇"+adapterView.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
+                if(adapterView.getSelectedItemId() == 1) {
+                    editText_homeTeam.setVisibility(View.VISIBLE);
+                }
+                else {
+                    editText_homeTeam.setVisibility(View.GONE);
+                }
             }
             @Override
             public void onNothingSelected(AdapterView parentView) {
-                Toast.makeText(RecordActivity.this, "您沒有選擇任何項目", Toast.LENGTH_LONG).show();
+                Toast.makeText(RecordActivity.this, "您沒有選擇任何項目", Toast.LENGTH_SHORT).show();
             }
         });
 
