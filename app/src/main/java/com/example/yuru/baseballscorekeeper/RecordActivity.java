@@ -52,7 +52,7 @@ public class RecordActivity extends AppCompatActivity {
         spinner_away.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView adapterView, View view, int position, long id) {
-                if(adapterView.getSelectedItemId() == 1) {
+                if(adapterView.getSelectedItem().toString() == "自訂") {
                     editText_awayTeam.setVisibility(View.VISIBLE);
                 }
                 else {
@@ -67,7 +67,7 @@ public class RecordActivity extends AppCompatActivity {
         spinner_home.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView adapterView, View view, int position, long id) {
-                if(adapterView.getSelectedItemId() == 1) {
+                if(adapterView.getSelectedItem().toString() == "自訂") {
                     editText_homeTeam.setVisibility(View.VISIBLE);
                 }
                 else {
