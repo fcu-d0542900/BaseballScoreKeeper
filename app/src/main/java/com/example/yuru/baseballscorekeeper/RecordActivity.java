@@ -18,7 +18,7 @@ import android.widget.Toast;
 public class RecordActivity extends AppCompatActivity {
 
     private View item;
-    private EditText editText_awayTeam,editText_homeTeam;
+    private EditText editText_awayTeam,editText_homeTeam,editText_gameDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +28,16 @@ public class RecordActivity extends AppCompatActivity {
         item = LayoutInflater.from(RecordActivity.this).inflate(R.layout.dialog_new_record, null);
         item.setPadding(3,0,3,0);
 
+        editText_awayTeam = item.findViewById(R.id.editText_awayTeam);
+        editText_homeTeam = item.findViewById(R.id.editText_homeTeam);
+        editText_gameDate = item.findViewById(R.id.editText_gameDate);
+
 
     }
 
 
     public void clickAddRecord(View view) {
         AlertDialog.Builder dialog_addRecord = new AlertDialog.Builder(this);
-        editText_awayTeam = item.findViewById(R.id.editText_awayTeam);
-        editText_homeTeam = item.findViewById(R.id.editText_homeTeam);
 
         //建立一個ArrayAdapter物件，並放置下拉選單的內容
         ArrayAdapter adapter_away = new ArrayAdapter(dialog_addRecord.getContext(),android.R.layout.simple_spinner_item,new String[]{"我的隊伍","自訂"});
@@ -98,7 +100,7 @@ public class RecordActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 String str_gameDate = datePicker_gameDate.getYear() + "/" + (datePicker_gameDate.getMonth() + 1) + "/" + datePicker_gameDate.getDayOfMonth();
-                Toast.makeText(getApplicationContext(), str_gameDate, Toast.LENGTH_SHORT).show();
+                editText_gameDate.setText(str_gameDate);
         }
         });
         dialog_chooseDate.show();
