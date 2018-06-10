@@ -25,6 +25,7 @@ public class PlayerActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager rLayoutManager;
     private Spinner playSpinner;
     private List<Player> item_player;
+    private View view_new_player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,9 @@ public class PlayerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_player);
 
         item_list = (RecyclerView) findViewById(R.id.player_list);
+
+        view_new_player = LayoutInflater.from(PlayerActivity.this).inflate(R.layout.dialog_new_player, null);
+        view_new_player.setPadding(3,0,3,0);
 
         item_player = new ArrayList<>();
 
@@ -67,22 +71,24 @@ public class PlayerActivity extends AppCompatActivity {
 
 
     public void clickAddPlayer(View view) {
+        AlertDialog.Builder dialog_addPlayer = new AlertDialog.Builder(this);
 
+        ArrayAdapter adapter_position = new ArrayAdapter(dialog_addPlayer.getContext(),android.R.layout.simple_spinner_item,new String[]{"","P","C","1B","2B","3B","SS","LF","CF","RF"});
+        adapter_position.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner spinner_home = (Spinner) view_new_player.findViewById(R.id.spinner_position);
+        spinner_home.setAdapter(adapter_position);
+        
+        dialog_addPlayer.setView(view_new_player);
+        dialog_addPlayer.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-            final View item = LayoutInflater.from(PlayerActivity.this).inflate(R.layout.dialog_new_player, null);
-            item.setPadding(3,0,3,0);
-            AlertDialog.Builder adb = new AlertDialog.Builder(this);
-            adb.setView(item);
-            adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_SHORT).show();
-                }
-            });
+        dialog_addPlayer.show();
 
-            adb.show();
-
-       /// 決定新項目的編號
+        /// 決定新項目的編號
         int newId = item_player.size() + 1;
         // 建立新增項目物件
         Player player = new Player(newId, "New" + newId, 0);

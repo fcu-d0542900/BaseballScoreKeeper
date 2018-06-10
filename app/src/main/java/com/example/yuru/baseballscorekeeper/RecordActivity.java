@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 public class RecordActivity extends AppCompatActivity {
 
-    private View item;
+    private View view_new_record;
     private EditText editText_awayTeam,editText_homeTeam,editText_gameDate;
 
     @Override
@@ -25,12 +25,12 @@ public class RecordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
 
-        item = LayoutInflater.from(RecordActivity.this).inflate(R.layout.dialog_new_record, null);
-        item.setPadding(3,0,3,0);
+        view_new_record = LayoutInflater.from(RecordActivity.this).inflate(R.layout.dialog_new_record, null);
+        view_new_record.setPadding(3,0,3,0);
 
-        editText_awayTeam = item.findViewById(R.id.editText_awayTeam);
-        editText_homeTeam = item.findViewById(R.id.editText_homeTeam);
-        editText_gameDate = item.findViewById(R.id.editText_gameDate);
+        editText_awayTeam = view_new_record.findViewById(R.id.editText_awayTeam);
+        editText_homeTeam = view_new_record.findViewById(R.id.editText_homeTeam);
+        editText_gameDate = view_new_record.findViewById(R.id.editText_gameDate);
 
 
     }
@@ -46,9 +46,9 @@ public class RecordActivity extends AppCompatActivity {
         ArrayAdapter adapter_home = new ArrayAdapter(dialog_addRecord.getContext(),android.R.layout.simple_spinner_item,new String[]{"我的隊伍","自訂"});
         adapter_home.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        Spinner spinner_away = (Spinner) item.findViewById(R.id.spinner_awayTeam);
+        Spinner spinner_away = (Spinner) view_new_record.findViewById(R.id.spinner_awayTeam);
         spinner_away.setAdapter(adapter_away);
-        Spinner spinner_home = (Spinner) item.findViewById(R.id.spinner_homeTeam);
+        Spinner spinner_home = (Spinner) view_new_record.findViewById(R.id.spinner_homeTeam);
         spinner_home.setAdapter(adapter_home);
 
         spinner_away.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -82,7 +82,7 @@ public class RecordActivity extends AppCompatActivity {
             }
         });
 
-        dialog_addRecord.setView(item);
+        dialog_addRecord.setView(view_new_record);
         dialog_addRecord.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
