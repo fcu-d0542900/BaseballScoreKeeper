@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
@@ -31,6 +34,40 @@ public class RecordActivity extends AppCompatActivity {
     public void clickAddRecord(View view) {
 
         AlertDialog.Builder dialog_addRecord = new AlertDialog.Builder(this);
+
+        //建立一個ArrayAdapter物件，並放置下拉選單的內容
+        ArrayAdapter adapter_away = new ArrayAdapter(dialog_addRecord.getContext(),android.R.layout.simple_spinner_item,new String[]{"我的隊伍","自訂"});
+        //設定下拉選單的樣式
+        adapter_away.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter adapter_home = new ArrayAdapter(dialog_addRecord.getContext(),android.R.layout.simple_spinner_item,new String[]{"我的隊伍","自訂"});
+        adapter_home.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        Spinner spinner_away = (Spinner) item.findViewById(R.id.spinner_awayTeam);
+        spinner_away.setAdapter(adapter_away);
+        Spinner spinner_home = (Spinner) item.findViewById(R.id.spinner_homeTeam);
+        spinner_home.setAdapter(adapter_home);
+
+        spinner_away.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView adapterView, View view, int position, long id) {
+                Toast.makeText(RecordActivity.this, "您選擇"+adapterView.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView parentView) {
+                Toast.makeText(RecordActivity.this, "您沒有選擇任何項目", Toast.LENGTH_LONG).show();
+            }
+        });
+        spinner_home.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView adapterView, View view, int position, long id) {
+                Toast.makeText(RecordActivity.this, "您選擇"+adapterView.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView parentView) {
+                Toast.makeText(RecordActivity.this, "您沒有選擇任何項目", Toast.LENGTH_LONG).show();
+            }
+        });
+
         dialog_addRecord.setView(item);
         dialog_addRecord.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
