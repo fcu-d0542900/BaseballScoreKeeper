@@ -91,18 +91,12 @@ public class NewRecordActivity extends AppCompatActivity {
         }
         scrollablePanelAdapter.setPlayerInfoList(playerInfoList);
 
-        List<DateInfo> dateInfoList = new ArrayList<>();
-        Calendar calendar = Calendar.getInstance();
+        List<BoardNumInfo> boardNumInfoList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            DateInfo dateInfo = new DateInfo();
-            String date = DAY_UI_MONTH_DAY_FORMAT.format(calendar.getTime());
-            String week = WEEK_FORMAT.format(calendar.getTime());
-            //dateInfo.setDate(date);
-            dateInfo.setWeek(week);
-            dateInfoList.add(dateInfo);
-            calendar.add(Calendar.DAY_OF_MONTH, 1);
+            BoardNumInfo dateInfo = new BoardNumInfo(i);
+            boardNumInfoList.add(dateInfo);
         }
-        scrollablePanelAdapter.setDateInfoList(dateInfoList);
+        scrollablePanelAdapter.setBoardNumInfoList(boardNumInfoList);
 
 
         //設定紀錄資料

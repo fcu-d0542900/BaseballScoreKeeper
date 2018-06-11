@@ -17,7 +17,7 @@ import java.util.List;
 public class ScrollablePanelAdapter extends PanelAdapter {
 
     private List<Player> item_player = new ArrayList<>();
-    private List<DateInfo> boardNumInfoList = new ArrayList<>();
+    private List<BoardNumInfo> boardNumInfoList = new ArrayList<>();
     private List<List<OrderInfo>> ordersList =new ArrayList<>();
 
     private static final int TEAMNAME_TYPE = 4;
@@ -95,9 +95,9 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     private void setBoardNumView(int pos, BoardNumViewHolder viewHolder) {
-        DateInfo dateInfo = boardNumInfoList.get(pos - 1);
-        if (dateInfo != null && pos > 0) {
-            viewHolder.dateTextView.setText(dateInfo.getWeek());
+        BoardNumInfo boardNumInfo = boardNumInfoList.get(pos - 1);
+        if (boardNumInfo != null && pos > 0) {
+            viewHolder.dateTextView.setText(boardNumInfo.getBroadNum_symbol().toString());
         }
     }
 
@@ -151,12 +151,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     private static class BoardNumViewHolder extends RecyclerView.ViewHolder {
         public TextView dateTextView;
-        public TextView weekTextView;
 
         public BoardNumViewHolder(View itemView) {
             super(itemView);
             this.dateTextView = (TextView) itemView.findViewById(R.id.text_boardNum);
-            this.weekTextView = (TextView) itemView.findViewById(R.id.week);
         }
 
     }
@@ -203,8 +201,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
 
-    public void setDateInfoList(List<DateInfo> dateInfoList) {
-        this.boardNumInfoList = dateInfoList;
+    public void setBoardNumInfoList(List<BoardNumInfo> boardNumInfoList) {
+        this.boardNumInfoList = boardNumInfoList;
     }
 
     public void setOrdersList(List<List<OrderInfo>> ordersList) {
