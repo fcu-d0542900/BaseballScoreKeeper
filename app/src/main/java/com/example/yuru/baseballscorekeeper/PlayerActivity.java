@@ -95,8 +95,7 @@ public class PlayerActivity extends AppCompatActivity {
                 playerNum = Integer.valueOf(editText_playerNum.getText().toString());
                 playerPosition = (int) spinner_position.getSelectedItemId();
 
-                Player player = new Player(playerNum,playerName, playerPosition);  // 建立新增項目物件
-                itemAdapter.add(player);  // 新增一個項目
+                itemAdapter.add(new Player(playerNum,playerName, playerPosition));  // 新增一個物件項目
                 item_list.scrollToPosition(item_player.size() - 1);  // 控制列表元件移到最後一個項目
 
                 Toast.makeText(getApplicationContext(), "ADD: "+playerName+" "+playerNum+" "+playerPosition, Toast.LENGTH_SHORT).show();
