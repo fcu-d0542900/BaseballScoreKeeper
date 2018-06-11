@@ -164,6 +164,16 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
                 }
             });
+
+            //計算好壞球
+            viewHolder.getBallView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Toast.makeText(v.getContext(), "好壞球" , Toast.LENGTH_SHORT).show();
+
+                }
+            });
         }
     }
 
@@ -197,6 +207,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         public TextView getHomeView;
         public TextView getSecondView;
         public TextView getThirdView;
+        public TextView getBallView;
 
         public View view;
 
@@ -208,6 +219,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.getHomeView = (TextView) view.findViewById(R.id.homeView);
             this.getSecondView = (TextView) view.findViewById(R.id.secondView);
             this.getThirdView = (TextView) view.findViewById(R.id.thirdView);
+            this.getBallView= (TextView) view.findViewById(R.id.ballView);
             this.getScoreView.bringToFront();
 
         }
