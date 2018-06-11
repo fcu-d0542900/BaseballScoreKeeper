@@ -13,9 +13,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
+import java.util.Random;
+
 public class NewRecordActivity extends AppCompatActivity {
 
     private TextView text_gameName,text_startTime,text_endTime;
+
+    public static final SimpleDateFormat DAY_UI_MONTH_DAY_FORMAT = new SimpleDateFormat("MM-dd");
+    public static final SimpleDateFormat WEEK_FORMAT = new SimpleDateFormat("EEE", Locale.US);
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +37,12 @@ public class NewRecordActivity extends AppCompatActivity {
         Intent intent = this.getIntent();
         text_gameName = findViewById(R.id.text_gameName);
         text_gameName.setText(intent.getStringExtra("gameName"));
+
+
+        final ScrollablePanel scrollablePanel = (ScrollablePanel) findViewById(R.id.scrollable_panel);
+        final ScrollablePanelAdapter scrollablePanelAdapter = new ScrollablePanelAdapter();
+        generateTestData(scrollablePanelAdapter);
+        scrollablePanel.setPanelAdapter(scrollablePanelAdapter);
 
 
     }
@@ -62,4 +80,60 @@ public class NewRecordActivity extends AppCompatActivity {
         });
         dialog_endTime.show();
     }
+
+
+    private void generateTestData(ScrollablePanelAdapter scrollablePanelAdapter) {
+
+        //設定球員資料
+        List<Player> playerInfoList = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            playerInfoList.add(new Player(i,"黃弘承",8 ));
+        }
+        scrollablePanelAdapter.setPlayerInfoList(playerInfoList);
+
+        List<DateInfo> dateInfoList = new ArrayList<>();
+        Calendar calendar = Calendar.getInstance();
+        for (int i = 0; i < 10; i++) {
+            DateInfo dateInfo = new DateInfo();
+            String date = DAY_UI_MONTH_DAY_FORMAT.format(calendar.getTime());
+            String week = WEEK_FORMAT.format(calendar.getTime());
+            //dateInfo.setDate(date);
+            dateInfo.setWeek(week);
+            dateInfoList.add(dateInfo);
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        scrollablePanelAdapter.setDateInfoList(dateInfoList);
+
+
+        //設定紀錄資料
+        List<List<OrderInfo>> ordersList = new ArrayList<>();
+        for (int i = 0;i<90;i++) {
+            List<OrderInfo> orderInfoList = new ArrayList<>();
+            for (int j = 0; j < 14; j++) {
+                OrderInfo orderInfo = new OrderInfo();
+                orderInfo.setGuestName("NO." + i + j);
+                orderInfo.setBegin(true);
+                orderInfo.setStatus(OrderInfo.Status.randomStatus());
+                if (orderInfoList.size() > 0) {
+                    OrderInfo lastOrderInfo = orderInfoList.get(orderInfoList.size() - 1);
+                    if (orderInfo.getStatus().ordinal() == lastOrderInfo.getStatus().ordinal()) {
+                        orderInfo.setId(lastOrderInfo.getId());
+                        orderInfo.setBegin(false);
+                        orderInfo.setGuestName("");
+                    } else {
+                        if (new Random().nextBoolean()) {
+                            orderInfo.setStatus(OrderInfo.Status.BLANK);
+                        }
+                    }
+                }
+                orderInfoList.add(orderInfo);
+            }
+            ordersList.add(orderInfoList);
+        }
+        scrollablePanelAdapter.setOrdersList(ordersList);
+    }
+
+
 }
+
+

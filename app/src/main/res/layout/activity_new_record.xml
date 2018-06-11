@@ -58,6 +58,11 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
+            <com.example.yuru.baseballscorekeeper.ScrollablePanel
+                android:id="@+id/scrollable_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
 
     </LinearLayout>
