@@ -2,6 +2,7 @@ package com.example.yuru.baseballscorekeeper;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -86,6 +87,11 @@ public class RecordActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(RecordActivity.this,NewRecordActivity.class);
+                intent.putExtra("n",1);
+                startActivityForResult(intent,111);
+
             }
         });
         dialog_addRecord.show();

@@ -18,6 +18,7 @@
         </activity>
         <activity android:name=".PlayerActivity" />
         <activity android:name=".RecordActivity" />
+        <activity android:name=".NewRecordActivity"></activity>
     </application>
 
 </manifest>
