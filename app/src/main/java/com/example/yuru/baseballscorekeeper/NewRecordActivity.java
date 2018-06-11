@@ -83,7 +83,7 @@ public class NewRecordActivity extends AppCompatActivity {
         //設定球員資料
         List<Player> playerInfoList = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
-            playerInfoList.add(new Player(i,"黃弘承",8 ));
+            playerInfoList.add(new Player(i+28,"黃弘承",i+1 ));
         }
         scrollablePanelAdapter.setPlayerInfoList(playerInfoList);
 

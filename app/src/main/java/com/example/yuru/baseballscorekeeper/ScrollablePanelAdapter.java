@@ -106,6 +106,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         if (playerInfo != null && pos > 0) {
             viewHolder.text_playerPosition.setText(playerInfo.getPosition());
             viewHolder.text_playerName.setText(playerInfo.getName());
+            viewHolder.text_playerNum.setText(Long.valueOf(playerInfo.getId()).toString());
             viewHolder.text_batOrder.setText(Integer.valueOf(pos).toString());
         }
     }
@@ -190,6 +191,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     private static class PlayerInfoViewHolder extends RecyclerView.ViewHolder {
         public TextView text_playerPosition;
         public TextView text_playerName;
+        public TextView text_playerNum;
         public TextView text_batOrder;
 
 
@@ -197,6 +199,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             super(view);
             this.text_playerPosition = (TextView) view.findViewById(R.id.text_playerPosition);
             this.text_playerName = (TextView) view.findViewById(R.id.text_playerName);
+            this.text_playerNum = (TextView) view.findViewById(R.id.text_playerNum);
             this.text_batOrder = (TextView) view.findViewById(R.id.text_batOrder);
         }
     }
