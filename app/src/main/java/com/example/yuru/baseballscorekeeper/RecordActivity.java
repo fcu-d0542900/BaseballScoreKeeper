@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -19,7 +20,9 @@ import android.widget.Toast;
 public class RecordActivity extends AppCompatActivity {
 
     private View view_new_record;
-    private EditText editText_awayTeam,editText_homeTeam,editText_gameDate;
+    private EditText editText_gameName,editText_gameDate;
+    private EditText editText_awayTeam,editText_homeTeam;
+    private CheckBox checkBox_inputPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +37,12 @@ public class RecordActivity extends AppCompatActivity {
 
         view_new_record = LayoutInflater.from(RecordActivity.this).inflate(R.layout.dialog_new_record, null);
         view_new_record.setPadding(3,0,3,0);
+
+        editText_gameName = view_new_record.findViewById(R.id.editText_gameName);
+        editText_gameDate = view_new_record.findViewById(R.id.editText_gameDate);
         editText_awayTeam = view_new_record.findViewById(R.id.editText_awayTeam);
         editText_homeTeam = view_new_record.findViewById(R.id.editText_homeTeam);
+        checkBox_inputPlayer = view_new_record.findViewById(R.id.checkBox_inputPlayer);
 
         AlertDialog.Builder dialog_addRecord = new AlertDialog.Builder(this);
 
@@ -88,7 +95,10 @@ public class RecordActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_SHORT).show();
 
+                String gameName = editText_gameName.getText().toString();
+
                 Intent intent = new Intent(RecordActivity.this,NewRecordActivity.class);
+                intent.putExtra("gameName",gameName);
                 intent.putExtra("n",1);
                 startActivityForResult(intent,111);
 
