@@ -34,14 +34,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:onClick="fn_startTime"
                 android:text="開始時間" />
 
             <TextView
-                android:id="@+id/text_endTimeiew3"
+                android:id="@+id/text_endTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:onClick="fn_endTime"
                 android:text="結束時間" />
         </LinearLayout>
     </LinearLayout>
