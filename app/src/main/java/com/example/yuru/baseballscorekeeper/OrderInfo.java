@@ -12,23 +12,8 @@ import java.util.Random;
 public class OrderInfo {
     private long id;
     private String guestName;
-    private Status status;
     private boolean isBegin;
 
-    public enum Status {
-        CHECK_IN,
-        REVERSE,
-        BLANK;
-
-        private static final List<Status> VALUES =
-                Collections.unmodifiableList(Arrays.asList(values()));
-        private static final int SIZE = VALUES.size();
-        private static final Random RANDOM = new Random();
-
-        public static Status randomStatus() {
-            return VALUES.get(RANDOM.nextInt(SIZE));
-        }
-    }
 
     public String getGuestName() {
         return guestName;
@@ -36,14 +21,6 @@ public class OrderInfo {
 
     public void setGuestName(String guestName) {
         this.guestName = guestName;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
     }
 
     public boolean isBegin() {

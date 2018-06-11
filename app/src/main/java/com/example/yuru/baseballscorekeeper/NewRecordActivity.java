@@ -101,25 +101,12 @@ public class NewRecordActivity extends AppCompatActivity {
 
         //設定紀錄資料
         List<List<OrderInfo>> ordersList = new ArrayList<>();
-        for (int i = 0;i<90;i++) {
+        for (int i = 0; i < 30; i++) {
             List<OrderInfo> orderInfoList = new ArrayList<>();
             for (int j = 0; j < 14; j++) {
                 OrderInfo orderInfo = new OrderInfo();
                 orderInfo.setGuestName("NO." + i + j);
-                orderInfo.setBegin(true);
-                orderInfo.setStatus(OrderInfo.Status.randomStatus());
-                if (orderInfoList.size() > 0) {
-                    OrderInfo lastOrderInfo = orderInfoList.get(orderInfoList.size() - 1);
-                    if (orderInfo.getStatus().ordinal() == lastOrderInfo.getStatus().ordinal()) {
-                        orderInfo.setId(lastOrderInfo.getId());
-                        orderInfo.setBegin(false);
-                        orderInfo.setGuestName("");
-                    } else {
-                        if (new Random().nextBoolean()) {
-                            orderInfo.setStatus(OrderInfo.Status.BLANK);
-                        }
-                    }
-                }
+
                 orderInfoList.add(orderInfo);
             }
             ordersList.add(orderInfoList);

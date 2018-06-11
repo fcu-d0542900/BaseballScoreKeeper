@@ -113,39 +113,57 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     private void setOrderView(final int row, final int column, OrderViewHolder viewHolder) {
         final OrderInfo orderInfo = ordersList.get(row - 1).get(column - 1);
         if (orderInfo != null) {
-            if (orderInfo.getStatus() == OrderInfo.Status.BLANK) {
-                viewHolder.view.setBackgroundResource(R.drawable.bg_white_gray_stroke);
-                viewHolder.nameTextView.setText("");
-                viewHolder.statusTextView.setText("");
-            } else if (orderInfo.getStatus() == OrderInfo.Status.CHECK_IN) {
-                viewHolder.nameTextView.setText(orderInfo.isBegin() ? orderInfo.getGuestName() : "");
-                viewHolder.statusTextView.setText(orderInfo.isBegin() ? "check in" : "");
-                viewHolder.view.setBackgroundResource(orderInfo.isBegin() ? R.drawable.bg_white_gray_stroke : R.drawable.bg_white_gray_stroke);
-            } else if (orderInfo.getStatus() == OrderInfo.Status.REVERSE) {
-                viewHolder.nameTextView.setText(orderInfo.isBegin() ? orderInfo.getGuestName() : "");
-                viewHolder.statusTextView.setText(orderInfo.isBegin() ? "reverse" : "");
-                viewHolder.view.setBackgroundResource(orderInfo.isBegin() ? R.drawable.bg_white_gray_stroke : R.drawable.bg_white_gray_stroke);
-            }
-            if (orderInfo.getStatus() != OrderInfo.Status.BLANK) {
-                viewHolder.itemView.setClickable(true);
-                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (orderInfo.isBegin()) {
-                            Toast.makeText(v.getContext(), "name:" + orderInfo.getGuestName(), Toast.LENGTH_SHORT).show();
-                        } else {
-                            int i = 2;
-                            while (column - i >= 0 && ordersList.get(row - 1).get(column - i).getId() == orderInfo.getId()) {
-                                i++;
-                            }
-                            final OrderInfo info = ordersList.get(row - 1).get(column - i + 1);
-                            Toast.makeText(v.getContext(), "name:" + info.getGuestName(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            } else {
-                viewHolder.itemView.setClickable(false);
-            }
+            viewHolder.getScoreView.bringToFront();
+
+            //中間菱形區域
+            viewHolder.getScoreView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Toast.makeText(v.getContext(), "得分區域" +orderInfo.getGuestName(), Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+            //一壘
+            viewHolder.getFirstView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Toast.makeText(v.getContext(), "一壘" , Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+            //二壘
+            viewHolder.getSecondView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Toast.makeText(v.getContext(), "二壘" , Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+            //三壘
+            viewHolder.getThirdView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Toast.makeText(v.getContext(), "三壘" , Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+            //本壘
+            viewHolder.getHomeView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Toast.makeText(v.getContext(), "本壘" , Toast.LENGTH_SHORT).show();
+
+                }
+            });
         }
     }
 
@@ -174,15 +192,24 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     private static class OrderViewHolder extends RecyclerView.ViewHolder {
-        public TextView nameTextView;
-        public TextView statusTextView;
+        public TextView getScoreView;
+        public TextView getFirstView;
+        public TextView getHomeView;
+        public TextView getSecondView;
+        public TextView getThirdView;
+
         public View view;
 
         public OrderViewHolder(View view) {
             super(view);
             this.view = view;
-            this.statusTextView = (TextView) view.findViewById(R.id.status);
-            this.nameTextView = (TextView) view.findViewById(R.id.guest_name);
+            this.getScoreView = (TextView) view.findViewById(R.id.centerView);
+            this.getFirstView = (TextView) view.findViewById(R.id.firstView);
+            this.getHomeView = (TextView) view.findViewById(R.id.homeView);
+            this.getSecondView = (TextView) view.findViewById(R.id.secondView);
+            this.getThirdView = (TextView) view.findViewById(R.id.thirdView);
+            this.getScoreView.bringToFront();
+
         }
     }
 
