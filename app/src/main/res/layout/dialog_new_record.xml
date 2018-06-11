@@ -25,7 +25,8 @@
         <EditText
             android:id="@+id/editText_gameName"
             android:layout_width="200dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:hint="(必填)" />
     </LinearLayout>
 
     <LinearLayout
@@ -44,6 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:hint="西元年/月/日"
             android:inputType="date" />
 
         <ImageButton
