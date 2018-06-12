@@ -101,12 +101,17 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         }
     }
 
-    private void setPlayerInfoView(int pos, PlayerInfoViewHolder viewHolder) {
+    public void setPlayerInfoView(int pos, PlayerInfoViewHolder viewHolder) {
         Player playerInfo = item_player.get(pos - 1);
         if (playerInfo != null && pos > 0) {
             viewHolder.text_playerPosition.setText(playerInfo.getPosition());
             viewHolder.text_playerName.setText(playerInfo.getName());
-            viewHolder.text_playerNum.setText(Long.valueOf(playerInfo.getId()).toString());
+            if(playerInfo.getId() == -1) {
+                viewHolder.text_playerNum.setText("");
+            }
+            else {
+                viewHolder.text_playerNum.setText(Long.valueOf(playerInfo.getId()).toString());
+            }
             viewHolder.text_batOrder.setText(Integer.valueOf(pos).toString());
         }
     }

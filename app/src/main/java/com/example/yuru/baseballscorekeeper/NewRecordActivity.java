@@ -12,6 +12,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -78,19 +79,21 @@ public class NewRecordActivity extends AppCompatActivity {
     }
 
 
+
+
     private void generateTestData(ScrollablePanelAdapter scrollablePanelAdapter) {
 
         //設定球員資料
-        List<Player> playerInfoList = new ArrayList<>();
+        List<Player>  playerInfoList = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
-            playerInfoList.add(new Player(i+28,"黃弘承",i+1 ));
+            playerInfoList.add(new Player());  //預設為空
         }
         scrollablePanelAdapter.setPlayerInfoList(playerInfoList);
 
+        //設定局數資料
         List<BoardNumInfo> boardNumInfoList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            BoardNumInfo dateInfo = new BoardNumInfo(i);
-            boardNumInfoList.add(dateInfo);
+        for (int i = 0; i < (9+1); i++) {
+            boardNumInfoList.add(new BoardNumInfo(i));
         }
         scrollablePanelAdapter.setBoardNumInfoList(boardNumInfoList);
 
