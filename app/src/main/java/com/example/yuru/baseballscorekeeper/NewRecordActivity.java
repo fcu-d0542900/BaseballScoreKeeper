@@ -7,6 +7,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -37,12 +38,17 @@ public class NewRecordActivity extends AppCompatActivity {
         text_gameName = findViewById(R.id.text_gameName);
         text_gameName.setText(intent.getStringExtra("gameName"));
 
-
         final ScrollablePanel scrollablePanel = (ScrollablePanel) findViewById(R.id.scrollable_panel);
         final ScrollablePanelAdapter scrollablePanelAdapter = new ScrollablePanelAdapter();
-        generateTestData(scrollablePanelAdapter);
-        scrollablePanel.setPanelAdapter(scrollablePanelAdapter);
 
+        final ScrollablePanel score_scrollable_panel = (ScrollablePanel) findViewById(R.id.score_scrollable_panel);
+        final ScoreScrollablePanelAdapter score_scrollablePanelAdapter = new ScoreScrollablePanelAdapter();
+        Log.d("run", "跑到此行");
+
+        generateTestData(scrollablePanelAdapter);
+        generateScoreData(score_scrollablePanelAdapter);
+        scrollablePanel.setPanelAdapter(scrollablePanelAdapter);
+        score_scrollable_panel.setPanelAdapter(score_scrollablePanelAdapter);
 
     }
 
@@ -113,14 +119,51 @@ public class NewRecordActivity extends AppCompatActivity {
             for (int j = 0; j < 14; j++) {
                 OrderInfo orderInfo = new OrderInfo();
                 orderInfo.setGuestName("NO." + i + j);
-
                 orderInfoList.add(orderInfo);
             }
             ordersList.add(orderInfoList);
         }
         scrollablePanelAdapter.setOrdersList(ordersList);
+
+
     }
 
+   private void generateScoreData(ScoreScrollablePanelAdapter score_scrollablePanelAdapter){
+
+        //設定局數資料
+       List<BoardNumInfo> boardNumInfoList = new ArrayList<>();
+       for (int i = 0; i < 11; i++) {
+           if(i<9){
+               boardNumInfoList.add(new BoardNumInfo(i));
+           }
+           else{
+               boardNumInfoList.add(new BoardNumInfo(15));
+           }
+       }
+       score_scrollablePanelAdapter.setBoardNumInfoList(boardNumInfoList);
+
+       //設定隊伍資料
+        List<Team>  teamInfoList = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            Team team = new Team();
+            teamInfoList.add(team);  //預設為空
+        }
+        score_scrollablePanelAdapter.setTeamInfoList(teamInfoList);
+
+       ///設定記分板資料
+        List<List<ScoreBoardInfo>> scoreList = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            List<ScoreBoardInfo> scoreInfoList = new ArrayList<>();
+            for (int j = 0; j < 10; j++) {
+                ScoreBoardInfo scoreInfo = new ScoreBoardInfo();
+                scoreInfo.setScore(j);
+                scoreInfoList.add(scoreInfo);
+            }
+            scoreList.add(scoreInfoList);
+        }
+        score_scrollablePanelAdapter.setScoreList(scoreList);
+
+    }
 
 }
 

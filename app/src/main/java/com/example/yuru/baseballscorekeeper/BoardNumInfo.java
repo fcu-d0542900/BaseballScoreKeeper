@@ -6,7 +6,7 @@ package com.example.yuru.baseballscorekeeper;
 
 public class BoardNumInfo {
     private int broadNum;
-    private String[] broadNum_symbol = {"一","二","三","四","五","六","七","八","九","十","十一","十二","十三","十四","十五"};
+    private String[] broadNum_symbol = {"一","二","三","四","五","六","七","八","九","十","十一","十二","十三","十四","十五","總分"};
 
     BoardNumInfo(int broadNum) {
         this.broadNum=broadNum;
