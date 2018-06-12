@@ -5,9 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by kelin on 16-11-18.
- */
 
 public class OrderInfo {
     private long id;
