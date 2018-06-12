@@ -12,7 +12,7 @@ public class Player {
 
     public Player() {
         id=-1;
-        name="";
+        name="   ";
         position_num=10;
     }
     public Player(long id, String name, int position_num) {
@@ -42,6 +42,7 @@ public class Player {
         }
         this.position_num = position_num;
     }
+
 
     @Override
     public String toString() {

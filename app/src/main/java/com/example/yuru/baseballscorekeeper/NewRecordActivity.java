@@ -24,6 +24,7 @@ import java.util.Random;
 public class NewRecordActivity extends AppCompatActivity {
 
     private TextView text_gameName,text_startTime,text_endTime;
+    private Boolean isSetPlayer;
 
 
     @Override
@@ -32,6 +33,7 @@ public class NewRecordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_record);
 
         Intent intent = this.getIntent();
+        isSetPlayer = intent.getBooleanExtra("isSetPlayer",false);
         text_gameName = findViewById(R.id.text_gameName);
         text_gameName.setText(intent.getStringExtra("gameName"));
 
@@ -83,16 +85,22 @@ public class NewRecordActivity extends AppCompatActivity {
 
     private void generateTestData(ScrollablePanelAdapter scrollablePanelAdapter) {
 
+        if(isSetPlayer == true) {
+            //拿資料庫球員資料
+            Toast.makeText(getApplicationContext(),"isSetPlayer", Toast.LENGTH_SHORT).show();
+        }
+        
         //設定球員資料
         List<Player>  playerInfoList = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
-            playerInfoList.add(new Player());  //預設為空
+            Player player = new Player();
+            playerInfoList.add(player);  //預設為空
         }
         scrollablePanelAdapter.setPlayerInfoList(playerInfoList);
 
         //設定局數資料
         List<BoardNumInfo> boardNumInfoList = new ArrayList<>();
-        for (int i = 0; i < (9+1); i++) {
+        for (int i = 0; i < 10; i++) {
             boardNumInfoList.add(new BoardNumInfo(i));
         }
         scrollablePanelAdapter.setBoardNumInfoList(boardNumInfoList);

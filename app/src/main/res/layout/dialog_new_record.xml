@@ -119,7 +119,7 @@
             android:text="是否加入預設球員" />
 
         <CheckBox
-            android:id="@+id/checkBox_inputPlayer"
+            android:id="@+id/checkBox_isSetPlayer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" />

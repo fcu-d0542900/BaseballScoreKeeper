@@ -22,7 +22,7 @@ public class RecordActivity extends AppCompatActivity {
     private View view_new_record;
     private EditText editText_gameName,editText_gameDate;
     private EditText editText_awayTeam,editText_homeTeam;
-    private CheckBox checkBox_inputPlayer;
+    private CheckBox checkBox_isSetPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class RecordActivity extends AppCompatActivity {
         editText_gameDate = view_new_record.findViewById(R.id.editText_gameDate);
         editText_awayTeam = view_new_record.findViewById(R.id.editText_awayTeam);
         editText_homeTeam = view_new_record.findViewById(R.id.editText_homeTeam);
-        checkBox_inputPlayer = view_new_record.findViewById(R.id.checkBox_inputPlayer);
+        checkBox_isSetPlayer = view_new_record.findViewById(R.id.checkBox_isSetPlayer);
 
         AlertDialog.Builder dialog_addRecord = new AlertDialog.Builder(this);
 
@@ -96,9 +96,11 @@ public class RecordActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_SHORT).show();
 
                 String gameName = editText_gameName.getText().toString();
+                Boolean isSetPlayer = checkBox_isSetPlayer.isChecked();
 
                 Intent intent = new Intent(RecordActivity.this,NewRecordActivity.class);
                 intent.putExtra("gameName",gameName);
+                intent.putExtra("isSetPlayer",isSetPlayer);
                 intent.putExtra("n",1);
                 startActivityForResult(intent,111);
 
