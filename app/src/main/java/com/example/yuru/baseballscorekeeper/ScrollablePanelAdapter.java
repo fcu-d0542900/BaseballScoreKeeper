@@ -104,6 +104,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     public void setPlayerInfoView(int pos, final PlayerInfoViewHolder viewHolder) {
         final Player playerInfo = item_player.get(pos - 1);
         viewHolder.text_batOrder.setText(Integer.valueOf(pos).toString());
+
+        
         if (playerInfo != null && pos>0) {
 
             //設定資料

@@ -7,6 +7,7 @@ package com.example.yuru.baseballscorekeeper;
 public class Player {
     private long id;
     private String name;
+    private String team;
     private int position_num;
     private String[] position_symbol={"DH","P","C","1B","2B","3B","SS","LF","CF","RF",""};  //設DH為0，其他照符號
 
@@ -41,6 +42,12 @@ public class Player {
             position_num=10;
         }
         this.position_num = position_num;
+    }
+    public void setTeam(String team) {
+        this.team = team;
+    }
+    public String getTeam() {
+        return team;
     }
 
 
