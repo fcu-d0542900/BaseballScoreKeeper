@@ -98,7 +98,13 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
     private void setBoardNumView(int pos, BoardNumViewHolder viewHolder) {
         BoardNumInfo boardNumInfo = boardNumInfoList.get(pos - 1);
         if (boardNumInfo != null && pos > 0) {
-            viewHolder.boaredTextView.setText(boardNumInfo.getBroadNum_symbol().toString());
+            if(pos == boardNumInfoList.size()-1) {
+                viewHolder.boaredTextView.setText("R");
+            }
+            else {
+                viewHolder.boaredTextView.setText(Integer.valueOf(boardNumInfo.getBroadNum_num()).toString());
+            }
+
         }
     }
 
@@ -108,13 +114,6 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
         if (teamInfo != null && pos>0) {
             //設定資料
             viewHolder.text_teamName.setText(teamInfo.getTeamName());
-
-            if(teamInfo.getTeamName() == "") {
-                viewHolder.text_teamName.setText("未設隊伍");
-            }
-            else {
-                viewHolder.text_teamName.setText(teamInfo.getTeamName());
-            }
 
         }
     }

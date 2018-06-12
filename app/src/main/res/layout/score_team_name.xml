@@ -10,6 +10,7 @@
         android:id="@+id/text_Scoreteam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:hint="未設隊伍"
         android:textColor="@color/text_gray_666666"
         android:textSize="12sp" />
 

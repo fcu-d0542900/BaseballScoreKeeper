@@ -133,12 +133,7 @@ public class NewRecordActivity extends AppCompatActivity {
         //設定局數資料
        List<BoardNumInfo> boardNumInfoList = new ArrayList<>();
        for (int i = 0; i < 11; i++) {
-           if(i<9){
-               boardNumInfoList.add(new BoardNumInfo(i));
-           }
-           else{
-               boardNumInfoList.add(new BoardNumInfo(15));
-           }
+           boardNumInfoList.add(new BoardNumInfo(i));
        }
        score_scrollablePanelAdapter.setBoardNumInfoList(boardNumInfoList);
 
