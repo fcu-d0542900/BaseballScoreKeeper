@@ -140,7 +140,6 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.getScoreView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    viewHolder.getScoreView.setText("AAAA");
                     Toast.makeText(v.getContext(), "得分區域" +orderInfo.getGuestName(), Toast.LENGTH_SHORT).show();
 
                 }
