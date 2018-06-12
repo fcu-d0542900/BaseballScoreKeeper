@@ -19,15 +19,21 @@ import android.widget.Toast;
 
 public class RecordActivity extends AppCompatActivity {
 
+    String teamName;
+
     private View view_new_record;
     private EditText editText_gameName,editText_gameDate;
     private EditText editText_awayTeam,editText_homeTeam;
+    private Spinner spinner_awayTeam,spinner_homeTeam;
     private CheckBox checkBox_isSetPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
+
+        Intent intent = this.getIntent();
+        teamName = intent.getStringExtra("teamName");
 
 
     }
@@ -42,6 +48,8 @@ public class RecordActivity extends AppCompatActivity {
         editText_gameDate = view_new_record.findViewById(R.id.editText_gameDate);
         editText_awayTeam = view_new_record.findViewById(R.id.editText_awayTeam);
         editText_homeTeam = view_new_record.findViewById(R.id.editText_homeTeam);
+        spinner_awayTeam = view_new_record.findViewById(R.id.spinner_awayTeam);
+        spinner_homeTeam = view_new_record.findViewById(R.id.spinner_homeTeam);
         checkBox_isSetPlayer = view_new_record.findViewById(R.id.checkBox_isSetPlayer);
 
         AlertDialog.Builder dialog_addRecord = new AlertDialog.Builder(this);
@@ -53,18 +61,17 @@ public class RecordActivity extends AppCompatActivity {
         ArrayAdapter adapter_home = new ArrayAdapter(dialog_addRecord.getContext(),android.R.layout.simple_spinner_item,new String[]{"我的隊伍","自訂"});
         adapter_home.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        Spinner spinner_away = (Spinner) view_new_record.findViewById(R.id.spinner_awayTeam);
-        spinner_away.setAdapter(adapter_away);
-        Spinner spinner_home = (Spinner) view_new_record.findViewById(R.id.spinner_homeTeam);
-        spinner_home.setAdapter(adapter_home);
+        spinner_awayTeam.setAdapter(adapter_away);
+        spinner_homeTeam.setAdapter(adapter_home);
 
-        spinner_away.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner_awayTeam.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView adapterView, View view, int position, long id) {
                 if(adapterView.getSelectedItem().toString() == "自訂") {
                     editText_awayTeam.setVisibility(View.VISIBLE);
                 }
                 else {
+                    editText_awayTeam.setText(teamName);
                     editText_awayTeam.setVisibility(View.GONE);
                 }
             }
@@ -73,13 +80,14 @@ public class RecordActivity extends AppCompatActivity {
                 Toast.makeText(RecordActivity.this, "您沒有選擇任何項目", Toast.LENGTH_SHORT).show();
             }
         });
-        spinner_home.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner_homeTeam.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView adapterView, View view, int position, long id) {
                 if(adapterView.getSelectedItem().toString() == "自訂") {
                     editText_homeTeam.setVisibility(View.VISIBLE);
                 }
                 else {
+                    editText_homeTeam.setText(teamName);
                     editText_homeTeam.setVisibility(View.GONE);
                 }
             }
@@ -96,10 +104,14 @@ public class RecordActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_SHORT).show();
 
                 String gameName = editText_gameName.getText().toString();
+                String awayTeam = editText_awayTeam.getText().toString();
+                String homeTeam = editText_homeTeam.getText().toString();
                 Boolean isSetPlayer = checkBox_isSetPlayer.isChecked();
 
                 Intent intent = new Intent(RecordActivity.this,NewRecordActivity.class);
                 intent.putExtra("gameName",gameName);
+                intent.putExtra("awayTeam",awayTeam);
+                intent.putExtra("homeTeam",homeTeam);
                 intent.putExtra("isSetPlayer",isSetPlayer);
                 intent.putExtra("n",1);
                 startActivityForResult(intent,111);

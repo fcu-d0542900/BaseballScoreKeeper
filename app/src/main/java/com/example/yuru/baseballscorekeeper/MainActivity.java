@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void fn_record(View view) {
         Intent intent = new Intent(MainActivity.this,RecordActivity.class);
+        intent.putExtra("teamName",myTeamName);
         intent.putExtra("n",1);
         startActivityForResult(intent,111);
     }

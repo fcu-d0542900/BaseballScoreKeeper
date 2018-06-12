@@ -26,6 +26,7 @@ public class NewRecordActivity extends AppCompatActivity {
 
     private TextView text_gameName,text_startTime,text_endTime;
     private Boolean isSetPlayer;
+    private String awayTeam,homeTeam;
 
 
     @Override
@@ -34,6 +35,8 @@ public class NewRecordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_record);
 
         Intent intent = this.getIntent();
+        awayTeam = intent.getStringExtra("awayTeam");
+        homeTeam = intent.getStringExtra("homeTeam");
         isSetPlayer = intent.getBooleanExtra("isSetPlayer",false);
         text_gameName = findViewById(R.id.text_gameName);
         text_gameName.setText(intent.getStringExtra("gameName"));
@@ -106,7 +109,7 @@ public class NewRecordActivity extends AppCompatActivity {
 
         //設定局數資料
         List<BoardNumInfo> boardNumInfoList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < (9+1); i++) {
             boardNumInfoList.add(new BoardNumInfo(i));
         }
         scrollablePanelAdapter.setBoardNumInfoList(boardNumInfoList);
@@ -114,9 +117,9 @@ public class NewRecordActivity extends AppCompatActivity {
 
         //設定紀錄資料
         List<List<OrderInfo>> ordersList = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 9; i++) {
             List<OrderInfo> orderInfoList = new ArrayList<>();
-            for (int j = 0; j < 14; j++) {
+            for (int j = 0; j < 10; j++) {
                 OrderInfo orderInfo = new OrderInfo();
                 orderInfo.setGuestName("NO." + i + j);
                 orderInfoList.add(orderInfo);
@@ -132,24 +135,22 @@ public class NewRecordActivity extends AppCompatActivity {
 
         //設定局數資料
        List<BoardNumInfo> boardNumInfoList = new ArrayList<>();
-       for (int i = 0; i < 11; i++) {
+       for (int i = 0; i < (9+2); i++) {
            boardNumInfoList.add(new BoardNumInfo(i));
        }
        score_scrollablePanelAdapter.setBoardNumInfoList(boardNumInfoList);
 
        //設定隊伍資料
         List<Team>  teamInfoList = new ArrayList<>();
-        for (int i = 0; i < 2; i++) {
-            Team team = new Team();
-            teamInfoList.add(team);  //預設為空
-        }
+        teamInfoList.add(new Team(awayTeam));
+        teamInfoList.add(new Team(homeTeam));
         score_scrollablePanelAdapter.setTeamInfoList(teamInfoList);
 
        ///設定記分板資料
         List<List<ScoreBoardInfo>> scoreList = new ArrayList<>();
         for (int i = 0; i < 2; i++) {
             List<ScoreBoardInfo> scoreInfoList = new ArrayList<>();
-            for (int j = 0; j < 10; j++) {
+            for (int j = 0; j < 15; j++) {
                 ScoreBoardInfo scoreInfo = new ScoreBoardInfo();
                 scoreInfo.setScore(j);
                 scoreInfoList.add(scoreInfo);
