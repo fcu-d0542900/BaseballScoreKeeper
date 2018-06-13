@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         database.setContext(MainActivity.this);
-        Log.d("database",database.getDatabase().getTeamname());
+        Log.d("database",database.getDatabase().getTeamName());
     }
 
     @Override
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 myTeamName = editText_teamName.getText().toString();
-                database.getDatabase().setTeamname(myTeamName);
+                database.getDatabase().setTeamName(myTeamName);
             }
         });
         dialog_setTeamName.show();
