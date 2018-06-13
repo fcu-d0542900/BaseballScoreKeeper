@@ -92,8 +92,6 @@ public class PlayerActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 //*****背號沒寫會錯誤 直接跳回主頁*****
 
-                Log.i(">>>>",editText_playerNum.getText().toString());
-
                 if(!editText_playerNum.getText().toString().equals("")) {
                     playerName = editText_playerName.getText().toString();
                     playerNum = Integer.valueOf(editText_playerNum.getText().toString());
