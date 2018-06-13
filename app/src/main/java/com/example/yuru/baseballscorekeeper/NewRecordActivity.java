@@ -170,11 +170,7 @@ public class NewRecordActivity extends AppCompatActivity {
 
     }
 
-    public View view_set_player() {
-        view_set_player = LayoutInflater.from(NewRecordActivity.this).inflate(R.layout.dialog_new_player, null);
-        view_set_player.setPadding(3,0,3,0);
-        return view_set_player;
-    }
+
 
 }
 
