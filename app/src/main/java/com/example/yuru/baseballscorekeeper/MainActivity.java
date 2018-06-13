@@ -6,8 +6,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baseball.DatabaseService;
@@ -19,6 +21,11 @@ public class MainActivity extends AppCompatActivity {
 
     private String myTeamName;
     private DatabaseService database = DatabaseService.getInstance();
+
+    private TextView text_setTeamName ;
+    private EditText editText_setTeamName ;
+    private View view_setTeamName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,16 +59,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void fn_setTeamName(View view) {
+        view_setTeamName = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog_set_team_name, null);
+        view_setTeamName.setPadding(10,30,10,0);
+        text_setTeamName = view_setTeamName.findViewById(R.id.text_setTeamName);
+        editText_setTeamName = view_setTeamName.findViewById(R.id.editText_setTeamName);
+        if(database.getDatabase().getTeamName() != null) {
+            text_setTeamName.setText(database.getDatabase().getTeamName());
+        }
 
         AlertDialog.Builder dialog_setTeamName = new AlertDialog.Builder(this);
-        dialog_setTeamName.setMessage("我的隊伍名稱:");
-        final EditText editText_teamName = new EditText(MainActivity.this);
-        dialog_setTeamName.setView(editText_teamName);
+        dialog_setTeamName.setView(view_setTeamName);
         dialog_setTeamName.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                myTeamName = editText_teamName.getText().toString();
+            if(!editText_setTeamName.getText().toString().equals("")) {
+                myTeamName = editText_setTeamName.getText().toString();
                 database.getDatabase().setTeamName(myTeamName);
+            }
             }
         });
         dialog_setTeamName.show();
