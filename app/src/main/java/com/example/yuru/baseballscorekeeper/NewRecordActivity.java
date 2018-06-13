@@ -8,9 +8,12 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -29,6 +32,10 @@ public class NewRecordActivity extends AppCompatActivity {
     private String awayTeam,homeTeam;
 
 
+    private View view_set_player;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +47,7 @@ public class NewRecordActivity extends AppCompatActivity {
         isSetPlayer = intent.getBooleanExtra("isSetPlayer",false);
         text_gameName = findViewById(R.id.text_gameName);
         text_gameName.setText(intent.getStringExtra("gameName"));
+
 
         final ScrollablePanel scrollablePanel = (ScrollablePanel) findViewById(R.id.scrollable_panel);
         final ScrollablePanelAdapter scrollablePanelAdapter = new ScrollablePanelAdapter();
@@ -105,10 +113,11 @@ public class NewRecordActivity extends AppCompatActivity {
             Player player = new Player();
             playerInfoList.add(player);  //預設為空
         }
+        scrollablePanelAdapter.setNewRecordActivity(NewRecordActivity.this);
         scrollablePanelAdapter.setPlayerInfoList(playerInfoList);
 
         //設定局數資料
-        List<BoardNumInfo> boardNumInfoList = new ArrayList<>();
+        List<BoardNumInfo> boardNumInfoList = new ArrayList<>() ;
         for (int i = 0; i < (9+1); i++) {
             boardNumInfoList.add(new BoardNumInfo(i));
         }
@@ -159,6 +168,12 @@ public class NewRecordActivity extends AppCompatActivity {
         }
         score_scrollablePanelAdapter.setScoreList(scoreList);
 
+    }
+
+    public View view_set_player() {
+        view_set_player = LayoutInflater.from(NewRecordActivity.this).inflate(R.layout.dialog_new_player, null);
+        view_set_player.setPadding(3,0,3,0);
+        return view_set_player;
     }
 
 }

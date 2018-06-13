@@ -1,9 +1,14 @@
 package com.example.yuru.baseballscorekeeper;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,9 +21,16 @@ import java.util.List;
 
 public class ScrollablePanelAdapter extends PanelAdapter {
 
+    private NewRecordActivity newRecordActivity ;
+
     private List<Player> item_player = new ArrayList<>();
     private List<BoardNumInfo> boardNumInfoList = new ArrayList<>();
     private List<List<OrderInfo>> ordersList =new ArrayList<>();
+
+    private EditText editText_playerName,editText_playerNum;
+    private Spinner spinner_position;
+    private View view_set_player;
+
 
     private static final int TEAMNAME_TYPE = 4;
     private static final int PLAYERINFO_TYPE = 0;
@@ -122,6 +134,38 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.text_playerName.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+/*
+                    view_set_player = newRecordActivity.view_set_player();
+
+                    editText_playerName = view_change_player.findViewById(R.id.editText_playerName);
+                    editText_playerNum = view_change_player.findViewById(R.id.editText_playerNum);
+                    spinner_position = view_change_player.findViewById(R.id.spinner_position);
+*/
+                    AlertDialog.Builder dialog_setPlayer = new AlertDialog.Builder(newRecordActivity);
+                    dialog_setPlayer.setMessage("Hi~~");
+                    //dialog_setPlayer.setView(view_set_player);
+/*
+                    ArrayAdapter adapter_position = new ArrayAdapter(dialog_setPlayer.getContext(),android.R.layout.simple_spinner_item,new String[]{"","P","C","1B","2B","3B","SS","LF","CF","RF"});
+                    adapter_position.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner_position.setAdapter(adapter_position);
+*/
+                    dialog_setPlayer.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //*****背號沒寫會錯誤 直接跳回主頁*****
+/*
+                            playerName = editText_playerName.getText().toString();
+                            playerNum = Integer.valueOf(editText_playerNum.getText().toString());
+                            playerPosition = (int) spinner_position.getSelectedItemId();
+
+                            itemAdapter.add(new Player(playerNum,playerName, playerPosition));  // 新增一個物件項目
+                            item_list.scrollToPosition(item_player.size() - 1);  // 控制列表元件移到最後一個項目
+*/
+                            Toast.makeText(newRecordActivity.getApplicationContext(), "ok", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    dialog_setPlayer.show();
+
                     playerInfo.setName("黃弘承");
                     viewHolder.text_playerName.setText("黃弘承");
                     Toast.makeText(v.getContext(), "name", Toast.LENGTH_SHORT).show();
@@ -215,8 +259,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         public TextView text_playerNum;
         public TextView text_batOrder;
 
+
         public PlayerInfoViewHolder(View view) {
             super(view);
+
             this.text_playerPosition = (TextView) view.findViewById(R.id.text_playerPosition);
             this.text_playerName = (TextView) view.findViewById(R.id.text_playerName);
             this.text_playerNum = (TextView) view.findViewById(R.id.text_playerNum);
@@ -269,6 +315,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     public void setOrdersList(List<List<OrderInfo>> ordersList) {
         this.ordersList = ordersList;
+    }
+
+    public void setNewRecordActivity(NewRecordActivity newRecordActivity) {
+        this.newRecordActivity=newRecordActivity;
     }
 
 
