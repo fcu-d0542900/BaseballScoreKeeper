@@ -160,18 +160,21 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                         public void onClick(DialogInterface dialogInterface, int i) {
                             //*****背號沒寫會錯誤 直接跳回主頁*****
 
-                            playerName = editText_playerName.getText().toString();
-                            playerNum = Integer.valueOf(editText_playerNum.getText().toString());
-                            playerPosition = (int) spinner_position.getSelectedItemId();
+                            if(!editText_playerNum.getText().toString().equals("")) {
+                                playerName = editText_playerName.getText().toString();
+                                playerNum = Integer.valueOf(editText_playerNum.getText().toString());
+                                playerPosition = (int) spinner_position.getSelectedItemId();
 
-                            playerInfo.setName(playerName);
-                            playerInfo.setId(playerNum);
-                            playerInfo.setPosition(playerPosition);
-                            viewHolder.text_playerName.setText(playerName);
-                            viewHolder.text_playerNum.setText(Integer.valueOf(playerNum).toString());
-                            viewHolder.text_playerPosition.setText(playerInfo.getPosition());
+                                playerInfo.setName(playerName);
+                                playerInfo.setId(playerNum);
+                                playerInfo.setPosition(playerPosition);
+                                viewHolder.text_playerName.setText(playerName);
+                                viewHolder.text_playerNum.setText(Integer.valueOf(playerNum).toString());
+                                viewHolder.text_playerPosition.setText(playerInfo.getPosition());
 
-                            Toast.makeText(newRecordActivity.getApplicationContext(), "SET", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(newRecordActivity.getApplicationContext(), "SET", Toast.LENGTH_SHORT).show();
+                            }
+                            Toast.makeText(newRecordActivity.getApplicationContext(), "請填入背號!", Toast.LENGTH_SHORT).show();
                         }
                     });
                     dialog_setPlayer.show();
