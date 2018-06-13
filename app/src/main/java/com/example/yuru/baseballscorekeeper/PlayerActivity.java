@@ -27,7 +27,7 @@ public class PlayerActivity extends AppCompatActivity {
 
     private View view_new_player;
     private EditText editText_playerName,editText_playerNum;
-    Spinner spinner_position;
+    private Spinner spinner_position;
 
     String playerName;
     int playerNum,playerPosition;
@@ -82,11 +82,11 @@ public class PlayerActivity extends AppCompatActivity {
         spinner_position = view_new_player.findViewById(R.id.spinner_position);
 
         AlertDialog.Builder dialog_addPlayer = new AlertDialog.Builder(this);
-        ArrayAdapter adapter_position = new ArrayAdapter(dialog_addPlayer.getContext(),android.R.layout.simple_spinner_item,new String[]{"","P","C","1B","2B","3B","SS","LF","CF","RF"});
+
+        dialog_addPlayer.setView(view_new_player);ArrayAdapter adapter_position = new ArrayAdapter(dialog_addPlayer.getContext(),android.R.layout.simple_spinner_item,new String[]{"","P","C","1B","2B","3B","SS","LF","CF","RF"});
         adapter_position.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_position.setAdapter(adapter_position);
-        
-        dialog_addPlayer.setView(view_new_player);
+
         dialog_addPlayer.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
