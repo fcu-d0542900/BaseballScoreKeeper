@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Database implements Serializable{
     private String teamName = "";
-    private List<String> teamMember = new ArrayList<>();
+    private Team team = new Team();
     private List<Record> record = new ArrayList<>();
 
     public List<Record> getAllRecord() {
@@ -32,14 +32,5 @@ public class Database implements Serializable{
         return this.teamName;
     }
 
-    public List<String> addTeamMember(String name){
-        this.teamMember.add(name);
-        DatabaseService.getInstance().write();
-        return getTeamMember();
-    }
-
-    public List<String> getTeamMember() {
-        return this.teamMember;
-    }
 }
 

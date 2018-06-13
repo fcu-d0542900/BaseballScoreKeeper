@@ -1,24 +1,35 @@
 package com.baseball;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by YURU on 2018/6/8.
  */
 
 public class Team {
+    private String teamName="";
+    private List<String> teamMember = new ArrayList<>();
 
-    private String teamName;
+    public Team(){}
 
-    public Team() {
-        teamName="";
-    }
-    public Team(String name) {
-        setTeamName(name);
-    }
-
+//    public Team(String homeTeam) {
+//        setTeamName(homeTeam);
+//    }
 
     public void setTeamName(String name) {
         this.teamName = name;
     }
+
     public String getTeamName() {return teamName;}
 
+    public List<String> addTeamMember(String name){
+        this.teamMember.add(name);
+        DatabaseService.getInstance().write();
+        return getTeamMember();
+    }
+
+    public List<String> getTeamMember() {
+        return this.teamMember;
+    }
 }

@@ -18,6 +18,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.baseball.Database;
+import com.baseball.DatabaseService;
 import com.baseball.Record;
 
 import java.util.ArrayList;
@@ -50,11 +52,8 @@ public class RecordActivity extends AppCompatActivity {
         teamName = intent.getStringExtra("teamName");
 
         item_list = (RecyclerView) findViewById(R.id.record_list);
-        item_record = new ArrayList<>();
+        item_record = DatabaseService.getInstance().getDatabase().getAllRecord();
 
-        item_record.add(new Record("大專盃預賽","2018/6/8","a","b"));
-        item_record.add(new Record("人言盃","2018/6/10","a","b"));
-        item_record.add(new Record("大專盃複賽","2018/6/15","a","b"));
 
         // 執行RecyclerView元件的設定
         item_list.setHasFixedSize(true);

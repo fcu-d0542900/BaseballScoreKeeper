@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.baseball.DatabaseService;
+import com.baseball.Record;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         database.setContext(MainActivity.this);
+        test();
         Log.d("database",database.getDatabase().getTeamName());
     }
 
@@ -65,4 +67,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /* remove later */
+    private void test(){
+        DatabaseService.getInstance().getDatabase().addRecord(new Record("大專盃預賽","2018/6/8","a","b"));
+        DatabaseService.getInstance().getDatabase().addRecord(new Record("人言盃","2018/6/10","a","b"));
+        DatabaseService.getInstance().getDatabase().addRecord(new Record("大專盃複賽","2018/6/15","a","b"));
+
+    }
 }
