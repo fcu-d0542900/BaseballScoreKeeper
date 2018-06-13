@@ -91,15 +91,20 @@ public class PlayerActivity extends AppCompatActivity {
         dialog_addPlayer.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                //*****背號沒寫會錯誤 直接跳回主頁*****
-                playerName = editText_playerName.getText().toString();
-                playerNum = Integer.valueOf(editText_playerNum.getText().toString());
-                playerPosition = (int) spinner_position.getSelectedItemId();
+                if(!editText_playerNum.getText().toString().equals("")) {
+                    playerName = editText_playerName.getText().toString();
+                    playerNum = Integer.valueOf(editText_playerNum.getText().toString());
+                    playerPosition = (int) spinner_position.getSelectedItemId();
 
-                itemAdapter.add(new Player(playerNum,playerName, playerPosition));  // 新增一個物件項目
-                item_list.scrollToPosition(item_player.size() - 1);  // 控制列表元件移到最後一個項目
+                    itemAdapter.add(new Player(playerNum,playerName, playerPosition));  // 新增一個物件項目
+                    item_list.scrollToPosition(item_player.size() - 1);  // 控制列表元件移到最後一個項目
 
-                Toast.makeText(getApplicationContext(), "ADD: "+playerName+" "+playerNum+" "+playerPosition, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "ADD: "+playerName+" "+playerNum+" "+playerPosition, Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "請填入背號!", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         dialog_addPlayer.show();
