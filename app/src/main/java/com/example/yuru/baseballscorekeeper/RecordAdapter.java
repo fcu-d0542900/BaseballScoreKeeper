@@ -97,11 +97,11 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
     }
 
     // 新增一個項目
-    public void add(Record record) {
-        item_record.add(record);
-        // 通知資料項目已經新增
-        notifyItemInserted(item_record.size());
-    }
+//    public void add(Record record) {
+//        item_record.add(record);
+//        // 通知資料項目已經新增
+//        notifyItemInserted(item_record.size());
+//    }
 
     // 刪除一個項目
     public void remove(int position) {

@@ -41,7 +41,7 @@ public class NewRecordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_record);
 
         Intent intent = this.getIntent();
-        currentRecord = DatabaseService.getInstance().getDatabase().getRecord(Integer.parseInt(intent.getStringExtra("recordPosition")));
+        currentRecord = DatabaseService.getInstance().getDatabase().getRecord(intent.getIntExtra("recordPosition",0));
         awayTeam = currentRecord.getAwayTeam();
         homeTeam = currentRecord.getHomeTeam();
         isSetPlayer = intent.getBooleanExtra("isSetPlayer",false);
