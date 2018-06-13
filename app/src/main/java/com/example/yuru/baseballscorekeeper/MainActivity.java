@@ -10,16 +10,25 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.baseball.DatabaseService;
+
 public class MainActivity extends AppCompatActivity {
 
     private String myTeamName;
-
+    private DatabaseService database = DatabaseService.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        database.setContext(MainActivity.this);
+
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        DatabaseService.getInstance().write();
+    }
 
     public void fn_player(View view) {
         Intent intent = new Intent(MainActivity.this,PlayerActivity.class);
