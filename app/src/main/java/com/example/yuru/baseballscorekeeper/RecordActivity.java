@@ -5,6 +5,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,16 +19,26 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class RecordActivity extends AppCompatActivity {
 
     String teamName;
+    private RecyclerView item_list;
+    private RecordAdapter itemAdapter;
+    private RecyclerView.LayoutManager rLayoutManager;
+    private List<Record> item_record;
 
     private View view_new_record;
     private EditText editText_gameName,editText_gameDate;
     private EditText editText_awayTeam,editText_homeTeam;
     private Spinner spinner_awayTeam,spinner_homeTeam;
     private CheckBox checkBox_isSetPlayer;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +48,34 @@ public class RecordActivity extends AppCompatActivity {
         Intent intent = this.getIntent();
         teamName = intent.getStringExtra("teamName");
 
+        item_list = (RecyclerView) findViewById(R.id.record_list);
+        item_record = new ArrayList<>();
 
+        item_record.add(new Record("大專盃預賽","2018/6/8","a","b"));
+        item_record.add(new Record("人言盃","2018/6/10","a","b"));
+        item_record.add(new Record("大專盃複賽","2018/6/15","a","b"));
+
+        // 執行RecyclerView元件的設定
+        item_list.setHasFixedSize(true);
+        // 建立與設定RecyclerView元件的配置元件
+        rLayoutManager = new LinearLayoutManager(this);
+        item_list.setLayoutManager(rLayoutManager);
+
+        // 建立RecyclerView元件的資料來源物件
+        itemAdapter = new RecordAdapter(item_record, this) {
+            @Override
+            public void onBindViewHolder(final ViewHolder holder, final int position) {
+                super.onBindViewHolder(holder, position);
+            }
+        };
+
+        // 設定RecyclerView使用的資料來源物件
+        item_list.setAdapter(itemAdapter);
+
+        // 建立與設定項目操作物件
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(itemAdapter);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(item_list);
     }
 
 
