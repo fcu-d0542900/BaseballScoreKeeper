@@ -12,6 +12,7 @@ public class Database implements Serializable{
 
     public void setTeamname(String name){
         this.teamname = name;
+        DatabaseService.getInstance().write();
     }
 
     public String getTeamname(){
@@ -20,6 +21,7 @@ public class Database implements Serializable{
 
     public List<String> addTeamMember(String name){
         this.teamMember.add(name);
+        DatabaseService.getInstance().write();
         return getTeamMember();
     }
 

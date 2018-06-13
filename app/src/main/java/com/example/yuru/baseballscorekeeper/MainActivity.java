@@ -26,8 +26,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         database.setContext(MainActivity.this);
-        Log.d("database",database.getDatabase().getName());
-        Log.d("database",database.getDatabase().toString());
+        Log.d("database",database.getDatabase().getTeamname());
     }
 
     @Override
@@ -58,12 +57,8 @@ public class MainActivity extends AppCompatActivity {
         dialog_setTeamName.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(getApplicationContext(),"prev team name: "+database.getDatabase().getName(),Toast.LENGTH_SHORT).show();
                 myTeamName = editText_teamName.getText().toString();
-                database.getDatabase().setName(myTeamName);
-                database.write();
-                Log.d("database",database.getDatabase().getName());
-                Toast.makeText(getApplicationContext(),"Team Name: "+myTeamName,Toast.LENGTH_SHORT).show();
+                database.getDatabase().setTeamname(myTeamName);
             }
         });
         dialog_setTeamName.show();
