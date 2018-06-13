@@ -103,7 +103,9 @@ public class NewRecordActivity extends AppCompatActivity {
     //設定球員資料
     List<Player>  playerInfoList = new ArrayList<>();
     //設定局數資料
-    List<BoardNumInfo> boardNumInfoList = new ArrayList<>() ;
+    List<BoardNumInfo> boardNumInfoList = new ArrayList<>();
+    //設定目前局數資料
+    List<BoardNumInfo> currentBoardNumInfoList = new ArrayList<>();
     //設定紀錄資料
     List<List<OrderInfo>> ordersList = new ArrayList<>();
     ///設定記分板資料
@@ -125,10 +127,11 @@ public class NewRecordActivity extends AppCompatActivity {
         scrollablePanelAdapter.setNewRecordActivity(NewRecordActivity.this);
         scrollablePanelAdapter.setPlayerInfoList(playerInfoList);
 
+        //設定局數
         for (int i = 0; i < (9+1); i++) {
-            boardNumInfoList.add(new BoardNumInfo(i));
+            currentBoardNumInfoList.add(new BoardNumInfo(i));
         }
-        scrollablePanelAdapter.setBoardNumInfoList(boardNumInfoList);
+        scrollablePanelAdapter.setBoardNumInfoList(currentBoardNumInfoList);
 
 
         for (int i = 0; i < 9; i++) {
@@ -149,6 +152,7 @@ public class NewRecordActivity extends AppCompatActivity {
         for (int i = 0; i < (9+2); i++) {
             boardNumInfoList.add(new BoardNumInfo(i));
         }
+
         score_scrollablePanelAdapter.setBoardNumInfoList(boardNumInfoList);
 
 
