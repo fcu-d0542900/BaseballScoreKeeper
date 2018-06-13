@@ -1,6 +1,7 @@
 package com.example.yuru.baseballscorekeeper;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -27,7 +28,7 @@ public class NewRecordActivity extends AppCompatActivity {
     private TextView text_gameName,text_startTime,text_endTime;
     private Boolean isSetPlayer;
     private String awayTeam,homeTeam;
-
+    Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class NewRecordActivity extends AppCompatActivity {
         text_gameName = findViewById(R.id.text_gameName);
         text_gameName.setText(intent.getStringExtra("gameName"));
 
+        mContext=this;
         final ScrollablePanel scrollablePanel = (ScrollablePanel) findViewById(R.id.scrollable_panel);
         final ScrollablePanelAdapter scrollablePanelAdapter = new ScrollablePanelAdapter();
 

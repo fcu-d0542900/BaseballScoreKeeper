@@ -1,5 +1,6 @@
 package com.example.yuru.baseballscorekeeper;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,14 +17,19 @@ import java.util.List;
 
 public class ScrollablePanelAdapter extends PanelAdapter {
 
+
     private List<Player> item_player = new ArrayList<>();
     private List<BoardNumInfo> boardNumInfoList = new ArrayList<>();
     private List<List<OrderInfo>> ordersList =new ArrayList<>();
+
 
     private static final int TEAMNAME_TYPE = 4;
     private static final int PLAYERINFO_TYPE = 0;
     private static final int BOARDNUM_TYPE = 1;
     private static final int ORDER_TYPE = 2;
+
+    Context mContext;
+    LayoutInflater mInflater;
 
     @Override
     public int getRowCount() {
@@ -142,6 +148,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.getScoreView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     Toast.makeText(v.getContext(), "得分區域" +orderInfo.getGuestName(), Toast.LENGTH_SHORT).show();
 
                 }
