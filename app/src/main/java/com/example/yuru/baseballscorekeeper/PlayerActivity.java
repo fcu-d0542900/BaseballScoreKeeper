@@ -102,8 +102,10 @@ public class PlayerActivity extends AppCompatActivity {
 
                     Toast.makeText(getApplicationContext(), "ADD: "+playerName+" "+playerNum+" "+playerPosition, Toast.LENGTH_SHORT).show();
                 }
+                else {
+                    Toast.makeText(getApplicationContext(), "請填入背號!", Toast.LENGTH_SHORT).show();
+                }
 
-                Toast.makeText(getApplicationContext(), "請填入背號!", Toast.LENGTH_SHORT).show();
             }
         });
         dialog_addPlayer.show();

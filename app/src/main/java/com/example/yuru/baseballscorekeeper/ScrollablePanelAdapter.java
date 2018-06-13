@@ -174,7 +174,9 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
                                 Toast.makeText(newRecordActivity.getApplicationContext(), "SET", Toast.LENGTH_SHORT).show();
                             }
-                            Toast.makeText(newRecordActivity.getApplicationContext(), "請填入背號!", Toast.LENGTH_SHORT).show();
+                            else {
+                                Toast.makeText(newRecordActivity.getApplicationContext(), "請填入背號!", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
                     dialog_setPlayer.show();
