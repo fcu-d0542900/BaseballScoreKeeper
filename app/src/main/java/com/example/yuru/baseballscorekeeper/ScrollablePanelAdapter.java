@@ -1,12 +1,21 @@
 package com.example.yuru.baseballscorekeeper;
 
-import android.content.Context;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.baseball.BoardNumInfo;
+import com.baseball.OrderInfo;
+import com.baseball.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,19 +26,24 @@ import java.util.List;
 
 public class ScrollablePanelAdapter extends PanelAdapter {
 
+    private NewRecordActivity newRecordActivity ;
 
     private List<Player> item_player = new ArrayList<>();
     private List<BoardNumInfo> boardNumInfoList = new ArrayList<>();
     private List<List<OrderInfo>> ordersList =new ArrayList<>();
+
+    private EditText editText_playerName,editText_playerNum;
+    private Spinner spinner_position;
+    private View view_set_player;
+
+    private String playerName;
+    private int playerNum,playerPosition;
 
 
     private static final int TEAMNAME_TYPE = 4;
     private static final int PLAYERINFO_TYPE = 0;
     private static final int BOARDNUM_TYPE = 1;
     private static final int ORDER_TYPE = 2;
-
-    Context mContext;
-    LayoutInflater mInflater;
 
     @Override
     public int getRowCount() {
@@ -128,9 +142,48 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.text_playerName.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    playerInfo.setName("黃弘承");
-                    viewHolder.text_playerName.setText("黃弘承");
-                    Toast.makeText(v.getContext(), "name", Toast.LENGTH_SHORT).show();
+
+                    view_set_player = LayoutInflater.from(newRecordActivity).inflate(R.layout.dialog_new_player, null);
+                    view_set_player.setPadding(3,0,3,0);
+                    ImageView img = view_set_player.findViewById(R.id.image_title_newPlayer);
+                    img.setVisibility(View.GONE);
+
+                    editText_playerName = view_set_player.findViewById(R.id.editText_playerName);
+                    editText_playerNum = view_set_player.findViewById(R.id.editText_playerNum);
+                    spinner_position = view_set_player.findViewById(R.id.spinner_position);
+
+                    AlertDialog.Builder dialog_setPlayer = new AlertDialog.Builder(newRecordActivity);
+                    dialog_setPlayer.setView(view_set_player);
+
+                    ArrayAdapter adapter_position = new ArrayAdapter(dialog_setPlayer.getContext(),android.R.layout.simple_spinner_item,new String[]{"","P","C","1B","2B","3B","SS","LF","CF","RF"});
+                    adapter_position.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner_position.setAdapter(adapter_position);
+
+                    dialog_setPlayer.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            if(!editText_playerNum.getText().toString().equals("")) {
+                                playerName = editText_playerName.getText().toString();
+                                playerNum = Integer.valueOf(editText_playerNum.getText().toString());
+                                playerPosition = (int) spinner_position.getSelectedItemId();
+
+                                playerInfo.setName(playerName);
+                                playerInfo.setId(playerNum);
+                                playerInfo.setPosition(playerPosition);
+                                viewHolder.text_playerName.setText(playerName);
+                                viewHolder.text_playerNum.setText(Integer.valueOf(playerNum).toString());
+                                viewHolder.text_playerPosition.setText(playerInfo.getPosition());
+
+                                Toast.makeText(newRecordActivity.getApplicationContext(), "SET", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                Toast.makeText(newRecordActivity.getApplicationContext(), "請填入背號!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                    dialog_setPlayer.show();
+
+                    //Toast.makeText(v.getContext(), "name", Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -148,7 +201,6 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.getScoreView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     Toast.makeText(v.getContext(), "得分區域" +orderInfo.getGuestName(), Toast.LENGTH_SHORT).show();
 
                 }
@@ -222,8 +274,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         public TextView text_playerNum;
         public TextView text_batOrder;
 
+
         public PlayerInfoViewHolder(View view) {
             super(view);
+
             this.text_playerPosition = (TextView) view.findViewById(R.id.text_playerPosition);
             this.text_playerName = (TextView) view.findViewById(R.id.text_playerName);
             this.text_playerNum = (TextView) view.findViewById(R.id.text_playerNum);
@@ -276,6 +330,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     public void setOrdersList(List<List<OrderInfo>> ordersList) {
         this.ordersList = ordersList;
+    }
+
+    public void setNewRecordActivity(NewRecordActivity newRecordActivity) {
+        this.newRecordActivity=newRecordActivity;
     }
 
 

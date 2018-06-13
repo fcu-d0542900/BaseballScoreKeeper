@@ -1,4 +1,4 @@
-package com.example.yuru.baseballscorekeeper;
+package com.baseball;
 
 /**
  * Created by YURU on 2018/6/8.

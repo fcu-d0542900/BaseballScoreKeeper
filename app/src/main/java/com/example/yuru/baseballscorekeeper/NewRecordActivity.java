@@ -1,7 +1,6 @@
 package com.example.yuru.baseballscorekeeper;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -10,25 +9,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
+import com.baseball.BoardNumInfo;
+import com.baseball.OrderInfo;
+import com.baseball.Player;
+import com.baseball.ScoreBoardInfo;
+import com.baseball.Team;
+
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
-import java.util.Random;
 
 public class NewRecordActivity extends AppCompatActivity {
 
     private TextView text_gameName,text_startTime,text_endTime;
     private Boolean isSetPlayer;
     private String awayTeam,homeTeam;
-    Context mContext;
+
+
+    private View view_set_player;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,7 @@ public class NewRecordActivity extends AppCompatActivity {
         text_gameName = findViewById(R.id.text_gameName);
         text_gameName.setText(intent.getStringExtra("gameName"));
 
-        mContext=this;
+
         final ScrollablePanel scrollablePanel = (ScrollablePanel) findViewById(R.id.scrollable_panel);
         final ScrollablePanelAdapter scrollablePanelAdapter = new ScrollablePanelAdapter();
 
@@ -107,10 +110,11 @@ public class NewRecordActivity extends AppCompatActivity {
             Player player = new Player();
             playerInfoList.add(player);  //預設為空
         }
+        scrollablePanelAdapter.setNewRecordActivity(NewRecordActivity.this);
         scrollablePanelAdapter.setPlayerInfoList(playerInfoList);
 
         //設定局數資料
-        List<BoardNumInfo> boardNumInfoList = new ArrayList<>();
+        List<BoardNumInfo> boardNumInfoList = new ArrayList<>() ;
         for (int i = 0; i < (9+1); i++) {
             boardNumInfoList.add(new BoardNumInfo(i));
         }
@@ -162,6 +166,8 @@ public class NewRecordActivity extends AppCompatActivity {
         score_scrollablePanelAdapter.setScoreList(scoreList);
 
     }
+
+
 
 }
 

@@ -10,52 +10,33 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.IdpResponse;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import java.util.Arrays;
-import java.util.List;
+import com.baseball.DatabaseService;
+import com.baseball.Record;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int RC_SIGN_IN = 123;
-    private String myTeamName;
 
+    private String myTeamName;
+    private DatabaseService database = DatabaseService.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        List<AuthUI.IdpConfig> providers = Arrays.asList(
-                new AuthUI.IdpConfig.GoogleBuilder().build());
-        startActivityForResult(
-                AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setAvailableProviders(providers)
-                        .build(),
-                RC_SIGN_IN);
-
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RC_SIGN_IN) {
-            IdpResponse response = IdpResponse.fromResultIntent(data);
-
-            if (resultCode == RESULT_OK) {
-                // Successfully signed in
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                // ...
-            } else {
-                // Sign in failed. If response is null the user canceled the
-                // sign-in flow using the back button. Otherwise check
-                Log.i("Login Error", String.valueOf(response.getError().getErrorCode())); // and handle the error.
-                // ...
-            }
-        }
+    protected void onStart() {
+        super.onStart();
+        database.setContext(MainActivity.this);
+        test();
+        Log.d("database",database.getDatabase().getTeamName());
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        DatabaseService.getInstance().write();
+    }
+
     public void fn_player(View view) {
         Intent intent = new Intent(MainActivity.this,PlayerActivity.class);
         intent.putExtra("n",1);
@@ -70,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void fn_setTeamName(View view) {
+
         AlertDialog.Builder dialog_setTeamName = new AlertDialog.Builder(this);
         dialog_setTeamName.setMessage("我的隊伍名稱:");
         final EditText editText_teamName = new EditText(MainActivity.this);
@@ -78,11 +60,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 myTeamName = editText_teamName.getText().toString();
-                Toast.makeText(getApplicationContext(),"Team Name: "+myTeamName,Toast.LENGTH_SHORT).show();
+                database.getDatabase().setTeamName(myTeamName);
             }
         });
         dialog_setTeamName.show();
 
     }
 
+    /* remove later */
+    private void test(){
+        DatabaseService.getInstance().getDatabase().addRecord(new Record("大專盃預賽","2018/6/8","a","b"));
+        DatabaseService.getInstance().getDatabase().addRecord(new Record("人言盃","2018/6/10","a","b"));
+        DatabaseService.getInstance().getDatabase().addRecord(new Record("大專盃複賽","2018/6/15","a","b"));
+
+    }
 }

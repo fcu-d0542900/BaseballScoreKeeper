@@ -7,13 +7,14 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.baseball.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class PlayerActivity extends AppCompatActivity {
 
     private View view_new_player;
     private EditText editText_playerName,editText_playerNum;
-    Spinner spinner_position;
+    private Spinner spinner_position;
 
     String playerName;
     int playerNum,playerPosition;
@@ -82,23 +83,28 @@ public class PlayerActivity extends AppCompatActivity {
         spinner_position = view_new_player.findViewById(R.id.spinner_position);
 
         AlertDialog.Builder dialog_addPlayer = new AlertDialog.Builder(this);
-        ArrayAdapter adapter_position = new ArrayAdapter(dialog_addPlayer.getContext(),android.R.layout.simple_spinner_item,new String[]{"","P","C","1B","2B","3B","SS","LF","CF","RF"});
+
+        dialog_addPlayer.setView(view_new_player);ArrayAdapter adapter_position = new ArrayAdapter(dialog_addPlayer.getContext(),android.R.layout.simple_spinner_item,new String[]{"","P","C","1B","2B","3B","SS","LF","CF","RF"});
         adapter_position.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_position.setAdapter(adapter_position);
-        
-        dialog_addPlayer.setView(view_new_player);
+
         dialog_addPlayer.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                //*****背號沒寫會錯誤 直接跳回主頁*****
-                playerName = editText_playerName.getText().toString();
-                playerNum = Integer.valueOf(editText_playerNum.getText().toString());
-                playerPosition = (int) spinner_position.getSelectedItemId();
+                if(!editText_playerNum.getText().toString().equals("")) {
+                    playerName = editText_playerName.getText().toString();
+                    playerNum = Integer.valueOf(editText_playerNum.getText().toString());
+                    playerPosition = (int) spinner_position.getSelectedItemId();
 
-                itemAdapter.add(new Player(playerNum,playerName, playerPosition));  // 新增一個物件項目
-                item_list.scrollToPosition(item_player.size() - 1);  // 控制列表元件移到最後一個項目
+                    itemAdapter.add(new Player(playerNum,playerName, playerPosition));  // 新增一個物件項目
+                    item_list.scrollToPosition(item_player.size() - 1);  // 控制列表元件移到最後一個項目
 
-                Toast.makeText(getApplicationContext(), "ADD: "+playerName+" "+playerNum+" "+playerPosition, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "ADD: "+playerName+" "+playerNum+" "+playerPosition, Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "請填入背號!", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         dialog_addPlayer.show();
