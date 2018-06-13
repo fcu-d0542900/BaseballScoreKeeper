@@ -1,4 +1,4 @@
-package com.example.yuru.baseballscorekeeper;
+package com.baseball;
 
 import java.util.Arrays;
 import java.util.Collections;

@@ -9,6 +9,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.baseball.Record;
+
 import java.util.Collections;
 import java.util.List;
 

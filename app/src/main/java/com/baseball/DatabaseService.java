@@ -19,9 +19,6 @@ public class DatabaseService {
     private Database database;
     Context context;
 
-    DatabaseService(){
-    }
-
     public Database getDatabase() {
         return database;
     }
@@ -36,7 +33,8 @@ public class DatabaseService {
             instance = new DatabaseService();
         return instance;
     }
-    public void read(){
+
+    private void read(){
         ObjectInputStream input;
         boolean exist = true;
         try {

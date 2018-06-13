@@ -13,6 +13,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baseball.BoardNumInfo;
+import com.baseball.OrderInfo;
+import com.baseball.Player;
+
 import java.util.ArrayList;
 import java.util.List;
 

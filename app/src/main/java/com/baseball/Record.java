@@ -1,25 +1,53 @@
 package com.baseball;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+/**
+ * Created by YURU on 2018/6/13.
+ */
 
-public class Record implements Serializable {
-    private Team ally = new Team();
-    private Team enemy = new Team();
-    private Date date;
+public class Record {
+    private String gameName;
+    private String gameDate;
+    private String awayTeam;
+    private String homeTeam;
 
-    Record() {
-        date = Calendar.getInstance().getTime();
+    public Record() {
+
+    }
+    public Record(String gameName,String gameDate,String awayTeam,String homeTeam) {
+        this.gameName=gameName;
+        this.gameDate=gameDate;
+        this.awayTeam=awayTeam;
+        this.homeTeam=homeTeam;
+    }
+    public void setGameName(String gameName) {
+        this.gameName=gameName;
     }
 
-    public Team getAlly() {
-        return ally;
+    public String getGameName() {
+        return  gameName;
     }
 
-    public Team getEnemy() {
-        return enemy;
+    public void setGameDate(String gameDate) {
+        this.gameDate = gameDate;
+    }
+
+    public String getGameDate() {
+        return gameDate;
+    }
+
+    public void setAwayTeam(String awayTeam) {
+        this.awayTeam = awayTeam;
+    }
+
+    public String getAwayTeam() {
+        return awayTeam;
+    }
+
+    public void setHomeTeam(String homeTeam) {
+        this.homeTeam = homeTeam;
+    }
+
+    public String getHomeTeam() {
+        return homeTeam;
     }
 }
