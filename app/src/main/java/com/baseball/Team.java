@@ -13,9 +13,9 @@ public class Team {
 
     public Team(){}
 
-//    public Team(String homeTeam) {
-//        setTeamName(homeTeam);
-//    }
+    public Team(String homeTeam) {
+        setTeamName(homeTeam);
+    }
 
     public void setTeamName(String name) {
         this.teamName = name;
