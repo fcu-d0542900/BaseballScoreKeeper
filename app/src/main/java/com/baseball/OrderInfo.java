@@ -1,12 +1,13 @@
 package com.baseball;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 
-public class OrderInfo {
+public class OrderInfo implements Serializable {
     private long id;
     private String guestName;
     private boolean isBegin;

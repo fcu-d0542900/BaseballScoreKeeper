@@ -1,53 +1,54 @@
 package com.baseball;
 
+import android.util.Log;
+
+import java.io.Serializable;
+import java.util.Date;
+
 /**
  * Created by YURU on 2018/6/13.
  */
 
-public class Record {
-    private String gameName;
-    private String gameDate;
-    private String awayTeam;
-    private String homeTeam;
+public class Record implements Serializable {
+    private String name;
+    private Date date;
+    private Team away;
+    private Team home;
 
     public Record() {
 
     }
-    public Record(String gameName,String gameDate,String awayTeam,String homeTeam) {
-        this.gameName=gameName;
-        this.gameDate=gameDate;
-        this.awayTeam=awayTeam;
-        this.homeTeam=homeTeam;
+    public Record(String name,String awayTeam,String homeTeam,Date date) {
+        this.name=name;
+        this.date=date;
+        this.away=new Team(awayTeam);
+        this.home=new Team(homeTeam);
+        Log.d("record","add record: "+name);
     }
-    public void setGameName(String gameName) {
-        this.gameName=gameName;
+
+    public void setGameName(String name) {
+        this.name=name;
     }
 
     public String getGameName() {
-        return  gameName;
+        return  name;
     }
 
-    public void setGameDate(String gameDate) {
-        this.gameDate = gameDate;
+    public void setGameDate(Date date) {
+        this.date = date;
     }
 
-    public String getGameDate() {
-        return gameDate;
+    public Date getGameDate() {
+        return date;
     }
 
-    public void setAwayTeam(String awayTeam) {
-        this.awayTeam = awayTeam;
+
+    public Team getAwayTeam() {
+        return away;
     }
 
-    public String getAwayTeam() {
-        return awayTeam;
-    }
 
-    public void setHomeTeam(String homeTeam) {
-        this.homeTeam = homeTeam;
-    }
-
-    public String getHomeTeam() {
-        return homeTeam;
+    public Team getHomeTeam() {
+        return home;
     }
 }

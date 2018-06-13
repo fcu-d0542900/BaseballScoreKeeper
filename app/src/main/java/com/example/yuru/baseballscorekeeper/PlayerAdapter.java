@@ -9,6 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.baseball.DatabaseService;
 import com.baseball.Player;
 
 import java.util.Collections;
@@ -27,8 +28,8 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
     private int lastPosition = -1;
     private Context context;
 
-    public PlayerAdapter(List<Player> item_player, Context context) {
-        this.item_player = item_player;
+    public PlayerAdapter(Context context) {
+        this.item_player = DatabaseService.getInstance().getDatabase().getTeamMember();
         this.context = context;
     }
 

@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.baseball.DatabaseService;
 import com.baseball.Player;
 
 import java.util.ArrayList;
@@ -24,7 +25,6 @@ public class PlayerActivity extends AppCompatActivity {
     private RecyclerView item_list;
     private PlayerAdapter itemAdapter;
     private RecyclerView.LayoutManager rLayoutManager;
-    private List<Player> item_player;
 
     private View view_new_player;
     private EditText editText_playerName,editText_playerNum;
@@ -41,11 +41,10 @@ public class PlayerActivity extends AppCompatActivity {
 
         item_list = (RecyclerView) findViewById(R.id.player_list);
 
-        item_player = new ArrayList<>();
 
-        item_player.add(new Player(35, "弘承", 8));
-        item_player.add(new Player(16, "YURU", 10));
-        item_player.add(new Player(56, "童", 7));
+//        item_player.add(new Player(35, "弘承", 8));
+//        item_player.add(new Player(16, "YURU", 10));
+//        item_player.add(new Player(56, "童", 7));
 
 
 
@@ -56,7 +55,7 @@ public class PlayerActivity extends AppCompatActivity {
         item_list.setLayoutManager(rLayoutManager);
 
         // 建立RecyclerView元件的資料來源物件
-        itemAdapter = new PlayerAdapter(item_player, this) {
+        itemAdapter = new PlayerAdapter(this) {
             @Override
             public void onBindViewHolder(final ViewHolder holder, final int position) {
                 super.onBindViewHolder(holder, position);
@@ -95,9 +94,8 @@ public class PlayerActivity extends AppCompatActivity {
                     playerName = editText_playerName.getText().toString();
                     playerNum = Integer.valueOf(editText_playerNum.getText().toString());
                     playerPosition = (int) spinner_position.getSelectedItemId();
-
-                    itemAdapter.add(new Player(playerNum,playerName, playerPosition));  // 新增一個物件項目
-                    item_list.scrollToPosition(item_player.size() - 1);  // 控制列表元件移到最後一個項目
+                    int position = DatabaseService.getInstance().getDatabase().addTeamMember(new Player(playerNum,playerName, playerPosition));
+                    item_list.scrollToPosition(position);  // 控制列表元件移到最後一個項目
 
                     Toast.makeText(getApplicationContext(), "ADD: "+playerName+" "+playerNum+" "+playerPosition, Toast.LENGTH_SHORT).show();
                 }

@@ -1,5 +1,6 @@
 package com.baseball;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * Created by YURU on 2018/6/8.
  */
 
-public class Team {
+public class Team implements Serializable {
     private String teamName="";
     private List<String> teamMember = new ArrayList<>();
 

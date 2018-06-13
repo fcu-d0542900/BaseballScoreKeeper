@@ -9,6 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.baseball.DatabaseService;
 import com.baseball.Record;
 
 import java.util.Collections;
@@ -27,8 +28,8 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
     private int lastPosition = -1;
     private Context context;
 
-    public RecordAdapter(List<Record> item_record, Context context) {
-        this.item_record = item_record;
+    public RecordAdapter(Context context) {
+        this.item_record = DatabaseService.getInstance().getDatabase().getAllRecord();
         this.context = context;
     }
 
@@ -71,7 +72,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
 
         // 設定編號、名稱、說明與是否選擇
         holder.text_gameName.setText(record.getGameName());
-        holder.text_gameDate.setText(record.getGameDate());  //String.valueOf(player.getPosition())
+        holder.text_gameDate.setText(record.getGameDate().toString());  //String.valueOf(player.getPosition())
 
         // 設定動畫效果
         setAnimation(holder.rootView, position);
@@ -108,6 +109,12 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         // 通知資料項目已經刪除
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, item_record.size());
+    }
+
+    // 刪除一個項目
+    public void update() {
+        // 通知資料項目已經刪除
+        notifyDataSetChanged();
     }
 
     // 實作 ItemTouchHelperAdapter 介面的方法

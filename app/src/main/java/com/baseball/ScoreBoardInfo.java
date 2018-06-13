@@ -1,7 +1,9 @@
 package com.baseball;
 
 
-public class ScoreBoardInfo {
+import java.io.Serializable;
+
+public class ScoreBoardInfo implements Serializable {
     private int score;
 
     public ScoreBoardInfo(){

@@ -1,10 +1,12 @@
 package com.baseball;
 
+import java.io.Serializable;
+
 /**
  * Created by YURU on 2018/6/8.
  */
 
-public class Player {
+public class Player implements Serializable {
     private long id;
     private String name;
     private String team;

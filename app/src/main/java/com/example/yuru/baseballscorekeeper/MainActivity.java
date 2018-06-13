@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.baseball.DatabaseService;
 import com.baseball.Record;
 
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity {
 
     private String myTeamName;
@@ -69,9 +71,9 @@ public class MainActivity extends AppCompatActivity {
 
     /* remove later */
     private void test(){
-        DatabaseService.getInstance().getDatabase().addRecord(new Record("大專盃預賽","2018/6/8","a","b"));
-        DatabaseService.getInstance().getDatabase().addRecord(new Record("人言盃","2018/6/10","a","b"));
-        DatabaseService.getInstance().getDatabase().addRecord(new Record("大專盃複賽","2018/6/15","a","b"));
+        DatabaseService.getInstance().getDatabase().addRecord(new Record("大專盃預賽","2018/6/8","a", Calendar.getInstance().getTime()));
+        DatabaseService.getInstance().getDatabase().addRecord(new Record("人言盃","2018/6/10","a",Calendar.getInstance().getTime()));
+        DatabaseService.getInstance().getDatabase().addRecord(new Record("大專盃複賽","2018/6/15","a",Calendar.getInstance().getTime()));
 
     }
 }

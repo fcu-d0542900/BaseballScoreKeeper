@@ -23,6 +23,7 @@ import com.baseball.DatabaseService;
 import com.baseball.Record;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -32,7 +33,6 @@ public class RecordActivity extends AppCompatActivity {
     private RecyclerView item_list;
     private RecordAdapter itemAdapter;
     private RecyclerView.LayoutManager rLayoutManager;
-    private List<Record> item_record;
 
     private View view_new_record;
     private EditText editText_gameName,editText_gameDate;
@@ -52,8 +52,6 @@ public class RecordActivity extends AppCompatActivity {
         teamName = intent.getStringExtra("teamName");
 
         item_list = (RecyclerView) findViewById(R.id.record_list);
-        item_record = DatabaseService.getInstance().getDatabase().getAllRecord();
-
 
         // 執行RecyclerView元件的設定
         item_list.setHasFixedSize(true);
@@ -62,7 +60,7 @@ public class RecordActivity extends AppCompatActivity {
         item_list.setLayoutManager(rLayoutManager);
 
         // 建立RecyclerView元件的資料來源物件
-        itemAdapter = new RecordAdapter(item_record, this) {
+        itemAdapter = new RecordAdapter(this) {
             @Override
             public void onBindViewHolder(final ViewHolder holder, final int position) {
                 super.onBindViewHolder(holder, position);
@@ -148,7 +146,11 @@ public class RecordActivity extends AppCompatActivity {
                 String homeTeam = editText_homeTeam.getText().toString();
                 Boolean isSetPlayer = checkBox_isSetPlayer.isChecked();
 
+                int position = DatabaseService.getInstance().getDatabase().addRecord(new Record(gameName, awayTeam,homeTeam,Calendar.getInstance().getTime()));
+                itemAdapter.update();
+
                 Intent intent = new Intent(RecordActivity.this,NewRecordActivity.class);
+                intent.putExtra("recordPosition",position);
                 intent.putExtra("gameName",gameName);
                 intent.putExtra("awayTeam",awayTeam);
                 intent.putExtra("homeTeam",homeTeam);
@@ -176,4 +178,6 @@ public class RecordActivity extends AppCompatActivity {
         });
         dialog_chooseDate.show();
     }
+
+
 }
