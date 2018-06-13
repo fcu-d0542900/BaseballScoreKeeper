@@ -16,11 +16,16 @@ import java.io.StreamCorruptedException;
 public class DatabaseService {
     private String filename = "db.dat";
     private static DatabaseService instance;
-    private DB database;
+    private Database database;
     Context context;
 
     DatabaseService(){
     }
+
+    public Database getDatabase() {
+        return database;
+    }
+
     public void setContext(Context context){
         this.context = context;
         read();
@@ -36,10 +41,11 @@ public class DatabaseService {
         boolean exist = true;
         try {
             input = new ObjectInputStream(context.openFileInput(filename));
-            database = (DB) input.readObject();
-            Log.v("serialization","read databse");
+            Log.d("database","file read success "+ input.readLine());
+            database = (Database) input.readObject();
             input.close();
             exist = false;
+            Log.d("database","databse read success "+ database.toString());
         } catch (StreamCorruptedException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
@@ -50,7 +56,7 @@ public class DatabaseService {
             e.printStackTrace();
         }
         if(exist)
-            database = new DB();
+            database = new Database();
     }
 
     public void write(){

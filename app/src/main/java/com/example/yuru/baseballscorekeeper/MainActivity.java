@@ -20,8 +20,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        database.setContext(MainActivity.this);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        database.setContext(MainActivity.this);
+        Log.d("database",database.getDatabase().getName());
+        Log.d("database",database.getDatabase().toString());
     }
 
     @Override
@@ -44,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void fn_setTeamName(View view) {
+
         AlertDialog.Builder dialog_setTeamName = new AlertDialog.Builder(this);
         dialog_setTeamName.setMessage("我的隊伍名稱:");
         final EditText editText_teamName = new EditText(MainActivity.this);
@@ -51,7 +58,11 @@ public class MainActivity extends AppCompatActivity {
         dialog_setTeamName.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getApplicationContext(),"prev team name: "+database.getDatabase().getName(),Toast.LENGTH_SHORT).show();
                 myTeamName = editText_teamName.getText().toString();
+                database.getDatabase().setName(myTeamName);
+                database.write();
+                Log.d("database",database.getDatabase().getName());
                 Toast.makeText(getApplicationContext(),"Team Name: "+myTeamName,Toast.LENGTH_SHORT).show();
             }
         });
