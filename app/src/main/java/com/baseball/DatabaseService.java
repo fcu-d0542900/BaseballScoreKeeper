@@ -20,10 +20,10 @@ public class DatabaseService {
     Context context;
 
     DatabaseService(){
-        read();
     }
     public void setContext(Context context){
         this.context = context;
+        read();
     }
 
     public static DatabaseService getInstance(){
