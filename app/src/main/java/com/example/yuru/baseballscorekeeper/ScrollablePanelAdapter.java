@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +31,9 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     private EditText editText_playerName,editText_playerNum;
     private Spinner spinner_position;
     private View view_set_player;
+
+    private String playerName;
+    private int playerNum,playerPosition;
 
 
     private static final int TEAMNAME_TYPE = 4;
@@ -134,41 +138,45 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.text_playerName.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-/*
-                    view_set_player = newRecordActivity.view_set_player();
 
-                    editText_playerName = view_change_player.findViewById(R.id.editText_playerName);
-                    editText_playerNum = view_change_player.findViewById(R.id.editText_playerNum);
-                    spinner_position = view_change_player.findViewById(R.id.spinner_position);
-*/
+                    view_set_player = LayoutInflater.from(newRecordActivity).inflate(R.layout.dialog_new_player, null);
+                    view_set_player.setPadding(3,0,3,0);
+                    ImageView img = view_set_player.findViewById(R.id.image_title_newPlayer);
+                    img.setVisibility(View.GONE);
+
+                    editText_playerName = view_set_player.findViewById(R.id.editText_playerName);
+                    editText_playerNum = view_set_player.findViewById(R.id.editText_playerNum);
+                    spinner_position = view_set_player.findViewById(R.id.spinner_position);
+
                     AlertDialog.Builder dialog_setPlayer = new AlertDialog.Builder(newRecordActivity);
-                    dialog_setPlayer.setMessage("Hi~~");
-                    //dialog_setPlayer.setView(view_set_player);
-/*
+                    dialog_setPlayer.setView(view_set_player);
+
                     ArrayAdapter adapter_position = new ArrayAdapter(dialog_setPlayer.getContext(),android.R.layout.simple_spinner_item,new String[]{"","P","C","1B","2B","3B","SS","LF","CF","RF"});
                     adapter_position.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinner_position.setAdapter(adapter_position);
-*/
+
                     dialog_setPlayer.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             //*****背號沒寫會錯誤 直接跳回主頁*****
-/*
+
                             playerName = editText_playerName.getText().toString();
                             playerNum = Integer.valueOf(editText_playerNum.getText().toString());
                             playerPosition = (int) spinner_position.getSelectedItemId();
 
-                            itemAdapter.add(new Player(playerNum,playerName, playerPosition));  // 新增一個物件項目
-                            item_list.scrollToPosition(item_player.size() - 1);  // 控制列表元件移到最後一個項目
-*/
-                            Toast.makeText(newRecordActivity.getApplicationContext(), "ok", Toast.LENGTH_SHORT).show();
+                            playerInfo.setName(playerName);
+                            playerInfo.setId(playerNum);
+                            playerInfo.setPosition(playerPosition);
+                            viewHolder.text_playerName.setText(playerName);
+                            viewHolder.text_playerNum.setText(Integer.valueOf(playerNum).toString());
+                            viewHolder.text_playerPosition.setText(playerInfo.getPosition());
+
+                            Toast.makeText(newRecordActivity.getApplicationContext(), "SET", Toast.LENGTH_SHORT).show();
                         }
                     });
                     dialog_setPlayer.show();
 
-                    playerInfo.setName("黃弘承");
-                    viewHolder.text_playerName.setText("黃弘承");
-                    Toast.makeText(v.getContext(), "name", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(v.getContext(), "name", Toast.LENGTH_SHORT).show();
 
                 }
             });
