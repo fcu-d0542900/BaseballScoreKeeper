@@ -318,11 +318,9 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         }
     }
 
-
     public void setPlayerInfoList(List<Player> item_player) {
         this.item_player = item_player;
     }
-
 
     public void setBoardNumInfoList(List<BoardNumInfo> boardNumInfoList) {
         this.boardNumInfoList = boardNumInfoList;

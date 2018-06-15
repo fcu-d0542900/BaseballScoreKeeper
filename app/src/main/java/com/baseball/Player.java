@@ -1,6 +1,10 @@
 package com.baseball;
 
+import android.util.Log;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by YURU on 2018/6/8.
@@ -53,8 +57,11 @@ public class Player implements Serializable {
     }
 
 
+
     @Override
     public String toString() {
         return String.format("%d, %s, %d", getId(), getName(), getPosition());
     }
+
+
 }

@@ -12,6 +12,4 @@
         android:layout_height="wrap_content"
         android:textColor="@color/text_gray_666666"
         android:textSize="12sp" />
-
-
 </LinearLayout>

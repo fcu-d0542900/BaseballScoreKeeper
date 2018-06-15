@@ -14,6 +14,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.baseball.BoardNumInfo;
+import com.baseball.Database;
 import com.baseball.DatabaseService;
 import com.baseball.OrderInfo;
 import com.baseball.Player;
@@ -30,9 +31,8 @@ public class NewRecordActivity extends AppCompatActivity {
     private Boolean isSetPlayer;
     private Team awayTeam,homeTeam;
     private Record currentRecord;
-
     private View view_set_player;
-
+    List<Player> player =DatabaseService.getInstance().getDatabase().getTeamMember();  //從資料庫抓playerlist
 
 
     @Override
@@ -54,8 +54,6 @@ public class NewRecordActivity extends AppCompatActivity {
 
         final ScrollablePanel score_scrollable_panel = (ScrollablePanel) findViewById(R.id.score_scrollable_panel);
         final ScoreScrollablePanelAdapter score_scrollablePanelAdapter = new ScoreScrollablePanelAdapter();
-        Log.d("run", "跑到此行");
-
         generateTestData(scrollablePanelAdapter);
         generateScoreData(score_scrollablePanelAdapter);
         scrollablePanel.setPanelAdapter(scrollablePanelAdapter);
@@ -118,12 +116,13 @@ public class NewRecordActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"isSetPlayer", Toast.LENGTH_SHORT).show();
         }
 
-
-        for (int i = 0; i < 9; i++) {
-            Player player = new Player();
-            playerInfoList.add(player);  //預設為空
+        for (int i = 0; i < player.size(); i++) {    //從databese裡的list抓值
+            playerInfoList.add(player.get(i));
         }
 
+        for (int i = player.size(); i < 9; i++) {   //剩下產生空格子
+            playerInfoList.add(new Player());
+        }
         scrollablePanelAdapter.setNewRecordActivity(NewRecordActivity.this);
         scrollablePanelAdapter.setPlayerInfoList(playerInfoList);
 

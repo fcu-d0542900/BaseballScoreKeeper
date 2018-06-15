@@ -40,9 +40,6 @@ public class RecordActivity extends AppCompatActivity {
     private Spinner spinner_awayTeam,spinner_homeTeam;
     private CheckBox checkBox_isSetPlayer;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,9 +106,11 @@ public class RecordActivity extends AppCompatActivity {
                     editText_awayTeam.setVisibility(View.VISIBLE);
                 }
                 else {
+
                     editText_awayTeam.setText(teamName);
                     editText_awayTeam.setVisibility(View.GONE);
                 }
+                Toast.makeText(RecordActivity.this," 您選擇"+adapterView.getSelectedItemPosition(), Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView parentView) {
