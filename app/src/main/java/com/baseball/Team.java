@@ -35,15 +35,16 @@ public class Team implements Serializable {
             return newItem;
         }
         int index = 0;
-        for (RecordItem item :
-                recordItems) {
-            if(row == index%9 && round==item.getRound())
-                return item;
-            else if(round > this.currentRound){
-                return newItem;
+        if(recordItems!=null)
+            for (RecordItem item :
+                    recordItems) {
+                if(row == index%9 && round==item.getRound())
+                    return item;
+                else if(round > this.currentRound){
+                    return newItem;
+                }
+                index ++;
             }
-            index ++;
-        }
         return newItem;
     }
     public int getCurrentRound() {
@@ -112,10 +113,11 @@ public class Team implements Serializable {
 
     public String getScore(int i) {
         int score = 0;
-        for (RecordItem item:
-             recordItems) {
-            if (item.getRound() == i && item.isGetScore()) score++;
-        }
+        if(recordItems!=null)
+            for (RecordItem item:
+                    recordItems) {
+                if (item.getRound() == i && item.isGetScore()) score++;
+            }
         return ""+score;
     }
 

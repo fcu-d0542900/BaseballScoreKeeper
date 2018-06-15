@@ -11,12 +11,12 @@ public class Player implements Serializable {
     private String name =" ";
     private POSITION position;
     public enum POSITION {
-        DH,P,C,_1B,_2B,_3B,SS,LF,CF,RF
+        DH,P,C,_1B,_2B,_3B,SS,LF,CF,RF,_
     }
     public Player() {
         id=-1;
         name="   ";
-        position=null;
+        position=POSITION._;
     }
     public Player(long id, String name, POSITION position) {
         setId(id);
