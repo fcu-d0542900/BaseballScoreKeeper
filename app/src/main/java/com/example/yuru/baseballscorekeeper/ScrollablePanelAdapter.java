@@ -302,6 +302,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
         //更改球員
         public ImageView getChangeGarrison,getChangeHitter;
+        //安打
+        public ImageView getHit1View,getHit2View,getHit3View,getHit4View;
 
         //一壘
         public ImageView getFirstViewZero,getFirstViewHR;
@@ -339,7 +341,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
         OrderViewHolder(View view) {
             super(view);
-            
+
             this.getScoreView = view.findViewById(R.id.centerView);
             this.getFirstView = view.findViewById(R.id.firstView);
             this.getHomeView = view.findViewById(R.id.homeView);
@@ -349,6 +351,11 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
             this.getChangeGarrison = view.findViewById(R.id.image_change_garrison);
             this.getChangeHitter = view.findViewById(R.id.image_change_hitter);
+            this.getHit1View = view.findViewById(R.id.image_hit1);
+            this.getHit2View = view.findViewById(R.id.image_hit2);
+            this.getHit3View = view.findViewById(R.id.image_hit3);
+            this.getHit4View = view.findViewById(R.id.image_hit4);
+
 
             //一壘
             this.getFirstViewZero = view.findViewById(R.id.image_firstView_zero);
