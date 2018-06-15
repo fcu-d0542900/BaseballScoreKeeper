@@ -110,6 +110,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
     public void remove(int position) {
         item_player.remove(position);
         // 通知資料項目已經刪除
+        // 劉永貴這裡要刪掉
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, item_player.size());
     }
