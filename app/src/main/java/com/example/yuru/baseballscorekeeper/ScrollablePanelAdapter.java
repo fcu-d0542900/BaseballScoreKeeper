@@ -39,7 +39,6 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     private String playerName;
     private int playerNum,playerPosition;
 
-
     private static final int TEAMNAME_TYPE = 4;
     private static final int PLAYERINFO_TYPE = 0;
     private static final int BOARDNUM_TYPE = 1;
