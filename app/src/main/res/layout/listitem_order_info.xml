@@ -27,6 +27,13 @@
                     android:layout_height="200dp"
                     android:background="@drawable/outline">
 
+                    <ImageView
+                        android:id="@+id/image_change_hitter"
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left|right"
+                        app:srcCompat="@drawable/change_hitter" />
+
                     <TextView
                         android:id="@+id/ballView"
                         android:layout_width="match_parent"
@@ -75,7 +82,7 @@
                                             app:srcCompat="@drawable/double_plays" />
 
                                         <LinearLayout
-                                            android:id="@+id/linear_thirdView_acion"
+                                            android:id="@+id/linear_thirdView_action"
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
@@ -97,7 +104,6 @@
                                                 app:srcCompat="@drawable/error" />
 
                                             <ImageView
-                                                android:id="@+id/image_thirdView_action_to"
                                                 android:layout_width="20dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_weight="1"
@@ -115,7 +121,7 @@
                                                 android:layout_width="25dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_weight="1"
-                                                app:srcCompat="@drawable/tag" />
+                                                app:srcCompat="@drawable/error" />
                                         </LinearLayout>
 
                                         <LinearLayout
@@ -127,7 +133,6 @@
                                             android:orientation="horizontal">
 
                                             <ImageView
-                                                android:id="@+id/image_thirdView_throwLeft"
                                                 android:layout_width="25dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_weight="1"
@@ -141,7 +146,6 @@
                                                 app:srcCompat="@drawable/throw9" />
 
                                             <ImageView
-                                                android:id="@+id/image_thirdView_throw_to"
                                                 android:layout_width="20dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_weight="1"
@@ -155,7 +159,6 @@
                                                 app:srcCompat="@drawable/throw6" />
 
                                             <ImageView
-                                                android:id="@+id/image_thirdView_throwRight"
                                                 android:layout_width="25dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_weight="1"
@@ -267,7 +270,7 @@
                                                 android:layout_width="25dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_weight="1"
-                                                app:srcCompat="@drawable/tag" />
+                                                app:srcCompat="@drawable/error" />
                                         </LinearLayout>
 
                                         <LinearLayout
@@ -408,7 +411,7 @@
                                                 android:layout_width="25dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_weight="1"
-                                                app:srcCompat="@drawable/tag" />
+                                                app:srcCompat="@drawable/error" />
                                         </LinearLayout>
 
                                         <LinearLayout
@@ -541,7 +544,7 @@
                                                             <ImageView
                                                                 android:id="@+id/image_firstView_oneNum"
                                                                 android:layout_width="match_parent"
-                                                                android:layout_height="25dp"
+                                                                android:layout_height="18dp"
                                                                 app:srcCompat="@drawable/throw9" />
 
                                                             <ImageView
@@ -575,6 +578,7 @@
                                                         android:layout_height="17dp"
                                                         android:layout_gravity="center"
                                                         android:layout_weight="1"
+                                                        android:visibility="gone"
                                                         app:srcCompat="@drawable/u" />
 
                                                 </LinearLayout>
@@ -663,10 +667,11 @@
 
                                     <ImageView
                                         android:id="@+id/image_sacrifice_hits"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
                                         android:layout_gravity="bottom|right"
                                         android:scaleType="fitXY"
+                                        android:visibility="gone"
                                         app:srcCompat="@drawable/sacrifice_hits" />
                                 </FrameLayout>
 
@@ -676,6 +681,22 @@
                                     android:layout_height="30dp"
                                     android:layout_gravity="top|right"
                                     app:srcCompat="@drawable/home_runs" />
+
+                                <ImageView
+                                    android:id="@+id/image_firstView_zero"
+                                    android:layout_width="60dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="8dp"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/throw_b" />
+
+                                <ImageView
+                                    android:id="@+id/image_end"
+                                    android:layout_width="23dp"
+                                    android:layout_height="23dp"
+                                    android:layout_gravity="bottom|right"
+                                    app:srcCompat="@drawable/end" />
 
                                 <TextView
                                     android:id="@+id/firstView"
@@ -700,7 +721,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right"
-                            android:visibility="visible"
                             app:srcCompat="@drawable/hit_stright" />
 
                         <ImageView
@@ -744,7 +764,7 @@
         </FrameLayout>
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/image_change_garrison"
             android:layout_width="wrap_content"
             android:layout_height="5dp"
             android:scaleType="fitXY"

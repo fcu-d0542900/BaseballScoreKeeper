@@ -14,8 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baseball.BoardNumInfo;
+import com.baseball.DatabaseService;
 import com.baseball.OrderInfo;
 import com.baseball.Player;
+import com.baseball.RecordItemFirstBase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -264,6 +266,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         public BoardNumViewHolder(View itemView) {
             super(itemView);
             this.dateTextView = (TextView) itemView.findViewById(R.id.text_boardNum);
+
         }
 
     }
