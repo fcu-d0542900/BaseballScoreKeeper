@@ -84,7 +84,8 @@ public class PlayerActivity extends AppCompatActivity {
 
         AlertDialog.Builder dialog_addPlayer = new AlertDialog.Builder(this);
 
-        dialog_addPlayer.setView(view_new_player);ArrayAdapter adapter_position = new ArrayAdapter(dialog_addPlayer.getContext(),android.R.layout.simple_spinner_item,new String[]{"","P","C","1B","2B","3B","SS","LF","CF","RF"});
+        dialog_addPlayer.setView(view_new_player);
+        ArrayAdapter adapter_position = new ArrayAdapter(dialog_addPlayer.getContext(),android.R.layout.simple_spinner_item,new String[]{"","P","C","1B","2B","3B","SS","LF","CF","RF"});
         adapter_position.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_position.setAdapter(adapter_position);
 

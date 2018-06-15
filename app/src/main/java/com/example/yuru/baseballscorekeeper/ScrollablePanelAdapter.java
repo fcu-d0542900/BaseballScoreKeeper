@@ -40,8 +40,14 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     private Spinner spinner_position;
     private View view_set_player;
 
+    private TextView choice1;
     private String playerName;
     private int playerNum,playerPosition;
+
+    Dialog basetwothree = new Dialog();
+
+    final String[] center_choice = new String[]{"得分/出局", "安打","替換守備","替換打者","結束半局"};
+    final String[] hits_choice = new String[]{"一壘安打", "二壘安打","三壘安打","全壘打"};
 
     private static final int TEAMNAME_TYPE = 4;
     private static final int PLAYERINFO_TYPE = 0;
@@ -188,8 +194,6 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                     });
                     dialog_setPlayer.show();
 
-                    //Toast.makeText(v.getContext(), "name", Toast.LENGTH_SHORT).show();
-
                 }
             });
 
@@ -207,6 +211,121 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 @Override
                 public void onClick(View v) {
 
+                    new AlertDialog.Builder(newRecordActivity)
+                            .setItems(center_choice, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    String name = center_choice[which];
+                                    Toast.makeText(newRecordActivity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+
+                                    switch (which) {
+                                        //點擊得分/出局
+                                        case 0:
+                                            AlertDialog.Builder center_choice1 = new AlertDialog.Builder(newRecordActivity);
+                                            View view_center_choice1 = View.inflate(newRecordActivity, R.layout.record_center_dialog, null);      //自訂dialog布局
+                                            center_choice1.setView(view_center_choice1);   //設置view
+                                            final AlertDialog center_dialog = center_choice1.create();    //根據builder設置好的一系列數據, 来建構一個dialog
+                                            //點擊得分
+                                            view_center_choice1.findViewById(R.id.click_run).setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    Toast.makeText(newRecordActivity, "得分", Toast.LENGTH_SHORT).show();
+                                                    center_dialog.dismiss();
+                                                }
+                                            });
+                                            //點擊一出局
+                                            view_center_choice1.findViewById(R.id.click_out1).setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    Toast.makeText(newRecordActivity, "一出局", Toast.LENGTH_SHORT).show();
+                                                    center_dialog.dismiss();
+                                                }
+                                            });
+                                            //點擊二出局
+                                            view_center_choice1.findViewById(R.id.click_out2).setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    Toast.makeText(newRecordActivity, "二出局", Toast.LENGTH_SHORT).show();
+                                                    center_dialog.dismiss();
+                                                }
+                                            });
+                                            //點擊三出局
+                                            view_center_choice1.findViewById(R.id.click_out3).setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    Toast.makeText(newRecordActivity, "三出局", Toast.LENGTH_SHORT).show();
+                                                    center_dialog.dismiss();
+                                                }
+                                            });
+                                            //點擊殘壘
+                                            view_center_choice1.findViewById(R.id.click_left).setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    Toast.makeText(newRecordActivity, "殘壘", Toast.LENGTH_SHORT).show();
+                                                    center_dialog.dismiss();
+                                                }
+                                            });
+                                            center_dialog.show();
+                                            break;
+
+                                        //點擊安打
+                                        case 1:
+                                            new AlertDialog.Builder(newRecordActivity)
+                                                    .setItems(hits_choice, new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            String name_h = hits_choice[which];
+                                                            switch (which) {
+                                                                //點擊一壘安打
+                                                                case 0:
+                                                                    Toast.makeText(newRecordActivity.getApplicationContext(), name_h, Toast.LENGTH_SHORT).show();
+                                                                    break;
+
+                                                                //點擊一壘安打
+                                                                case 1:
+                                                                    Toast.makeText(newRecordActivity.getApplicationContext(), name_h, Toast.LENGTH_SHORT).show();
+                                                                    break;
+
+                                                                //點擊一壘安打
+                                                                case 2:
+                                                                    Toast.makeText(newRecordActivity.getApplicationContext(), name_h, Toast.LENGTH_SHORT).show();
+                                                                    break;
+
+                                                                //點擊一壘安打
+                                                                case 3:
+                                                                    Toast.makeText(newRecordActivity.getApplicationContext(), name_h, Toast.LENGTH_SHORT).show();
+                                                                    break;
+
+                                                                default:
+                                                                    break;
+                                                            }
+                                                        }
+                                                    })
+                                                    .show();
+                                            break;
+
+                                        //點擊替換守備
+                                        case 2:
+                                            Toast.makeText(newRecordActivity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+                                            break;
+
+                                        //點擊替換打者
+                                        case 3:
+                                            Toast.makeText(newRecordActivity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+                                            break;
+
+                                        //點擊結束半局
+                                        case 4:
+                                            Toast.makeText(newRecordActivity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+                                            break;
+                                        default:
+                                            break;
+                                    }
+
+
+                                }
+                            })
+                            .show();
                     Toast.makeText(v.getContext(), "得分區域" +orderInfo.getGuestName(), Toast.LENGTH_SHORT).show();
 
                 }
@@ -227,6 +346,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 @Override
                 public void onClick(View v) {
 
+                    basetwothree.setNewRecordActivity(newRecordActivity);
+                    basetwothree.getTwoBaseDialog(new String[]{"推進","進壘",});
                     Toast.makeText(v.getContext(), "二壘" , Toast.LENGTH_SHORT).show();
 
                 }
@@ -446,6 +567,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     public void setNewRecordActivity(NewRecordActivity newRecordActivity) {
         this.newRecordActivity=newRecordActivity;
     }
+
+
 
 
 
