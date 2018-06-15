@@ -10,12 +10,82 @@ import java.util.List;
 
 public class Team implements Serializable {
     private String teamName="";
-    private List<String> teamMember = new ArrayList<>();
+    private List<Player> teamMember = new ArrayList<>();
+    private int currentRound = 0;
+    private List<RecordItem> recordItems;
 
     public Team(){}
 
-    public Team(String homeTeam) {
+    public Team(String homeTeam,TEAM team) {
         setTeamName(homeTeam);
+        switch (team){
+            case away:
+                currentRound =1;
+            case home:
+                currentRound=0;
+        }
+        if (homeTeam.equals(DatabaseService.getInstance().getDatabase().getTeamName())){
+            teamMember = new ArrayList<>(DatabaseService.getInstance().getDatabase().getTeamMember());
+        };
+    }
+
+    public RecordItem getRecordItems(int row,int round) {
+        RecordItem newItem = new RecordItem(teamMember.get(row),round);
+        if(round > this.currentRound){
+            return newItem;
+        }
+        int index = 0;
+        for (RecordItem item :
+                recordItems) {
+            if(row == index%9 && round==item.getRound())
+                index ++;
+        }
+        return newItem;
+    }
+    public int getCurrentRound() {
+        return currentRound;
+    }
+
+    public int nextCurrentRound() {
+        currentRound = currentRound+1;
+        return currentRound;
+    }
+
+    public String getRoundText(int round) {
+        String text = "";
+        switch(round){
+            case 0:
+                text="一";
+            case 1:
+                text="二";
+            case 2:
+                text="三";
+            case 3:
+                text="四";
+            case 4:
+                text="五";
+            case 5:
+                text="六";
+            case 6:
+                text="七";
+            case 7:
+                text="八";
+            case 8:
+                text="九";
+            case 9:
+                text="十";
+            case 10:
+                text="十一";
+            case 11:
+                text="十二";
+            case 12:
+                text="十三";
+            case 13:
+                text="十四";
+            case 14:
+                text="十五";
+        }
+        return text;
     }
 
     public void setTeamName(String name) {
@@ -24,13 +94,20 @@ public class Team implements Serializable {
 
     public String getTeamName() {return teamName;}
 
-    public List<String> addTeamMember(String name){
-        this.teamMember.add(name);
+    public List<Player> addTeamMember(String name){
+        Player player = new Player();
+        player.setName(name);
+        this.teamMember.add(player);
         DatabaseService.getInstance().write();
         return getTeamMember();
     }
 
-    public List<String> getTeamMember() {
+    public List<Player> getTeamMember() {
         return this.teamMember;
+    }
+
+    public enum TEAM{
+        away,
+        home
     }
 }
