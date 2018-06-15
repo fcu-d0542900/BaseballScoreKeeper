@@ -57,8 +57,8 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
 
             // 使用父類別 ViewHolder 宣告的「itemView」欄位變數，
             // 取得背號、名稱
-            text_gameName = (TextView) itemView.findViewById(R.id.card_gameName);
-            text_gameDate = (TextView) itemView.findViewById(R.id.card_gameDate);
+            text_gameName = itemView.findViewById(R.id.card_gameName);
+            text_gameDate = itemView.findViewById(R.id.card_gameDate);
 
             // 設定包裝元件
             rootView = view;

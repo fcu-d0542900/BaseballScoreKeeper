@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by YURU on 2018/6/13.
@@ -15,11 +16,7 @@ public class Record implements Serializable {
     private Team away;
     private Team home;
 
-    public Record() {
-
-    }
-
-    public Record(String name,String awayTeam,String homeTeam,Date date) {
+    public Record(String name, String awayTeam, String homeTeam, Date date) {
         this.name=name;
         this.date=date;
         this.away=new Team(awayTeam,Team.TEAM.away);
@@ -29,6 +26,7 @@ public class Record implements Serializable {
 
     public void setGameName(String name) {
         this.name=name;
+        DatabaseService.getInstance().write();
     }
 
     public String getGameName() {
@@ -37,6 +35,8 @@ public class Record implements Serializable {
 
     public void setGameDate(Date date) {
         this.date = date;
+        DatabaseService.getInstance().write();
+
     }
 
     public Date getGameDate() {

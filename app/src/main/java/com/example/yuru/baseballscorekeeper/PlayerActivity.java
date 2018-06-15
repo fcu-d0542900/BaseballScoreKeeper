@@ -40,7 +40,7 @@ public class PlayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
 
-        item_list = (RecyclerView) findViewById(R.id.player_list);
+        item_list = findViewById(R.id.player_list);
 
 
 //        item_player.add(new Player(35, "弘承", 8));
@@ -96,7 +96,7 @@ public class PlayerActivity extends AppCompatActivity {
                     playerName = editText_playerName.getText().toString();
                     playerNum = Integer.valueOf(editText_playerNum.getText().toString());
                     playerPosition = (int) spinner_position.getSelectedItemId();
-                    int position = DatabaseService.getInstance().getDatabase().addTeamMember(new Player(playerNum,playerName, playerPosition));
+                    int position = DatabaseService.getInstance().getDatabase().addTeamMember(new Player(playerNum,playerName, Player.POSITION.values()[playerPosition]));
                     item_list.scrollToPosition(position);  // 控制列表元件移到最後一個項目
 
                     Toast.makeText(getApplicationContext(), "ADD: "+playerName+" "+playerNum+" "+playerPosition, Toast.LENGTH_SHORT).show();

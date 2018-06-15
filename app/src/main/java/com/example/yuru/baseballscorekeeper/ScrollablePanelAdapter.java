@@ -1,14 +1,18 @@
 package com.example.yuru.baseballscorekeeper;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -122,11 +126,12 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     private void setBoardNumView(int pos, BoardNumViewHolder viewHolder) {
         BoardNumInfo boardNumInfo = boardNumInfoList.get(pos - 1);
         if (boardNumInfo != null && pos > 0) {
-            viewHolder.dateTextView.setText(boardNumInfo.getBroadNum_symbol().toString());
+            viewHolder.dateTextView.setText(boardNumInfo.getBroadNum_symbol());
         }
     }
 
-    public void setPlayerInfoView(int pos, final PlayerInfoViewHolder viewHolder) {
+    @SuppressLint("SetTextI18n")
+    private void setPlayerInfoView(int pos, final PlayerInfoViewHolder viewHolder) {
         final Player playerInfo = item_player.get(pos - 1);
         viewHolder.text_batOrder.setText(Integer.valueOf(pos).toString());
 
@@ -134,7 +139,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         if (playerInfo != null && pos>0) {
 
             //設定資料
-            viewHolder.text_playerPosition.setText(playerInfo.getPosition());
+            viewHolder.text_playerPosition.setText(playerInfo.getPosition().toString().replaceAll("_", ""));
             viewHolder.text_playerName.setText(playerInfo.getName());
             if(playerInfo.getId() == -1) {
                 viewHolder.text_playerNum.setText("");
@@ -145,6 +150,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
             //更改球員
             viewHolder.text_playerName.setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("InflateParams")
                 @Override
                 public void onClick(View v) {
 
@@ -160,7 +166,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                     AlertDialog.Builder dialog_setPlayer = new AlertDialog.Builder(newRecordActivity);
                     dialog_setPlayer.setView(view_set_player);
 
-                    ArrayAdapter adapter_position = new ArrayAdapter(dialog_setPlayer.getContext(),android.R.layout.simple_spinner_item,new String[]{"","P","C","1B","2B","3B","SS","LF","CF","RF"});
+                    ArrayAdapter<String> adapter_position = new ArrayAdapter<>(dialog_setPlayer.getContext(),android.R.layout.simple_spinner_item,new String[]{"","P","C","1B","2B","3B","SS","LF","CF","RF"});
                     adapter_position.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinner_position.setAdapter(adapter_position);
 
@@ -174,10 +180,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
                                 playerInfo.setName(playerName);
                                 playerInfo.setId(playerNum);
-                                playerInfo.setPosition(playerPosition);
+                                playerInfo.setPosition(Player.POSITION.values()[playerPosition]);
                                 viewHolder.text_playerName.setText(playerName);
                                 viewHolder.text_playerNum.setText(Integer.valueOf(playerNum).toString());
-                                viewHolder.text_playerPosition.setText(playerInfo.getPosition());
+                                viewHolder.text_playerPosition.setText(playerInfo.getPosition().toString().replaceAll("_",""));
 
                                 Toast.makeText(newRecordActivity.getApplicationContext(), "SET", Toast.LENGTH_SHORT).show();
                             }
@@ -380,11 +386,12 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     private static class BoardNumViewHolder extends RecyclerView.ViewHolder {
-        public TextView dateTextView;
+        TextView dateTextView;
 
-        public BoardNumViewHolder(View itemView) {
+        BoardNumViewHolder(View itemView) {
             super(itemView);
-            this.dateTextView = (TextView) itemView.findViewById(R.id.text_boardNum);
+            this.dateTextView = itemView.findViewById(R.id.text_boardNum);
+
         }
 
     }
@@ -396,46 +403,152 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         public TextView text_batOrder;
 
 
-        public PlayerInfoViewHolder(View view) {
+        PlayerInfoViewHolder(View view) {
             super(view);
 
-            this.text_playerPosition = (TextView) view.findViewById(R.id.text_playerPosition);
-            this.text_playerName = (TextView) view.findViewById(R.id.text_playerName);
-            this.text_playerNum = (TextView) view.findViewById(R.id.text_playerNum);
-            this.text_batOrder = (TextView) view.findViewById(R.id.text_batOrder);
+            this.text_playerPosition = view.findViewById(R.id.text_playerPosition);
+            this.text_playerName = view.findViewById(R.id.text_playerName);
+            this.text_playerNum = view.findViewById(R.id.text_playerNum);
+            this.text_batOrder = view.findViewById(R.id.text_batOrder);
         }
     }
 
     private static class OrderViewHolder extends RecyclerView.ViewHolder {
-        public TextView getScoreView;
-        public TextView getFirstView;
-        public TextView getHomeView;
-        public TextView getSecondView;
-        public TextView getThirdView;
-        public TextView getBallView;
+        TextView getScoreView;
+        TextView getFirstView;
+        TextView getHomeView;
+        TextView getSecondView;
+        TextView getThirdView;
+        TextView getBallView;
 
-        public View view;
+        //更改球員
+        public ImageView getChangeGarrison,getChangeHitter;
+        //安打
+        public ImageView getHit1View,getHit2View,getHit3View,getHit4View;
 
-        public OrderViewHolder(View view) {
+        //一壘
+        public ImageView getFirstViewZero,getFirstViewHR;
+        public FrameLayout getFirstViewOne,getFirstViewTwo,getFirstViewThree;
+        public ImageView getFirstViewOneTop,getFirstViewOneNum,getFirstViewOneBottom;
+        public ImageView getFirstViewOneAc1,getFirstViewOneAc2;
+        public ImageView getFirstViewTwoNum,getFirstViewTwoAc;
+        public ImageView getFirstViewThreeNum,getFirstViewThreeAc;
+        public ImageView getSacrificeFly,getSacrificeHits;
+
+        //二壘
+        public ImageView getSecondViewActionName,getSecondViewPushNum,getSecondViewBase;
+        public LinearLayout getSecondViewAction;
+        public ImageView getSecondViewActionOneNum,getSecondViewActionOneAc;
+        public ImageView getSecondViewActionTwoNum,getSecondViewActionTwoAc;
+        public LinearLayout getSecondViewThrow;
+        public ImageView getSecondViewThrowOne,getSecondViewThrowTwo;
+
+        //三壘
+        public ImageView getThirdViewActionName,getThirdViewPushNum,getThirdViewBase;
+        public LinearLayout getThirdViewAction;
+        public ImageView getThirdViewActionOneNum,getThirdViewActionOneAc;
+        public ImageView getThirdViewActionTwoNum,getThirdViewActionTwoAc;
+        public LinearLayout getThirdViewThrow;
+        public ImageView getThirdViewThrowOne,getThirdViewThrowTwo;
+
+        //本壘
+        public ImageView getHomeViewActionName,getHomeViewPushNum,getHomeViewBase;
+        public LinearLayout getHomeViewAction;
+        public ImageView getHomeViewActionOneNum,getHomeViewActionOneAc;
+        public ImageView getHomeViewActionTwoNum,getHomeViewActionTwoAc;
+        public LinearLayout getHomeViewThrow;
+        public ImageView getHomeViewThrowOne,getHomeViewThrowTwo;
+
+
+        OrderViewHolder(View view) {
             super(view);
-            this.view = view;
-            this.getScoreView = (TextView) view.findViewById(R.id.centerView);
-            this.getFirstView = (TextView) view.findViewById(R.id.firstView);
-            this.getHomeView = (TextView) view.findViewById(R.id.homeView);
-            this.getSecondView = (TextView) view.findViewById(R.id.secondView);
-            this.getThirdView = (TextView) view.findViewById(R.id.thirdView);
-            this.getBallView= (TextView) view.findViewById(R.id.ballView);
+
+            this.getScoreView = view.findViewById(R.id.centerView);
+            this.getFirstView = view.findViewById(R.id.firstView);
+            this.getHomeView = view.findViewById(R.id.homeView);
+            this.getSecondView = view.findViewById(R.id.secondView);
+            this.getThirdView = view.findViewById(R.id.thirdView);
+            this.getBallView= view.findViewById(R.id.ballView);
+
+            this.getChangeGarrison = view.findViewById(R.id.image_change_garrison);
+            this.getChangeHitter = view.findViewById(R.id.image_change_hitter);
+            this.getHit1View = view.findViewById(R.id.image_hit1);
+            this.getHit2View = view.findViewById(R.id.image_hit2);
+            this.getHit3View = view.findViewById(R.id.image_hit3);
+            this.getHit4View = view.findViewById(R.id.image_hit4);
+
+
+            //一壘
+            this.getFirstViewZero = view.findViewById(R.id.image_firstView_zero);
+            this.getFirstViewOne = view.findViewById(R.id.frame_firstView_one);
+            this.getFirstViewTwo = view.findViewById(R.id.frame_firstView_two);
+            this.getFirstViewThree = view.findViewById(R.id.frame_firstView_three);
+            this.getFirstViewHR = view.findViewById(R.id.image_HR);
+            this.getFirstViewOneTop = view.findViewById(R.id.image_firstView_oneTop);
+            this.getFirstViewOneNum = view.findViewById(R.id.image_firstView_oneNum);
+            this.getFirstViewOneBottom = view.findViewById(R.id.image_firstView_oneBottom);
+            this.getFirstViewOneAc1 = view.findViewById(R.id.image_firstView_one_ac1);
+            this.getFirstViewOneAc2 = view.findViewById(R.id.image_firstView_one_ac2);
+            this.getFirstViewTwoNum = view.findViewById(R.id.image_firstView_twoNum);
+            this.getFirstViewTwoAc = view.findViewById(R.id.image_firstView_two_ac);
+            this.getFirstViewThreeNum = view.findViewById(R.id.image_firstView_threeNum);
+            this.getFirstViewThreeAc = view.findViewById(R.id.image_firstView_three_ac);
+            this.getSacrificeFly = view.findViewById(R.id.image_sacrifice_fly);
+            this.getSacrificeHits = view.findViewById(R.id.image_sacrifice_hits);
+
+            //二壘
+            this.getSecondViewActionName = view.findViewById(R.id.image_secondView_actionName);
+            this.getSecondViewAction = view.findViewById(R.id.linear_secondView_acion);
+            this.getSecondViewActionOneNum = view.findViewById(R.id.image_secondView_actionOne);
+            this.getSecondViewActionOneAc = view.findViewById(R.id.image_secondView_actionOne_ac);
+            this.getSecondViewActionTwoNum = view.findViewById(R.id.image_secondView_actionTwo);
+            this.getSecondViewActionTwoAc = view.findViewById(R.id.image_secondView_actionTwo_ac);
+            this.getSecondViewThrow = view.findViewById(R.id.linear_secondView_throw);
+            this.getSecondViewThrowOne = view.findViewById(R.id.image_secondView_throwOne);
+            this.getSecondViewThrowTwo = view.findViewById(R.id.image_secondView_throwTwo);
+            this.getSecondViewPushNum = view.findViewById(R.id.image_secondView_pushNumber);
+            this.getSecondViewBase = view.findViewById(R.id.image_base_1to2);
+
+            //三壘
+            this.getThirdViewActionName = view.findViewById(R.id.image_thirdView_actionName);
+            this.getThirdViewAction = view.findViewById(R.id.linear_thirdView_action);
+            this.getThirdViewActionOneNum = view.findViewById(R.id.image_thirdView_actionOne);
+            this.getThirdViewActionOneAc = view.findViewById(R.id.image_thirdView_actionOne_ac);
+            this.getThirdViewActionTwoNum = view.findViewById(R.id.image_thirdView_actionTwo);
+            this.getThirdViewActionTwoAc = view.findViewById(R.id.image_thirdView_actionTwo_ac);
+            this.getThirdViewThrow = view.findViewById(R.id.linear_thirdView_throw);
+            this.getThirdViewThrowOne = view.findViewById(R.id.image_thirdView_throwOne);
+            this.getThirdViewThrowTwo = view.findViewById(R.id.image_thirdView_throwTwo);
+            this.getThirdViewPushNum = view.findViewById(R.id.image_thirdView_pushNumber);
+            this.getThirdViewBase = view.findViewById(R.id.image_base_2to3);
+
+            //本壘
+            this.getHomeViewActionName = view.findViewById(R.id.image_homeView_actionName);
+            this.getHomeViewAction = view.findViewById(R.id.linear_homeView_acion);
+            this.getHomeViewActionOneNum = view.findViewById(R.id.image_homeView_actionOne);
+            this.getHomeViewActionOneAc = view.findViewById(R.id.image_homeView_actionOne_ac);
+            this.getHomeViewActionTwoNum = view.findViewById(R.id.image_homeView_actionTwo);
+            this.getHomeViewActionTwoAc = view.findViewById(R.id.image_homeView_actionTwo_ac);
+            this.getHomeViewThrow = view.findViewById(R.id.linear_homeView_throw);
+            this.getHomeViewThrowOne = view.findViewById(R.id.image_homeView_throwOne);
+            this.getHomeViewThrowTwo = view.findViewById(R.id.image_homeView_throwTwo);
+            this.getHomeViewPushNum = view.findViewById(R.id.image_homeView_pushNumber);
+            this.getHomeViewBase = view.findViewById(R.id.image_base_3tohome);
+
+
+
+
             this.getScoreView.bringToFront();
 
         }
     }
 
     private static class TeamNameViewHolder extends RecyclerView.ViewHolder {
-        public TextView titleTextView;
+        TextView titleTextView;
 
-        public TeamNameViewHolder(View view) {
+        TeamNameViewHolder(View view) {
             super(view);
-            this.titleTextView = (TextView) view.findViewById(R.id.title);
+            this.titleTextView = view.findViewById(R.id.title);
         }
     }
 

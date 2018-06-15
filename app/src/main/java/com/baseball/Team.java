@@ -11,29 +11,49 @@ import java.util.List;
 public class Team implements Serializable {
     private String teamName="";
     private List<Player> teamMember = new ArrayList<>();
-    private int round = 0;
+    private int currentRound = 0;
+    private List<RecordItem> recordItems;
+    private List<BoardNumInfo> recordRoundItem;
     public Team(){}
 
     public Team(String homeTeam,TEAM team) {
         setTeamName(homeTeam);
         switch (team){
             case away:
-                round =1;
+                currentRound =1;
             case home:
-                round=0;
+                currentRound=0;
         }
         if (homeTeam.equals(DatabaseService.getInstance().getDatabase().getTeamName())){
             teamMember = new ArrayList<>(DatabaseService.getInstance().getDatabase().getTeamMember());
-        };
+        }
     }
 
-    public int getRound() {
-        return round;
+    public RecordItem getRecordItems(int row,int round) {
+        RecordItem newItem = new RecordItem(teamMember.get(row),round);
+        if(round > this.currentRound){
+            return newItem;
+        }
+        int index = 0;
+        if(recordItems!=null)
+            for (RecordItem item :
+                    recordItems) {
+                if(row == index%9 && round==item.getRound())
+                    return item;
+                else if(round > this.currentRound){
+                    return newItem;
+                }
+                index ++;
+            }
+        return newItem;
+    }
+    public int getCurrentRound() {
+        return currentRound;
     }
 
     public int nextRound() {
-        round = round+1;
-        return round;
+        currentRound = currentRound+1;
+        return currentRound;
     }
 
     public String getRoundText(int round) {
@@ -41,34 +61,49 @@ public class Team implements Serializable {
         switch(round){
             case 0:
                 text="一";
+                break;
             case 1:
                 text="二";
+                break;
             case 2:
                 text="三";
+                break;
             case 3:
                 text="四";
+                break;
             case 4:
                 text="五";
+                break;
             case 5:
                 text="六";
+                break;
             case 6:
                 text="七";
+                break;
             case 7:
                 text="八";
+                break;
             case 8:
                 text="九";
+                break;
             case 9:
                 text="十";
+                break;
             case 10:
                 text="十一";
+                break;
             case 11:
                 text="十二";
+                break;
             case 12:
                 text="十三";
+                break;
             case 13:
                 text="十四";
+                break;
             case 14:
                 text="十五";
+                break;
         }
         return text;
     }
@@ -89,6 +124,16 @@ public class Team implements Serializable {
 
     public List<Player> getTeamMember() {
         return this.teamMember;
+    }
+
+    public String getScore(int i) {
+        int score = 0;
+        if(recordItems!=null)
+            for (RecordItem item:
+                    recordItems) {
+                if (item.getRound() == i && item.isGetScore()) score++;
+            }
+        return ""+score;
     }
 
     public enum TEAM{
