@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/guest_layout"
     android:layout_width="300dp"
     android:layout_height="200dp"
@@ -23,13 +24,13 @@
 
                 <FrameLayout
                     android:layout_width="60dp"
-                    android:layout_height="200dp">
+                    android:layout_height="200dp"
+                    android:background="@drawable/outline">
 
                     <TextView
                         android:id="@+id/ballView"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/outline" />
+                        android:layout_height="match_parent" />
                 </FrameLayout>
 
                 <FrameLayout
@@ -46,21 +47,150 @@
                             android:layout_height="100dp"
                             android:orientation="horizontal">
 
-                            <TextView
-                                android:id="@+id/thirdView"
+                            <FrameLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="100dp"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:background="@drawable/outline"
-                                android:gravity="center" />
+                                android:background="@drawable/outline">
 
-                            <TextView
-                                android:id="@+id/secondView"
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="40dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            app:srcCompat="@drawable/double_plays" />
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:gravity="center"
+                                            android:orientation="horizontal">
+
+                                            <ImageView
+                                                android:id="@+id/image_actionOne"
+                                                android:layout_width="25dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                app:srcCompat="@drawable/throw8" />
+
+                                            <ImageView
+                                                android:id="@+id/image_actionOne_ac"
+                                                android:layout_width="25dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                app:srcCompat="@drawable/error" />
+
+                                            <ImageView
+                                                android:id="@+id/image_action_to"
+                                                android:layout_width="20dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                app:srcCompat="@drawable/to" />
+
+                                            <ImageView
+                                                android:id="@+id/image_actionTwo"
+                                                android:layout_width="25dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                app:srcCompat="@drawable/throw5" />
+
+                                            <ImageView
+                                                android:id="@+id/image_actionTwo_ac"
+                                                android:layout_width="25dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                app:srcCompat="@drawable/tag" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:gravity="center"
+                                            android:orientation="horizontal">
+
+                                            <ImageView
+                                                android:id="@+id/image_throwLeft"
+                                                android:layout_width="25dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                app:srcCompat="@drawable/throw_left" />
+
+                                            <ImageView
+                                                android:id="@+id/image_throwOne"
+                                                android:layout_width="25dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                app:srcCompat="@drawable/throw9" />
+
+                                            <ImageView
+                                                android:id="@+id/image_throw_to"
+                                                android:layout_width="20dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                app:srcCompat="@drawable/to" />
+
+                                            <ImageView
+                                                android:id="@+id/image_throwTwo"
+                                                android:layout_width="25dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                app:srcCompat="@drawable/throw6" />
+
+                                            <ImageView
+                                                android:id="@+id/image_throwRight"
+                                                android:layout_width="25dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                app:srcCompat="@drawable/throw_right" />
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <ImageView
+                                        android:id="@+id/image_pushNumber"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="30dp"
+                                        android:layout_marginTop="20dp"
+                                        android:layout_weight="1"
+                                        app:srcCompat="@drawable/push1" />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/thirdView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="100dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center" />
+                            </FrameLayout>
+
+                            <FrameLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="100dp"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:background="@drawable/outline"
-                                android:gravity="center" />
+                                android:background="@drawable/outline">
+
+                                <TextView
+                                    android:id="@+id/secondView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="100dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center" />
+                            </FrameLayout>
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -68,21 +198,34 @@
                             android:layout_height="100dp"
                             android:orientation="horizontal">
 
-                            <TextView
-                                android:id="@+id/homeView"
+                            <FrameLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="100dp"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:background="@drawable/outline"
-                                android:gravity="center" />
+                                android:background="@drawable/outline">
 
-                            <TextView
-                                android:id="@+id/firstView"
+                                <TextView
+                                    android:id="@+id/homeView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="100dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center" />
+                            </FrameLayout>
+
+                            <FrameLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="100dp"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:background="@drawable/outline"
-                                android:gravity="center" />
+                                android:background="@drawable/outline">
+
+                                <TextView
+                                    android:id="@+id/firstView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="100dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center" />
+                            </FrameLayout>
+
                         </LinearLayout>
                     </LinearLayout>
 
@@ -90,19 +233,62 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_gravity="center"
+                        android:background="@drawable/outline"
                         android:rotation="45">
+
+                        <ImageView
+                            android:id="@+id/image_hit1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:visibility="visible"
+                            app:srcCompat="@drawable/hit_stright" />
+
+                        <ImageView
+                            android:id="@+id/image_hit2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/hit" />
+
+                        <ImageView
+                            android:id="@+id/image_hit3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            app:srcCompat="@drawable/hit_stright" />
+
+                        <ImageView
+                            android:id="@+id/image_hit4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            app:srcCompat="@drawable/hit" />
+
+                        <ImageView
+                            android:id="@+id/image_centerView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/runs" />
 
                         <TextView
                             android:id="@+id/centerView"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:background="@drawable/outline"
                             android:textColor="@color/text_gray_666666"
                             android:textSize="12sp" />
                     </FrameLayout>
                 </FrameLayout>
 
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView23"
+                android:layout_width="wrap_content"
+                android:layout_height="5dp"
+                android:adjustViewBounds="false"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/change_garrison" />
 
         </FrameLayout>
 

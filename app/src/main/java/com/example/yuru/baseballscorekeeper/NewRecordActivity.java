@@ -134,16 +134,16 @@ public class NewRecordActivity extends AppCompatActivity {
 
 
         for (int i = 0; i < 9; i++) {
-            List<OrderInfo> orderInfoList = new ArrayList<>();
-            for (int j = 0; j < 10; j++) {
-                OrderInfo orderInfo = new OrderInfo();
-                orderInfo.setGuestName("NO." + i + j);
-                orderInfoList.add(orderInfo);
-            }
-            ordersList.add(orderInfoList);
+        List<OrderInfo> orderInfoList = new ArrayList<>();
+        for (int j = 0; j < 10; j++) {
+            OrderInfo orderInfo = new OrderInfo();
+            orderInfo.setGuestName("NO." + i + j);
+            orderInfoList.add(orderInfo);
         }
-        scrollablePanelAdapter.setOrdersList(ordersList);
+        ordersList.add(orderInfoList);
     }
+        scrollablePanelAdapter.setOrdersList(ordersList);
+}
 
     private void generateScoreData(ScoreScrollablePanelAdapter score_scrollablePanelAdapter){
 
