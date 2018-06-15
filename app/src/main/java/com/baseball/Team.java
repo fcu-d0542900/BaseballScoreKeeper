@@ -12,6 +12,8 @@ public class Team implements Serializable {
     private String teamName="";
     private List<Player> teamMember = new ArrayList<>();
     private int round = 0;
+    private List<RecordItem> recordItems;
+
     public Team(){}
 
     public Team(String homeTeam,TEAM team) {
@@ -27,6 +29,17 @@ public class Team implements Serializable {
         };
     }
 
+    public RecordItem getRecordItems(int row,int round) {
+        RecordItem newItem = new RecordItem();
+        if(round > this.round){
+            return newItem;
+        }
+        for (RecordItem item :
+                recordItems) {
+            if
+        }
+        return newItem;
+    }
     public int getRound() {
         return round;
     }
