@@ -53,9 +53,8 @@ public class NewRecordActivity extends AppCompatActivity {
         final ScrollablePanelAdapter scrollablePanelAdapter = new ScrollablePanelAdapter();
 
         final ScrollablePanel score_scrollable_panel = (ScrollablePanel) findViewById(R.id.score_scrollable_panel);
-        final ScoreScrollablePanelAdapter score_scrollablePanelAdapter = new ScoreScrollablePanelAdapter();
+        final ScoreScrollablePanelAdapter score_scrollablePanelAdapter = new ScoreScrollablePanelAdapter(currentRecord);
         generateTestData(scrollablePanelAdapter);
-        generateScoreData(score_scrollablePanelAdapter);
         scrollablePanel.setPanelAdapter(scrollablePanelAdapter);
         score_scrollable_panel.setPanelAdapter(score_scrollablePanelAdapter);
 
@@ -97,7 +96,7 @@ public class NewRecordActivity extends AppCompatActivity {
 
 
     //設定隊伍資料
-    List<Team>  teamInfoList = new ArrayList<>();
+//    List<Team>  teamInfoList = new ArrayList<>();
     //設定球員資料
     List<Player>  playerInfoList = new ArrayList<>();
     //設定局數資料
@@ -134,47 +133,16 @@ public class NewRecordActivity extends AppCompatActivity {
 
 
         for (int i = 0; i < 9; i++) {
-        List<OrderInfo> orderInfoList = new ArrayList<>();
-        for (int j = 0; j < 10; j++) {
-            OrderInfo orderInfo = new OrderInfo();
-            orderInfo.setGuestName("NO." + i + j);
-            orderInfoList.add(orderInfo);
-        }
-        ordersList.add(orderInfoList);
-    }
-        scrollablePanelAdapter.setOrdersList(ordersList);
-}
-
-    private void generateScoreData(ScoreScrollablePanelAdapter score_scrollablePanelAdapter){
-
-
-        for (int i = 0; i < (9+2); i++) {
-            boardNumInfoList.add(new BoardNumInfo(i));
-        }
-
-        score_scrollablePanelAdapter.setBoardNumInfoList(boardNumInfoList);
-
-
-        teamInfoList.add(currentRecord.getAwayTeam());
-        teamInfoList.add(currentRecord.getHomeTeam());
-        score_scrollablePanelAdapter.setTeamInfoList(teamInfoList);
-
-
-        for (int i = 0; i < 2; i++) {
-            List<ScoreBoardInfo> scoreInfoList = new ArrayList<>();
-            for (int j = 0; j < 15; j++) {
-                ScoreBoardInfo scoreInfo = new ScoreBoardInfo();
-                scoreInfo.setScore(j);
-                scoreInfoList.add(scoreInfo);
+            List<OrderInfo> orderInfoList = new ArrayList<>();
+            for (int j = 0; j < 10; j++) {
+                OrderInfo orderInfo = new OrderInfo();
+                orderInfo.setGuestName("NO." + i + j);
+                orderInfoList.add(orderInfo);
             }
-            scoreList.add(scoreInfoList);
+            ordersList.add(orderInfoList);
         }
-        score_scrollablePanelAdapter.setScoreList(scoreList);
-
+        scrollablePanelAdapter.setOrdersList(ordersList);
     }
-
-
-
 }
 
 

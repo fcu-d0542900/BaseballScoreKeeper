@@ -13,7 +13,7 @@ public class Team implements Serializable {
     private List<Player> teamMember = new ArrayList<>();
     private int currentRound = 0;
     private List<RecordItem> recordItems;
-
+    private List<BoardNumInfo> recordRoundItem;
     public Team(){}
 
     public Team(String homeTeam,TEAM team) {
@@ -38,7 +38,11 @@ public class Team implements Serializable {
         for (RecordItem item :
                 recordItems) {
             if(row == index%9 && round==item.getRound())
-                index ++;
+                return item;
+            else if(round > this.currentRound){
+                return newItem;
+            }
+            index ++;
         }
         return newItem;
     }
@@ -46,7 +50,7 @@ public class Team implements Serializable {
         return currentRound;
     }
 
-    public int nextCurrentRound() {
+    public int nextRound() {
         currentRound = currentRound+1;
         return currentRound;
     }
@@ -104,6 +108,15 @@ public class Team implements Serializable {
 
     public List<Player> getTeamMember() {
         return this.teamMember;
+    }
+
+    public String getScore(int i) {
+        int score = 0;
+        for (RecordItem item:
+             recordItems) {
+            if (item.getRound() == i && item.isGetScore()) score++;
+        }
+        return ""+score;
     }
 
     public enum TEAM{

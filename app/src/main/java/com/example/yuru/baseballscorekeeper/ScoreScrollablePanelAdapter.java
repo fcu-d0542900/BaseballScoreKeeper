@@ -1,12 +1,14 @@
 package com.example.yuru.baseballscorekeeper;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.baseball.BoardNumInfo;
+import com.baseball.Record;
 import com.baseball.ScoreBoardInfo;
 import com.baseball.Team;
 
@@ -20,18 +22,33 @@ import java.util.List;
 
 public class ScoreScrollablePanelAdapter extends PanelAdapter {
 
-    private List<Team> item_team = new ArrayList<>();
+    private List<Team> team = new ArrayList<>();
     private List<BoardNumInfo> boardNumInfoList = new ArrayList<>();
-    private List<List<ScoreBoardInfo>> scoresList =new ArrayList<>();
+    private Record record;
 
     private static final int TITLENAME_TYPE = 7;
     private static final int TEAMINFO_TYPE = 5;
     private static final int BOARDNUM_TYPE = 1;
     private static final int SCOREBOARD_TYPE = 6;
 
+    public ScoreScrollablePanelAdapter(Record currentRecord) {
+        super();
+        record = currentRecord;
+        if (record != null){
+            team.clear();
+            team.add(record.getAwayTeam());
+            team.add(record.getHomeTeam());
+        }
+
+        boardNumInfoList.clear();
+        for (int i=0;i<15+2;i++){
+            boardNumInfoList.add(new BoardNumInfo(i));
+        }
+    }
+
     @Override
     public int getRowCount() {
-        return item_team.size() + 1;
+        return team.size() + 1;
     }
 
     @Override
@@ -112,7 +129,7 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
 
     //隊伍
     public void setTeamInfoView(int pos, final TeamInfoViewHolder viewHolder) {
-        final Team teamInfo = item_team.get(pos - 1);
+        final Team teamInfo = team.get(pos - 1);
         if (teamInfo != null && pos>0) {
             //設定資料
             viewHolder.text_teamName.setText(teamInfo.getTeamName());
@@ -121,9 +138,10 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
     }
 
     //記分板
-        private void setScoreView(final int row, final int column, final ScoreBoardViewHolder viewHolder) {
-        final ScoreBoardInfo scoreInfo = scoresList.get(row - 1).get(column - 1);
-
+    private void setScoreView(final int row, final int column, final ScoreBoardViewHolder viewHolder) {
+        final String scoreInfo = (row == 0 ? record.getAwayTeam() :record.getHomeTeam() ).getScore(column - 1);
+        Log.v("score",scoreInfo);
+        //TODO: 玉鳳 显示分数在记分板上
     }
 
     //上方局數欄
@@ -170,23 +188,6 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
             this.titleTextView = (TextView) view.findViewById(R.id.text_teamTitle);
         }
     }
-
-
-    public void setTeamInfoList(List<Team> item_team) {
-        this.item_team = item_team;
-    }
-
-
-    public void setBoardNumInfoList(List<BoardNumInfo> boardNumInfoList) {
-        this.boardNumInfoList = boardNumInfoList;
-    }
-
-    public void setScoreList(List<List<ScoreBoardInfo>> scoresList) {
-        this.scoresList = scoresList;
-    }
-
-
-
 }
 
 

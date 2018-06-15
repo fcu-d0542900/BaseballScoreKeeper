@@ -6,20 +6,46 @@ import java.io.Serializable;
  * Created by YURU on 2018/6/11.
  */
 
-public class BoardNumInfo implements Serializable {
+public class BoardNumInfo {
     private int broadNum;
-    private String[] broadNum_symbol = {"一","二","三","四","五","六","七","八","九","十","十一","十二","十三","十四","十五"};
-
     public BoardNumInfo(int broadNum) {
         this.broadNum=broadNum;
     }
-
-    public void setBroadNum(int broadNum) {
-        this.broadNum = broadNum;
-    }
-
     public String getBroadNum_symbol() {
-        return broadNum_symbol[broadNum];
+        String text = "";
+        switch(broadNum){
+            case 0:
+                text="一";
+            case 1:
+                text="二";
+            case 2:
+                text="三";
+            case 3:
+                text="四";
+            case 4:
+                text="五";
+            case 5:
+                text="六";
+            case 6:
+                text="七";
+            case 7:
+                text="八";
+            case 8:
+                text="九";
+            case 9:
+                text="十";
+            case 10:
+                text="十一";
+            case 11:
+                text="十二";
+            case 12:
+                text="十三";
+            case 13:
+                text="十四";
+            case 14:
+                text="十五";
+        }
+        return text;
     }
     public int getBroadNum_num() {
         return broadNum+1;
