@@ -1,5 +1,6 @@
 package com.example.yuru.baseballscorekeeper;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,7 +29,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
     private int lastPosition = -1;
     private Context context;
 
-    public PlayerAdapter(Context context) {
+    PlayerAdapter(Context context) {
         this.item_player = DatabaseService.getInstance().getDatabase().getTeamMember();
         this.context = context;
     }
@@ -38,8 +39,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
         // 建立項目使用的畫面配置元件
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_item01, parent, false);
         // 建立與回傳包裝好的畫面配置元件
-        ViewHolder viewHolder = new ViewHolder(v);
-        return viewHolder;
+        return new ViewHolder(v);
     }
 
     // 使用 ViewHolder 包裝項目使用的畫面元件
@@ -51,22 +51,23 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
         protected TextView position_text;
 
         // 包裝元件
-        protected View rootView;
+        View rootView;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
 
             // 使用父類別 ViewHolder 宣告的「itemView」欄位變數，
             // 取得背號、名稱
-            id_text = (TextView) itemView.findViewById(R.id.id_text);
-            name_text = (TextView) itemView.findViewById(R.id.name_text);
-            position_text = (TextView) itemView.findViewById(R.id.position_text);
+            id_text = itemView.findViewById(R.id.id_text);
+            name_text = itemView.findViewById(R.id.name_text);
+            position_text = itemView.findViewById(R.id.position_text);
 
             // 設定包裝元件
             rootView = view;
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         // 讀取目前位置的項目物件
@@ -75,7 +76,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
         // 設定編號、名稱、說明與是否選擇
         holder.id_text.setText(Long.toString(player.getId()));
         holder.name_text.setText(player.getName());
-        holder.position_text.setText(player.getPosition());  //String.valueOf(player.getPosition())
+        holder.position_text.setText(player.getPosition().toString().replaceAll("_",""));  //String.valueOf(player.getPosition())
 
         // 設定動畫效果
         setAnimation(holder.rootView, position);
@@ -107,7 +108,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
     }
 
     // 刪除一個項目
-    public void remove(int position) {
+    private void remove(int position) {
         item_player.remove(position);
         // 通知資料項目已經刪除
         // 劉永貴這裡要刪掉

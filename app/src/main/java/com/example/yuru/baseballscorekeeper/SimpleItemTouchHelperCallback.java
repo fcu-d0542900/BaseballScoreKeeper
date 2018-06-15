@@ -9,7 +9,7 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
     // 實作操作輔助介面的 Adapter 物件
     private final ItemTouchHelperAdapter adapter;
 
-    public SimpleItemTouchHelperCallback(ItemTouchHelperAdapter adapter) {
+    SimpleItemTouchHelperCallback(ItemTouchHelperAdapter adapter) {
         this.adapter = adapter;
     }
 

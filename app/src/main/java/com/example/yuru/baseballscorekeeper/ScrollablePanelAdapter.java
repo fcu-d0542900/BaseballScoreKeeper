@@ -1,5 +1,6 @@
 package com.example.yuru.baseballscorekeeper;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.provider.ContactsContract;
@@ -17,10 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baseball.BoardNumInfo;
-import com.baseball.DatabaseService;
 import com.baseball.OrderInfo;
 import com.baseball.Player;
-import com.baseball.RecordItemFirstBase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,11 +120,12 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     private void setBoardNumView(int pos, BoardNumViewHolder viewHolder) {
         BoardNumInfo boardNumInfo = boardNumInfoList.get(pos - 1);
         if (boardNumInfo != null && pos > 0) {
-            viewHolder.dateTextView.setText(boardNumInfo.getBroadNum_symbol().toString());
+            viewHolder.dateTextView.setText(boardNumInfo.getBroadNum_symbol());
         }
     }
 
-    public void setPlayerInfoView(int pos, final PlayerInfoViewHolder viewHolder) {
+    @SuppressLint("SetTextI18n")
+    private void setPlayerInfoView(int pos, final PlayerInfoViewHolder viewHolder) {
         final Player playerInfo = item_player.get(pos - 1);
         viewHolder.text_batOrder.setText(Integer.valueOf(pos).toString());
 
@@ -133,7 +133,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         if (playerInfo != null && pos>0) {
 
             //設定資料
-            viewHolder.text_playerPosition.setText(playerInfo.getPosition());
+            viewHolder.text_playerPosition.setText(playerInfo.getPosition().toString().replaceAll("_", ""));
             viewHolder.text_playerName.setText(playerInfo.getName());
             if(playerInfo.getId() == -1) {
                 viewHolder.text_playerNum.setText("");
@@ -144,6 +144,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
             //更改球員
             viewHolder.text_playerName.setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("InflateParams")
                 @Override
                 public void onClick(View v) {
 
@@ -159,7 +160,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                     AlertDialog.Builder dialog_setPlayer = new AlertDialog.Builder(newRecordActivity);
                     dialog_setPlayer.setView(view_set_player);
 
-                    ArrayAdapter adapter_position = new ArrayAdapter(dialog_setPlayer.getContext(),android.R.layout.simple_spinner_item,new String[]{"","P","C","1B","2B","3B","SS","LF","CF","RF"});
+                    ArrayAdapter<String> adapter_position = new ArrayAdapter<>(dialog_setPlayer.getContext(),android.R.layout.simple_spinner_item,new String[]{"","P","C","1B","2B","3B","SS","LF","CF","RF"});
                     adapter_position.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinner_position.setAdapter(adapter_position);
 
@@ -173,10 +174,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
                                 playerInfo.setName(playerName);
                                 playerInfo.setId(playerNum);
-                                playerInfo.setPosition(playerPosition);
+                                playerInfo.setPosition(Player.POSITION.values()[playerPosition]);
                                 viewHolder.text_playerName.setText(playerName);
                                 viewHolder.text_playerNum.setText(Integer.valueOf(playerNum).toString());
-                                viewHolder.text_playerPosition.setText(playerInfo.getPosition());
+                                viewHolder.text_playerPosition.setText(playerInfo.getPosition().toString().replaceAll("_",""));
 
                                 Toast.makeText(newRecordActivity.getApplicationContext(), "SET", Toast.LENGTH_SHORT).show();
                             }
@@ -264,11 +265,11 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     private static class BoardNumViewHolder extends RecyclerView.ViewHolder {
-        public TextView dateTextView;
+        TextView dateTextView;
 
-        public BoardNumViewHolder(View itemView) {
+        BoardNumViewHolder(View itemView) {
             super(itemView);
-            this.dateTextView = (TextView) itemView.findViewById(R.id.text_boardNum);
+            this.dateTextView = itemView.findViewById(R.id.text_boardNum);
 
         }
 
@@ -281,23 +282,23 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         public TextView text_batOrder;
 
 
-        public PlayerInfoViewHolder(View view) {
+        PlayerInfoViewHolder(View view) {
             super(view);
 
-            this.text_playerPosition = (TextView) view.findViewById(R.id.text_playerPosition);
-            this.text_playerName = (TextView) view.findViewById(R.id.text_playerName);
-            this.text_playerNum = (TextView) view.findViewById(R.id.text_playerNum);
-            this.text_batOrder = (TextView) view.findViewById(R.id.text_batOrder);
+            this.text_playerPosition = view.findViewById(R.id.text_playerPosition);
+            this.text_playerName = view.findViewById(R.id.text_playerName);
+            this.text_playerNum = view.findViewById(R.id.text_playerNum);
+            this.text_batOrder = view.findViewById(R.id.text_batOrder);
         }
     }
 
     private static class OrderViewHolder extends RecyclerView.ViewHolder {
-        public TextView getScoreView;
-        public TextView getFirstView;
-        public TextView getHomeView;
-        public TextView getSecondView;
-        public TextView getThirdView;
-        public TextView getBallView;
+        TextView getScoreView;
+        TextView getFirstView;
+        TextView getHomeView;
+        TextView getSecondView;
+        TextView getThirdView;
+        TextView getBallView;
 
         //更改球員
         public ImageView getChangeGarrison,getChangeHitter;
@@ -336,14 +337,15 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         public ImageView getHomeViewThrowOne,getHomeViewThrowTwo;
 
 
-        public OrderViewHolder(View view) {
+        OrderViewHolder(View view) {
             super(view);
-            this.getScoreView = (TextView) view.findViewById(R.id.centerView);
-            this.getFirstView = (TextView) view.findViewById(R.id.firstView);
-            this.getHomeView = (TextView) view.findViewById(R.id.homeView);
-            this.getSecondView = (TextView) view.findViewById(R.id.secondView);
-            this.getThirdView = (TextView) view.findViewById(R.id.thirdView);
-            this.getBallView= (TextView) view.findViewById(R.id.ballView);
+            
+            this.getScoreView = view.findViewById(R.id.centerView);
+            this.getFirstView = view.findViewById(R.id.firstView);
+            this.getHomeView = view.findViewById(R.id.homeView);
+            this.getSecondView = view.findViewById(R.id.secondView);
+            this.getThirdView = view.findViewById(R.id.thirdView);
+            this.getBallView= view.findViewById(R.id.ballView);
 
             this.getChangeGarrison = view.findViewById(R.id.image_change_garrison);
             this.getChangeHitter = view.findViewById(R.id.image_change_hitter);
@@ -405,17 +407,20 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.getHomeViewPushNum = view.findViewById(R.id.image_homeView_pushNumber);
             this.getHomeViewBase = view.findViewById(R.id.image_base_3tohome);
 
+
+
+
             this.getScoreView.bringToFront();
 
         }
     }
 
     private static class TeamNameViewHolder extends RecyclerView.ViewHolder {
-        public TextView titleTextView;
+        TextView titleTextView;
 
-        public TeamNameViewHolder(View view) {
+        TeamNameViewHolder(View view) {
             super(view);
-            this.titleTextView = (TextView) view.findViewById(R.id.title);
+            this.titleTextView = view.findViewById(R.id.title);
         }
     }
 

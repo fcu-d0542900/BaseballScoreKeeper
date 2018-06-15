@@ -1,10 +1,6 @@
 package com.baseball;
 
-import android.util.Log;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by YURU on 2018/6/8.
@@ -12,20 +8,20 @@ import java.util.List;
 
 public class Player implements Serializable {
     private long id;
-    private String name;
-    private String team;
-    private int position_num;
-    private String[] position_symbol={"DH","P","C","1B","2B","3B","SS","LF","CF","RF",""};  //設DH為0，其他照符號
-
+    private String name =" ";
+    private POSITION position;
+    public enum POSITION {
+        DH,P,C,_1B,_2B,_3B,SS,LF,CF,RF
+    }
     public Player() {
         id=-1;
         name="   ";
-        position_num=10;
+        position=null;
     }
-    public Player(long id, String name, int position_num) {
+    public Player(long id, String name, POSITION position) {
         setId(id);
         setName(name);
-        setPosition(position_num);
+        setPosition(position);
     }
 
     public long getId() {
@@ -33,30 +29,25 @@ public class Player implements Serializable {
     }
     public void setId(long id) {
         this.id = id;
+        DatabaseService.getInstance().write();
+
     }
     public String getName() {
         return name;
     }
     public void setName(String name) {
         this.name = name;
-    }
-    public String getPosition() {
-        return position_symbol[position_num];
-    }
-    public void setPosition(int position_num) {
-        if(position_num>10) {
-            position_num=10;
-        }
-        this.position_num = position_num;
-    }
-    public void setTeam(String team) {
-        this.team = team;
-    }
-    public String getTeam() {
-        return team;
-    }
+        DatabaseService.getInstance().write();
 
+    }
+    public POSITION getPosition() {
+        return position;
+    }
+    public void setPosition(POSITION position) {
+        this.position = position;
+        DatabaseService.getInstance().write();
 
+    }
 
     @Override
     public String toString() {
