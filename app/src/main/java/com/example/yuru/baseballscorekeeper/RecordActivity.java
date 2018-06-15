@@ -48,7 +48,7 @@ public class RecordActivity extends AppCompatActivity {
         Intent intent = this.getIntent();
         teamName = intent.getStringExtra("teamName");
 
-        item_list = (RecyclerView) findViewById(R.id.record_list);
+        item_list = findViewById(R.id.record_list);
 
         // 執行RecyclerView元件的設定
         item_list.setHasFixedSize(true);
@@ -173,7 +173,7 @@ public class RecordActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 String str_gameDate = datePicker_gameDate.getYear() + "/" + (datePicker_gameDate.getMonth() + 1) + "/" + datePicker_gameDate.getDayOfMonth();
                 editText_gameDate.setText(str_gameDate);
-        }
+            }
         });
         dialog_chooseDate.show();
     }

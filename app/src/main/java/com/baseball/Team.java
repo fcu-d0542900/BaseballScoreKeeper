@@ -26,7 +26,7 @@ public class Team implements Serializable {
         }
         if (homeTeam.equals(DatabaseService.getInstance().getDatabase().getTeamName())){
             teamMember = new ArrayList<>(DatabaseService.getInstance().getDatabase().getTeamMember());
-        };
+        }
     }
 
     public RecordItem getRecordItems(int row,int round) {

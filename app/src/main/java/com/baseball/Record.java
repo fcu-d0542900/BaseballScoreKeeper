@@ -30,6 +30,7 @@ public class Record implements Serializable {
 
     public void setGameName(String name) {
         this.name=name;
+        DatabaseService.getInstance().write();
     }
 
     public String getGameName() {
@@ -38,6 +39,8 @@ public class Record implements Serializable {
 
     public void setGameDate(Date date) {
         this.date = date;
+        DatabaseService.getInstance().write();
+
     }
 
     public Date getGameDate() {

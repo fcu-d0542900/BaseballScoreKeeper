@@ -49,10 +49,10 @@ public class NewRecordActivity extends AppCompatActivity {
         text_gameName.setText(currentRecord.getGameName());
 
 
-        final ScrollablePanel scrollablePanel = (ScrollablePanel) findViewById(R.id.scrollable_panel);
+        final ScrollablePanel scrollablePanel = findViewById(R.id.scrollable_panel);
         final ScrollablePanelAdapter scrollablePanelAdapter = new ScrollablePanelAdapter();
 
-        final ScrollablePanel score_scrollable_panel = (ScrollablePanel) findViewById(R.id.score_scrollable_panel);
+        final ScrollablePanel score_scrollable_panel = findViewById(R.id.score_scrollable_panel);
         final ScoreScrollablePanelAdapter score_scrollablePanelAdapter = new ScoreScrollablePanelAdapter(currentRecord);
         generateTestData(scrollablePanelAdapter);
         scrollablePanel.setPanelAdapter(scrollablePanelAdapter);

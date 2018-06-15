@@ -150,7 +150,7 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
 
         public BoardNumViewHolder(View itemView) {
             super(itemView);
-            this.boaredTextView = (TextView) itemView.findViewById(R.id.text_Scoreboard);
+            this.boaredTextView = itemView.findViewById(R.id.text_Scoreboard);
         }
 
     }
@@ -161,7 +161,7 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
 
         public TeamInfoViewHolder(View view) {
             super(view);
-            this.text_teamName = (TextView) view.findViewById(R.id.text_Scoreteam);
+            this.text_teamName = view.findViewById(R.id.text_Scoreteam);
         }
     }
 
@@ -174,7 +174,7 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
         public ScoreBoardViewHolder(View view) {
             super(view);
             this.view = view;
-            this.getScoreView = (TextView) view.findViewById(R.id.text_ScoreMain);
+            this.getScoreView = view.findViewById(R.id.text_ScoreMain);
 
         }
     }
@@ -185,7 +185,7 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
 
         public TeamTitleViewHolder(View view) {
             super(view);
-            this.titleTextView = (TextView) view.findViewById(R.id.text_teamTitle);
+            this.titleTextView = view.findViewById(R.id.text_teamTitle);
         }
     }
 }

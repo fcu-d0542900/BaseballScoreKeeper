@@ -11,7 +11,8 @@ public class RecordItem implements Serializable {
 
     RecordItem(Player player,int round){
         this.attPlayer = player;
-        this.round = round;
+        this.round = round;        DatabaseService.getInstance().write();
+
     }
 
     public Player getAttPlayer() {
@@ -21,7 +22,8 @@ public class RecordItem implements Serializable {
     public boolean changeAttPlayer(Player player){
         if(player.getId() == attPlayer.getId())
             return false;
-        attPlayer = player;
+        attPlayer = player;        DatabaseService.getInstance().write();
+
         return true;
     }
 
@@ -30,7 +32,8 @@ public class RecordItem implements Serializable {
     }
 
     public void toggleScore(){
-        score = !score;
+        score = !score;        DatabaseService.getInstance().write();
+
     }
 
     public boolean isGetScore(){
