@@ -31,7 +31,7 @@
                         android:id="@+id/image_change_hitter"
                         android:layout_width="5dp"
                         android:layout_height="match_parent"
-                        android:layout_gravity="right"
+                        android:layout_gravity="left|right"
                         app:srcCompat="@drawable/change_hitter" />
 
                     <TextView
@@ -539,20 +539,18 @@
                                                                 android:layout_width="match_parent"
                                                                 android:layout_height="9dp"
                                                                 android:layout_gravity="center"
-                                                                android:visibility="gone"
                                                                 app:srcCompat="@drawable/fly_ball" />
 
                                                             <ImageView
                                                                 android:id="@+id/image_firstView_oneNum"
                                                                 android:layout_width="match_parent"
-                                                                android:layout_height="25dp"
+                                                                android:layout_height="18dp"
                                                                 app:srcCompat="@drawable/throw9" />
 
                                                             <ImageView
                                                                 android:id="@+id/image_firstView_oneBottom"
                                                                 android:layout_width="match_parent"
                                                                 android:layout_height="9dp"
-                                                                android:visibility="gone"
                                                                 app:srcCompat="@drawable/ground_ball" />
                                                         </LinearLayout>
 
@@ -572,7 +570,6 @@
                                                         android:layout_height="wrap_content"
                                                         android:layout_gravity="center"
                                                         android:layout_weight="1"
-                                                        android:visibility="gone"
                                                         app:srcCompat="@drawable/fielder_choice" />
 
                                                     <ImageView
@@ -592,8 +589,7 @@
                                                 android:id="@+id/frame_firstView_two"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
-                                                android:layout_weight="1"
-                                                android:visibility="gone">
+                                                android:layout_weight="1">
 
                                                 <LinearLayout
                                                     android:layout_width="match_parent"
@@ -631,8 +627,7 @@
                                                 android:id="@+id/frame_firstView_three"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
-                                                android:layout_weight="1"
-                                                android:visibility="gone">
+                                                android:layout_weight="1">
 
                                                 <LinearLayout
                                                     android:layout_width="match_parent"
@@ -672,8 +667,8 @@
 
                                     <ImageView
                                         android:id="@+id/image_sacrifice_hits"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
                                         android:layout_gravity="bottom|right"
                                         android:scaleType="fitXY"
                                         android:visibility="gone"
@@ -688,12 +683,20 @@
                                     app:srcCompat="@drawable/home_runs" />
 
                                 <ImageView
-                                    android:id="@+id/image_firstView_one"
+                                    android:id="@+id/image_firstView_zero"
                                     android:layout_width="60dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:layout_marginTop="8dp"
+                                    android:visibility="gone"
                                     app:srcCompat="@drawable/throw_b" />
+
+                                <ImageView
+                                    android:id="@+id/image_end"
+                                    android:layout_width="23dp"
+                                    android:layout_height="23dp"
+                                    android:layout_gravity="bottom|right"
+                                    app:srcCompat="@drawable/end" />
 
                                 <TextView
                                     android:id="@+id/firstView"
@@ -718,7 +721,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right"
-                            android:visibility="visible"
                             app:srcCompat="@drawable/hit_stright" />
 
                         <ImageView
