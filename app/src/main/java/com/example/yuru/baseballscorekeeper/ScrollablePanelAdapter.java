@@ -2,13 +2,16 @@ package com.example.yuru.baseballscorekeeper;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -296,17 +299,112 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         public TextView getThirdView;
         public TextView getBallView;
 
-        public View view;
+        //更改球員
+        public ImageView getChangeGarrison,getChangeHitter;
+
+        //一壘
+        public ImageView getFirstViewZero,getFirstViewHR;
+        public FrameLayout getFirstViewOne,getFirstViewTwo,getFirstViewThree;
+        public ImageView getFirstViewOneTop,getFirstViewOneNum,getFirstViewOneBottom;
+        public ImageView getFirstViewOneAc1,getFirstViewOneAc2;
+        public ImageView getFirstViewTwoNum,getFirstViewTwoAc;
+        public ImageView getFirstViewThreeNum,getFirstViewThreeAc;
+        public ImageView getSacrificeFly,getSacrificeHits;
+
+        //二壘
+        public ImageView getSecondViewActionName,getSecondViewPushNum,getSecondViewBase;
+        public LinearLayout getSecondViewAction;
+        public ImageView getSecondViewActionOneNum,getSecondViewActionOneAc;
+        public ImageView getSecondViewActionTwoNum,getSecondViewActionTwoAc;
+        public LinearLayout getSecondViewThrow;
+        public ImageView getSecondViewThrowOne,getSecondViewThrowTwo;
+
+        //三壘
+        public ImageView getThirdViewActionName,getThirdViewPushNum,getThirdViewBase;
+        public LinearLayout getThirdViewAction;
+        public ImageView getThirdViewActionOneNum,getThirdViewActionOneAc;
+        public ImageView getThirdViewActionTwoNum,getThirdViewActionTwoAc;
+        public LinearLayout getThirdViewThrow;
+        public ImageView getThirdViewThrowOne,getThirdViewThrowTwo;
+
+        //本壘
+        public ImageView getHomeViewActionName,getHomeViewPushNum,getHomeViewBase;
+        public LinearLayout getHomeViewAction;
+        public ImageView getHomeViewActionOneNum,getHomeViewActionOneAc;
+        public ImageView getHomeViewActionTwoNum,getHomeViewActionTwoAc;
+        public LinearLayout getHomeViewThrow;
+        public ImageView getHomeViewThrowOne,getHomeViewThrowTwo;
+
 
         public OrderViewHolder(View view) {
             super(view);
-            this.view = view;
             this.getScoreView = (TextView) view.findViewById(R.id.centerView);
             this.getFirstView = (TextView) view.findViewById(R.id.firstView);
             this.getHomeView = (TextView) view.findViewById(R.id.homeView);
             this.getSecondView = (TextView) view.findViewById(R.id.secondView);
             this.getThirdView = (TextView) view.findViewById(R.id.thirdView);
             this.getBallView= (TextView) view.findViewById(R.id.ballView);
+
+            this.getChangeGarrison = view.findViewById(R.id.image_change_garrison);
+            this.getChangeHitter = view.findViewById(R.id.image_change_hitter);
+
+            //一壘
+            this.getFirstViewZero = view.findViewById(R.id.image_firstView_zero);
+            this.getFirstViewOne = view.findViewById(R.id.frame_firstView_one);
+            this.getFirstViewTwo = view.findViewById(R.id.frame_firstView_two);
+            this.getFirstViewThree = view.findViewById(R.id.frame_firstView_three);
+            this.getFirstViewHR = view.findViewById(R.id.image_HR);
+            this.getFirstViewOneTop = view.findViewById(R.id.image_firstView_oneTop);
+            this.getFirstViewOneNum = view.findViewById(R.id.image_firstView_oneNum);
+            this.getFirstViewOneBottom = view.findViewById(R.id.image_firstView_oneBottom);
+            this.getFirstViewOneAc1 = view.findViewById(R.id.image_firstView_one_ac1);
+            this.getFirstViewOneAc2 = view.findViewById(R.id.image_firstView_one_ac2);
+            this.getFirstViewTwoNum = view.findViewById(R.id.image_firstView_twoNum);
+            this.getFirstViewTwoAc = view.findViewById(R.id.image_firstView_two_ac);
+            this.getFirstViewThreeNum = view.findViewById(R.id.image_firstView_threeNum);
+            this.getFirstViewThreeAc = view.findViewById(R.id.image_firstView_three_ac);
+            this.getSacrificeFly = view.findViewById(R.id.image_sacrifice_fly);
+            this.getSacrificeHits = view.findViewById(R.id.image_sacrifice_hits);
+
+            //二壘
+            this.getSecondViewActionName = view.findViewById(R.id.image_secondView_actionName);
+            this.getSecondViewAction = view.findViewById(R.id.linear_secondView_acion);
+            this.getSecondViewActionOneNum = view.findViewById(R.id.image_secondView_actionOne);
+            this.getSecondViewActionOneAc = view.findViewById(R.id.image_secondView_actionOne_ac);
+            this.getSecondViewActionTwoNum = view.findViewById(R.id.image_secondView_actionTwo);
+            this.getSecondViewActionTwoAc = view.findViewById(R.id.image_secondView_actionTwo_ac);
+            this.getSecondViewThrow = view.findViewById(R.id.linear_secondView_throw);
+            this.getSecondViewThrowOne = view.findViewById(R.id.image_secondView_throwOne);
+            this.getSecondViewThrowTwo = view.findViewById(R.id.image_secondView_throwTwo);
+            this.getSecondViewPushNum = view.findViewById(R.id.image_secondView_pushNumber);
+            this.getSecondViewBase = view.findViewById(R.id.image_base_1to2);
+
+            //三壘
+            this.getThirdViewActionName = view.findViewById(R.id.image_thirdView_actionName);
+            this.getThirdViewAction = view.findViewById(R.id.linear_thirdView_action);
+            this.getThirdViewActionOneNum = view.findViewById(R.id.image_thirdView_actionOne);
+            this.getThirdViewActionOneAc = view.findViewById(R.id.image_thirdView_actionOne_ac);
+            this.getThirdViewActionTwoNum = view.findViewById(R.id.image_thirdView_actionTwo);
+            this.getThirdViewActionTwoAc = view.findViewById(R.id.image_thirdView_actionTwo_ac);
+            this.getThirdViewThrow = view.findViewById(R.id.linear_thirdView_throw);
+            this.getThirdViewThrowOne = view.findViewById(R.id.image_thirdView_throwOne);
+            this.getThirdViewThrowTwo = view.findViewById(R.id.image_thirdView_throwTwo);
+            this.getThirdViewPushNum = view.findViewById(R.id.image_thirdView_pushNumber);
+            this.getThirdViewBase = view.findViewById(R.id.image_base_2to3);
+
+            //本壘
+            this.getHomeViewActionName = view.findViewById(R.id.image_homeView_actionName);
+            this.getHomeViewAction = view.findViewById(R.id.linear_homeView_acion);
+            this.getHomeViewActionOneNum = view.findViewById(R.id.image_homeView_actionOne);
+            this.getHomeViewActionOneAc = view.findViewById(R.id.image_homeView_actionOne_ac);
+            this.getHomeViewActionTwoNum = view.findViewById(R.id.image_homeView_actionTwo);
+            this.getHomeViewActionTwoAc = view.findViewById(R.id.image_homeView_actionTwo_ac);
+            this.getHomeViewThrow = view.findViewById(R.id.linear_homeView_throw);
+            this.getHomeViewThrowOne = view.findViewById(R.id.image_homeView_throwOne);
+            this.getHomeViewThrowTwo = view.findViewById(R.id.image_homeView_throwTwo);
+            this.getHomeViewPushNum = view.findViewById(R.id.image_homeView_pushNumber);
+            this.getHomeViewBase = view.findViewById(R.id.image_base_3tohome);
+
             this.getScoreView.bringToFront();
 
         }

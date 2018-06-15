@@ -9,7 +9,7 @@ import android.widget.ImageView;
  */
 
 public class RecordItemFirstBase {
-    private ImageView showZeroView;
+    private ImageView showZeroView,showHRView;
     private FrameLayout showOneView,showTwoView,showThreeView;
 
     public void setShowZeroView(ImageView showZeroView) {
@@ -47,4 +47,14 @@ public class RecordItemFirstBase {
         if (showThreeView != null)
             showThreeView.setVisibility(isShow?View.VISIBLE:View.GONE);
     }
+
+    public void setShowHRView(ImageView showHRView) {
+        this.showHRView = showHRView;
+    }
+
+    public void setShowHRViewVisibility(boolean isShow) {
+        if (showHRView != null)
+            showHRView.setVisibility(isShow?View.VISIBLE:View.GONE);
+    }
+
 }

@@ -363,7 +363,7 @@
                                         android:orientation="vertical">
 
                                         <ImageView
-                                            android:id="@+id/image_homeView_actionName2"
+                                            android:id="@+id/image_homeView_actionName"
                                             android:layout_width="40dp"
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
@@ -606,7 +606,7 @@
                                                         app:srcCompat="@drawable/throw3" />
 
                                                     <ImageView
-                                                        android:id="@+id/image_firstView_twoN_ac"
+                                                        android:id="@+id/image_firstView_two_ac"
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="18dp"
                                                         android:layout_weight="1"
