@@ -223,7 +223,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                                         case 0:
                                             AlertDialog.Builder center_choice1 = new AlertDialog.Builder(newRecordActivity);
                                             View view_center_choice1 = View.inflate(newRecordActivity, R.layout.record_center_dialog, null);      //自訂dialog布局
-                                            center_choice1.setView(view_center_choice1);   //設置view
+                                            center_choice1.setView(view_center_choice1);
+                                            // 設置view
                                             final AlertDialog center_dialog = center_choice1.create();    //根據builder設置好的一系列數據, 来建構一個dialog
                                             //點擊得分
                                             view_center_choice1.findViewById(R.id.click_run).setOnClickListener(new View.OnClickListener() {
@@ -281,17 +282,17 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                                                                     Toast.makeText(newRecordActivity.getApplicationContext(), name_h, Toast.LENGTH_SHORT).show();
                                                                     break;
 
-                                                                //點擊一壘安打
+                                                                //點擊二壘安打
                                                                 case 1:
                                                                     Toast.makeText(newRecordActivity.getApplicationContext(), name_h, Toast.LENGTH_SHORT).show();
                                                                     break;
 
-                                                                //點擊一壘安打
+                                                                //點擊壘安打
                                                                 case 2:
                                                                     Toast.makeText(newRecordActivity.getApplicationContext(), name_h, Toast.LENGTH_SHORT).show();
                                                                     break;
 
-                                                                //點擊一壘安打
+                                                                //點擊三全壘打
                                                                 case 3:
                                                                     Toast.makeText(newRecordActivity.getApplicationContext(), name_h, Toast.LENGTH_SHORT).show();
                                                                     break;
