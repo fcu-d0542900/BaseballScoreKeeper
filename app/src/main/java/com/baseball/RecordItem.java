@@ -5,9 +5,10 @@ import java.util.List;
 
 public class RecordItem implements Serializable {
     // metric infomation
-    private int round;
     int row;
     int column;
+    private int round;
+    private boolean isNew;
 
     // user infomation
     private Player attPlayer;
@@ -31,7 +32,7 @@ public class RecordItem implements Serializable {
     }
 
     public enum BASE_B_D_K_KR {
-        B,D,K,KR,_
+        B,D,K,KR,__
     }
 
     public void updateFirstBaseUI(RecordItemFirstBase base){
@@ -67,8 +68,7 @@ public class RecordItem implements Serializable {
         this.round = round;
         this.row = row;
         this.column = column;
-        DatabaseService.getInstance().write();
-
+        isNew = true;
     }
 
     public Player getAttPlayer() {
@@ -79,8 +79,7 @@ public class RecordItem implements Serializable {
         if(player.getId() == attPlayer.getId())
             return false;
         attPlayer = player;
-        DatabaseService.getInstance().write();
-
+        save();
         return true;
     }
 
@@ -90,11 +89,18 @@ public class RecordItem implements Serializable {
 
     public void toggleScore(){
         score = !score;
-        DatabaseService.getInstance().write();
 
     }
 
     public boolean isGetScore(){
         return score;
+    }
+
+    private void save(){
+        if(isNew) {
+            isNew = false;
+            DatabaseService.getInstance().getDatabase().getRecord(DatabaseService.CurrentRecord).getTeam().addRecordItems(this);
+        }
+        DatabaseService.getInstance().write();
     }
 }

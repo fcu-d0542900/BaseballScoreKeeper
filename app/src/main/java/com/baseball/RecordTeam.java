@@ -8,15 +8,14 @@ import java.util.List;
  * Created by YURU on 2018/6/8.
  */
 
-public class Team implements Serializable {
+public class RecordTeam implements Serializable {
     private String teamName="";
     private List<Player> teamMember = new ArrayList<>();
     private int currentRound = 0;
     private List<RecordItem> recordItems;
     private List<BoardNumInfo> recordRoundItem;
-    public Team(){}
 
-    public Team(String homeTeam,TEAM team) {
+    public RecordTeam(String homeTeam, Faction team) {
         setTeamName(homeTeam);
         switch (team){
             case away:
@@ -26,6 +25,9 @@ public class Team implements Serializable {
         }
         if (homeTeam.equals(DatabaseService.getInstance().getDatabase().getTeamName())){
             teamMember = new ArrayList<>(DatabaseService.getInstance().getDatabase().getTeamMember());
+        }
+        while(teamMember.size()<9){
+            teamMember.add(new Player());
         }
     }
 
@@ -40,6 +42,10 @@ public class Team implements Serializable {
 
             }
         return new RecordItem(teamMember.get(row),currentRound,row,column);
+    }
+
+    public void addRecordItems(RecordItem recordItems) {
+        this.recordItems.add(recordItems);
     }
 
     public int getCurrentRound() {
@@ -131,7 +137,13 @@ public class Team implements Serializable {
         return ""+score;
     }
 
-    public enum TEAM{
+    public int getLastRecordItemsColumn() {
+        if(recordItems!=null)
+            return recordItems.get(recordItems.size() - 1).column;
+        return 0;
+    }
+
+    public enum Faction{
         away,
         home
     }

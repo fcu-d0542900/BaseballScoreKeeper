@@ -1,5 +1,6 @@
 package com.baseball;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 
@@ -14,10 +15,12 @@ import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 
 public class DatabaseService {
+    public static int CurrentRecord = 0;
     private String filename = "db.dat";
+    @SuppressLint("StaticFieldLeak")
     private static DatabaseService instance;
     private Database database;
-    Context context;
+    private Context context;
 
     public Database getDatabase() {
         return database;
@@ -44,13 +47,7 @@ public class DatabaseService {
             input.close();
             exist = false;
             Log.d("database","databse read success "+ database.toString());
-        } catch (StreamCorruptedException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         if(exist)
@@ -64,8 +61,6 @@ public class DatabaseService {
             out = new ObjectOutputStream(context.openFileOutput(filename, Context.MODE_PRIVATE));
             out.writeObject(database);
             out.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -19,7 +19,7 @@ import java.util.List;
  * Created by YURU on 2018/6/16.
  */
 
-public class FirstBaseDialog {
+public class BaseFirstDialog {
 
     private RecordItemFirstBase recordItemFirstBase;
 
@@ -39,7 +39,7 @@ public class FirstBaseDialog {
         this.newRecordActivity = newRecordActivity;
     }
 
-    public void setFirstBaseDialog() {
+    public void setBaseFirstDialog(ScrollablePanelAdapter.OrderViewHolder viewHolder) {
         recordItemFirstBase = new RecordItemFirstBase();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(newRecordActivity);

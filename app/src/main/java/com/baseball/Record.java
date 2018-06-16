@@ -4,7 +4,6 @@ import android.util.Log;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by YURU on 2018/6/13.
@@ -13,14 +12,16 @@ import java.util.List;
 public class Record implements Serializable {
     private String name;
     private Date date;
-    private Team away;
-    private Team home;
+    private RecordTeam away;
+    private RecordTeam home;
+    RecordTeam.Faction currenFaction;
 
     public Record(String name, String awayTeam, String homeTeam, Date date) {
         this.name=name;
         this.date=date;
-        this.away=new Team(awayTeam,Team.TEAM.away);
-        this.home=new Team(homeTeam,Team.TEAM.home);
+        this.away=new RecordTeam(awayTeam, RecordTeam.Faction.away);
+        this.home=new RecordTeam(homeTeam, RecordTeam.Faction.home);
+        this.currenFaction = RecordTeam.Faction.away;
         Log.d("record","add record: "+name);
     }
 
@@ -43,13 +44,27 @@ public class Record implements Serializable {
         return date;
     }
 
+    public RecordTeam getTeam(){
+        switch (currenFaction){
+            case home:
+                return getHomeTeam();
+            case away:
+                return getAwayTeam();
+            default:
+                return null;
+        }
+    }
 
-    public Team getAwayTeam() {
+    public void setCurrenFaction(RecordTeam.Faction currentFaction) {
+        this.currenFaction = currentFaction;
+    }
+
+    public RecordTeam getAwayTeam() {
         return away;
     }
 
 
-    public Team getHomeTeam() {
+    public RecordTeam getHomeTeam() {
         return home;
     }
 }

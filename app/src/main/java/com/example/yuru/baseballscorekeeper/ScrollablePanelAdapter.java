@@ -3,7 +3,6 @@ package com.example.yuru.baseballscorekeeper;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +19,8 @@ import android.widget.Toast;
 import com.baseball.BoardNumInfo;
 import com.baseball.OrderInfo;
 import com.baseball.Player;
+import com.baseball.RecordItemFirstBase;
+import com.baseball.RecordItemOtherBase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +33,11 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     private NewRecordActivity newRecordActivity ;
 
-    private List<Player> item_player = new ArrayList<>();
-    private List<BoardNumInfo> boardNumInfoList = new ArrayList<>();
-    private List<List<OrderInfo>> ordersList =new ArrayList<>();
+    private List<Player> item_player;
+
+    private List<BoardNumInfo> boardNumInfoList;
+
+    private List<List<OrderInfo>> ordersList = new ArrayList<>();
 
     private EditText editText_playerName,editText_playerNum;
     private Spinner spinner_position;
@@ -44,8 +47,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     private String playerName;
     private int playerNum,playerPosition;
 
-    Dialog basetwothree = new Dialog();
-    FirstBaseDialog firstBaseDialog = new FirstBaseDialog();
+    private Dialog basetwothree = new Dialog();
+    private BaseFirstDialog baseFirstDialog = new BaseFirstDialog();
 
     final String[] center_choice = new String[]{"得分/出局", "安打","替換守備","替換打者","結束半局"};
     final String[] hits_choice = new String[]{"一壘安打", "二壘安打","三壘安打","全壘打"};
@@ -55,6 +58,13 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     private static final int BOARDNUM_TYPE = 1;
     private static final int ORDER_TYPE = 2;
 
+
+    public ScrollablePanelAdapter(NewRecordActivity newRecordActivity) {
+        super();
+        this.setNewRecordActivity(newRecordActivity);
+        item_player = newRecordActivity.player;
+    }
+
     @Override
     public int getRowCount() {
         return item_player.size() + 1;
@@ -62,7 +72,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     @Override
     public int getColumnCount() {
-        return boardNumInfoList.size();
+        return newRecordActivity.currentRecord.getTeam().getLastRecordItemsColumn() + 1;
     }
 
 
@@ -338,8 +348,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 @Override
                 public void onClick(View v) {
 
-                    firstBaseDialog.setNewRecordActivity(newRecordActivity);
-                    firstBaseDialog.setFirstBaseDialog();
+                    baseFirstDialog.setNewRecordActivity(newRecordActivity);
+                    baseFirstDialog.setBaseFirstDialog(viewHolder);
                     Toast.makeText(v.getContext(), "一壘" , Toast.LENGTH_SHORT).show();
 
                 }
@@ -351,7 +361,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 public void onClick(View v) {
 
                     basetwothree.setNewRecordActivity(newRecordActivity);
-                    basetwothree.getTwoBaseDialog(new String[]{"推進","進壘"});
+                    basetwothree.setTwoBaseDialog(viewHolder,new String[]{"推進","進壘"});
                     Toast.makeText(v.getContext(), "二壘" , Toast.LENGTH_SHORT).show();
 
                 }
@@ -417,7 +427,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         }
     }
 
-    private static class OrderViewHolder extends RecyclerView.ViewHolder {
+    static class OrderViewHolder extends RecyclerView.ViewHolder {
         TextView getScoreView;
         TextView getFirstView;
         TextView getHomeView;
@@ -438,6 +448,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         public ImageView getFirstViewTwoNum,getFirstViewTwoAc;
         public ImageView getFirstViewThreeNum,getFirstViewThreeAc;
         public ImageView getSacrificeFly,getSacrificeHits;
+        public RecordItemOtherBase base1;
 
         //二壘
         public ImageView getSecondViewActionName,getSecondViewPushNum,getSecondViewBase;
@@ -446,6 +457,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         public ImageView getSecondViewActionTwoNum,getSecondViewActionTwoAc;
         public LinearLayout getSecondViewThrow;
         public ImageView getSecondViewThrowOne,getSecondViewThrowTwo;
+        public RecordItemOtherBase base2;
 
         //三壘
         public ImageView getThirdViewActionName,getThirdViewPushNum,getThirdViewBase;
@@ -454,6 +466,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         public ImageView getThirdViewActionTwoNum,getThirdViewActionTwoAc;
         public LinearLayout getThirdViewThrow;
         public ImageView getThirdViewThrowOne,getThirdViewThrowTwo;
+        public RecordItemOtherBase base3;
 
         //本壘
         public ImageView getHomeViewActionName,getHomeViewPushNum,getHomeViewBase;
@@ -462,7 +475,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         public ImageView getHomeViewActionTwoNum,getHomeViewActionTwoAc;
         public LinearLayout getHomeViewThrow;
         public ImageView getHomeViewThrowOne,getHomeViewThrowTwo;
-
+        public RecordItemFirstBase base;
 
         OrderViewHolder(View view) {
             super(view);
@@ -538,7 +551,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.getHomeViewThrowTwo = view.findViewById(R.id.image_homeView_throwTwo);
             this.getHomeViewPushNum = view.findViewById(R.id.image_homeView_pushNumber);
             this.getHomeViewBase = view.findViewById(R.id.image_base_3tohome);
-
+            // TODO 把 UI set 進去這邊 YURU 這樣懂了嗎？
+//            base.setShowThreeView(getHomeViewThrow);
 
 
 
@@ -554,18 +568,6 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             super(view);
             this.titleTextView = view.findViewById(R.id.title);
         }
-    }
-
-    public void setPlayerInfoList(List<Player> item_player) {
-        this.item_player = item_player;
-    }
-
-    public void setBoardNumInfoList(List<BoardNumInfo> boardNumInfoList) {
-        this.boardNumInfoList = boardNumInfoList;
-    }
-
-    public void setOrdersList(List<List<OrderInfo>> ordersList) {
-        this.ordersList = ordersList;
     }
 
     public void setNewRecordActivity(NewRecordActivity newRecordActivity) {

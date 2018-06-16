@@ -7,20 +7,17 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.baseball.BoardNumInfo;
-import com.baseball.Database;
 import com.baseball.DatabaseService;
 import com.baseball.OrderInfo;
 import com.baseball.Player;
 import com.baseball.Record;
+import com.baseball.RecordTeam;
 import com.baseball.ScoreBoardInfo;
-import com.baseball.Team;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +26,8 @@ public class NewRecordActivity extends AppCompatActivity {
 
     private TextView text_gameName,text_startTime,text_endTime;
     private Boolean isSetPlayer;
-    private Team awayTeam,homeTeam;
-    private Record currentRecord;
+    private RecordTeam awayRecordTeam, homeRecordTeam;
+    Record currentRecord;
     private View view_set_player;
     List<Player> player =DatabaseService.getInstance().getDatabase().getTeamMember();  //從資料庫抓playerlist
 
@@ -42,19 +39,19 @@ public class NewRecordActivity extends AppCompatActivity {
 
         Intent intent = this.getIntent();
         currentRecord = DatabaseService.getInstance().getDatabase().getRecord(intent.getIntExtra("recordPosition",0));
-        awayTeam = currentRecord.getAwayTeam();
-        homeTeam = currentRecord.getHomeTeam();
+        awayRecordTeam = currentRecord.getAwayTeam();
+        homeRecordTeam = currentRecord.getHomeTeam();
         isSetPlayer = intent.getBooleanExtra("isSetPlayer",false);
         text_gameName = findViewById(R.id.text_gameName);
         text_gameName.setText(currentRecord.getGameName());
 
 
         final ScrollablePanel scrollablePanel = findViewById(R.id.scrollable_panel);
-        final ScrollablePanelAdapter scrollablePanelAdapter = new ScrollablePanelAdapter();
+        final ScrollablePanelAdapter scrollablePanelAdapter = new ScrollablePanelAdapter(NewRecordActivity.this);
 
         final ScrollablePanel score_scrollable_panel = findViewById(R.id.score_scrollable_panel);
         final ScoreScrollablePanelAdapter score_scrollablePanelAdapter = new ScoreScrollablePanelAdapter(currentRecord);
-        generateTestData(scrollablePanelAdapter);
+//        generateTestData(scrollablePanelAdapter);
         scrollablePanel.setPanelAdapter(scrollablePanelAdapter);
         score_scrollable_panel.setPanelAdapter(score_scrollablePanelAdapter);
 
@@ -96,7 +93,7 @@ public class NewRecordActivity extends AppCompatActivity {
 
 
     //設定隊伍資料
-//    List<Team>  teamInfoList = new ArrayList<>();
+//    List<RecordTeam>  teamInfoList = new ArrayList<>();
     //設定球員資料
     List<Player>  playerInfoList = new ArrayList<>();
     //設定局數資料
@@ -108,41 +105,23 @@ public class NewRecordActivity extends AppCompatActivity {
     ///設定記分板資料
     List<List<ScoreBoardInfo>> scoreList = new ArrayList<>();
 
-    private void generateTestData(ScrollablePanelAdapter scrollablePanelAdapter) {
-
-        if(isSetPlayer == true) {
-            //拿資料庫球員資料
-            Toast.makeText(getApplicationContext(),"isSetPlayer", Toast.LENGTH_SHORT).show();
-        }
-
-        for (int i = 0; i < player.size(); i++) {    //從databese裡的list抓值
-            playerInfoList.add(player.get(i));
-        }
-
-        for (int i = player.size(); i < 9; i++) {   //剩下產生空格子
-            playerInfoList.add(new Player());
-        }
-        scrollablePanelAdapter.setNewRecordActivity(NewRecordActivity.this);
-        scrollablePanelAdapter.setPlayerInfoList(playerInfoList);
-
-        //設定局數
-        for (int i = 0; i < (9+1); i++) {
-            currentBoardNumInfoList.add(new BoardNumInfo(i));
-        }
-        scrollablePanelAdapter.setBoardNumInfoList(currentBoardNumInfoList);
-
-
-        for (int i = 0; i < 9; i++) {
-            List<OrderInfo> orderInfoList = new ArrayList<>();
-            for (int j = 0; j < 10; j++) {
-                OrderInfo orderInfo = new OrderInfo();
-                orderInfo.setGuestName("NO." + i + j);
-                orderInfoList.add(orderInfo);
-            }
-            ordersList.add(orderInfoList);
-        }
-        scrollablePanelAdapter.setOrdersList(ordersList);
-    }
+//    private void generateTestData(ScrollablePanelAdapter scrollablePanelAdapter) {
+//
+//        if(isSetPlayer == true) {
+//            //拿資料庫球員資料
+//            Toast.makeText(getApplicationContext(),"isSetPlayer", Toast.LENGTH_SHORT).show();
+//        }
+//
+//        for (int i = 0; i < player.size(); i++) {    //從databese裡的list抓值
+//            playerInfoList.add(player.get(i));
+//        }
+//
+//        for (int i = player.size(); i < 9; i++) {   //剩下產生空格子
+//            playerInfoList.add(new Player());
+//        }
+//        scrollablePanelAdapter.setNewRecordActivity(NewRecordActivity.this);
+//
+//    }
 }
 
 

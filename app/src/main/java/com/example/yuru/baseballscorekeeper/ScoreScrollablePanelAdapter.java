@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import com.baseball.BoardNumInfo;
 import com.baseball.Record;
-import com.baseball.ScoreBoardInfo;
-import com.baseball.Team;
+import com.baseball.RecordItem;
+import com.baseball.RecordTeam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ import java.util.List;
 
 public class ScoreScrollablePanelAdapter extends PanelAdapter {
 
-    private List<Team> team = new ArrayList<>();
+    private List<RecordTeam> recordTeam = new ArrayList<>();
     private List<BoardNumInfo> boardNumInfoList = new ArrayList<>();
     private Record record;
 
@@ -35,10 +35,12 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
         super();
         record = currentRecord;
         if (record != null){
-            team.clear();
-            team.add(record.getAwayTeam());
-            team.add(record.getHomeTeam());
+            recordTeam.clear();
+            recordTeam.add(record.getAwayTeam());
+            recordTeam.add(record.getHomeTeam());
         }
+        RecordItem recordItem = record.getAwayTeam().getRecordItems(0,0);
+        recordItem.setBASE_B_D_K_KR(true, RecordItem.BASE_B_D_K_KR.B);
 
         boardNumInfoList.clear();
         for (int i=0;i<9+2;i++){
@@ -48,7 +50,7 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
 
     @Override
     public int getRowCount() {
-        return team.size() + 1;
+        return recordTeam.size() + 1;
     }
 
     @Override
@@ -129,10 +131,10 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
 
     //隊伍
     public void setTeamInfoView(int pos, final TeamInfoViewHolder viewHolder) {
-        final Team teamInfo = team.get(pos - 1);
-        if (teamInfo != null && pos>0) {
+        final RecordTeam recordTeamInfo = recordTeam.get(pos - 1);
+        if (recordTeamInfo != null && pos>0) {
             //設定資料
-            viewHolder.text_teamName.setText(teamInfo.getTeamName());
+            viewHolder.text_teamName.setText(recordTeamInfo.getTeamName());
 
         }
     }
