@@ -45,6 +45,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     private int playerNum,playerPosition;
 
     Dialog basetwothree = new Dialog();
+    FirstBaseDialog firstBaseDialog = new FirstBaseDialog();
 
     final String[] center_choice = new String[]{"得分/出局", "安打","替換守備","替換打者","結束半局"};
     final String[] hits_choice = new String[]{"一壘安打", "二壘安打","三壘安打","全壘打"};
@@ -336,6 +337,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 @Override
                 public void onClick(View v) {
 
+                    firstBaseDialog.setNewRecordActivity(newRecordActivity);
+                    firstBaseDialog.setFirstBaseDialog();
                     Toast.makeText(v.getContext(), "一壘" , Toast.LENGTH_SHORT).show();
 
                 }
@@ -347,7 +350,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 public void onClick(View v) {
 
                     basetwothree.setNewRecordActivity(newRecordActivity);
-                    basetwothree.getTwoBaseDialog(new String[]{"推進","進壘",});
+                    basetwothree.getTwoBaseDialog(new String[]{"推進","進壘"});
                     Toast.makeText(v.getContext(), "二壘" , Toast.LENGTH_SHORT).show();
 
                 }
