@@ -11,6 +11,7 @@ import android.widget.ImageView;
 public class RecordItemFirstBase {
     private ImageView showZeroView,showHRView;
     private FrameLayout showOneView,showTwoView,showThreeView;
+    private ImageView showSacrificeFly,showSacrificeHits;
 
     public void setShowZeroView(ImageView showZeroView) {
         this.showZeroView = showZeroView;
@@ -57,4 +58,21 @@ public class RecordItemFirstBase {
             showHRView.setVisibility(isShow?View.VISIBLE:View.GONE);
     }
 
+    public void setShowSacrificeFly(ImageView showSacrificeFly) {
+        this.showSacrificeFly = showSacrificeFly;
+    }
+
+    public void setShowSacrificeFlyVisibility(boolean isShow) {
+        if (showSacrificeFly != null)
+            showSacrificeFly.setVisibility(isShow?View.VISIBLE:View.GONE);
+    }
+
+    public void setShowSacrificeHits(ImageView showSacrificeHits) {
+        this.showSacrificeHits = showSacrificeHits;
+    }
+
+    public void setShowSacrificeHitsVisibility(boolean isShow) {
+        if (showSacrificeHits != null)
+            showSacrificeHits.setVisibility(isShow?View.VISIBLE:View.GONE);
+    }
 }
