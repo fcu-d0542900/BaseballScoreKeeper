@@ -37,11 +37,16 @@ public class FirstBaseDialog {
     //犧牲觸擊
     private Spinner spinner_actionOne,spinner_actionTwo;
 
+    private int actionOne,actionTwo;
+
     //一般
     private RadioGroup radioGroup_type;
     private RadioButton radioButton_type_high,radioButton_type_line,radioButton_type_ground;
     private Spinner spinner_direction;
     private CheckBox checkBox_elseAc_FC,checkBox_elseAc_u,checkBox_elseAc_E,checkBox_elseAc_T;
+
+    private int select_typeID,select_direction;
+    private String select_type_str,select_elseAc;
 
 
     private String[] nums = {"1","2","3","4","5","6","7","8","9"};
@@ -146,8 +151,8 @@ public class FirstBaseDialog {
                                         scrifice_hits_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
-                                                int actionOne = (int) spinner_actionOne.getSelectedItemId();
-                                                int actionTwo = (int) spinner_actionTwo.getSelectedItemId();
+                                                actionOne = (int) spinner_actionOne.getSelectedItemId();
+                                                actionTwo = (int) spinner_actionTwo.getSelectedItemId();
                                                 Toast.makeText(newRecordActivity, "OK " + (actionOne+1) + "," + (actionTwo+1), Toast.LENGTH_SHORT).show();
                                             }
                                         });
@@ -176,53 +181,17 @@ public class FirstBaseDialog {
                                         adapter_position.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                         spinner_direction.setAdapter(adapter_position);
 
+                                        first_one_builder.setNeutralButton("NEXT", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                set_first_view_one();
+                                                set_first_view_two();
+                                            }
+                                        });
                                         first_one_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
-                                                int select_typeID = radioGroup_type.getCheckedRadioButtonId();
-                                                String select_type_str;
-                                                int select_direction = (int)spinner_direction.getSelectedItemId(); //TODO ahkui  存入資料庫， 顯示圖片 1~9
-                                                
-                                                String select_elseAc = "";
-
-                                                if(radioButton_type_high.getId() == select_typeID) {
-                                                    select_type_str = "高飛球";
-                                                    //TODO ahkui  存入資料庫， 顯示圖片高飛球  (R.drawable.fly_ball)
-
-                                                }
-                                                else if(radioButton_type_line.getId() == select_typeID) {
-                                                    select_type_str = "平飛球";
-                                                    //TODO ahkui  存入資料庫， 顯示圖片平飛球  (R.drawable.line_drive)
-
-                                                }
-                                                else if(radioButton_type_ground.getId() == select_typeID) {
-                                                    select_type_str = "滾地球";
-                                                    //TODO ahkui  存入資料庫， 顯示圖片滾地球  (R.drawable.ground_ball)
-
-                                                }
-                                                else {
-                                                    select_type_str = "未選擇";
-                                                }
-
-                                                if(checkBox_elseAc_FC.isChecked()) {
-                                                    select_elseAc = select_elseAc + "," + checkBox_elseAc_FC.getText().toString();
-                                                    //TODO ahkui  存入資料庫， 顯示圖片FC  (R.drawable.fielder_choice)
-
-                                                }
-                                                if(checkBox_elseAc_u.isChecked()) {
-                                                    select_elseAc = select_elseAc + "," + checkBox_elseAc_u.getText().toString();
-                                                    //TODO ahkui  存入資料庫， 顯示圖片u  (R.drawable.u)
-                                                }
-                                                if(checkBox_elseAc_E.isChecked()) {
-                                                    select_elseAc = select_elseAc + "," + checkBox_elseAc_E.getText().toString();
-                                                    //TODO ahkui  存入資料庫， 顯示圖片E  (R.drawable.error)
-                                                }
-                                                if(checkBox_elseAc_T.isChecked()) {
-                                                    select_elseAc = select_elseAc + "," + checkBox_elseAc_T.getText().toString();
-                                                    //TODO ahkui  存入資料庫， 顯示圖片T  (R.drawable.tag)
-                                                }
-
-                                                Toast.makeText(newRecordActivity, "OK "+select_type_str+","+(select_direction+1) +select_elseAc, Toast.LENGTH_SHORT).show();
+                                                set_first_view_one();
                                             }
                                         });
                                         first_one_builder.show();
@@ -285,6 +254,66 @@ public class FirstBaseDialog {
             }
         });
         builder.show();
+
+
+    }
+
+    public void set_first_view_one() {
+        select_typeID = radioGroup_type.getCheckedRadioButtonId();
+        select_direction = (int)spinner_direction.getSelectedItemId(); //TODO ahkui  存入資料庫， 顯示圖片 1~9
+        select_elseAc = "";
+
+        if(radioButton_type_high.getId() == select_typeID) {
+            select_type_str = "高飛球";
+            //TODO ahkui  存入資料庫， 顯示圖片高飛球  (R.drawable.fly_ball)
+        }
+        else if(radioButton_type_line.getId() == select_typeID) {
+            select_type_str = "平飛球";
+            //TODO ahkui  存入資料庫， 顯示圖片平飛球  (R.drawable.line_drive)
+        }
+        else if(radioButton_type_ground.getId() == select_typeID) {
+            select_type_str = "滾地球";
+            //TODO ahkui  存入資料庫， 顯示圖片滾地球  (R.drawable.ground_ball)
+        }
+        else {
+            select_type_str = "未選擇";
+        }
+
+        if(checkBox_elseAc_FC.isChecked()) {
+            select_elseAc = select_elseAc + "," + checkBox_elseAc_FC.getText().toString();
+            //TODO ahkui  存入資料庫， 顯示圖片FC  (R.drawable.fielder_choice)
+
+        }
+        if(checkBox_elseAc_u.isChecked()) {
+            select_elseAc = select_elseAc + "," + checkBox_elseAc_u.getText().toString();
+            //TODO ahkui  存入資料庫， 顯示圖片u  (R.drawable.u)
+        }
+        if(checkBox_elseAc_E.isChecked()) {
+            select_elseAc = select_elseAc + "," + checkBox_elseAc_E.getText().toString();
+            //TODO ahkui  存入資料庫， 顯示圖片E  (R.drawable.error)
+        }
+        if(checkBox_elseAc_T.isChecked()) {
+            select_elseAc = select_elseAc + "," + checkBox_elseAc_T.getText().toString();
+            //TODO ahkui  存入資料庫， 顯示圖片T  (R.drawable.tag)
+        }
+        Toast.makeText(newRecordActivity, "OK "+select_type_str+","+(select_direction+1) +select_elseAc, Toast.LENGTH_SHORT).show();
+    }
+
+    public void set_first_view_two() {
+        AlertDialog.Builder first_two_builder = new AlertDialog.Builder(newRecordActivity);
+        View view_first_two_dialog = LayoutInflater.from(newRecordActivity).inflate(R.layout.record_first_two, null);
+        view_first_two_dialog.setPadding(10,20,10,10);
+        first_two_builder.setView(view_first_two_dialog);
+
+
+        first_two_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(newRecordActivity, "OK ", Toast.LENGTH_SHORT).show();
+            }
+        });
+        first_two_builder.show();
+
     }
 
 }
