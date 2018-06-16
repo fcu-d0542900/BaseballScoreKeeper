@@ -65,6 +65,7 @@ public class FirstBaseDialog {
                             public void onClick(View v) {
                                 Toast.makeText(newRecordActivity, "保送", Toast.LENGTH_SHORT).show();
                                 unhit_dialog.dismiss();
+                                //TODO: ahkui 存入資料庫， 顯示圖片 B
                             }
                         });
                         view_unhit_dialog.findViewById(R.id.click_db).setOnClickListener(new View.OnClickListener() {
@@ -72,6 +73,7 @@ public class FirstBaseDialog {
                             public void onClick(View v) {
                                 Toast.makeText(newRecordActivity, "觸身", Toast.LENGTH_SHORT).show();
                                 unhit_dialog.dismiss();
+                                //TODO:ahkui 存入資料庫， 顯示圖片 D
                             }
                         });
                         view_unhit_dialog.findViewById(R.id.click_k).setOnClickListener(new View.OnClickListener() {
@@ -79,6 +81,7 @@ public class FirstBaseDialog {
                             public void onClick(View v) {
                                 Toast.makeText(newRecordActivity, "三振", Toast.LENGTH_SHORT).show();
                                 unhit_dialog.dismiss();
+                                //TODO:ahkui 存入資料庫， 顯示圖片 K
                             }
                         });
                         view_unhit_dialog.findViewById(R.id.click_nok).setOnClickListener(new View.OnClickListener() {
@@ -86,6 +89,7 @@ public class FirstBaseDialog {
                             public void onClick(View v) {
                                 Toast.makeText(newRecordActivity, "不死三振", Toast.LENGTH_SHORT).show();
                                 unhit_dialog.dismiss();
+                                //TODO:ahkui 存入資料庫， 顯示圖片 倒K
                             }
                         });
                         unhit_dialog.show();
