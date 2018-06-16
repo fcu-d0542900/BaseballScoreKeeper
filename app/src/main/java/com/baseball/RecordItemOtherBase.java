@@ -45,7 +45,7 @@ public class RecordItemOtherBase {
 
     public void setShowPushNumViewVisibility(boolean isShow) {
         if (showPushNumView != null)
-            showPushNumView.setVisibility(isShow? View.VISIBLE:View.GONE);
+            showPushNumView.setVisibility(isShow? View.VISIBLE:View.INVISIBLE);
     }
 
     public void setShowToBaseView(ImageView showToBaseView) {
@@ -54,7 +54,7 @@ public class RecordItemOtherBase {
 
     public void setShowToBaseViewVisibility(boolean isShow) {
         if (showToBaseView != null)
-            showToBaseView.setVisibility(isShow? View.VISIBLE:View.GONE);
+            showToBaseView.setVisibility(isShow? View.VISIBLE:View.INVISIBLE);
     }
 
 }

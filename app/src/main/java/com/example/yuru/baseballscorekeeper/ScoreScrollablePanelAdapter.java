@@ -41,7 +41,7 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
         }
 
         boardNumInfoList.clear();
-        for (int i=0;i<15+2;i++){
+        for (int i=0;i<9+2;i++){
             boardNumInfoList.add(new BoardNumInfo(i));
         }
     }
