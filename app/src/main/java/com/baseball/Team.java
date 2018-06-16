@@ -29,24 +29,19 @@ public class Team implements Serializable {
         }
     }
 
-    public RecordItem getRecordItems(int row,int round) {
-        RecordItem newItem = new RecordItem(teamMember.get(row),round);
-        if(round > this.currentRound){
-            return newItem;
-        }
-        int index = 0;
+    public RecordItem getRecordItems(int row,int column) {
         if(recordItems!=null)
             for (RecordItem item :
                     recordItems) {
-                if(row == index%9 && round==item.getRound())
+                if(row == item.row && column==item.column)
                     return item;
-                else if(round > this.currentRound){
-                    return newItem;
-                }
-                index ++;
+                else if(item.row >= row && column<item.column)
+                    break;
+
             }
-        return newItem;
+        return new RecordItem(teamMember.get(row),currentRound,row,column);
     }
+
     public int getCurrentRound() {
         return currentRound;
     }

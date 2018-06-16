@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 public class RecordItemOtherBase {
     private ImageView showActionNameView,showPushNumView,showToBaseView;
     private LinearLayout showActionView,showThrowView;
+    private ImageView showActionOneAcView,showActionTwoAcView;
 
     public void setShowActionNameView(ImageView showActionNameView) {
         this.showActionNameView = showActionNameView;
@@ -57,4 +58,21 @@ public class RecordItemOtherBase {
             showToBaseView.setVisibility(isShow? View.VISIBLE:View.INVISIBLE);
     }
 
+    public void setShowActionOneAcView(ImageView showActionOneAcView) {
+        this.showActionOneAcView = showActionOneAcView;
+    }
+
+    public void setShowwActionOneAcViewVisibility(boolean isShow) {
+        if (showActionOneAcView != null)
+            showActionOneAcView.setVisibility(isShow? View.VISIBLE:View.GONE);
+    }
+
+    public void setShowActionTwoAcView(ImageView showActionTwoAcView) {
+        this.showActionTwoAcView = showActionTwoAcView;
+    }
+
+    public void setShowActionTwoViewVisibility(boolean isShow) {
+        if (showActionTwoAcView != null)
+            showActionTwoAcView.setVisibility(isShow? View.VISIBLE:View.GONE);
+    }
 }
