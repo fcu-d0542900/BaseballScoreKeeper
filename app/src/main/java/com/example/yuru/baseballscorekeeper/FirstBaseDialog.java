@@ -4,8 +4,14 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.baseball.RecordItemFirstBase;
 
 import java.util.List;
 
@@ -16,9 +22,14 @@ import java.util.List;
 public class FirstBaseDialog {
 
     private NewRecordActivity newRecordActivity;
+    private RadioGroup radioGroup_sacrificeFly_type,radioGroup_sacrificeFly_direction;
+    private RadioButton radioButton_sacrificeFly_type_high,radioButton_sacrificeFly_type_line;
+
+/*
     private String[] nums = {"1","2","3","4","5","6","7","8","9"};
     private List<String> numList_left, numList_right;
     private Spinner spinner_left,spinner_right;
+*/
 
 
     public void setNewRecordActivity(NewRecordActivity newRecordActivity) {
@@ -26,6 +37,7 @@ public class FirstBaseDialog {
     }
 
     public void setFirstBaseDialog() {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(newRecordActivity);
         builder.setItems(new String[]{"擊出球","未擊出球"}, new DialogInterface.OnClickListener(){
             @Override
@@ -38,8 +50,30 @@ public class FirstBaseDialog {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 switch (i) {
                                     case 0:
-                                        //高犧
                                         Toast.makeText(newRecordActivity, "高飛犧牲打", Toast.LENGTH_SHORT).show();
+
+                                        AlertDialog.Builder scrifice_fly_builder = new AlertDialog.Builder(newRecordActivity);
+                                        final View view_scrifice_fly_dialog = LayoutInflater.from(newRecordActivity).inflate(R.layout.record_sacrifice_fly, null);
+                                        radioGroup_sacrificeFly_type = view_scrifice_fly_dialog.findViewById(R.id.radioGroup_sacrificeFly_type);
+                                        radioButton_sacrificeFly_type_high = view_scrifice_fly_dialog.findViewById(R.id.radioButton_sacrificeFly_high);
+                                        radioButton_sacrificeFly_type_line = view_scrifice_fly_dialog.findViewById(R.id.radioButton_sacrificeFly_line);
+                                        view_scrifice_fly_dialog.setPadding(10,10,10,10);
+                                        scrifice_fly_builder.setView(view_scrifice_fly_dialog);
+                                        scrifice_fly_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                int select_sacrificeFly_typeID = radioGroup_sacrificeFly_type.getCheckedRadioButtonId();
+                                                String select_sacrificeFly_type_str = null;
+                                                if(radioButton_sacrificeFly_type_high.getId() == select_sacrificeFly_typeID) {
+                                                    select_sacrificeFly_type_str = "高飛球";
+                                                }
+                                                else if(radioButton_sacrificeFly_type_line.getId() == select_sacrificeFly_typeID) {
+                                                    select_sacrificeFly_type_str = "平飛球";
+                                                }
+                                                Toast.makeText(newRecordActivity.getApplicationContext(), "OK"+select_sacrificeFly_type_str, Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                        scrifice_fly_builder.show();
                                         break;
                                     case 1:
                                         //觸犧
@@ -65,6 +99,8 @@ public class FirstBaseDialog {
                             public void onClick(View v) {
                                 Toast.makeText(newRecordActivity, "保送", Toast.LENGTH_SHORT).show();
                                 unhit_dialog.dismiss();
+                                RecordItemFirstBase recordItemFirstBase = new RecordItemFirstBase();
+                                recordItemFirstBase.setShowZeroViewVisibility(true);
                                 //TODO: ahkui 存入資料庫， 顯示圖片 B
                             }
                         });
@@ -73,6 +109,8 @@ public class FirstBaseDialog {
                             public void onClick(View v) {
                                 Toast.makeText(newRecordActivity, "觸身", Toast.LENGTH_SHORT).show();
                                 unhit_dialog.dismiss();
+                                RecordItemFirstBase recordItemFirstBase = new RecordItemFirstBase();
+                                recordItemFirstBase.setShowZeroViewVisibility(true);
                                 //TODO:ahkui 存入資料庫， 顯示圖片 D
                             }
                         });
@@ -81,6 +119,8 @@ public class FirstBaseDialog {
                             public void onClick(View v) {
                                 Toast.makeText(newRecordActivity, "三振", Toast.LENGTH_SHORT).show();
                                 unhit_dialog.dismiss();
+                                RecordItemFirstBase recordItemFirstBase = new RecordItemFirstBase();
+                                recordItemFirstBase.setShowZeroViewVisibility(true);
                                 //TODO:ahkui 存入資料庫， 顯示圖片 K
                             }
                         });
@@ -89,6 +129,8 @@ public class FirstBaseDialog {
                             public void onClick(View v) {
                                 Toast.makeText(newRecordActivity, "不死三振", Toast.LENGTH_SHORT).show();
                                 unhit_dialog.dismiss();
+                                RecordItemFirstBase recordItemFirstBase = new RecordItemFirstBase();
+                                recordItemFirstBase.setShowZeroViewVisibility(true);
                                 //TODO:ahkui 存入資料庫， 顯示圖片 倒K
                             }
                         });
