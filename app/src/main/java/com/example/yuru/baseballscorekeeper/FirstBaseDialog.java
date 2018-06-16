@@ -48,6 +48,11 @@ public class FirstBaseDialog {
     private int select_typeID,select_direction;
     private String select_type_str,select_elseAc;
 
+    //two
+    private Spinner spinner_two_direction;
+    private RadioGroup radioGroup_two_Ac;
+    private RadioButton radioButton_two_E,radioButton_two_T;
+
 
     private String[] nums = {"1","2","3","4","5","6","7","8","9"};
 
@@ -177,9 +182,9 @@ public class FirstBaseDialog {
                                         checkBox_elseAc_E = view_first_one_dialog.findViewById(R.id.checkBox_elseAc_E);
                                         checkBox_elseAc_T = view_first_one_dialog.findViewById(R.id.checkBox_elseAc_T);
 
-                                        ArrayAdapter adapter_position = new ArrayAdapter(first_one_builder.getContext(),android.R.layout.simple_spinner_item,nums);
-                                        adapter_position.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                        spinner_direction.setAdapter(adapter_position);
+                                        ArrayAdapter adapter_direction = new ArrayAdapter(first_one_builder.getContext(),android.R.layout.simple_spinner_item,nums);
+                                        adapter_direction.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                        spinner_direction.setAdapter(adapter_direction);
 
                                         first_one_builder.setNeutralButton("NEXT", new DialogInterface.OnClickListener() {
                                             @Override
@@ -305,11 +310,21 @@ public class FirstBaseDialog {
         view_first_two_dialog.setPadding(10,20,10,10);
         first_two_builder.setView(view_first_two_dialog);
 
+        spinner_two_direction = view_first_two_dialog.findViewById(R.id.spinner_two_direction);
+        radioGroup_two_Ac = view_first_two_dialog.findViewById(R.id.radioGroup_two_Ac);
+        radioButton_two_E = view_first_two_dialog.findViewById(R.id.radioButton_two_E);
+        radioButton_two_T = view_first_two_dialog.findViewById(R.id.radioButton_two_T);
+
+        ArrayAdapter adapter_direction_two = new ArrayAdapter(first_two_builder.getContext(),android.R.layout.simple_spinner_item,nums);
+        adapter_direction_two.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_two_direction.setAdapter(adapter_direction_two);
 
         first_two_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 Toast.makeText(newRecordActivity, "OK ", Toast.LENGTH_SHORT).show();
+
+
             }
         });
         first_two_builder.show();
