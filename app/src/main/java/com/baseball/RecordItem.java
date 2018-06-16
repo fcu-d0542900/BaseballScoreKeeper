@@ -8,20 +8,50 @@ public class RecordItem implements Serializable {
     private List<Player> defPlayer;
     private int round;
     private boolean score=false;
+    private boolean isShow_BASE_B_D_K_KR = false;
+    private BASE_B_D_K_KR base_step; // TODO change this variable name YURU ZENGLA, i am no idea...
 
-    private RecordItemCenter global;
-    private RecordItemFirstBase base;
-    private RecordItemOtherBase base1,base2,base3;
-
-    public void updateUI(RecordItemCenter global){
-
+    public void updateUI(RecordItemCenter center,RecordItemFirstBase base,RecordItemOtherBase base1,RecordItemOtherBase base2,RecordItemOtherBase base3){
+this .updateFirstBaseUI(base);
     }
-    public void updatebaseUI(Object base,int base_int){
-        if (base_int == 0){
-            RecordItemFirstBase base0 = (RecordItemFirstBase) base;
-            base0.setShowOneViewVisibility(false);
+
+    public void setBASE_B_D_K_KR(boolean state,BASE_B_D_K_KR value){
+        this.isShow_BASE_B_D_K_KR = state;
+        base_step = value;
+    }
+
+    public enum BASE_B_D_K_KR {
+        B,D,K,KR,_
+    }
+
+    public void updateFirstBaseUI(RecordItemFirstBase base){
+        // TODO update base ui with database
+        if(isShow_BASE_B_D_K_KR) {
+            base.setShowHRViewVisibility(false);
+            base.setShowZeroViewVisibility(false);
+            base.setShowOneViewVisibility(false);
+            base.setShowTwoViewVisibility(false);
+            base.setShowThreeViewVisibility(false);
+            switch (base_step) {
+                case B:
+                    base.setShowThreeViewVisibility(true);
+                    break;
+                case D:
+                    break;
+                case K:
+                    break;
+                case KR:
+                    break;
+            }
         }
     }
+
+    public void updateOtherBaseUI(RecordItemOtherBase base,int base_int){
+        if (base_int == 0){
+            // TODO update base1 ui with database
+        }
+    }
+
     RecordItem(Player player,int round){
         this.attPlayer = player;
         this.round = round;
@@ -36,7 +66,8 @@ public class RecordItem implements Serializable {
     public boolean changeAttPlayer(Player player){
         if(player.getId() == attPlayer.getId())
             return false;
-        attPlayer = player;        DatabaseService.getInstance().write();
+        attPlayer = player;
+        DatabaseService.getInstance().write();
 
         return true;
     }
@@ -46,7 +77,8 @@ public class RecordItem implements Serializable {
     }
 
     public void toggleScore(){
-        score = !score;        DatabaseService.getInstance().write();
+        score = !score;
+        DatabaseService.getInstance().write();
 
     }
 
