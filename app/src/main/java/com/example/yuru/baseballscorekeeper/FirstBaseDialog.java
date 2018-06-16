@@ -114,8 +114,9 @@ public class FirstBaseDialog {
                                         scrifice_fly_builder.show();
                                         break;
                                     case 1:
-                                        //觸犧
                                         Toast.makeText(newRecordActivity, "觸擊犧牲打", Toast.LENGTH_SHORT).show();
+
+
                                         break;
                                     case 2:
                                         //一般
@@ -147,7 +148,6 @@ public class FirstBaseDialog {
                             public void onClick(View v) {
                                 Toast.makeText(newRecordActivity, "觸身", Toast.LENGTH_SHORT).show();
                                 unhit_dialog.dismiss();
-                                RecordItemFirstBase recordItemFirstBase = new RecordItemFirstBase();
                                 recordItemFirstBase.setShowZeroViewVisibility(true);
                                 //TODO:ahkui 存入資料庫， 顯示圖片 D  (R.drawable.hit_by_pitch)
 
@@ -158,7 +158,6 @@ public class FirstBaseDialog {
                             public void onClick(View v) {
                                 Toast.makeText(newRecordActivity, "三振", Toast.LENGTH_SHORT).show();
                                 unhit_dialog.dismiss();
-                                RecordItemFirstBase recordItemFirstBase = new RecordItemFirstBase();
                                 recordItemFirstBase.setShowZeroViewVisibility(true);
                                 //TODO:ahkui 存入資料庫， 顯示圖片 K  (R.drawable.killed)
                             }
