@@ -39,19 +39,16 @@ public class DatabaseService {
 
     private void read(){
         ObjectInputStream input;
-        boolean exist = true;
         try {
             input = new ObjectInputStream(context.openFileInput(filename));
             Log.d("database","file read success "+ input.readLine());
             database = (Database) input.readObject();
             input.close();
-            exist = false;
             Log.d("database","databse read success "+ database.toString());
         } catch (IOException | ClassNotFoundException e) {
+            database = new Database();
             e.printStackTrace();
         }
-        if(exist)
-            database = new Database();
     }
 
     public void write(){

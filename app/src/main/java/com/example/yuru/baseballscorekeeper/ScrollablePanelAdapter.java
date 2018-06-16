@@ -33,10 +33,6 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     private NewRecordActivity newRecordActivity ;
 
-    private List<Player> item_player;
-
-    private List<BoardNumInfo> boardNumInfoList;
-
     private List<List<OrderInfo>> ordersList = new ArrayList<>();
 
     private EditText editText_playerName,editText_playerNum;
@@ -47,7 +43,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     private String playerName;
     private int playerNum,playerPosition;
 
-    private Dialog basetwothree = new Dialog();
+    private Dialog baseOther = new Dialog();
     private BaseFirstDialog baseFirstDialog = new BaseFirstDialog();
 
     final String[] center_choice = new String[]{"得分/出局", "安打","替換守備","替換打者","結束半局"};
@@ -62,12 +58,11 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     public ScrollablePanelAdapter(NewRecordActivity newRecordActivity) {
         super();
         this.setNewRecordActivity(newRecordActivity);
-        item_player = newRecordActivity.player;
     }
 
     @Override
     public int getRowCount() {
-        return item_player.size() + 1;
+        return newRecordActivity.currentRecord.getTeam().getTeamMember().size() + 1;
     }
 
     @Override
@@ -135,7 +130,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     private void setBoardNumView(int pos, BoardNumViewHolder viewHolder) {
-        BoardNumInfo boardNumInfo = boardNumInfoList.get(pos - 1);
+        BoardNumInfo boardNumInfo = newRecordActivity.currentRecord.getTeam()..get(pos - 1);
         if (boardNumInfo != null && pos > 0) {
             viewHolder.dateTextView.setText(boardNumInfo.getBroadNum_symbol());
         }
@@ -143,7 +138,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     @SuppressLint("SetTextI18n")
     private void setPlayerInfoView(int pos, final PlayerInfoViewHolder viewHolder) {
-        final Player playerInfo = item_player.get(pos - 1);
+        final Player playerInfo = newRecordActivity.currentRecord.getTeam().getTeamMember().get(pos - 1);
         viewHolder.text_batOrder.setText(Integer.valueOf(pos).toString());
 
 
@@ -349,7 +344,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 public void onClick(View v) {
 
                     baseFirstDialog.setNewRecordActivity(newRecordActivity);
-                    baseFirstDialog.setBaseFirstDialog(viewHolder);
+                    baseFirstDialog.setBaseHomeDialog(viewHolder);
                     Toast.makeText(v.getContext(), "一壘" , Toast.LENGTH_SHORT).show();
 
                 }
@@ -360,8 +355,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 @Override
                 public void onClick(View v) {
 
-                    basetwothree.setNewRecordActivity(newRecordActivity);
-                    basetwothree.setTwoBaseDialog(viewHolder,new String[]{"推進","進壘"});
+                    baseOther.setNewRecordActivity(newRecordActivity);
+                    baseOther.setBaseTwoDialog(viewHolder,new String[]{"推進","進壘"});
                     Toast.makeText(v.getContext(), "二壘" , Toast.LENGTH_SHORT).show();
 
                 }

@@ -27,7 +27,7 @@ public class Dialog {
     private Spinner spinner_left,spinner_right,spinner_left_e,spinner_right_e;
     int pos_left,pos_right,pos_push,pos_erroe_l;
 
-    public void setTwoBaseDialog(ScrollablePanelAdapter.OrderViewHolder viewHolder, final String[] items) {
+    public void setBaseTwoDialog(ScrollablePanelAdapter.OrderViewHolder viewHolder, final String[] items) {
         AlertDialog.Builder builder = new AlertDialog.Builder(newRecordActivity);
 
         numList_left = new ArrayList<String>();
