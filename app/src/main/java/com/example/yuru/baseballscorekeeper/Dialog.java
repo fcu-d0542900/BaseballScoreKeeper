@@ -25,7 +25,7 @@ public class Dialog {
     private String[] push = {"(1)","(2)","(3)","(4)","(5)","(6)","(7)","(8)","(9)"};
     private List<String>  numList_left, numList_right;
     private Spinner spinner_left,spinner_right,spinner_left_e,spinner_right_e;
-    int pos_left,pos_right,pos_push,pos_erroe_l,pos_erroe_r;
+    int pos_left,pos_right,pos_push,pos_erroe_l;
 
     public void getTwoBaseDialog(final String[] items) {
         AlertDialog.Builder builder = new AlertDialog.Builder(newRecordActivity);
