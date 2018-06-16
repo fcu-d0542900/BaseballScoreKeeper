@@ -6,8 +6,8 @@ import java.util.List;
 public class RecordItem implements Serializable {
     // metric infomation
     private int round;
-    private int row;
-    private int column;
+    int row;
+    int column;
 
     // user infomation
     private Player attPlayer;
