@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.baseball.Record;
+import com.baseball.RecordItem;
 import com.baseball.RecordItemOtherBase;
 
 import java.util.ArrayList;
@@ -27,22 +29,11 @@ public class Dialog {
     private String[] nums = {"1","2","3","4","5","6","7","8","9"};
     private String[] isError={"","E"};
     private String[] push = {"(1)","(2)","(3)","(4)","(5)","(6)","(7)","(8)","(9)"};
-    private List<String>  numList_left, numList_right;
     private Spinner spinner_left,spinner_right,spinner_left_e,spinner_right_e;
-    int pos_left,pos_right;
 
     public void getTwoBaseDialog(final String[] items) {
         AlertDialog.Builder builder = new AlertDialog.Builder(newRecordActivity);
         recordItemOtherBase= new RecordItemOtherBase();
-
-        numList_left = new ArrayList<String>();
-        numList_right = new ArrayList<String>();
-
-        for(int i = 0;i < nums.length;i++)
-        {
-            numList_left.add(nums[i]);
-            numList_right.add(nums[i]);
-        }
 
         //設定對話框內的項目
         builder.setItems(items, new DialogInterface.OnClickListener(){
@@ -223,24 +214,55 @@ public class Dialog {
                                                         dialog_throw.setView(view_throwTo);
                                                         spinner_left = view_throwTo.findViewById(R.id.spinner_left);
                                                         spinner_right=view_throwTo.findViewById(R.id.spinner_right);
-                                                        ArrayAdapter throw_left = new ArrayAdapter(dialog_throw.getContext(),android.R.layout.simple_spinner_item,numList_left);
-                                                        ArrayAdapter throw_right = new ArrayAdapter(dialog_throw.getContext(),android.R.layout.simple_spinner_item,numList_right);
+                                                        ArrayAdapter throw_left = new ArrayAdapter(dialog_throw.getContext(),android.R.layout.simple_spinner_item,nums);
+                                                        ArrayAdapter throw_right = new ArrayAdapter(dialog_throw.getContext(),android.R.layout.simple_spinner_item,nums);
                                                         throw_left.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                                         throw_right.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                                         spinner_left.setAdapter(throw_left);
                                                         spinner_right.setAdapter(throw_left);
                                                         dialog_throw.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                             public void onClick(DialogInterface dialogInterface, int i) {
-                                                                Toast.makeText(newRecordActivity,""+pos_left+pos_right,Toast.LENGTH_SHORT).show();
+
                                                             }
                                                         });
 
+                                                        //左選單
                                                         spinner_left.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                                             @Override
                                                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                                                 if(view!=null)
                                                                 {
-                                                                    pos_left=position+1;
+                                                                    switch (position){
+                                                                        case 0:
+                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw1)
+                                                                            break;
+                                                                        case 1:
+                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw2)
+                                                                            break;
+                                                                        case 2:
+                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw3)
+                                                                            break;
+                                                                        case 3:
+                                                                            //TODO: ahkui 存入資料庫，顯示棒次   (R.drawable.throw4)
+                                                                            break;
+                                                                        case 4:
+                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw5)
+                                                                            break;
+                                                                        case 5:
+                                                                            //TODO: ahkui 存入資料庫，顯示棒次   (R.drawable.throw6)
+                                                                            break;
+                                                                        case 6:
+                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw7)
+                                                                            break;
+                                                                        case 7:
+                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw8)
+                                                                            break;
+                                                                        case 8:
+                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw9)
+                                                                            break;
+                                                                        default:
+                                                                            break;
+                                                                    }
                                                                 }
                                                             }
                                                             @Override
@@ -248,12 +270,43 @@ public class Dialog {
                                                             }
                                                         });
 
+                                                        //右選單
                                                         spinner_right.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                                             @Override
                                                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                                                 if(view!=null)
                                                                 {
-                                                                    pos_right=position+1;
+                                                                    switch (position){
+                                                                        case 0:
+                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw1)
+                                                                            break;
+                                                                        case 1:
+                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw2)
+                                                                            break;
+                                                                        case 2:
+                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw3)
+                                                                            break;
+                                                                        case 3:
+                                                                            //TODO: ahkui 存入資料庫，顯示棒次   (R.drawable.throw4)
+                                                                            break;
+                                                                        case 4:
+                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw5)
+                                                                            break;
+                                                                        case 5:
+                                                                            //TODO: ahkui 存入資料庫，顯示棒次   (R.drawable.throw6)
+                                                                            break;
+                                                                        case 6:
+                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw7)
+                                                                            break;
+                                                                        case 7:
+                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw8)
+                                                                            break;
+                                                                        case 8:
+                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw9)
+                                                                            break;
+                                                                        default:
+                                                                            break;
+                                                                    }
                                                                 }
                                                             }
                                                             @Override
@@ -319,31 +372,31 @@ public class Dialog {
                 {
                     switch (position){
                         case 0:
-                            recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw1)
+                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw1)
                             break;
                         case 1:
-                            recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw2)
+                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw2)
                             break;
                         case 2:
-                            recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw3)
+                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw3)
                             break;
                         case 3:
-                            recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫，顯示棒次   (R.drawable.throw4)
+                            //TODO: ahkui 存入資料庫，顯示棒次   (R.drawable.throw4)
                             break;
                         case 4:
-                            recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw5)
+                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw5)
                             break;
                         case 5:
-                            recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫，顯示棒次   (R.drawable.throw6)
+                            //TODO: ahkui 存入資料庫，顯示棒次   (R.drawable.throw6)
                             break;
                         case 6:
-                            recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw7)
+                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw7)
                             break;
                         case 7:
-                            recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw8)
+                             //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw8)
                             break;
                         case 8:
-                            recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw9)
+                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw9)
                             break;
                         default:
                             break;
@@ -365,7 +418,9 @@ public class Dialog {
                         case 0:   //無失誤
                             break;
                         case 1:   //有失誤
+                            recordItemOtherBase.setShowActionOneAcViewVisibility(true);
                             //TODO: ahkui 存入資料庫， 左框顯示E   (R.drawable.error)
+
                             break;
                         default:
                             break;
@@ -385,31 +440,31 @@ public class Dialog {
                 {
                     switch (position){
                         case 0:
-                            recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw1)
+                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw1)
                             break;
                         case 1:
-                            recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw2)
+                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw2)
                             break;
                         case 2:
-                            recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw3)
+                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw3)
                             break;
                         case 3:
-                            recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫，顯示棒次   (R.drawable.throw4)
+                            //TODO: ahkui 存入資料庫，顯示棒次   (R.drawable.throw4)
                             break;
                         case 4:
-                            recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw5)
+                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw5)
                             break;
                         case 5:
-                            recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫，顯示棒次   (R.drawable.throw6)
+                            //TODO: ahkui 存入資料庫，顯示棒次   (R.drawable.throw6)
                             break;
                         case 6:
-                            recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw7)
+                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw7)
                             break;
                         case 7:
-                            recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw8)
+                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw8)
                             break;
                         case 8:
-                            recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw9)
+                           //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw9)
                             break;
                         default:
                             break;
@@ -434,6 +489,7 @@ public class Dialog {
                         case 0:   //無失誤
                             break;
                         case 1:   //有失誤
+                            recordItemOtherBase.setShowActionTwoViewVisibility(true);
                             //TODO: ahkui 存入資料庫， 右框顯示E   (R.drawable.error)
                             break;
                         default:
