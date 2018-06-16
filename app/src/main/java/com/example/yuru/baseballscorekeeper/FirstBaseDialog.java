@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -11,6 +12,8 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.baseball.DatabaseService;
+import com.baseball.Player;
 import com.baseball.RecordItemFirstBase;
 
 import java.util.List;
@@ -28,11 +31,11 @@ public class FirstBaseDialog {
     private RadioButton radioButton_sacrificeFly_type_high,radioButton_sacrificeFly_type_line;
     private RadioButton radioButton_sacrificeFly_direction_7,radioButton_sacrificeFly_direction_8,radioButton_sacrificeFly_direction_9;
 
-/*
+    private Spinner spinner_actionOne,spinner_actionTwo;
+
+
     private String[] nums = {"1","2","3","4","5","6","7","8","9"};
-    private List<String> numList_left, numList_right;
-    private Spinner spinner_left,spinner_right;
-*/
+
 
 
     public void setNewRecordActivity(NewRecordActivity newRecordActivity) {
@@ -49,7 +52,7 @@ public class FirstBaseDialog {
                 switch (which) {
                     case 0:
                         AlertDialog.Builder hit_builder = new AlertDialog.Builder(newRecordActivity);
-                        hit_builder.setItems(new String[]{"高飛犧牲打", "觸及犧牲打", "其他"}, new DialogInterface.OnClickListener() {
+                        hit_builder.setItems(new String[]{"高飛犧牲打", "觸擊犧牲打", "其他"}, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 switch (i) {
@@ -57,7 +60,7 @@ public class FirstBaseDialog {
                                         Toast.makeText(newRecordActivity, "高飛犧牲打", Toast.LENGTH_SHORT).show();
 
                                         AlertDialog.Builder scrifice_fly_builder = new AlertDialog.Builder(newRecordActivity);
-                                        final View view_scrifice_fly_dialog = LayoutInflater.from(newRecordActivity).inflate(R.layout.record_sacrifice_fly, null);
+                                        View view_scrifice_fly_dialog = LayoutInflater.from(newRecordActivity).inflate(R.layout.record_sacrifice_fly, null);
                                         radioGroup_sacrificeFly_type = view_scrifice_fly_dialog.findViewById(R.id.radioGroup_sacrificeFly_type);
                                         radioButton_sacrificeFly_type_high = view_scrifice_fly_dialog.findViewById(R.id.radioButton_sacrificeFly_high);
                                         radioButton_sacrificeFly_type_line = view_scrifice_fly_dialog.findViewById(R.id.radioButton_sacrificeFly_line);
@@ -116,6 +119,29 @@ public class FirstBaseDialog {
                                     case 1:
                                         Toast.makeText(newRecordActivity, "觸擊犧牲打", Toast.LENGTH_SHORT).show();
 
+                                        AlertDialog.Builder scrifice_hits_builder = new AlertDialog.Builder(newRecordActivity);
+                                        View view_scrifice_hits_dialog = LayoutInflater.from(newRecordActivity).inflate(R.layout.record_sacrifice_hiits, null);
+                                        spinner_actionOne = view_scrifice_hits_dialog.findViewById(R.id.spinner_actionOne);
+                                        spinner_actionTwo = view_scrifice_hits_dialog.findViewById(R.id.spinner_actionTwo);
+
+                                        view_scrifice_hits_dialog.setPadding(10,20,10,10);
+                                        scrifice_hits_builder.setView(view_scrifice_hits_dialog);
+                                        ArrayAdapter adapter_actionOne = new ArrayAdapter(scrifice_hits_builder.getContext(),android.R.layout.simple_spinner_item,nums);
+                                        ArrayAdapter adapter_actionTwo = new ArrayAdapter(scrifice_hits_builder.getContext(),android.R.layout.simple_spinner_item,nums);
+                                        adapter_actionOne.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                        adapter_actionTwo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                        spinner_actionOne.setAdapter(adapter_actionOne);
+                                        spinner_actionTwo.setAdapter(adapter_actionTwo);
+
+                                        scrifice_hits_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                int actionOne = (int) spinner_actionOne.getSelectedItemId();
+                                                int actionTwo = (int) spinner_actionTwo.getSelectedItemId();
+                                                Toast.makeText(newRecordActivity, "OK " + (actionOne+1) + "," + (actionTwo+1), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                        scrifice_hits_builder.show();
 
                                         break;
                                     case 2:
