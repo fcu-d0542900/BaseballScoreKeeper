@@ -516,9 +516,9 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             base1.setShowTwoView(getFirstViewTwo);
             base1.setShowThreeView(getFirstViewThree);
             base1.setShowHRView(getFirstViewHR);
-            base1.setFirstViewOneTop(getFirstViewOneTop);
+            base1.setShowFirstViewOneTop(getFirstViewOneTop);
             base1.setFirstViewOneNum(getFirstViewOneNum);
-            base1.setFirstViewOneBottom(getFirstViewOneBottom);
+            base1.setShowFirstViewOneBottom(getFirstViewOneBottom);
             base1.setShowFirstViewOneAc1(getFirstViewOneAc1);
             base1.setShowFirstViewOneAc2(getFirstViewOneAc2);
             base1.setFirstViewTwoNum(getFirstViewTwoNum);

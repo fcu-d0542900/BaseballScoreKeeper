@@ -83,13 +83,14 @@ public class RecordItem implements Serializable {
         switch (_BASE_FIRST_STEP_ONE){
             case HIGH:
                 base.setShowSacrificeFlyVisibility(true);
+                base.setShowFirstViewOneTopVisibility(true);
                 base.setShowOneViewVisibility(true);
                 switch (ballType){
                     case HIGH:
-                        base.setFirstViewOneTopValue(R.drawable.fly_ball);
+                        base.setShowFirstViewOneTopValue(R.drawable.fly_ball);
                         break;
                     case FLAT:
-                        base.setFirstViewOneTopValue(R.drawable.line_drive);
+                        base.setShowFirstViewOneTopValue(R.drawable.line_drive);
                         break;
                     case __:
                         base.setShowOneViewVisibility(false);

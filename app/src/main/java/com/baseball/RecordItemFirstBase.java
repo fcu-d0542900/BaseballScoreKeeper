@@ -13,7 +13,7 @@ public class RecordItemFirstBase {
     private FrameLayout showOneView,showTwoView,showThreeView;
     private ImageView showSacrificeFly,showSacrificeHits;
 
-    public ImageView firstViewOneTop,firstViewOneNum,firstViewOneBottom;
+    public ImageView showFirstViewOneTop,firstViewOneNum,showFirstViewOneBottom;
     public ImageView showFirstViewOneAc1,showFirstViewOneAc2;
 
     public ImageView firstViewTwoNum,showFirstViewTwoAc;
@@ -94,13 +94,18 @@ public class RecordItemFirstBase {
     }
 
 
-    //FirstViewOneTop
-    public void setFirstViewOneTop(ImageView firstViewOneTop) {
-        this.firstViewOneTop = firstViewOneTop;
+    //showFirstViewOneTop
+    public void setShowFirstViewOneTop(ImageView firstViewOneTop) {
+        this.showFirstViewOneTop = firstViewOneTop;
     }
 
-    public  void setFirstViewOneTopValue(int imageID) {
-        firstViewOneTop.setImageResource(imageID);
+    public  void setShowFirstViewOneTopValue(int imageID) {
+        showFirstViewOneTop.setImageResource(imageID);
+    }
+
+    public void setShowFirstViewOneTopVisibility(boolean isShow) {
+        if (showFirstViewOneTop != null)
+            showFirstViewOneTop.setVisibility(isShow?View.VISIBLE:View.GONE);
     }
 
     //FirstViewOneNum
@@ -112,13 +117,18 @@ public class RecordItemFirstBase {
         firstViewOneNum.setImageResource(imageID);
     }
 
-    //FirstViewOneBottom
-    public void setFirstViewOneBottom(ImageView firstViewOneBottom) {
-        this.firstViewOneBottom = firstViewOneBottom;
+    //showFirstViewOneBottom
+    public void setShowFirstViewOneBottom(ImageView firstViewOneBottom) {
+        this.showFirstViewOneBottom = firstViewOneBottom;
     }
 
-    public  void setFirstViewOneBottomValue(int imageID) {
-        firstViewOneBottom.setImageResource(imageID);
+    public  void setShowFirstViewOneBottomValue(int imageID) {
+        showFirstViewOneBottom.setImageResource(imageID);
+    }
+
+    public void setShowFirstViewOneBottomVisibility(boolean isShow) {
+        if (showFirstViewOneBottom != null)
+            showFirstViewOneBottom.setVisibility(isShow?View.VISIBLE:View.GONE);
     }
 
     //FirstViewOneAc1
