@@ -1,5 +1,7 @@
 package com.baseball;
 
+import com.example.yuru.baseballscorekeeper.R;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -15,10 +17,6 @@ public class RecordItem implements Serializable {
     private List<Player> defPlayer;
     private boolean score=false;
 
-    // ui information
-    private boolean isShow_BASE_B_D_K_KR = false;
-    private BASE_B_D_K_KR base_step; // TODO change this variable name YURU ZENGLA, i am no idea...
-
     public void updateUI(RecordItemCenter center,RecordItemFirstBase base,RecordItemOtherBase base1,RecordItemOtherBase base2,RecordItemOtherBase base3){
         this.updateFirstBaseUI(base);
         this.updateOtherBaseUI(base1,1);
@@ -26,34 +24,111 @@ public class RecordItem implements Serializable {
         this.updateOtherBaseUI(base3,3);
     }
 
-    public void setBASE_B_D_K_KR(boolean state,BASE_B_D_K_KR value){
-        this.isShow_BASE_B_D_K_KR = state;
-        base_step = value;
+    BASE_FIRST_STEP_ONE _BASE_FIRST_STEP_ONE = BASE_FIRST_STEP_ONE.__;
+    BALL_TYPE ballType = BALL_TYPE.__;
+    BALL_DIRECTION ballDirection = BALL_DIRECTION.__;
+    public void set_BASE_FIRST_STEP_ONE(BASE_FIRST_STEP_ONE _BASE_FIRST_STEP_ONE) {
+        this._BASE_FIRST_STEP_ONE = _BASE_FIRST_STEP_ONE;
+        save();
     }
 
-    public enum BASE_B_D_K_KR {
-        B,D,K,KR,__
+    public enum BASE_FIRST_STEP_ONE{
+        HIGH,// 高飛犧牲
+        TOUCH,//觸及犧牲
+        NORMAL,//一般
+        BADBALL, //保送
+        HITBYPITCH, //觸身球
+        KILLED, //三鎮
+        NOKILLED, //不死三陣
+        __
+    }
+
+    public enum BALL_TYPE {
+        HIGH, // 高飛球
+        FLAT, // 平飛球
+        FLOOR, // 滾地球
+        __
+    }
+
+    public enum BALL_DIRECTION{
+        LEFT,//左
+        MIDDLE,//中
+        RIGHT,//右
+        __
+        }
+
+    public void setBallDirection(BALL_DIRECTION ball_direction) {
+        this.ballDirection = ball_direction;
+        save();
+    }
+
+    public void setBallType(BALL_TYPE ballType) {
+        this.ballType = ballType;
+        save();
     }
 
     public void updateFirstBaseUI(RecordItemFirstBase base){
         // TODO update base ui with database
-        if(isShow_BASE_B_D_K_KR) {
-            base.setShowHRViewVisibility(false);
-            base.setShowZeroViewVisibility(false);
-            base.setShowOneViewVisibility(false);
-            base.setShowTwoViewVisibility(false);
-            base.setShowThreeViewVisibility(false);
-            switch (base_step) {
-                case B:
-                    base.setShowThreeViewVisibility(true);
-                    break;
-                case D:
-                    break;
-                case K:
-                    break;
-                case KR:
-                    break;
-            }
+        base.setShowSacrificeFlyVisibility(false);
+        base.setShowOneViewVisibility(false);
+        base.setShowHRViewVisibility(false);
+        base.setShowSacrificeHitsVisibility(false);
+        base.setShowThreeViewVisibility(false);
+        base.setShowTwoViewVisibility(false);
+        base.setShowZeroViewVisibility(false);
+        base.setShowFirstViewThreeAcVisibility(false);
+        base.setShowFirstViewTwoAcVisibility(false);
+        base.setShowFirstViewOneAc1Visibility(false);
+        base.setShowFirstViewOneAc2Visibility(false);
+        switch (_BASE_FIRST_STEP_ONE){
+            case HIGH:
+                base.setShowSacrificeFlyVisibility(true);
+                base.setShowOneViewVisibility(true);
+                switch (ballType){
+                    case HIGH:
+                        base.setFirstViewOneTopValue(R.drawable.fly_ball);
+                        break;
+                    case FLAT:
+                        base.setFirstViewOneTopValue(R.drawable.line_drive);
+                        break;
+                    case __:
+                        base.setShowOneViewVisibility(false);
+                }
+                switch (ballDirection){
+                    case LEFT:
+                        base.setFirstViewOneNumValue(R.drawable.throw7);
+                        break;
+                    case MIDDLE:
+                        base.setFirstViewOneNumValue(R.drawable.throw8);
+                        break;
+                    case RIGHT:
+                        base.setFirstViewOneNumValue(R.drawable.throw9);
+                        break;
+                }
+                break;
+            case TOUCH:
+            case NORMAL:
+                break;
+            case BADBALL:
+            case HITBYPITCH:
+            case KILLED:
+            case NOKILLED:
+                base.setShowZeroViewVisibility(true);
+                switch (_BASE_FIRST_STEP_ONE){
+                    case BADBALL:
+                        base.setShowZeroValue(R.drawable.throw_b);
+                        break;
+                    case HITBYPITCH:
+                        base.setShowZeroValue(R.drawable.hit_by_pitch);
+                        break;
+                    case KILLED:
+                        base.setShowZeroValue(R.drawable.killed);
+                        break;
+                    case NOKILLED:
+                        base.setShowZeroValue(R.drawable.no_killed);
+                        break;
+                }
+                break;
         }
     }
 

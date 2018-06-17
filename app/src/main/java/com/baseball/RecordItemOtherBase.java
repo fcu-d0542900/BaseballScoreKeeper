@@ -12,9 +12,17 @@ public class RecordItemOtherBase {
     private ImageView showActionNameView,showPushNumView,showToBaseView;
     private LinearLayout showActionView,showThrowView;
     private ImageView showActionOneAcView,showActionTwoAcView;
+    private ImageView actionOneNum,actionTwoNum;
+    public ImageView throwOne,throwTwo;
 
+
+    //ShowActionName
     public void setShowActionNameView(ImageView showActionNameView) {
         this.showActionNameView = showActionNameView;
+    }
+
+    public  void setShowActionNameValue(int imageID) {
+        showActionNameView.setImageResource(imageID);
     }
 
     public void setShowActionNameViewVisibility(boolean isShow) {
@@ -22,6 +30,7 @@ public class RecordItemOtherBase {
             showActionNameView.setVisibility(isShow? View.VISIBLE:View.GONE);
     }
 
+    //ShowAction
     public void setShowActionView(LinearLayout showActionView) {
         this.showActionView = showActionView;
     }
@@ -31,6 +40,7 @@ public class RecordItemOtherBase {
             showActionView.setVisibility(isShow? View.VISIBLE:View.GONE);
     }
 
+    //ShowThrow
     public void setShowThrowView(LinearLayout showThrowView) {
         this.showThrowView = showThrowView;
     }
@@ -40,8 +50,13 @@ public class RecordItemOtherBase {
             showThrowView.setVisibility(isShow? View.VISIBLE:View.GONE);
     }
 
+    //ShowPushNum
     public void setShowPushNumView(ImageView showPushNumView) {
         this.showPushNumView = showPushNumView;
+    }
+
+    public  void setShowPushNumValue(int imageID) {
+        showPushNumView.setImageResource(imageID);
     }
 
     public void setShowPushNumViewVisibility(boolean isShow) {
@@ -49,6 +64,7 @@ public class RecordItemOtherBase {
             showPushNumView.setVisibility(isShow? View.VISIBLE:View.INVISIBLE);
     }
 
+    //ShowToBase
     public void setShowToBaseView(ImageView showToBaseView) {
         this.showToBaseView = showToBaseView;
     }
@@ -58,6 +74,7 @@ public class RecordItemOtherBase {
             showToBaseView.setVisibility(isShow? View.VISIBLE:View.INVISIBLE);
     }
 
+    //ShowActionOneAc
     public void setShowActionOneAcView(ImageView showActionOneAcView) {
         this.showActionOneAcView = showActionOneAcView;
     }
@@ -67,6 +84,7 @@ public class RecordItemOtherBase {
             showActionOneAcView.setVisibility(isShow? View.VISIBLE:View.GONE);
     }
 
+    //ShowActionTwoAc
     public void setShowActionTwoAcView(ImageView showActionTwoAcView) {
         this.showActionTwoAcView = showActionTwoAcView;
     }
@@ -74,5 +92,41 @@ public class RecordItemOtherBase {
     public void setShowActionTwoViewVisibility(boolean isShow) {
         if (showActionTwoAcView != null)
             showActionTwoAcView.setVisibility(isShow? View.VISIBLE:View.GONE);
+    }
+
+    //ActionOneNum
+    public void setActionOneNum(ImageView actionOneNum) {
+        this.actionOneNum = actionOneNum;
+    }
+
+    public  void setActionOneNumValue(int imageID) {
+        actionOneNum.setImageResource(imageID);
+    }
+
+    //ActionTwoNum
+    public void setActionTwoNum(ImageView actionTwoNum) {
+        this.actionTwoNum = actionTwoNum;
+    }
+
+    public  void setActionTwoNumValue(int imageID) {
+        actionTwoNum.setImageResource(imageID);
+    }
+
+    //ThrowOne
+    public void setThrowOne(ImageView throwOne) {
+        this.throwOne = throwOne;
+    }
+
+    public  void setThrowOneValue(int imageID) {
+        throwOne.setImageResource(imageID);
+    }
+
+    //ThrowTwo
+    public void setThrowTwo(ImageView throwTwo) {
+        this.throwTwo = throwTwo;
+    }
+
+    public  void setThrowTwoValue(int imageID) {
+        throwTwo.setImageResource(imageID);
     }
 }

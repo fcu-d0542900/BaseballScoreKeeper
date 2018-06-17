@@ -198,6 +198,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     private void setOrderView(final int row, final int column, final OrderViewHolder viewHolder) {
         final RecordItem recordItem = activity.currentRecord.getTeam().getRecordItems(row - 1,column - 1);
+        viewHolder.setRecordItem(recordItem);
         if (recordItem != null) {
             viewHolder.getScoreView.bringToFront();
 
@@ -334,7 +335,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.getFirstView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    baseFirstDialog.setNewRecordActivity(activity);
+                    baseFirstDialog.setActivity(activity);
                     baseFirstDialog.setBaseFirstDialog(viewHolder);
                     Toast.makeText(v.getContext(), "一壘" , Toast.LENGTH_SHORT).show();
 
@@ -422,6 +423,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     static class OrderViewHolder extends RecyclerView.ViewHolder {
+        RecordItem recordItem;
+
         TextView getScoreView;
         TextView getFirstView;
         TextView getHomeView;
@@ -442,6 +445,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         public ImageView getFirstViewTwoNum,getFirstViewTwoAc;
         public ImageView getFirstViewThreeNum,getFirstViewThreeAc;
         public ImageView getSacrificeFly,getSacrificeHits;
+
         public RecordItemFirstBase base1;
 
         //二壘
@@ -473,7 +477,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
         OrderViewHolder(View view) {
             super(view);
-
+            base  = new RecordItemOtherBase();
+            base2  = new RecordItemOtherBase();
+            base3  = new RecordItemOtherBase();
+            base1  = new RecordItemFirstBase();
             this.getScoreView = view.findViewById(R.id.centerView);
             this.getFirstView = view.findViewById(R.id.firstView);
             this.getHomeView = view.findViewById(R.id.homeView);
@@ -506,11 +513,24 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.getFirstViewThreeAc = view.findViewById(R.id.image_firstView_three_ac);
             this.getSacrificeFly = view.findViewById(R.id.image_sacrifice_fly);
             this.getSacrificeHits = view.findViewById(R.id.image_sacrifice_hits);
-            // TODO YURU 把它全部放進 base1
-//            base1.setShowActionNameView();
-//            base1.setShowActionOneAcView();
-//            base1.setShowActionTwoAcView();
-//            base1.setShowActionView();
+            base1.setShowZeroView(getFirstViewZero);
+            base1.setShowOneView(getFirstViewOne);
+            base1.setShowTwoView(getFirstViewTwo);
+            base1.setShowThreeView(getFirstViewThree);
+            base1.setShowHRView(getFirstViewHR);
+            base1.setFirstViewOneTop(getFirstViewOneTop);
+            base1.setFirstViewOneNum(getFirstViewOneNum);
+            base1.setFirstViewOneBottom(getFirstViewOneBottom);
+            base1.setShowFirstViewOneAc1(getFirstViewOneAc1);
+            base1.setShowFirstViewOneAc2(getFirstViewOneAc2);
+            base1.setFirstViewTwoNum(getFirstViewTwoNum);
+            base1.setFirstViewThreeNum(getFirstViewThreeNum);
+            base1.setShowFirstViewThreeAc(getFirstViewThreeAc);
+            base1.setShowSacrificeFly(getSacrificeFly);
+            base1.setShowSacrificeHits(getSacrificeHits);
+
+
+
             //二壘
             this.getSecondViewActionName = view.findViewById(R.id.image_secondView_actionName);
             this.getSecondViewAction = view.findViewById(R.id.linear_secondView_acion);
@@ -523,6 +543,18 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.getSecondViewThrowTwo = view.findViewById(R.id.image_secondView_throwTwo);
             this.getSecondViewPushNum = view.findViewById(R.id.image_secondView_pushNumber);
             this.getSecondViewBase = view.findViewById(R.id.image_base_1to2);
+            base2.setShowActionNameView(getSecondViewActionName);
+            base2.setShowActionView(getSecondViewAction);
+            base2.setActionOneNum(getSecondViewActionOneNum);
+            base2.setShowActionOneAcView(getSecondViewActionOneAc);
+            base2.setActionTwoNum(getSecondViewActionTwoNum);
+            base2.setShowActionTwoAcView(getSecondViewActionTwoAc);
+            base2.setShowThrowView(getSecondViewThrow);
+            base2.setThrowOne(getSecondViewThrowOne);
+            base2.setThrowTwo(getSecondViewThrowTwo);
+            base2.setShowPushNumView(getSecondViewPushNum);
+            base2.setShowToBaseView(getSecondViewBase);
+
 
             //三壘
             this.getThirdViewActionName = view.findViewById(R.id.image_thirdView_actionName);
@@ -536,6 +568,17 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.getThirdViewThrowTwo = view.findViewById(R.id.image_thirdView_throwTwo);
             this.getThirdViewPushNum = view.findViewById(R.id.image_thirdView_pushNumber);
             this.getThirdViewBase = view.findViewById(R.id.image_base_2to3);
+            base3.setShowActionNameView(getThirdViewActionName);
+            base3.setShowActionView(getThirdViewAction);
+            base3.setActionOneNum(getThirdViewActionOneNum);
+            base3.setShowActionOneAcView(getThirdViewActionOneAc);
+            base3.setActionTwoNum(getThirdViewActionTwoNum);
+            base3.setShowActionTwoAcView(getThirdViewActionTwoAc);
+            base3.setShowThrowView(getThirdViewThrow);
+            base3.setThrowOne(getThirdViewThrowOne);
+            base3.setThrowTwo(getThirdViewThrowTwo);
+            base3.setShowPushNumView(getThirdViewPushNum);
+            base3.setShowToBaseView(getThirdViewBase);
 
             //本壘
             this.getHomeViewActionName = view.findViewById(R.id.image_homeView_actionName);
@@ -549,13 +592,25 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.getHomeViewThrowTwo = view.findViewById(R.id.image_homeView_throwTwo);
             this.getHomeViewPushNum = view.findViewById(R.id.image_homeView_pushNumber);
             this.getHomeViewBase = view.findViewById(R.id.image_base_3tohome);
-            // TODO 把 UI set 進去這邊 YURU 這樣懂了嗎？
-//            base.setShowThreeView(getHomeViewThrow);
-
+            base.setShowActionNameView(getHomeViewActionName);
+            base.setShowActionView(getHomeViewAction);
+            base.setActionOneNum(getHomeViewActionOneNum);
+            base.setShowActionOneAcView(getHomeViewActionOneAc);
+            base.setActionTwoNum(getHomeViewActionTwoNum);
+            base.setShowActionTwoAcView(getHomeViewActionTwoAc);
+            base.setShowThrowView(getHomeViewThrow);
+            base.setThrowOne(getHomeViewThrowOne);
+            base.setThrowTwo(getHomeViewThrowTwo);
+            base.setShowPushNumView(getHomeViewPushNum);
+            base.setShowToBaseView(getHomeViewBase);
 
 
             this.getScoreView.bringToFront();
 
+        }
+
+        public void setRecordItem(RecordItem recordItem) {
+            this.recordItem = recordItem;
         }
     }
 
