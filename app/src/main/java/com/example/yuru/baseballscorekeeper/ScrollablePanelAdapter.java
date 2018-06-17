@@ -19,10 +19,12 @@ import android.widget.Toast;
 
 import com.baseball.BASE;
 import com.baseball.Player;
+import com.baseball.Record;
 import com.baseball.RecordItem;
 import com.baseball.RecordItemCenter;
 import com.baseball.RecordItemFirstBase;
 import com.baseball.RecordItemOtherBase;
+import com.baseball.RecordTeam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +65,11 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     }
 
+    public void updateData() {
+        recordItems = activity.getUpdateData();
+        activity.scrollablePanel.notifyDataSetChanged();
+    }
+
     @Override
     public int getRowCount() {
         return recordItems.size()+1;
@@ -87,6 +94,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 setOrderView(row, column, (OrderViewHolder) holder);
                 break;
             case TEAMNAME_TYPE:
+                setTeamNameView((TeamNameViewHolder) holder);
                 break;
             default:
                 setOrderView(row, column, (OrderViewHolder) holder);
@@ -129,12 +137,11 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     }
 
+
+
     private void setBoardNumView(int pos, BoardNumViewHolder viewHolder) {
         viewHolder.dateTextView.setText(activity.currentRecord.getTeam().getRoundText(activity.currentRecord.getTeam().getRecordItemsPositionRound(pos)));
     }
-
-
-
 
     @SuppressLint("SetTextI18n")
     private void setPlayerInfoView(int pos, final PlayerInfoViewHolder viewHolder) {
@@ -208,13 +215,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     private void setOrderView(final int row, final int column, final OrderViewHolder viewHolder) {
-//        final RecordItem recordItem = activity.currentRecord.getTeam().getRecordItems(row - 1,column - 1);
         final RecordItem recordItem = recordItems.get(row -1).get(column-1);
-
         viewHolder.setRecordItem(recordItem);
         if (recordItem != null) {
             viewHolder.getScoreView.bringToFront();
-
             //中間菱形區域
             viewHolder.getScoreView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -285,6 +289,9 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 }
             });
         }
+    }
+    private void setTeamNameView(TeamNameViewHolder viewHolder) {
+        viewHolder.titleTextView.setText(activity.currentRecord.getTeam().getTeamName());
     }
 
     static class BoardNumViewHolder extends RecyclerView.ViewHolder {
@@ -535,17 +542,11 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         }
     }
 
-    public void updateData() {
-        recordItems = activity.getUpdateData();
-        activity.scrollablePanel.notifyDataSetChanged();
-    }
-
-
-    private static class TeamNameViewHolder extends RecyclerView.ViewHolder {
+    static class TeamNameViewHolder extends RecyclerView.ViewHolder {
         TextView titleTextView;
         TeamNameViewHolder(View view) {
             super(view);
-            this.titleTextView = view.findViewById(R.id.title);
+            this.titleTextView = view.findViewById(R.id.text_teamName);
         }
     }
 }

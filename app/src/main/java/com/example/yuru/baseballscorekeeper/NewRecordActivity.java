@@ -58,11 +58,11 @@ public class NewRecordActivity extends AppCompatActivity {
             public void onItemClick(View view, int position) {
 
                 if(position==1){  //點擊away
-                    currentRecord.setCurrenFaction(RecordTeam.Faction.away);  //TODO: ahkui這樣切換對嗎
+                    currentRecord.setCurrenFaction(RecordTeam.Faction.away);
                     scrollablePanelAdapter.updateData();
                 }
                 else if(position==2) { //點擊home
-                    currentRecord.setCurrenFaction(RecordTeam.Faction.home); //TODO: ahkui這樣切換對嗎
+                    currentRecord.setCurrenFaction(RecordTeam.Faction.home);
                     scrollablePanelAdapter.updateData();
                 }
             }

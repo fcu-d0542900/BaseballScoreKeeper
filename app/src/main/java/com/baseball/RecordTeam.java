@@ -17,7 +17,8 @@ public class RecordTeam implements Serializable {
     private List<RecordItem> recordItems;
 
     public RecordTeam(String homeTeam, Faction team) {
-        setTeamName(homeTeam);
+        if(homeTeam != null)
+            setTeamName(homeTeam);
         switch (team){
             case away:
                 currentRound =1;
