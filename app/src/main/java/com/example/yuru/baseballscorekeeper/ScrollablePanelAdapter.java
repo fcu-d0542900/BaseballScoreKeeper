@@ -513,6 +513,11 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         }
     }
 
+    public void updateData() {
+        recordItems = activity.getUpdateData();
+    }
+
+
     private static class TeamNameViewHolder extends RecyclerView.ViewHolder {
         TextView titleTextView;
         TeamNameViewHolder(View view) {

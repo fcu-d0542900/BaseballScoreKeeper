@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.baseball.DatabaseService;
 import com.baseball.Record;
 import com.baseball.RecordItem;
+import com.baseball.RecordTeam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +69,6 @@ public class NewRecordActivity extends AppCompatActivity {
                     currentRecord.setCurrenFaction(RecordTeam.Faction.home); //TODO: ahkui這樣切換對嗎
                     DatabaseService.getInstance().getDatabase().getRecord(DatabaseService.CurrentRecord).setCurrenFaction(RecordTeam.Faction.home);
                     scrollablePanelAdapter.updateData();
-
             }
         });
 
