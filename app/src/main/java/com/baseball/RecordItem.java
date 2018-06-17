@@ -70,15 +70,13 @@ public class RecordItem implements Serializable {
                 base.setShowZeroValue(R.drawable.bad_ball);
                 break;
             case HITBYPITCH:
-                base.setShowZero                base.setShowZeroValue(R.drawable.bad_ball);
-                base.setShowZeroValue(R.drawable.bad_ball);
-                ViewVisibility(true);
+                base.setShowZeroValue(R.drawable.hit_by_pitch);
                 break;
             case KILLED:
-                base.setShowZeroViewVisibility(true);
+                base.setShowZeroValue(R.drawable.killed);
                 break;
             case NOKILLED:
-                base.setShowZeroViewVisibility(true);
+                base.setShowZeroValue(R.drawable.no_killed);
                 break;
         }
     }
