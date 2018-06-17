@@ -333,15 +333,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.getFirstView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-<<<<<<< HEAD
                     baseFirstDialog.setNewRecordActivity(activity);
                     baseFirstDialog.setBaseFirstDialog(viewHolder);
-=======
-//                    baseOtherDialog.setBaseOneDialog(viewHolder,1,new String[]{"推進","進壘"});
-                    baseFirstDialog.setNewRecordActivity(activity);
-                    baseFirstDialog.setBaseFirstDialog(viewHolder);
-
->>>>>>> 00d56eacbeaa0d511eb229e678017e967aaf6cb8
                     Toast.makeText(v.getContext(), "一壘" , Toast.LENGTH_SHORT).show();
 
                 }
