@@ -182,6 +182,7 @@ public class BaseCenterDialog {
                     int playerNum = Integer.valueOf(editText_playerNum.getText().toString());
                     int playerPosition = (int) spinner_position.getSelectedItemId();
 
+                    //TODO ahkui 顯示 recordItemCenter.setShowChangeHitterVisibility(true);
                     //TODO ahkui  儲存更改球員資料 playerName playerNum  playerPosition
 
                     //playerInfo.setName(playerName);
