@@ -24,9 +24,9 @@ public class RecordItem implements Serializable {
         this.updateOtherBaseUI(base3,3);
     }
 
-    BASE_FIRST_STEP_ONE _BASE_FIRST_STEP_ONE;
-    BALL_TYPE ballType;
-    BALL_DIRECTION ballDirection;
+    BASE_FIRST_STEP_ONE _BASE_FIRST_STEP_ONE = BASE_FIRST_STEP_ONE.__;
+    BALL_TYPE ballType = BALL_TYPE.__;
+    BALL_DIRECTION ballDirection = BALL_DIRECTION.__;
     public void set_BASE_FIRST_STEP_ONE(BASE_FIRST_STEP_ONE _BASE_FIRST_STEP_ONE) {
         this._BASE_FIRST_STEP_ONE = _BASE_FIRST_STEP_ONE;
         save();
@@ -39,20 +39,23 @@ public class RecordItem implements Serializable {
         BADBALL, //保送
         HITBYPITCH, //觸身球
         KILLED, //三鎮
-        NOKILLED //不死三陣
+        NOKILLED, //不死三陣
+        __
     }
 
     public enum BALL_TYPE {
         HIGH, // 高飛球
         FLAT, // 平飛球
-        FLOOR // 滾地球
+        FLOOR, // 滾地球
+        __
     }
 
     public enum BALL_DIRECTION{
         LEFT,//左
         MIDDLE,//中
-        RIGHT//右
-    }
+        RIGHT,//右
+        __
+        }
 
     public void setBallDirection(BALL_DIRECTION ball_direction) {
         this.ballDirection = ball_direction;
@@ -88,25 +91,18 @@ public class RecordItem implements Serializable {
                     case FLAT:
                         base.setFirstViewOneTopValue(R.drawable.line_drive);
                         break;
-                    default:
+                    case __:
                         base.setShowOneViewVisibility(false);
-
                 }
                 switch (ballDirection){
                     case LEFT:
                         base.setFirstViewOneNumValue(R.drawable.throw7);
-
-                        // TODO YURU
                         break;
                     case MIDDLE:
                         base.setFirstViewOneNumValue(R.drawable.throw8);
-
-                        // TODO YURU
                         break;
                     case RIGHT:
                         base.setFirstViewOneNumValue(R.drawable.throw9);
-
-                        // TODO YURU
                         break;
                 }
                 break;
@@ -120,7 +116,7 @@ public class RecordItem implements Serializable {
                 base.setShowZeroViewVisibility(true);
                 switch (_BASE_FIRST_STEP_ONE){
                     case BADBALL:
-                        base.setShowZeroValue(R.drawable.bad_ball);
+                        base.setShowZeroValue(R.drawable.throw_b);
                         break;
                     case HITBYPITCH:
                         base.setShowZeroValue(R.drawable.hit_by_pitch);

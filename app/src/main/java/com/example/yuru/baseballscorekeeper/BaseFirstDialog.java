@@ -107,6 +107,7 @@ public class BaseFirstDialog {
 
                                                 }
                                                 else {
+                                                    viewHolder.recordItem.setBallType(RecordItem.BALL_TYPE.__);
                                                     select_sacrificeFly_type_str = "未選擇";
                                                 }
 
@@ -128,6 +129,7 @@ public class BaseFirstDialog {
                                                 }
                                                 else {
                                                     select_sacrificeFly_direction_str = "未選擇";
+                                                    viewHolder.recordItem.setBallDirection(RecordItem.BALL_DIRECTION.__);
                                                 }
 
                                                 Toast.makeText(activity.getApplicationContext(), "OK "+select_sacrificeFly_type_str + "," + select_sacrificeFly_direction_str, Toast.LENGTH_SHORT).show();
