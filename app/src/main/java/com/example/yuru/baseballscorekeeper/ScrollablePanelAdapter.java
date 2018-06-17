@@ -17,14 +17,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baseball.BoardNumInfo;
-import com.baseball.OrderInfo;
 import com.baseball.Player;
+import com.baseball.RecordItem;
 import com.baseball.RecordItemFirstBase;
 import com.baseball.RecordItemOtherBase;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by YURU on 2018/6/11.
@@ -34,17 +30,14 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     private NewRecordActivity activity;
 
-    private List<List<OrderInfo>> ordersList = new ArrayList<>();
-
     private EditText editText_playerName,editText_playerNum;
     private Spinner spinner_position;
     private View view_set_player;
 
-    private TextView choice1;
     private String playerName;
     private int playerNum,playerPosition;
 
-    private BaseOtherDialog baseOther = new BaseOtherDialog();
+    private BaseOtherDialog baseOtherDialog = new BaseOtherDialog();
     private BaseFirstDialog baseFirstDialog = new BaseFirstDialog();
 
     final String[] center_choice = new String[]{"得分/出局", "安打","替換守備","替換打者","結束半局"};
@@ -58,16 +51,18 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     public ScrollablePanelAdapter(NewRecordActivity activity) {
         super();
-        this.setActivity(activity);
+        this.activity = activity;
     }
 
     @Override
     public int getRowCount() {
-        return activity.currentRecord.getTeam().getTeamMember().size() + 1;
+        Log.e("ahkui",9+"");
+        return 9;
     }
 
     @Override
     public int getColumnCount() {
+        Log.e("ahkui",activity.currentRecord.getTeam().getLastRecordItemsColumn() + 1 +"");
         return activity.currentRecord.getTeam().getLastRecordItemsColumn() + 1;
     }
 
@@ -131,6 +126,9 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     private void setBoardNumView(int pos, BoardNumViewHolder viewHolder) {
+        viewHolder.dateTextView.setText(pos+"");
+
+//        viewHolder
         Log.v("ahkui",pos+"");
 //        BoardNumInfo boardNumInfo = activity.currentRecord.getTeam()..get(pos - 1);
 //        if (boardNumInfo != null && pos > 0) {
@@ -210,15 +208,14 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     private void setOrderView(final int row, final int column, final OrderViewHolder viewHolder) {
-        final OrderInfo orderInfo = ordersList.get(row - 1).get(column - 1);
-        if (orderInfo != null) {
+        final RecordItem recordItem = activity.currentRecord.getTeam().getRecordItems(row - 1,column - 1);
+        if (recordItem != null) {
             viewHolder.getScoreView.bringToFront();
 
             //中間菱形區域
             viewHolder.getScoreView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     new AlertDialog.Builder(activity)
                             .setItems(center_choice, new DialogInterface.OnClickListener() {
                                 @Override
@@ -335,7 +332,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                                 }
                             })
                             .show();
-                    Toast.makeText(v.getContext(), "得分區域" +orderInfo.getGuestName(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), "得分區域" +recordItem.getAttPlayer().getName(), Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -357,8 +354,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 @Override
                 public void onClick(View v) {
 
-                    baseOther.setNewRecordActivity(activity);
-                    baseOther.setBaseTwoDialog(viewHolder,new String[]{"推進","進壘"});
+                    baseOtherDialog.setNewRecordActivity(activity);
+                    baseOtherDialog.setBaseTwoDialog(viewHolder,new String[]{"推進","進壘"});
                     Toast.makeText(v.getContext(), "二壘" , Toast.LENGTH_SHORT).show();
 
                 }
@@ -509,7 +506,11 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.getFirstViewThreeAc = view.findViewById(R.id.image_firstView_three_ac);
             this.getSacrificeFly = view.findViewById(R.id.image_sacrifice_fly);
             this.getSacrificeHits = view.findViewById(R.id.image_sacrifice_hits);
-
+            // TODO YURU 把它全部放進 base1
+//            base1.setShowActionNameView();
+//            base1.setShowActionOneAcView();
+//            base1.setShowActionTwoAcView();
+//            base1.setShowActionView();
             //二壘
             this.getSecondViewActionName = view.findViewById(R.id.image_secondView_actionName);
             this.getSecondViewAction = view.findViewById(R.id.linear_secondView_acion);
