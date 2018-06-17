@@ -81,6 +81,7 @@ public class RecordItem implements Serializable {
     }
 
     public void updateFirstBaseUI(RecordItemFirstBase base){
+        Log.d("position","row: "+row+" column: "+column+" round: "+round);
         // TODO update base ui with database
         base.setShowSacrificeFlyVisibility(false);
         base.setShowOneViewVisibility(false);

@@ -13,6 +13,10 @@ import android.widget.TimePicker;
 
 import com.baseball.DatabaseService;
 import com.baseball.Record;
+import com.baseball.RecordItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NewRecordActivity extends AppCompatActivity {
 
@@ -74,6 +78,18 @@ public class NewRecordActivity extends AppCompatActivity {
             }
         });
         dialog_endTime.show();
+    }
+
+    public void updateData(List<List<RecordItem>> recordItems) {
+        recordItems.clear();
+        int col = currentRecord.getTeam().getLastRecordItemsColumn() + 1+3;
+        for (int i = 0; i < 9; i++) {
+            List<RecordItem> tmp = new ArrayList<>();
+            for (int j = 0; j <= col; j++) {
+                tmp.add(currentRecord.getTeam().getRecordItems(i,j));
+            }
+            recordItems.add(tmp);
+        }
     }
 }
 

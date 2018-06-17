@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,9 @@ import com.baseball.Player;
 import com.baseball.RecordItem;
 import com.baseball.RecordItemFirstBase;
 import com.baseball.RecordItemOtherBase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by YURU on 2018/6/11.
@@ -40,8 +44,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     private BaseFirstDialog baseFirstDialog = new BaseFirstDialog();
     private GoodBadBallDialog goodBadBallDialog = new GoodBadBallDialog();
 
-    final String[] center_choice = new String[]{"得分/出局", "安打","替換守備","替換打者","結束半局"};
-    final String[] hits_choice = new String[]{"一壘安打", "二壘安打","三壘安打","全壘打"};
+    private List<List<RecordItem>> recordItems;
+
+    private final String[] center_choice = new String[]{"得分/出局", "安打","替換守備","替換打者","結束半局"};
+    private final String[] hits_choice = new String[]{"一壘安打", "二壘安打","三壘安打","全壘打"};
 
     private static final int TEAMNAME_TYPE = 4;
     private static final int PLAYERINFO_TYPE = 0;
@@ -49,19 +55,21 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     private static final int ORDER_TYPE = 2;
 
 
-    public ScrollablePanelAdapter(NewRecordActivity activity) {
+    ScrollablePanelAdapter(NewRecordActivity activity) {
         super();
         this.activity = activity;
+        recordItems = new ArrayList<>();
+        activity.updateData(recordItems);
     }
 
     @Override
     public int getRowCount() {
-        return 9;
+        return recordItems.size()+1;
     }
 
     @Override
     public int getColumnCount() {
-        return activity.currentRecord.getTeam().getLastRecordItemsColumn() + 1 + 2 ;
+        return recordItems.get(0).size()+1 ;
     }
 
 
@@ -197,7 +205,9 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     private void setOrderView(final int row, final int column, final OrderViewHolder viewHolder) {
-        final RecordItem recordItem = activity.currentRecord.getTeam().getRecordItems(row - 1,column - 1);
+//        final RecordItem recordItem = activity.currentRecord.getTeam().getRecordItems(row - 1,column - 1);
+        final RecordItem recordItem = recordItems.get(row -1).get(column-1);
+
         viewHolder.setRecordItem(recordItem);
         if (recordItem != null) {
             viewHolder.getScoreView.bringToFront();
@@ -317,6 +327,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                                         case 4:
                                             Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
                                             activity.currentRecord.getTeam().nextRound();
+                                            activity.updateData(recordItems);
                                             break;
                                         default:
                                             break;
@@ -433,46 +444,46 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         TextView getBallView;
 
         //更改球員
-        public ImageView getChangeGarrison,getChangeHitter;
+        ImageView getChangeGarrison,getChangeHitter;
         //安打
-        public ImageView getHit1View,getHit2View,getHit3View,getHit4View;
+        ImageView getHit1View,getHit2View,getHit3View,getHit4View;
 
         //一壘
-        public ImageView getFirstViewZero,getFirstViewHR;
-        public FrameLayout getFirstViewOne,getFirstViewTwo,getFirstViewThree;
-        public ImageView getFirstViewOneTop,getFirstViewOneNum,getFirstViewOneBottom;
-        public ImageView getFirstViewOneAc1,getFirstViewOneAc2;
-        public ImageView getFirstViewTwoNum,getFirstViewTwoAc;
-        public ImageView getFirstViewThreeNum,getFirstViewThreeAc;
-        public ImageView getSacrificeFly,getSacrificeHits;
+        ImageView getFirstViewZero,getFirstViewHR;
+        FrameLayout getFirstViewOne,getFirstViewTwo,getFirstViewThree;
+        ImageView getFirstViewOneTop,getFirstViewOneNum,getFirstViewOneBottom;
+        ImageView getFirstViewOneAc1,getFirstViewOneAc2;
+        ImageView getFirstViewTwoNum,getFirstViewTwoAc;
+        ImageView getFirstViewThreeNum,getFirstViewThreeAc;
+        ImageView getSacrificeFly,getSacrificeHits;
 
         public RecordItemFirstBase base1;
 
         //二壘
-        public ImageView getSecondViewActionName,getSecondViewPushNum,getSecondViewBase;
-        public LinearLayout getSecondViewAction;
-        public ImageView getSecondViewActionOneNum,getSecondViewActionOneAc;
-        public ImageView getSecondViewActionTwoNum,getSecondViewActionTwoAc;
-        public LinearLayout getSecondViewThrow;
-        public ImageView getSecondViewThrowOne,getSecondViewThrowTwo;
+        ImageView getSecondViewActionName,getSecondViewPushNum,getSecondViewBase;
+        LinearLayout getSecondViewAction;
+        ImageView getSecondViewActionOneNum,getSecondViewActionOneAc;
+        ImageView getSecondViewActionTwoNum,getSecondViewActionTwoAc;
+        LinearLayout getSecondViewThrow;
+        ImageView getSecondViewThrowOne,getSecondViewThrowTwo;
         public RecordItemOtherBase base2;
 
         //三壘
-        public ImageView getThirdViewActionName,getThirdViewPushNum,getThirdViewBase;
-        public LinearLayout getThirdViewAction;
-        public ImageView getThirdViewActionOneNum,getThirdViewActionOneAc;
-        public ImageView getThirdViewActionTwoNum,getThirdViewActionTwoAc;
-        public LinearLayout getThirdViewThrow;
-        public ImageView getThirdViewThrowOne,getThirdViewThrowTwo;
-        public RecordItemOtherBase base3;
+        ImageView getThirdViewActionName,getThirdViewPushNum,getThirdViewBase;
+        LinearLayout getThirdViewAction;
+        ImageView getThirdViewActionOneNum,getThirdViewActionOneAc;
+        ImageView getThirdViewActionTwoNum,getThirdViewActionTwoAc;
+        LinearLayout getThirdViewThrow;
+        ImageView getThirdViewThrowOne,getThirdViewThrowTwo;
+        RecordItemOtherBase base3;
 
         //本壘
-        public ImageView getHomeViewActionName,getHomeViewPushNum,getHomeViewBase;
-        public LinearLayout getHomeViewAction;
-        public ImageView getHomeViewActionOneNum,getHomeViewActionOneAc;
-        public ImageView getHomeViewActionTwoNum,getHomeViewActionTwoAc;
-        public LinearLayout getHomeViewThrow;
-        public ImageView getHomeViewThrowOne,getHomeViewThrowTwo;
+        ImageView getHomeViewActionName,getHomeViewPushNum,getHomeViewBase;
+        LinearLayout getHomeViewAction;
+        ImageView getHomeViewActionOneNum,getHomeViewActionOneAc;
+        ImageView getHomeViewActionTwoNum,getHomeViewActionTwoAc;
+        LinearLayout getHomeViewThrow;
+        ImageView getHomeViewThrowOne,getHomeViewThrowTwo;
         public RecordItemOtherBase base;
 
         OrderViewHolder(View view) {
@@ -606,11 +617,12 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
 
             this.getScoreView.bringToFront();
-
         }
 
-        public void setRecordItem(RecordItem recordItem) {
+        void setRecordItem(RecordItem recordItem) {
             this.recordItem = recordItem;
+            recordItem.updateFirstBaseUI(base1);
+            Log.d("position",""+recordItem);
         }
     }
 
@@ -622,15 +634,4 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.titleTextView = view.findViewById(R.id.title);
         }
     }
-
-    public void setActivity(NewRecordActivity activity) {
-        this.activity =activity;
-    }
-
-
-
-
-
 }
-
-

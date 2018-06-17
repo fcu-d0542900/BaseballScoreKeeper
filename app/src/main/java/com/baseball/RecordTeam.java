@@ -1,5 +1,7 @@
 package com.baseball;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +34,7 @@ public class RecordTeam implements Serializable {
     }
 
     public RecordItem getRecordItems(int row,int column) {
+        Log.d("position","row: "+row+" column: "+column);
         if(recordItems.size()>0)
             for (RecordItem item :
                     recordItems) {

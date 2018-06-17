@@ -1,5 +1,7 @@
 package com.baseball;
 
+import android.annotation.SuppressLint;
+
 import java.io.Serializable;
 
 /**
@@ -8,7 +10,7 @@ import java.io.Serializable;
 
 public class Player implements Serializable {
     private long id;
-    private String name =" ";
+    private String name ="    ";
     private POSITION position;
     public enum POSITION {
         DH,P,C,_1B,_2B,_3B,SS,LF,CF,RF,__
@@ -49,6 +51,7 @@ public class Player implements Serializable {
 
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public String toString() {
         return String.format("%d, %s, %d", getId(), getName(), getPosition());
