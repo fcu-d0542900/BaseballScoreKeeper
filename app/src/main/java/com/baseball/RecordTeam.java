@@ -10,10 +10,9 @@ import java.util.List;
 
 public class RecordTeam implements Serializable {
     private String teamName="";
-    private List<Player> teamMember = new ArrayList<>();
     private int currentRound = 0;
+    private List<Player> teamMember = new ArrayList<>();
     private List<RecordItem> recordItems;
-    private List<BoardNumInfo> recordRoundItem;
 
     public RecordTeam(String homeTeam, Faction team) {
         setTeamName(homeTeam);
@@ -145,7 +144,6 @@ public class RecordTeam implements Serializable {
     }
 
     public int getRecordItemsPositionRound(int position) {
-        int last = 0;
         if(recordItems.size() == 0 && position == 1)
             return 0;
         for (RecordItem item : recordItems) {

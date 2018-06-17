@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -122,15 +121,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     private void setBoardNumView(int pos, BoardNumViewHolder viewHolder) {
-        Log.v("ahkui",pos +"");
         viewHolder.dateTextView.setText(activity.currentRecord.getTeam().getRoundText(activity.currentRecord.getTeam().getRecordItemsPositionRound(pos)));
-
-//        viewHolder
-        Log.v("ahkui",pos+"");
-//        BoardNumInfo boardNumInfo = activity.currentRecord.getTeam()..get(pos - 1);
-//        if (boardNumInfo != null && pos > 0) {
-//            viewHolder.dateTextView.setText(boardNumInfo.getBroadNum_symbol());
-//        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -310,16 +301,20 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                                         //點擊替換守備
                                         case 2:
                                             Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+                                            // TODO activity.currentRecord.getTeam().changeDefPlayer();
+
                                             break;
 
                                         //點擊替換打者
                                         case 3:
                                             Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+                                            // TODO activity.currentRecord.getTeam().changeAttPlayer();
                                             break;
 
                                         //點擊結束半局
                                         case 4:
                                             Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+                                            activity.currentRecord.getTeam().nextRound();
                                             break;
                                         default:
                                             break;
@@ -338,9 +333,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.getFirstView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+//                    baseOtherDialog.setBaseOneDialog(viewHolder,1,new String[]{"推進","進壘"});
+                    baseFirstDialog.setBaseFirstDialog(viewHolder);
 
                     baseFirstDialog.setNewRecordActivity(activity);
-                    baseFirstDialog.setBaseHomeDialog(viewHolder);
                     Toast.makeText(v.getContext(), "一壘" , Toast.LENGTH_SHORT).show();
 
                 }
@@ -350,6 +346,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.getSecondView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // TODO 玉鳳 二壘
 
                     baseOtherDialog.setNewRecordActivity(activity);
                     baseOtherDialog.setBaseTwoDialog(viewHolder,new String[]{"推進","進壘"});
@@ -362,9 +359,9 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.getThirdView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    // TODO 玉鳳 三壘
+//                    baseOtherDialog.setBaseThreeDialog(viewHolder,3,new String[]{"推進","進壘"});
                     Toast.makeText(v.getContext(), "三壘" , Toast.LENGTH_SHORT).show();
-
                 }
             });
 
@@ -372,6 +369,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.getHomeView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // TODO 玉鳳 本壘
+//                    baseFirstDialog.setBaseHomeDialog(viewHolder);
 
                     Toast.makeText(v.getContext(), "本壘" , Toast.LENGTH_SHORT).show();
 
