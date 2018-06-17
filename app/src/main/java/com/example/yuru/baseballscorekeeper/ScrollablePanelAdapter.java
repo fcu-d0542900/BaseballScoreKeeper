@@ -137,6 +137,9 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         viewHolder.dateTextView.setText(activity.currentRecord.getTeam().getRoundText(activity.currentRecord.getTeam().getRecordItemsPositionRound(pos)));
     }
 
+
+
+
     @SuppressLint("SetTextI18n")
     private void setPlayerInfoView(int pos, final PlayerInfoViewHolder viewHolder) {
         final Player playerInfo = activity.currentRecord.getTeam().getTeamMember().get(pos - 1);

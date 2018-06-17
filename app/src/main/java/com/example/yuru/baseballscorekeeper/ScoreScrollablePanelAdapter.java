@@ -25,11 +25,21 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
     private List<RecordTeam> recordTeam = new ArrayList<>();
     private List<BoardNumInfo> boardNumInfoList = new ArrayList<>();
     private NewRecordActivity activity;
+    private RecordAdapter.OnItemClickLitener mOnItemClickLitener;
 
     private static final int TITLENAME_TYPE = 7;
     private static final int TEAMINFO_TYPE = 5;
     private static final int BOARDNUM_TYPE = 1;
     private static final int SCOREBOARD_TYPE = 6;
+
+    //设置回调接口
+    public interface OnItemClickLitener{
+        void onItemClick(View view, String name);
+    }
+
+    public void setOnItemClickLitener(RecordAdapter.OnItemClickLitener mOnItemClickLitener){
+        this.mOnItemClickLitener = mOnItemClickLitener;
+    }
 
     ScoreScrollablePanelAdapter(NewRecordActivity activity) {
         super();
@@ -129,12 +139,35 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
     //隊伍
     public void setTeamInfoView(int pos, final TeamInfoViewHolder viewHolder) {
         final RecordTeam recordTeamInfo = recordTeam.get(pos - 1);
-        if (recordTeamInfo != null && pos>0) {
+        if (recordTeamInfo != null && pos > 0) {
             //設定資料
             viewHolder.text_teamName.setText(recordTeamInfo.getTeamName());
 
+            //通过为条目设置点击事件触发回调
+            if (pos == 1) {    //點擊away
+                if (mOnItemClickLitener != null) {
+                    viewHolder.text_teamName.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            mOnItemClickLitener.onItemClick(view, 1);
+                        }
+                    });
+                }
+
+            }
+            else if (pos == 2) {  //點擊home
+                if (mOnItemClickLitener != null) {
+                    viewHolder.text_teamName.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            mOnItemClickLitener.onItemClick(view, 2);
+                        }
+                    });
+                }
+            }
         }
     }
+
 
     //記分板
     private void setScoreView(final int row, final int column, final ScoreBoardViewHolder viewHolder) {
