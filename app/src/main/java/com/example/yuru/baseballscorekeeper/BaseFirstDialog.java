@@ -167,8 +167,10 @@ public class BaseFirstDialog {
 
                                                 actionOne = (int) spinner_actionOne.getSelectedItemId();
                                                 //TODO  ahkui   存入資料庫， 顯示圖片  數字 actionOne+1  (R.drawable.throw 數字)
+                                                viewHolder.recordItem.setBALL_TOUCH_AC1(actionOne);
                                                 actionTwo = (int) spinner_actionTwo.getSelectedItemId();
                                                 //TODO  ahkui   存入資料庫， 顯示圖片  數字 actionTwo+1  (R.drawable.throw 數字)
+                                                viewHolder.recordItem.setBALL_TOUCH_AC2(actionTwo);
                                                 Toast.makeText(activity, "OK " + (actionOne+1) + "," + (actionTwo+1), Toast.LENGTH_SHORT).show();
                                             }
                                         });
