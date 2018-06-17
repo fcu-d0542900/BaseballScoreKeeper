@@ -56,7 +56,7 @@ public class BaseOtherDialog {
                                         //TODO: ahkui 選擇完後  switch (which)   recordItemOtherBase.setShowPushNumViewVisibility(true);
                                         //TODO: ahkui  圖片id  recordItemOtherBase.setShowPushNumValue();
                                         //TODO: ahkui  (whitch)   存入資料庫， 顯示推進數字 (R.drawable.push1) ~ (R.drawable.push9)
-                                        
+
                                         Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
 
                                         //下一個選單失誤、上壘
