@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/click_strike"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:drawablePadding="20dp"
+        android:orientation="horizontal"
+        tools:ignore="InvalidId">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/strike" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="9dp"
+            android:text="好球"
+            android:textColor="@android:color/black"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/click_miss_strike"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:drawablePadding="20dp"
+        android:orientation="horizontal"
+        tools:ignore="InvalidId">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/miss_strike" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="9dp"
+            android:text="好球(揮空)"
+            android:textColor="@android:color/black"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/click_bad_ball"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:paddingLeft="3dp"
+        android:drawablePadding="20dp"
+        android:orientation="horizontal"
+        tools:ignore="InvalidId">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:scaleType="centerInside"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/bad_ball" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="15dp"
+            android:text="壞球"
+            android:textColor="@android:color/black"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/click_foul_ball"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:drawablePadding="20dp"
+        android:orientation="horizontal"
+        tools:ignore="InvalidId">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/foul_ball" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="界外球"
+            android:paddingLeft="9dp"
+            android:textColor="@android:color/black"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/click_bunt_foul"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:drawablePadding="20dp"
+        android:orientation="horizontal"
+        tools:ignore="InvalidId">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/bunt_foul" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="9dp"
+            android:text="觸擊界外"
+            android:textColor="@android:color/black"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/click_hit_ball"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:paddingLeft="3dp"
+        android:drawablePadding="20dp"
+        android:orientation="horizontal"
+        tools:ignore="InvalidId">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:scaleType="centerInside"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/hit_ball" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="15dp"
+            android:text="擊出球"
+            android:textColor="@android:color/black"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

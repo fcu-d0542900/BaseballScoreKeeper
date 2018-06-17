@@ -38,6 +38,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     private BaseOtherDialog baseOtherDialog;
     private BaseFirstDialog baseFirstDialog = new BaseFirstDialog();
+    private GoodBadBallDialog goodBadBallDialog = new GoodBadBallDialog();
 
     final String[] center_choice = new String[]{"得分/出局", "安打","替換守備","替換打者","結束半局"};
     final String[] hits_choice = new String[]{"一壘安打", "二壘安打","三壘安打","全壘打"};
@@ -384,7 +385,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.getBallView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    goodBadBallDialog.setNewRecordActivity(activity);
+                    goodBadBallDialog.setGoodBadBallDialog(viewHolder);
                     Toast.makeText(v.getContext(), "好壞球" , Toast.LENGTH_SHORT).show();
 
                 }
