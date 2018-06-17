@@ -1,5 +1,6 @@
 package com.example.yuru.baseballscorekeeper;
 
+import android.annotation.SuppressLint;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,8 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.baseball.BoardNumInfo;
-import com.baseball.Record;
-import com.baseball.RecordItem;
 import com.baseball.RecordTeam;
 
 import java.util.ArrayList;
@@ -123,6 +122,7 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
     }
 
     //局數
+    @SuppressLint("SetTextI18n")
     private void setBoardNumView(int pos, BoardNumViewHolder viewHolder) {
         BoardNumInfo boardNumInfo = boardNumInfoList.get(pos - 1);
         if (boardNumInfo != null && pos > 0) {
@@ -137,7 +137,7 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
     }
 
     //隊伍
-    public void setTeamInfoView(int pos, final TeamInfoViewHolder viewHolder) {
+    private void setTeamInfoView(int pos, final TeamInfoViewHolder viewHolder) {
         final RecordTeam recordTeamInfo = recordTeam.get(pos - 1);
         if (recordTeamInfo != null && pos > 0) {
             //設定資料
@@ -172,15 +172,14 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
     //記分板
     private void setScoreView(final int row, final int column, final ScoreBoardViewHolder viewHolder) {
         final String scoreInfo = (row == 0 ? activity.currentRecord.getAwayTeam() :activity.currentRecord.getHomeTeam() ).getScore(column - 1);
-        Log.v("score",scoreInfo);
-        //TODO: 玉鳳 显示分数在记分板上
+        viewHolder.scoreView.setText(scoreInfo);
     }
 
     //上方局數欄
     private static class BoardNumViewHolder extends RecyclerView.ViewHolder {
-        public TextView boaredTextView;
+        TextView boaredTextView;
 
-        public BoardNumViewHolder(View itemView) {
+        BoardNumViewHolder(View itemView) {
             super(itemView);
             this.boaredTextView = itemView.findViewById(R.id.text_Scoreboard);
         }
@@ -191,7 +190,7 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
     private static class TeamInfoViewHolder extends RecyclerView.ViewHolder {
         public TextView text_teamName;
 
-        public TeamInfoViewHolder(View view) {
+        TeamInfoViewHolder(View view) {
             super(view);
             this.text_teamName = view.findViewById(R.id.text_Scoreteam);
         }
@@ -199,23 +198,23 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
 
     //記分板
     private static class ScoreBoardViewHolder extends RecyclerView.ViewHolder {
-        public TextView getScoreView;
+        TextView scoreView;
 
         public View view;
 
-        public ScoreBoardViewHolder(View view) {
+        ScoreBoardViewHolder(View view) {
             super(view);
             this.view = view;
-            this.getScoreView = view.findViewById(R.id.text_ScoreMain);
+            this.scoreView = view.findViewById(R.id.text_ScoreMain);
 
         }
     }
 
     //title欄
     private static class TeamTitleViewHolder extends RecyclerView.ViewHolder {
-        public TextView titleTextView;
+        TextView titleTextView;
 
-        public TeamTitleViewHolder(View view) {
+        TeamTitleViewHolder(View view) {
             super(view);
             this.titleTextView = view.findViewById(R.id.text_teamTitle);
         }
