@@ -61,7 +61,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     @Override
     public int getColumnCount() {
-        return activity.currentRecord.getTeam().getLastRecordItemsColumn() + 1 + 1;
+        return activity.currentRecord.getTeam().getLastRecordItemsColumn() + 1 + 1 +5;
     }
 
 
@@ -104,7 +104,6 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             case BOARDNUM_TYPE:
                 return new BoardNumViewHolder(LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.listitem_board_num, parent, false));
-
             case PLAYERINFO_TYPE:
                 return new PlayerInfoViewHolder(LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.listitem_player_info, parent, false));
@@ -114,7 +113,6 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             case TEAMNAME_TYPE:
                 return new TeamNameViewHolder(LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.listitem_team_name, parent, false));
-
             default:
                 break;
         }
@@ -124,7 +122,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     private void setBoardNumView(int pos, BoardNumViewHolder viewHolder) {
-        viewHolder.dateTextView.setText(pos+"");
+        Log.v("ahkui",pos +"");
+        viewHolder.dateTextView.setText(activity.currentRecord.getTeam().getRoundText(activity.currentRecord.getTeam().getRecordItemsPositionRound(pos)));
 
 //        viewHolder
         Log.v("ahkui",pos+"");
