@@ -150,8 +150,12 @@ public class BaseFirstDialog {
                                         scrifice_hits_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
+                                                //TODO  ahkui  設定顯示觸擊犧牲打格子   recordItemFirstBase.setShowSacrificeHitsVisibility(true);
+
                                                 actionOne = (int) spinner_actionOne.getSelectedItemId();
+                                                //TODO  ahkui   存入資料庫， 顯示圖片  數字 actionOne+1  (R.drawable.throw 數字)
                                                 actionTwo = (int) spinner_actionTwo.getSelectedItemId();
+                                                //TODO  ahkui   存入資料庫， 顯示圖片  數字 actionTwo+1  (R.drawable.throw 數字)
                                                 Toast.makeText(activity, "OK " + (actionOne+1) + "," + (actionTwo+1), Toast.LENGTH_SHORT).show();
                                             }
                                         });
@@ -262,6 +266,8 @@ public class BaseFirstDialog {
     }
 
     public void set_first_view_one() {
+        //TODO ahkui   顯示 recordItemFirstBase.setShowOneViewVisibility(true);
+
         select_typeID = radioGroup_type.getCheckedRadioButtonId();
         select_direction = (int)spinner_direction.getSelectedItemId(); //TODO ahkui  存入資料庫， 顯示圖片 1~9
         select_elseAc = "";
@@ -320,6 +326,8 @@ public class BaseFirstDialog {
         first_two_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                //TODO ahkui   顯示 recordItemFirstBase.setShowTwoViewVisibility(true);
+                
                 Toast.makeText(activity, "OK ", Toast.LENGTH_SHORT).show();
 
 
