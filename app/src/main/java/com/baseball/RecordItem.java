@@ -1,5 +1,7 @@
 package com.baseball;
 
+import android.util.Log;
+
 import com.example.yuru.baseballscorekeeper.R;
 
 import java.io.Serializable;
@@ -124,6 +126,7 @@ public class RecordItem implements Serializable {
                 base.setShowTwoViewVisibility(true);
                 base.setFirstViewOneAc1Value(getImageByNumber(BALL_TOUCH_AC1));
                 base.setFirstViewOneAc2Value(getImageByNumber(BALL_TOUCH_AC2));
+                Log.d("ahkui touch","get into rouch "+ _BASE_FIRST_STEP_ONE.toString());
             case NORMAL:
                 break;
             case BADBALL:

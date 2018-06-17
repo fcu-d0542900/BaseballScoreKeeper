@@ -134,7 +134,7 @@ public class BaseFirstDialog {
                                                     select_sacrificeFly_direction_str = "未選擇";
                                                     viewHolder.recordItem.setBallDirection(RecordItem.BALL_DIRECTION.__);
                                                 }
-
+                                                viewHolder.recordItem.updateFirstBaseUI(viewHolder.base1);
                                                 Toast.makeText(activity.getApplicationContext(), "OK "+select_sacrificeFly_type_str + "," + select_sacrificeFly_direction_str, Toast.LENGTH_SHORT).show();
                                             }
                                         });
@@ -171,6 +171,7 @@ public class BaseFirstDialog {
                                                 actionTwo = (int) spinner_actionTwo.getSelectedItemId();
                                                 //TODO  ahkui   存入資料庫， 顯示圖片  數字 actionTwo+1  (R.drawable.throw 數字)
                                                 viewHolder.recordItem.setBALL_TOUCH_AC2(actionTwo);
+                                                viewHolder.recordItem.updateFirstBaseUI(viewHolder.base1);
                                                 Toast.makeText(activity, "OK " + (actionOne+1) + "," + (actionTwo+1), Toast.LENGTH_SHORT).show();
                                             }
                                         });
@@ -205,12 +206,14 @@ public class BaseFirstDialog {
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 set_first_view_one();
                                                 set_first_view_two();
+                                                viewHolder.recordItem.updateFirstBaseUI(viewHolder.base1);
                                             }
                                         });
                                         first_one_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 set_first_view_one();
+                                                viewHolder.recordItem.updateFirstBaseUI(viewHolder.base1);
                                             }
                                         });
                                         first_one_builder.show();
