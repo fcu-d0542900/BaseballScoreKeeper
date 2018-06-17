@@ -51,6 +51,14 @@ public class BaseFirstDialog {
     private int select_two_direction;
     private String select_twoAc;
 
+    //three
+    private Spinner spinner_three_direction;
+    private RadioGroup radioGroup_three_Ac;
+    private RadioButton radioButton_three_E,radioButton_three_T;
+
+    private int select_three_direction;
+    private String select_threeAc;
+
 
     private String[] nums = {"1","2","3","4","5","6","7","8","9"};
 
@@ -345,32 +353,85 @@ public class BaseFirstDialog {
         adapter_direction_two.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_two_direction.setAdapter(adapter_direction_two);
 
+        first_two_builder.setNeutralButton("NEXT", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                set_first_view_two();
+                first_view_three();
+            }
+        });
+
         first_two_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                //TODO ahkui   顯示 recordItemFirstBase.setShowTwoViewVisibility(true);
-
-                select_two_direction = (int) spinner_two_direction.getSelectedItemId();  //TODO ahkui  存入資料庫， 顯示圖片 1~9
-                if(radioGroup_two_Ac.getCheckedRadioButtonId() == radioButton_two_E.getId()) {
-                    //TODO ahkui  recordItemFirstBase.setShowFirstViewTwoAcVisibility(true);
-                    //TODO ahkui   圖片  (R.drawable.error)
-                    select_twoAc = "失誤 E";
-                }
-                else if(radioGroup_two_Ac.getCheckedRadioButtonId() == radioButton_two_T.getId()) {
-                    //TODO ahkui  recordItemFirstBase.setShowFirstViewTwoAcVisibility(true);
-                    //TODO ahkui   圖片  (R.drawable.tag)
-                    select_twoAc = "觸殺 T";
-                }
-                else {
-                    select_twoAc = "未選擇";
-                }
-
-                Toast.makeText(activity, "OK ," + (select_two_direction+1) + "," + select_twoAc, Toast.LENGTH_SHORT).show();
-
-
+                set_first_view_two();
             }
         });
         first_two_builder.show();
+    }
+
+    public void set_first_view_two() {
+        //TODO ahkui   顯示 recordItemFirstBase.setShowTwoViewVisibility(true);
+
+        select_two_direction = (int) spinner_two_direction.getSelectedItemId();  //TODO ahkui  存入資料庫， 顯示圖片 1~9
+        if(radioGroup_two_Ac.getCheckedRadioButtonId() == radioButton_two_E.getId()) {
+            //TODO ahkui  recordItemFirstBase.setShowFirstViewTwoAcVisibility(true);
+            //TODO ahkui   圖片  (R.drawable.error)
+            select_twoAc = "失誤 E";
+        }
+        else if(radioGroup_two_Ac.getCheckedRadioButtonId() == radioButton_two_T.getId()) {
+            //TODO ahkui  recordItemFirstBase.setShowFirstViewTwoAcVisibility(true);
+            //TODO ahkui   圖片  (R.drawable.tag)
+            select_twoAc = "觸殺 T";
+        }
+        else {
+            select_twoAc = "未選擇";
+        }
+
+        Toast.makeText(activity, "OK ," + (select_two_direction+1) + "," + select_twoAc, Toast.LENGTH_SHORT).show();
+
+    }
+
+    public void first_view_three() {
+        AlertDialog.Builder first_three_builder = new AlertDialog.Builder(activity);
+        View view_first_three_dialog = LayoutInflater.from(activity).inflate(R.layout.record_first_two, null);
+        view_first_three_dialog.setPadding(10,20,10,10);
+        first_three_builder.setView(view_first_three_dialog);
+
+        spinner_three_direction = view_first_three_dialog.findViewById(R.id.spinner_two_direction);
+        radioGroup_three_Ac = view_first_three_dialog.findViewById(R.id.radioGroup_two_Ac);
+        radioButton_three_E = view_first_three_dialog.findViewById(R.id.radioButton_two_E);
+        radioButton_three_T = view_first_three_dialog.findViewById(R.id.radioButton_two_T);
+
+        ArrayAdapter adapter_direction_two = new ArrayAdapter(first_three_builder.getContext(),android.R.layout.simple_spinner_item,nums);
+        adapter_direction_two.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_three_direction.setAdapter(adapter_direction_two);
+
+        first_three_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //TODO ahkui   顯示 recordItemFirstBase.setShowThreeViewVisibility(true);
+
+                select_three_direction = (int) spinner_three_direction.getSelectedItemId();  //TODO ahkui  存入資料庫， 顯示圖片 1~9
+                if(radioGroup_three_Ac.getCheckedRadioButtonId() == radioButton_three_E.getId()) {
+                    //TODO ahkui  recordItemFirstBase.setShowFirstViewThreeAcVisibility(true);
+                    //TODO ahkui   圖片  (R.drawable.error)  recordItemFirstBase.setFirstViewThreeAcValue();
+
+                    select_threeAc = "失誤 E";
+                }
+                else if(radioGroup_three_Ac.getCheckedRadioButtonId() == radioButton_three_T.getId()) {
+                    //TODO ahkui  recordItemFirstBase.setShowFirstViewThreeAcVisibility(true);
+                    //TODO ahkui   圖片  (R.drawable.tag)   recordItemFirstBase.setFirstViewThreeAcValue();
+                    select_threeAc = "觸殺 T";
+                }
+                else {
+                    select_threeAc = "未選擇";
+                }
+
+                Toast.makeText(activity, "OK ," + (select_three_direction+1) + "," + select_threeAc, Toast.LENGTH_SHORT).show();
+            }
+        });
+        first_three_builder.show();
     }
 
 
