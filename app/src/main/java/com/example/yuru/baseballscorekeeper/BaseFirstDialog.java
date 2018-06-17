@@ -146,12 +146,12 @@ public class BaseFirstDialog {
                                         Toast.makeText(activity, "觸擊犧牲打", Toast.LENGTH_SHORT).show();
 
                                         AlertDialog.Builder scrifice_hits_builder = new AlertDialog.Builder(activity);
-                                        @SuppressLint("InflateParams") View view_scrifice_hits_dialog = LayoutInflater.from(activity).inflate(R.layout.record_sacrifice_hiits, null);
-                                        spinner_actionOne = view_scrifice_hits_dialog.findViewById(R.id.spinner_actionOne);
-                                        spinner_actionTwo = view_scrifice_hits_dialog.findViewById(R.id.spinner_actionTwo);
+                                        @SuppressLint("InflateParams") View view_sacrifice_hits_dialog = LayoutInflater.from(activity).inflate(R.layout.record_sacrifice_hiits, null);
+                                        spinner_actionOne = view_sacrifice_hits_dialog.findViewById(R.id.spinner_actionOne);
+                                        spinner_actionTwo = view_sacrifice_hits_dialog.findViewById(R.id.spinner_actionTwo);
 
-                                        view_scrifice_hits_dialog.setPadding(10,10,10,10);
-                                        scrifice_hits_builder.setView(view_scrifice_hits_dialog);
+                                        view_sacrifice_hits_dialog.setPadding(10,10,10,10);
+                                        scrifice_hits_builder.setView(view_sacrifice_hits_dialog);
                                         ArrayAdapter<String> adapter_actionOne = new ArrayAdapter<>(scrifice_hits_builder.getContext(),android.R.layout.simple_spinner_item, num);
                                         ArrayAdapter<String> adapter_actionTwo = new ArrayAdapter<>(scrifice_hits_builder.getContext(),android.R.layout.simple_spinner_item, num);
                                         adapter_actionOne.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
