@@ -135,8 +135,8 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
     // 刪除一個項目
     public void remove(int position) {
         item_record.remove(position);
+        DatabaseService.getInstance().write();
         // 通知資料項目已經刪除
-        // TODO 劉永貴這裡要刪掉
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, item_record.size());
     }
