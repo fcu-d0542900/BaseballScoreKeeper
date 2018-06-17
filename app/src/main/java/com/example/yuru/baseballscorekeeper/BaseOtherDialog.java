@@ -55,37 +55,8 @@ public class BaseOtherDialog {
                                         String name = push[which];
                                         //TODO: ahkui 選擇完後  switch (which)   recordItemOtherBase.setShowPushNumViewVisibility(true);
                                         //TODO: ahkui  圖片id  recordItemOtherBase.setShowPushNumValue();
-                                        switch (which){
-                                            case 0:
-                                                //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push1)
-                                                break;
-                                            case 1:
-                                                //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push2)
-                                                break;
-                                            case 2:
-                                                //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push3)
-                                                break;
-                                            case 3:
-                                                //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push4)
-                                                break;
-                                            case 4:
-                                                //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push5)
-                                                break;
-                                            case 5:
-                                                //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push6)
-                                                break;
-                                            case 6:
-                                                //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push7)
-                                                break;
-                                            case 7:
-                                                //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push8)
-                                                break;
-                                            case 8:
-                                                //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push9)
-                                                break;
-                                            default:
-                                                break;
-                                        }
+                                        //TODO: ahkui  (whitch)   存入資料庫， 顯示推進數字 (R.drawable.push1) ~ (R.drawable.push9)
+                                        
                                         Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
 
                                         //下一個選單失誤、上壘
