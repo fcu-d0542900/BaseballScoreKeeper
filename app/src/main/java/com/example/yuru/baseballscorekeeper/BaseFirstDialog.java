@@ -74,7 +74,7 @@ public class BaseFirstDialog {
                                         Toast.makeText(activity, "高飛犧牲打", Toast.LENGTH_SHORT).show();
 
                                         AlertDialog.Builder scrifice_fly_builder = new AlertDialog.Builder(activity);
-                                        View view_scrifice_fly_dialog = LayoutInflater.from(activity).inflate(R.layout.record_sacrifice_fly, null);
+                                        final View view_scrifice_fly_dialog = LayoutInflater.from(activity).inflate(R.layout.record_sacrifice_fly, null);
                                         radioGroup_sacrificeFly_type = view_scrifice_fly_dialog.findViewById(R.id.radioGroup_sacrificeFly_type);
                                         radioButton_sacrificeFly_type_high = view_scrifice_fly_dialog.findViewById(R.id.radioButton_sacrificeFly_high);
                                         radioButton_sacrificeFly_type_line = view_scrifice_fly_dialog.findViewById(R.id.radioButton_sacrificeFly_line);
@@ -89,11 +89,13 @@ public class BaseFirstDialog {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 //TODO ahkui  設定顯示高飛犧牲打格子  recordItemFirstBase.setShowSacrificeFlyVisibility(true);
+                                                //TODO  ahkui   recordItemFirstBase.setShowOneViewVisibility(true);
 
                                                 int select_sacrificeFly_typeID = radioGroup_sacrificeFly_type.getCheckedRadioButtonId();
                                                 int select_sacrificeFly_directionID = radioGroup_sacrificeFly_direction.getCheckedRadioButtonId();
                                                 String select_sacrificeFly_type_str;
                                                 String select_sacrificeFly_direction_str;
+                                                //TODO ahkui  顯示下面選的圖片  recordItemFirstBase.setFirstViewOneTopValue();
                                                 if(radioButton_sacrificeFly_type_high.getId() == select_sacrificeFly_typeID) {
                                                     select_sacrificeFly_type_str = "高飛球";
                                                     //TODO ahkui  存入資料庫， 顯示圖片高飛球  (R.drawable.fly_ball)
@@ -108,6 +110,7 @@ public class BaseFirstDialog {
                                                     select_sacrificeFly_type_str = "未選擇";
                                                 }
 
+                                                //TODO ahkui  顯示下面選的數字圖片  recordItemFirstBase.setFirstViewOneNumValue();
                                                 if(radioButton_sacrificeFly_direction_7.getId() == select_sacrificeFly_directionID) {
                                                     select_sacrificeFly_direction_str = "左外野";
                                                     //TODO ahkui  存入資料庫， 顯示圖片 7  (R.drawable.throw7)
@@ -218,7 +221,7 @@ public class BaseFirstDialog {
                             public void onClick(View v) {
                                 Toast.makeText(activity, "保送", Toast.LENGTH_SHORT).show();
                                 unhit_dialog.dismiss();
-                                //TODO: ahkui 存入資料庫， 顯示圖片 B   (R.drawable.bad_ball)
+                                //TODO: ahkui 存入資料庫， 顯示圖片 B   (R.drawable.throw_b)
                                 viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.BADBALL);
 
                             }

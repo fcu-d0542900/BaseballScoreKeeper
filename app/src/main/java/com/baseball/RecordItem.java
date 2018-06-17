@@ -67,7 +67,7 @@ public class RecordItem implements Serializable {
         }
         switch (_BASE_FIRST_STEP_ONE){
             case BADBALL:
-                base.setShowZeroValue(R.drawable.bad_ball);
+                base.setShowZeroValue(R.drawable.throw_b);
                 break;
             case HITBYPITCH:
                 base.setShowZeroValue(R.drawable.hit_by_pitch);
