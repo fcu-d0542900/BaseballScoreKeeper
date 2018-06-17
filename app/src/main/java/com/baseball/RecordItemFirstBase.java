@@ -9,6 +9,8 @@ import android.widget.ImageView;
  */
 
 public class RecordItemFirstBase {
+    private ImageView showEndView;
+
     private ImageView showZeroView,showHRView;
     private FrameLayout showOneView,showTwoView,showThreeView;
     private ImageView showSacrificeFly,showSacrificeHits;
@@ -18,6 +20,16 @@ public class RecordItemFirstBase {
 
     public ImageView firstViewTwoNum,showFirstViewTwoAc;
     public ImageView firstViewThreeNum,showFirstViewThreeAc;
+
+    //showEndView
+    public void setShowEndView(ImageView showEndView) {
+        this.showEndView = showEndView;
+    }
+
+    public void setShowEndViewVisibility(boolean isShow) {
+        if (showEndView != null)
+            showEndView.setVisibility(isShow?View.VISIBLE:View.GONE);
+    }
 
     //ZeroView
     public void setShowZeroView(ImageView showZeroView) {

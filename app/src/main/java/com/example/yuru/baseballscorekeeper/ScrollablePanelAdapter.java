@@ -456,7 +456,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         ImageView getFirstViewTwoNum,getFirstViewTwoAc;
         ImageView getFirstViewThreeNum,getFirstViewThreeAc;
         ImageView getSacrificeFly,getSacrificeHits;
-
+        //
+        ImageView getEnd;
         public RecordItemFirstBase base1;
 
         //二壘
@@ -492,6 +493,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             base2  = new RecordItemOtherBase();
             base3  = new RecordItemOtherBase();
             base1  = new RecordItemFirstBase();
+
             this.getScoreView = view.findViewById(R.id.centerView);
             this.getFirstView = view.findViewById(R.id.firstView);
             this.getHomeView = view.findViewById(R.id.homeView);
@@ -524,6 +526,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.getFirstViewThreeAc = view.findViewById(R.id.image_firstView_three_ac);
             this.getSacrificeFly = view.findViewById(R.id.image_sacrifice_fly);
             this.getSacrificeHits = view.findViewById(R.id.image_sacrifice_hits);
+            this.getEnd = view.findViewById(R.id.image_end);
+
             base1.setShowZeroView(getFirstViewZero);
             base1.setShowOneView(getFirstViewOne);
             base1.setShowTwoView(getFirstViewTwo);
@@ -621,6 +625,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
         void setRecordItem(RecordItem recordItem) {
             this.recordItem = recordItem;
+            updateUI();
+        }
+
+        void updateUI(){
             recordItem.updateFirstBaseUI(base1);
             Log.d("position",""+recordItem);
         }

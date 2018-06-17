@@ -84,16 +84,22 @@ public class RecordItem implements Serializable {
         Log.d("position","row: "+row+" column: "+column+" round: "+round);
         // TODO update base ui with database
         base.setShowSacrificeFlyVisibility(false);
-        base.setShowOneViewVisibility(false);
-        base.setShowHRViewVisibility(false);
         base.setShowSacrificeHitsVisibility(false);
-        base.setShowThreeViewVisibility(false);
-        base.setShowTwoViewVisibility(false);
         base.setShowZeroViewVisibility(false);
-        base.setShowFirstViewThreeAcVisibility(false);
-        base.setShowFirstViewTwoAcVisibility(false);
+        base.setShowOneViewVisibility(false);
+        base.setShowTwoViewVisibility(false);
+        base.setShowThreeViewVisibility(false);
+        base.setShowHRViewVisibility(false);
+        //one
+        base.setShowFirstViewOneTopVisibility(false);
+        base.setShowFirstViewOneBottomVisibility(false);
         base.setShowFirstViewOneAc1Visibility(false);
         base.setShowFirstViewOneAc2Visibility(false);
+        //two
+        base.setShowFirstViewTwoAcVisibility(false);
+        //three
+        base.setShowFirstViewThreeAcVisibility(false);
+
         switch (_BASE_FIRST_STEP_ONE){
             case HIGH:
                 base.setShowSacrificeFlyVisibility(true);
@@ -124,9 +130,10 @@ public class RecordItem implements Serializable {
             case TOUCH:
                 base.setShowSacrificeHitsVisibility(true);
                 base.setShowOneViewVisibility(true);
+                base.setShowFirstViewOneBottomVisibility(true);
                 base.setShowTwoViewVisibility(true);
-                base.setFirstViewOneAc1Value(getImageByNumber(BALL_TOUCH_AC1));
-                base.setFirstViewOneAc2Value(getImageByNumber(BALL_TOUCH_AC2));
+                base.setFirstViewOneNumValue(getImageByNumber(BALL_TOUCH_AC1));
+                base.setFirstViewTwoNumValue(getImageByNumber(BALL_TOUCH_AC2));
                 Log.d("ahkui touch","get into rouch "+ _BASE_FIRST_STEP_ONE.toString());
             case NORMAL:
                 break;
@@ -180,6 +187,15 @@ public class RecordItem implements Serializable {
     public void updateOtherBaseUI(RecordItemOtherBase base,int base_int){
         if (base_int == 0){
             // TODO update base1 ui with database
+            base.setShowActionNameViewVisibility(false);
+            base.setShowActionViewVisibility(false);
+            base.setShowThrowViewVisibility(false);
+            base.setShowPushNumViewVisibility(false);
+            base.setShowToBaseViewVisibility(false);
+            //action
+            base.setShowActionOneAcViewVisibility(false);
+            base.setShowActionTwoAcViewVisibility(false);
+
         }
     }
 
