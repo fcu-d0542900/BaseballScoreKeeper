@@ -56,14 +56,12 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     @Override
     public int getRowCount() {
-        Log.e("ahkui",9+"");
         return 9;
     }
 
     @Override
     public int getColumnCount() {
-        Log.e("ahkui",activity.currentRecord.getTeam().getLastRecordItemsColumn() + 1 +"");
-        return activity.currentRecord.getTeam().getLastRecordItemsColumn() + 1;
+        return activity.currentRecord.getTeam().getLastRecordItemsColumn() + 1 + 1;
     }
 
 

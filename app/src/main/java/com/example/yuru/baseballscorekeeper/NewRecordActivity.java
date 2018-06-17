@@ -11,16 +11,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.baseball.BoardNumInfo;
 import com.baseball.DatabaseService;
-import com.baseball.OrderInfo;
-import com.baseball.Player;
 import com.baseball.Record;
-import com.baseball.RecordTeam;
-import com.baseball.ScoreBoardInfo;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class NewRecordActivity extends AppCompatActivity {
 
