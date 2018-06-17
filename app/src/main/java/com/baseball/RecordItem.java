@@ -24,9 +24,9 @@ public class RecordItem implements Serializable {
         this.updateOtherBaseUI(base3,3);
     }
 
-    BASE_FIRST_STEP_ONE _BASE_FIRST_STEP_ONE;
-    BALL_TYPE ballType;
-    BALL_DIRECTION ballDirection;
+    BASE_FIRST_STEP_ONE _BASE_FIRST_STEP_ONE = BASE_FIRST_STEP_ONE.__;
+    BALL_TYPE ballType = BALL_TYPE.__;
+    BALL_DIRECTION ballDirection = BALL_DIRECTION.__;
     public void set_BASE_FIRST_STEP_ONE(BASE_FIRST_STEP_ONE _BASE_FIRST_STEP_ONE) {
         this._BASE_FIRST_STEP_ONE = _BASE_FIRST_STEP_ONE;
         save();
@@ -39,27 +39,32 @@ public class RecordItem implements Serializable {
         BADBALL, //保送
         HITBYPITCH, //觸身球
         KILLED, //三鎮
-        NOKILLED //不死三陣
+        NOKILLED, //不死三陣
+        __
     }
 
     public enum BALL_TYPE {
         HIGH, // 高飛球
         FLAT, // 平飛球
-        FLOOR // 滾地球
+        FLOOR, // 滾地球
+        __
     }
 
     public enum BALL_DIRECTION{
         LEFT,//左
         MIDDLE,//中
-        RIGHT//右
-    }
+        RIGHT,//右
+        __
+        }
 
     public void setBallDirection(BALL_DIRECTION ball_direction) {
         this.ballDirection = ball_direction;
+        save();
     }
 
     public void setBallType(BALL_TYPE ballType) {
         this.ballType = ballType;
+        save();
     }
 
     public void updateFirstBaseUI(RecordItemFirstBase base){
@@ -78,23 +83,26 @@ public class RecordItem implements Serializable {
         switch (_BASE_FIRST_STEP_ONE){
             case HIGH:
                 base.setShowSacrificeFlyVisibility(true);
+                base.setShowOneViewVisibility(true);
                 switch (ballType){
                     case HIGH:
-                        // TODO YURU
+                        base.setFirstViewOneTopValue(R.drawable.fly_ball);
                         break;
                     case FLAT:
-                        // TODO YURU
+                        base.setFirstViewOneTopValue(R.drawable.line_drive);
                         break;
+                    case __:
+                        base.setShowOneViewVisibility(false);
                 }
                 switch (ballDirection){
                     case LEFT:
-                        // TODO YURU
+                        base.setFirstViewOneNumValue(R.drawable.throw7);
                         break;
                     case MIDDLE:
-                        // TODO YURU
+                        base.setFirstViewOneNumValue(R.drawable.throw8);
                         break;
                     case RIGHT:
-                        // TODO YURU
+                        base.setFirstViewOneNumValue(R.drawable.throw9);
                         break;
                 }
                 break;
