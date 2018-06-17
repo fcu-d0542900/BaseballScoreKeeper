@@ -84,16 +84,22 @@ public class RecordItem implements Serializable {
         Log.d("position","row: "+row+" column: "+column+" round: "+round);
         // TODO update base ui with database
         base.setShowSacrificeFlyVisibility(false);
-        base.setShowOneViewVisibility(false);
-        base.setShowHRViewVisibility(false);
         base.setShowSacrificeHitsVisibility(false);
-        base.setShowThreeViewVisibility(false);
-        base.setShowTwoViewVisibility(false);
         base.setShowZeroViewVisibility(false);
-        base.setShowFirstViewThreeAcVisibility(false);
-        base.setShowFirstViewTwoAcVisibility(false);
+        base.setShowOneViewVisibility(false);
+        base.setShowTwoViewVisibility(false);
+        base.setShowThreeViewVisibility(false);
+        base.setShowHRViewVisibility(false);
+        //one
+        base.setShowFirstViewOneTopVisibility(false);
+        base.setShowFirstViewOneBottomVisibility(false);
         base.setShowFirstViewOneAc1Visibility(false);
         base.setShowFirstViewOneAc2Visibility(false);
+        //two
+        base.setShowFirstViewTwoAcVisibility(false);
+        //three
+        base.setShowFirstViewThreeAcVisibility(false);
+
         switch (_BASE_FIRST_STEP_ONE){
             case HIGH:
                 base.setShowSacrificeFlyVisibility(true);
