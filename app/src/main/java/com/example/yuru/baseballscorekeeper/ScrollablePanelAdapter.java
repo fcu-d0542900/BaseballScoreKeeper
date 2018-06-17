@@ -41,7 +41,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     private int playerNum,playerPosition;
 
     private BaseOtherDialog baseOtherDialog;
-    private BaseFirstDialog baseFirstDialog = new BaseFirstDialog();
+    private BaseFirstDialog baseFirstDialog;
     private GoodBadBallDialog goodBadBallDialog = new GoodBadBallDialog();
 
     private List<List<RecordItem>> recordItems;
@@ -346,6 +346,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.getFirstView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    baseFirstDialog = new BaseFirstDialog();
                     baseFirstDialog.setActivity(activity);
                     baseFirstDialog.setBaseFirstDialog(viewHolder);
                     Toast.makeText(v.getContext(), "一壘" , Toast.LENGTH_SHORT).show();
@@ -357,10 +358,9 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.getSecondView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO 玉鳳 二壘
                     baseOtherDialog = new BaseOtherDialog();
-                    baseOtherDialog.setNewRecordActivity(activity);
-                    baseOtherDialog.setBaseTwoDialog(viewHolder,new String[]{"推進","進壘"});
+                    baseOtherDialog.setActivity(activity);
+                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"});
                     Toast.makeText(v.getContext(), "二壘" , Toast.LENGTH_SHORT).show();
 
                 }
@@ -370,11 +370,9 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.getThirdView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     baseOtherDialog = new BaseOtherDialog();
-                    baseOtherDialog.setNewRecordActivity(activity);
-                    baseOtherDialog.setBaseTwoDialog(viewHolder,new String[]{"推進","進壘"});
-
+                    baseOtherDialog.setActivity(activity);
+                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"});
                     Toast.makeText(v.getContext(), "三壘" , Toast.LENGTH_SHORT).show();
                 }
             });
@@ -383,10 +381,9 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.getHomeView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO 玉鳳 本壘
                     baseOtherDialog = new BaseOtherDialog();
-                    baseOtherDialog.setNewRecordActivity(activity);
-                    baseOtherDialog.setBaseTwoDialog(viewHolder,new String[]{"推進","進壘"});
+                    baseOtherDialog.setActivity(activity);
+                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"});
                     Toast.makeText(v.getContext(), "本壘" , Toast.LENGTH_SHORT).show();
 
                 }
@@ -405,7 +402,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         }
     }
 
-    private static class BoardNumViewHolder extends RecyclerView.ViewHolder {
+    static class BoardNumViewHolder extends RecyclerView.ViewHolder {
         TextView dateTextView;
 
         BoardNumViewHolder(View itemView) {
@@ -416,7 +413,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     }
 
-    private static class PlayerInfoViewHolder extends RecyclerView.ViewHolder {
+    static class PlayerInfoViewHolder extends RecyclerView.ViewHolder {
         public TextView text_playerPosition;
         public TextView text_playerName;
         public TextView text_playerNum;
