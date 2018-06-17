@@ -48,33 +48,35 @@ public class BaseOtherDialog {
                                     @Override
                                     public void onClick(DialogInterface dialog, final int which) {
                                         String name = push[which];
+                                        //TODO: ahkui 選擇完後  switch (which)   recordItemOtherBase.setShowPushNumViewVisibility(true);
+                                        //TODO: ahkui  圖片id  recordItemOtherBase.setShowPushNumValue();
                                         switch (which){
                                             case 0:
-                                                recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push1)
+                                                //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push1)
                                                 break;
                                             case 1:
-                                                recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push2)
+                                                //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push2)
                                                 break;
                                             case 2:
-                                                recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push3)
+                                                //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push3)
                                                 break;
                                             case 3:
-                                                recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push4)
+                                                //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push4)
                                                 break;
                                             case 4:
-                                                recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push5)
+                                                //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push5)
                                                 break;
                                             case 5:
-                                                recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push6)
+                                                //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push6)
                                                 break;
                                             case 6:
-                                                recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push7)
+                                                //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push7)
                                                 break;
                                             case 7:
-                                                recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push8)
+                                                //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push8)
                                                 break;
                                             case 8:
-                                                recordItemOtherBase.setShowPushNumViewVisibility(true);   //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push9)
+                                                //TODO: ahkui 存入資料庫， 顯示推進數字   (R.drawable.push9)
                                                 break;
                                             default:
                                                 break;
@@ -87,13 +89,14 @@ public class BaseOtherDialog {
                                         push_dialog.setView(view_push_choice1);   // 設置view
                                         final AlertDialog new_push_dialog = push_dialog.create();    //根據builder設置好的一系列數據, 来建構一個dialog
 
+                                        //TODO: ahkui  (DP,TP,S,CS,PO,W,P,BK)   選擇完後   recordItemOtherBase.setShowActionNameViewVisibility(true);
+                                        //TODO: ahkui   沒有失誤喔喔喔 !!!!
                                         //點擊雙殺DP
                                         view_push_choice1.findViewById(R.id.click_dp).setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 Toast.makeText(newRecordActivity, "雙殺DP", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
-                                                recordItemOtherBase.setShowActionNameViewVisibility(true);
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 DP  (R.drawable.double_plays)
                                             }
                                         });
@@ -104,7 +107,6 @@ public class BaseOtherDialog {
                                             public void onClick(View v) {
                                                 Toast.makeText(newRecordActivity, "三殺TP", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
-                                                recordItemOtherBase.setShowActionNameViewVisibility(true);
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 TP  (R.drawable.tripple_play)
                                             }
                                         });
@@ -115,7 +117,6 @@ public class BaseOtherDialog {
                                             public void onClick(View v) {
                                                 Toast.makeText(newRecordActivity, "盜壘S", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
-                                                recordItemOtherBase.setShowActionNameViewVisibility(true);
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 S  (R.drawable.stolen_base)
                                             }
                                         });
@@ -126,7 +127,6 @@ public class BaseOtherDialog {
                                             public void onClick(View v) {
                                                 Toast.makeText(newRecordActivity, "盜壘失敗CS", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
-                                                recordItemOtherBase.setShowActionNameViewVisibility(true);
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 CS  (R.drawable.caught_stolen)
                                             }
                                         });
@@ -137,18 +137,16 @@ public class BaseOtherDialog {
                                             public void onClick(View v) {
                                                 Toast.makeText(newRecordActivity, "投手牽制PO", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
-                                                recordItemOtherBase.setShowActionNameViewVisibility(true);
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 PO  (R.drawable.put_outs)
                                             }
                                         });
 
-                                        //點擊暴投
+                                        //點擊暴投W
                                         view_push_choice1.findViewById(R.id.click_w).setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 Toast.makeText(newRecordActivity, "暴投W", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
-                                                recordItemOtherBase.setShowActionNameViewVisibility(true);
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 W  (R.drawable.put_outs)
                                             }
                                         });
@@ -159,7 +157,6 @@ public class BaseOtherDialog {
                                             public void onClick(View v) {
                                                 Toast.makeText(newRecordActivity, "捕逸P", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
-                                                recordItemOtherBase.setShowActionNameViewVisibility(true);
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 P  (R.drawable.passed_ball)
                                             }
                                         });
@@ -170,18 +167,16 @@ public class BaseOtherDialog {
                                             public void onClick(View v) {
                                                 Toast.makeText(newRecordActivity, "投手犯規BK", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
-                                                recordItemOtherBase.setShowActionNameViewVisibility(true);
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 BK  (R.drawable.balks)
                                             }
                                         });
 
-                                        //點擊失誤
+                                        //點擊失誤E
                                         view_push_choice1.findViewById(R.id.click_error).setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 Toast.makeText(newRecordActivity, "失誤", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
-                                                //TODO:ahkui 存入資料庫， 顯示圖片 BK  (R.drawable.balks)
                                                 setErroeDialog();  // 點擊失誤後的選單
                                             }
                                         });
@@ -211,6 +206,7 @@ public class BaseOtherDialog {
                                                     case 0:   //點選趁傳
                                                         View view_throwTo = LayoutInflater.from(newRecordActivity).inflate(R.layout.record_throw_dialog, null);
                                                         AlertDialog.Builder dialog_throw = new AlertDialog.Builder(newRecordActivity);
+                                                        view_throwTo.setPadding(10,10,10,10);
                                                         dialog_throw.setView(view_throwTo);
                                                         spinner_left = view_throwTo.findViewById(R.id.spinner_left);
                                                         spinner_right=view_throwTo.findViewById(R.id.spinner_right);
@@ -342,10 +338,10 @@ public class BaseOtherDialog {
     }
 
     //失誤選單 數字E-數字E
-    public void setErroeDialog()
-    {
+    public void setErroeDialog() {
         View view_error = LayoutInflater.from(newRecordActivity).inflate(R.layout.record_error_dialog, null);
         AlertDialog.Builder dialog_error = new AlertDialog.Builder(newRecordActivity);
+        view_error.setPadding(0,10,0,10);
         dialog_error.setView(view_error);
         spinner_left = view_error.findViewById(R.id.spinner_left);
         spinner_right=view_error.findViewById(R.id.spinner_right);
@@ -364,6 +360,7 @@ public class BaseOtherDialog {
         spinner_left_e.setAdapter(left_error);
         spinner_right_e.setAdapter(right_error);
 
+/*
         //左選單1~9
         spinner_left.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -502,9 +499,33 @@ public class BaseOtherDialog {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+
+*/
+
         //點擊ok
         dialog_error.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogInterface, int i) {
+                //TODO: ahkui    recordItemOtherBase.setShowActionViewVisibility(true);
+
+                String select_left_E = "";
+                String select_right_E = "";
+                int select_spinner_left = (int) spinner_left.getSelectedItemId();
+                //TODO  ahkui   存入資料庫， 顯示圖片  數字select_spinner_left+1  (R.drawable.throw 數字)
+                int select_spinner_right = (int) spinner_right.getSelectedItemId();
+                //TODO  ahkui   存入資料庫， 顯示圖片  數字 select_spinner_right+1  (R.drawable.throw 數字)
+                int select_spinner_left_E = (int) spinner_left_e.getSelectedItemId();
+                int select_spinner_right_E = (int) spinner_right_e.getSelectedItemId();
+
+                if(select_spinner_left_E == 1) {
+                    select_left_E = ",E";
+                    //TODO: ahkui    recordItemOtherBase.setShowActionOneAcViewVisibility(true);
+                }
+                if(select_spinner_right_E == 1) {
+                    select_right_E = ",E";
+                    //TODO: ahkui    recordItemOtherBase.setShowActionTwoAcViewVisibility(true);
+                }
+
+                Toast.makeText(newRecordActivity, "OK ," + (select_spinner_left+1) + select_left_E + "," + (select_spinner_right+1) + select_right_E, Toast.LENGTH_SHORT).show();
             }
         });
         dialog_error.show();

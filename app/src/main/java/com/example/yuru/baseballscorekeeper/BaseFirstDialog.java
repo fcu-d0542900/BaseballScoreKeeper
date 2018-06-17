@@ -160,7 +160,7 @@ public class BaseFirstDialog {
                                         spinner_actionOne = view_scrifice_hits_dialog.findViewById(R.id.spinner_actionOne);
                                         spinner_actionTwo = view_scrifice_hits_dialog.findViewById(R.id.spinner_actionTwo);
 
-                                        view_scrifice_hits_dialog.setPadding(10,20,10,10);
+                                        view_scrifice_hits_dialog.setPadding(10,10,10,10);
                                         scrifice_hits_builder.setView(view_scrifice_hits_dialog);
                                         ArrayAdapter adapter_actionOne = new ArrayAdapter(scrifice_hits_builder.getContext(),android.R.layout.simple_spinner_item,nums);
                                         ArrayAdapter adapter_actionTwo = new ArrayAdapter(scrifice_hits_builder.getContext(),android.R.layout.simple_spinner_item,nums);
