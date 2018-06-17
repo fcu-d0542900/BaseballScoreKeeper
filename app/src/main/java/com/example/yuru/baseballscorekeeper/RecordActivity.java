@@ -101,7 +101,6 @@ public class RecordActivity extends AppCompatActivity {
         editText_homeTeam = view_new_record.findViewById(R.id.editText_homeTeam);
         spinner_awayTeam = view_new_record.findViewById(R.id.spinner_awayTeam);
         spinner_homeTeam = view_new_record.findViewById(R.id.spinner_homeTeam);
-        checkBox_isSetPlayer = view_new_record.findViewById(R.id.checkBox_isSetPlayer);
 
         AlertDialog.Builder dialog_addRecord = new AlertDialog.Builder(this);
 
@@ -159,7 +158,6 @@ public class RecordActivity extends AppCompatActivity {
                 String gameName = editText_gameName.getText().toString();
                 String awayTeam = editText_awayTeam.getText().toString();
                 String homeTeam = editText_homeTeam.getText().toString();
-                Boolean isSetPlayer = checkBox_isSetPlayer.isChecked();
 
                 int position = DatabaseService.getInstance().getDatabase().addRecord(new Record(gameName, awayTeam,homeTeam,Calendar.getInstance().getTime()));
                 itemAdapter.update();
@@ -169,7 +167,6 @@ public class RecordActivity extends AppCompatActivity {
                 intent.putExtra("gameName",gameName);
                 intent.putExtra("awayTeam",awayTeam);
                 intent.putExtra("homeTeam",homeTeam);
-                intent.putExtra("isSetPlayer",isSetPlayer);
                 intent.putExtra("n",1);
                 startActivityForResult(intent,111);
 
