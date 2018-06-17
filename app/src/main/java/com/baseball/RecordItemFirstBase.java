@@ -122,10 +122,6 @@ public class RecordItemFirstBase {
         this.showFirstViewOneBottom = firstViewOneBottom;
     }
 
-    public  void setShowFirstViewOneBottomValue(int imageID) {
-        showFirstViewOneBottom.setImageResource(imageID);
-    }
-
     public void setShowFirstViewOneBottomVisibility(boolean isShow) {
         if (showFirstViewOneBottom != null)
             showFirstViewOneBottom.setVisibility(isShow?View.VISIBLE:View.GONE);
