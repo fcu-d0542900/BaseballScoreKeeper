@@ -284,6 +284,9 @@ public class BaseFirstDialog {
         select_direction = (int)spinner_direction.getSelectedItemId(); //TODO ahkui  存入資料庫， 顯示圖片 1~9
         select_elseAc = "";
 
+        //TODO ahkui  高飛 平飛  recordItemFirstBase.setFirstViewOneTop(true);
+        //TODO ahkui  滾地 recordItemFirstBase.setFirstViewOneBottom(true);
+
         if(radioButton_type_high.getId() == select_typeID) {
             select_type_str = "高飛球";
             //TODO ahkui  存入資料庫， 顯示圖片高飛球  (R.drawable.fly_ball)
