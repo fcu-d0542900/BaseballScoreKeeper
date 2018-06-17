@@ -515,6 +515,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     public void updateData() {
         recordItems = activity.getUpdateData();
+        activity.scrollablePanel.notifyDataSetChanged();
     }
 
 

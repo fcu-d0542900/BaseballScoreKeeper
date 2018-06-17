@@ -17,6 +17,7 @@ import com.baseball.DatabaseService;
 import com.baseball.Record;
 import com.baseball.RecordItem;
 import com.baseball.RecordTeam;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,18 +58,13 @@ public class NewRecordActivity extends AppCompatActivity {
             public void onItemClick(View view, int position) {
 
                 if(position==1){  //點擊away
-                    Toast.makeText(NewRecordActivity.this,"點擊away"+position
-                            ,Toast.LENGTH_LONG).show();
                     currentRecord.setCurrenFaction(RecordTeam.Faction.away);  //TODO: ahkui這樣切換對嗎
-                    DatabaseService.getInstance().getDatabase().getRecord(DatabaseService.CurrentRecord).setCurrenFaction(RecordTeam.Faction.away);
                     scrollablePanelAdapter.updateData();
                 }
-                else if(position==2)  //點擊home
-                    Toast.makeText(NewRecordActivity.this,"點擊home"+position
-                            ,Toast.LENGTH_LONG).show();
+                else if(position==2) { //點擊home
                     currentRecord.setCurrenFaction(RecordTeam.Faction.home); //TODO: ahkui這樣切換對嗎
-                    DatabaseService.getInstance().getDatabase().getRecord(DatabaseService.CurrentRecord).setCurrenFaction(RecordTeam.Faction.home);
                     scrollablePanelAdapter.updateData();
+                }
             }
         });
 
