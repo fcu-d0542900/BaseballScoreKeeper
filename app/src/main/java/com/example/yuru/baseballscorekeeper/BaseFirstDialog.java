@@ -99,7 +99,7 @@ public class BaseFirstDialog {
                                                 //TODO ahkui  顯示下面選的圖片  recordItemFirstBase.setFirstViewOneTopValue();
                                                 if(radioButton_sacrificeFly_type_high.getId() == select_sacrificeFly_typeID) {
                                                     select_sacrificeFly_type_str = "高飛球";
-//                                                    TODO ahkui  存入資料庫， 顯示圖片高飛球  (R.drawable.fly_ball)
+                                                 //TODO ahkui  存入資料庫， 顯示圖片高飛球  (R.drawable.fly_ball)
                                                     viewHolder.recordItem.setBallType(RecordItem.BALL_TYPE.HIGH);
 
                                                 }

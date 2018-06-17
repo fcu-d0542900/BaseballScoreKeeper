@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.baseball.BASE;
 import com.baseball.Player;
 import com.baseball.RecordItem;
+import com.baseball.RecordItemCenter;
 import com.baseball.RecordItemFirstBase;
 import com.baseball.RecordItemOtherBase;
 
@@ -320,8 +321,12 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
         //更改球員
         ImageView getChangeGarrison,getChangeHitter;
+
+        //center
+        ImageView getCenterView;
         //安打
         ImageView getHit1View,getHit2View,getHit3View,getHit4View;
+        public RecordItemCenter center;
 
         //一壘
         ImageView getFirstViewZero,getFirstViewHR;
@@ -362,12 +367,15 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         ImageView getHomeViewThrowOne,getHomeViewThrowTwo;
         public RecordItemOtherBase base;
 
+
         OrderViewHolder(View view) {
             super(view);
-            base  = new RecordItemOtherBase();
+
+            base1  = new RecordItemFirstBase();
             base2  = new RecordItemOtherBase();
             base3  = new RecordItemOtherBase();
-            base1  = new RecordItemFirstBase();
+            base  = new RecordItemOtherBase();
+            center = new RecordItemCenter();
 
             this.getScoreView = view.findViewById(R.id.centerView);
             this.getFirstView = view.findViewById(R.id.firstView);
@@ -378,10 +386,22 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
             this.getChangeGarrison = view.findViewById(R.id.image_change_garrison);
             this.getChangeHitter = view.findViewById(R.id.image_change_hitter);
+
+            //center
+            this.getCenterView = view.findViewById(R.id.image_centerView);
             this.getHit1View = view.findViewById(R.id.image_hit1);
             this.getHit2View = view.findViewById(R.id.image_hit2);
             this.getHit3View = view.findViewById(R.id.image_hit3);
             this.getHit4View = view.findViewById(R.id.image_hit4);
+
+            center.setShowCenterView(getCenterView);
+            center.setShowHit1View(getHit1View);
+            center.setShowHit2View(getHit2View);
+            center.setShowHit3View(getHit3View);
+            center.setShowHit4View(getHit4View);
+
+            center.setShowChangeGarrison(getChangeGarrison);
+            center.setShowChangeHitter(getChangeHitter);
 
 
             //一壘
@@ -418,6 +438,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             base1.setShowFirstViewThreeAc(getFirstViewThreeAc);
             base1.setShowSacrificeFly(getSacrificeFly);
             base1.setShowSacrificeHits(getSacrificeHits);
+            base1.setShowEndView(getEnd);
+
 
 
 

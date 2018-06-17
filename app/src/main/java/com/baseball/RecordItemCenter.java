@@ -8,20 +8,28 @@ import android.widget.ImageView;
  */
 
 public class RecordItemCenter {
-    private ImageView showCenterView,showEndView;
+    private ImageView showCenterView;
+//    private ImageView showEndView;
     private ImageView showHit1View,showHit2View,showHit3View,showHit4View;
     private ImageView showChangeGarrison,showChangeHitter;
 
 
+    //ShowCenter
     public void setShowCenterView(ImageView showCenterView) {
         this.showCenterView = showCenterView;
     }
 
-    public void setShowActionNameViewVisibility(boolean isShow) {
+    public  void setShowCenterValue(int imageID) {
+        showCenterView.setImageResource(imageID);
+    }
+
+    public void setShowCenterVisibility(boolean isShow) {
         if (showCenterView != null)
             showCenterView.setVisibility(isShow? View.VISIBLE:View.GONE);
     }
 
+/*
+    //ShowEnd
     public void setShowEndView(ImageView showEndView) {
         this.showEndView = showEndView;
     }
@@ -30,7 +38,9 @@ public class RecordItemCenter {
         if (showEndView != null)
             showEndView.setVisibility(isShow? View.VISIBLE:View.GONE);
     }
+*/
 
+    //ShowHit1
     public void setShowHit1View(ImageView showHit1View) {
         this.showHit1View = showHit1View;
     }
@@ -40,6 +50,7 @@ public class RecordItemCenter {
             showHit1View.setVisibility(isShow? View.VISIBLE:View.GONE);
     }
 
+    //ShowHit2
     public void setShowHit2View(ImageView showHit2View) {
         this.showHit2View = showHit2View;
     }
@@ -49,6 +60,7 @@ public class RecordItemCenter {
             showHit2View.setVisibility(isShow? View.VISIBLE:View.GONE);
     }
 
+    //ShowHit3
     public void setShowHit3View(ImageView showHit3View) {
         this.showHit3View = showHit3View;
     }
@@ -58,6 +70,7 @@ public class RecordItemCenter {
             showHit3View.setVisibility(isShow? View.VISIBLE:View.GONE);
     }
 
+    //ShowHit4
     public void setShowHit4View(ImageView showHit4View) {
         this.showHit4View = showHit4View;
     }
@@ -67,6 +80,7 @@ public class RecordItemCenter {
             showHit4View.setVisibility(isShow? View.VISIBLE:View.GONE);
     }
 
+    //ShowChangeHitter
     public void setShowChangeHitter(ImageView showChangeHitter) {
         this.showChangeHitter = showChangeHitter;
     }
@@ -76,6 +90,7 @@ public class RecordItemCenter {
             showChangeHitter.setVisibility(isShow? View.VISIBLE:View.GONE);
     }
 
+    //ShowChangeGarrison
     public void setShowChangeGarrison(ImageView showChangeGarrison) {
         this.showChangeGarrison = showChangeGarrison;
     }
