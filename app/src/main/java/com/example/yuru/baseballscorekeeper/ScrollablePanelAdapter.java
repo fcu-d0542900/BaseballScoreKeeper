@@ -197,6 +197,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     private void setOrderView(final int row, final int column, final OrderViewHolder viewHolder) {
         final RecordItem recordItem = activity.currentRecord.getTeam().getRecordItems(row - 1,column - 1);
+        viewHolder.setRecordItem(recordItem);
         if (recordItem != null) {
             viewHolder.getScoreView.bringToFront();
 
@@ -334,7 +335,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 @Override
                 public void onClick(View v) {
 //                    baseOtherDialog.setBaseOneDialog(viewHolder,1,new String[]{"推進","進壘"});
-                    baseFirstDialog.setNewRecordActivity(activity);
+                    baseFirstDialog.setActivity(activity);
                     baseFirstDialog.setBaseFirstDialog(viewHolder);
 
                     Toast.makeText(v.getContext(), "一壘" , Toast.LENGTH_SHORT).show();
@@ -418,6 +419,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     static class OrderViewHolder extends RecyclerView.ViewHolder {
+        RecordItem recordItem;
+
         TextView getScoreView;
         TextView getFirstView;
         TextView getHomeView;
@@ -552,6 +555,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
             this.getScoreView.bringToFront();
 
+        }
+
+        public void setRecordItem(RecordItem recordItem) {
+            this.recordItem = recordItem;
         }
     }
 

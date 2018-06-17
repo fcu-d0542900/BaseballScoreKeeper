@@ -26,7 +26,22 @@ public class RecordItem implements Serializable {
         this.updateOtherBaseUI(base3,3);
     }
 
-    public void setBASE_B_D_K_KR(boolean state,BASE_B_D_K_KR value){
+    BASE_FIRST_STEP_ONE _BASE_FIRST_STEP_ONE;
+    public enum BASE_FIRST_STEP_ONE{
+        HIGH,
+        TOUCH,
+        NORMAL,
+        BADBALL,
+        HITBYPITCH,
+        KILLED,
+        NOKILLED
+    }
+
+    public void set_BASE_FIRST_STEP_ONE(BASE_FIRST_STEP_ONE _BASE_FIRST_STEP_ONE) {
+        this._BASE_FIRST_STEP_ONE = _BASE_FIRST_STEP_ONE;
+    }
+
+    public void setBASE_B_D_K_KR(boolean state, BASE_B_D_K_KR value){
         this.isShow_BASE_B_D_K_KR = state;
         base_step = value;
     }
