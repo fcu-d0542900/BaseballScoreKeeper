@@ -3,6 +3,7 @@ package com.baseball;
 import android.util.Log;
 
 import com.example.yuru.baseballscorekeeper.R;
+import com.google.gson.Gson;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,13 +19,6 @@ public class RecordItem implements Serializable {
     private Player attPlayer;
     private List<Player> defPlayer;
     private boolean score=false;
-
-    public void updateUI(RecordItemCenter center,RecordItemFirstBase base,RecordItemOtherBase base1,RecordItemOtherBase base2,RecordItemOtherBase base3){
-        this.updateFirstBaseUI(base);
-        this.updateOtherBaseUI(base1,1);
-        this.updateOtherBaseUI(base2,2);
-        this.updateOtherBaseUI(base3,3);
-    }
 
     BASE_FIRST_STEP_ONE _BASE_FIRST_STEP_ONE = BASE_FIRST_STEP_ONE.__;
     BALL_TYPE ballType = BALL_TYPE.__;
@@ -56,11 +50,20 @@ public class RecordItem implements Serializable {
     }
 
     public enum BALL_DIRECTION{
+        __,
+        ONE,
+        TWO,
+        THREE,
+        FOUR,
+        FIVE,
+        SIX,
+        SEVEN,
+        EIGHT,
+        NINE,
         LEFT,//左
         MIDDLE,//中
         RIGHT,//右
-        __
-        }
+    }
 
     public void setBallDirection(BALL_DIRECTION ball_direction) {
         this.ballDirection = ball_direction;
@@ -81,8 +84,9 @@ public class RecordItem implements Serializable {
     }
 
     public void updateFirstBaseUI(RecordItemFirstBase base){
-        Log.d("position","row: "+row+" column: "+column+" round: "+round);
-        // TODO update base ui with database
+        Gson gson = new Gson();
+        String json = gson.toJson(BALL_DIRECTION.values());
+        Log.v("json",json);
         base.setShowSacrificeFlyVisibility(false);
         base.setShowSacrificeHitsVisibility(false);
         base.setShowZeroViewVisibility(false);
@@ -159,29 +163,36 @@ public class RecordItem implements Serializable {
                 break;
         }
     }
-
-    private int getImageByNumber(int num){
-        switch (num){
-            case 1:
+    private int getImageByNumber(int num) {
+        return getImageByNumber(BALL_DIRECTION.values()[num]);
+    }
+    private int getImageByNumber(BALL_DIRECTION direction) {
+        switch (direction){
+            case ONE:
                 return R.drawable.throw1;
-            case 2:
+            case TWO:
                 return R.drawable.throw2;
-            case 3:
+            case THREE:
                 return R.drawable.throw3;
-            case 4:
+            case FOUR:
                 return R.drawable.throw4;
-            case 5:
+            case FIVE:
                 return R.drawable.throw5;
-            case 6:
+            case SIX:
                 return R.drawable.throw6;
-            case 7:
+            case SEVEN:
+            case LEFT:
                 return R.drawable.throw7;
-            case 8:
+            case EIGHT:
+            case MIDDLE:
                 return R.drawable.throw8;
-            case 9:
+            case NINE:
+            case RIGHT:
                 return R.drawable.throw9;
+            default:
+                return R.drawable.throw1;
+
         }
-        return num;
     }
 
     public void updateOtherBaseUI(RecordItemOtherBase base,int base_int){
