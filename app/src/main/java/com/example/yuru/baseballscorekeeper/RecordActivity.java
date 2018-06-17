@@ -71,10 +71,7 @@ public class RecordActivity extends AppCompatActivity {
 
                 // TODO:要去哪裡抓資料?
                 Intent intent = new Intent(RecordActivity.this,NewRecordActivity.class);
-                intent.putExtra("gameName","");
-                intent.putExtra("awayTeam","");
-                intent.putExtra("homeTeam","");
-                intent.putExtra("n",1);
+                intent.putExtra("recordPosition",position);
                 startActivityForResult(intent,111);
                 Toast.makeText(RecordActivity.this,"點擊"+position
                         ,Toast.LENGTH_LONG).show();
