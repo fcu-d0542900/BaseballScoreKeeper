@@ -1,5 +1,7 @@
 package com.baseball;
 
+import com.example.yuru.baseballscorekeeper.R;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -46,7 +48,6 @@ public class RecordItem implements Serializable {
         base.setShowHRViewVisibility(false);
         base.setShowSacrificeHitsVisibility(false);
         base.setShowThreeViewVisibility(false);
-        base.setShowThreeViewVisibility(false);
         base.setShowTwoViewVisibility(false);
         base.setShowZeroViewVisibility(false);
         base.setShowFirstViewThreeAcVisibility(false);
@@ -56,6 +57,29 @@ public class RecordItem implements Serializable {
         switch (_BASE_FIRST_STEP_ONE){
             case HIGH:
                 base.setShowSacrificeFlyVisibility(true);
+                break;
+            case BADBALL:
+            case HITBYPITCH:
+            case KILLED:
+            case NOKILLED:
+                base.setShowZeroViewVisibility(true);
+                break;
+        }
+        switch (_BASE_FIRST_STEP_ONE){
+            case BADBALL:
+                base.setShowZeroValue(R.drawable.bad_ball);
+                break;
+            case HITBYPITCH:
+                base.setShowZero                base.setShowZeroValue(R.drawable.bad_ball);
+                base.setShowZeroValue(R.drawable.bad_ball);
+                ViewVisibility(true);
+                break;
+            case KILLED:
+                base.setShowZeroViewVisibility(true);
+                break;
+            case NOKILLED:
+                base.setShowZeroViewVisibility(true);
+                break;
         }
     }
 

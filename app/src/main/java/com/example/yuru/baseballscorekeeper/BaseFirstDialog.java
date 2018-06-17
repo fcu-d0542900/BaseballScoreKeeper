@@ -70,6 +70,7 @@ public class BaseFirstDialog {
                                 switch (i) {
                                     case 0:
                                         viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.HIGH);
+                                        viewHolder.recordItem.updateFirstBaseUI(viewHolder.base1);
                                         Toast.makeText(activity, "高飛犧牲打", Toast.LENGTH_SHORT).show();
 
                                         AlertDialog.Builder scrifice_fly_builder = new AlertDialog.Builder(activity);
@@ -217,6 +218,7 @@ public class BaseFirstDialog {
 //                                recordItemFirstBase.setShowZeroViewVisibility(true);
                                 //TODO: ahkui 存入資料庫， 顯示圖片 B   (R.drawable.bad_ball)
                                 viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.BADBALL);
+                                viewHolder.recordItem.updateFirstBaseUI(viewHolder.base1);
 
                             }
                         });
@@ -225,9 +227,10 @@ public class BaseFirstDialog {
                             public void onClick(View v) {
                                 Toast.makeText(activity, "觸身", Toast.LENGTH_SHORT).show();
                                 unhit_dialog.dismiss();
-                                recordItemFirstBase.setShowZeroViewVisibility(true);
+//                                recordItemFirstBase.setShowZeroViewVisibility(true);
                                 //TODO:ahkui 存入資料庫， 顯示圖片 D  (R.drawable.hit_by_pitch)
                                 viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.HITBYPITCH);
+                                viewHolder.recordItem.updateFirstBaseUI(viewHolder.base1);
 
                             }
                         });
@@ -236,9 +239,10 @@ public class BaseFirstDialog {
                             public void onClick(View v) {
                                 Toast.makeText(activity, "三振", Toast.LENGTH_SHORT).show();
                                 unhit_dialog.dismiss();
-                                recordItemFirstBase.setShowZeroViewVisibility(true);
+//                                recordItemFirstBase.setShowZeroViewVisibility(true);
                                 //TODO:ahkui 存入資料庫， 顯示圖片 K  (R.drawable.killed)
                                 viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.KILLED);
+                                viewHolder.recordItem.updateFirstBaseUI(viewHolder.base1);
                             }
                         });
                         view_unhit_dialog.findViewById(R.id.click_nok).setOnClickListener(new View.OnClickListener() {
@@ -246,7 +250,7 @@ public class BaseFirstDialog {
                             public void onClick(View v) {
                                 Toast.makeText(activity, "不死三振", Toast.LENGTH_SHORT).show();
                                 unhit_dialog.dismiss();
-                                recordItemFirstBase.setShowZeroViewVisibility(true);
+//                                recordItemFirstBase.setShowZeroViewVisibility(true);
                                 //TODO:ahkui 存入資料庫， 顯示圖片 倒K  (R.drawable.no_killed)
                                 viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.NOKILLED);
 
