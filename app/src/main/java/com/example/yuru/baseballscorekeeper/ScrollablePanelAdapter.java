@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +60,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         super();
         this.activity = activity;
         recordItems = new ArrayList<>();
+        updateData();
+    }
+
+    void updateData(){
         activity.updateData(recordItems);
     }
 
@@ -206,8 +211,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     private void setOrderView(final int row, final int column, final OrderViewHolder viewHolder) {
 //        final RecordItem recordItem = activity.currentRecord.getTeam().getRecordItems(row - 1,column - 1);
         final RecordItem recordItem = recordItems.get(row -1).get(column-1);
-        viewHolder.setRecordItem(recordItem);
 
+        viewHolder.setRecordItem(recordItem);
         if (recordItem != null) {
             viewHolder.getScoreView.bringToFront();
 
@@ -615,6 +620,14 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
         void setRecordItem(RecordItem recordItem) {
             this.recordItem = recordItem;
+            recordItem.updateFirstBaseUI(base1);
+        }
+
+        void updateUI(NewRecordActivity activity){
+            recordItem.updateFirstBaseUI(base1);
+            recordItem.updateFirstBaseUI(base1);
+            activity.scrollablePanel.notifyDataSetChanged();
+            Log.d("position",""+recordItem);
         }
     }
 

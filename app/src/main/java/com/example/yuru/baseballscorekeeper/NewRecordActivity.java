@@ -7,6 +7,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -37,6 +38,8 @@ public class NewRecordActivity extends AppCompatActivity {
         currentRecord = DatabaseService.getInstance().getDatabase().getRecord(intent.getIntExtra("recordPosition",0));
         text_gameName = findViewById(R.id.text_gameName);
         text_gameName.setText(currentRecord.getGameName());
+        DatabaseService.CurrentRecord = intent.getIntExtra("recordPosition",0);
+        Log.d("ahkui","Record id: "+intent.getIntExtra("recordPosition",0)+"");
 
 
         scrollablePanel = findViewById(R.id.scrollable_panel);
