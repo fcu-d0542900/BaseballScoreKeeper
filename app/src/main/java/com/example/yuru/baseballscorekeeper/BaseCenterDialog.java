@@ -63,6 +63,7 @@ public class BaseCenterDialog {
                                     @Override
                                     public void onClick(View v) {
                                         //TODO 顯示得分 (R.drawable.runs)
+                                        //TODO 加分
                                         Toast.makeText(activity, "得分", Toast.LENGTH_SHORT).show();
                                         center_dialog.dismiss();
                                     }
@@ -71,7 +72,7 @@ public class BaseCenterDialog {
                                 view_center_choice1.findViewById(R.id.click_out1).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        //TODO 顯示得分 (R.drawable.out1)
+                                        //TODO 顯示一出局 (R.drawable.out1)
                                         Toast.makeText(activity, "一出局", Toast.LENGTH_SHORT).show();
                                         center_dialog.dismiss();
                                     }
@@ -80,7 +81,7 @@ public class BaseCenterDialog {
                                 view_center_choice1.findViewById(R.id.click_out2).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        //TODO 顯示得分 (R.drawable.out3)
+                                        //TODO 顯示二出局 (R.drawable.out3)
                                         Toast.makeText(activity, "二出局", Toast.LENGTH_SHORT).show();
                                         center_dialog.dismiss();
                                     }
@@ -89,7 +90,7 @@ public class BaseCenterDialog {
                                 view_center_choice1.findViewById(R.id.click_out3).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        //TODO 顯示得分 (R.drawable.out3)
+                                        //TODO 顯示三出局 (R.drawable.out3)
                                         Toast.makeText(activity, "三出局", Toast.LENGTH_SHORT).show();
                                         center_dialog.dismiss();
                                     }
@@ -98,7 +99,7 @@ public class BaseCenterDialog {
                                 view_center_choice1.findViewById(R.id.click_left).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        //TODO 顯示得分 (R.drawable.left_on_base)
+                                        //TODO 顯示殘壘 (R.drawable.left_on_base)
                                         Toast.makeText(activity, "殘壘", Toast.LENGTH_SHORT).show();
                                         center_dialog.dismiss();
                                     }
