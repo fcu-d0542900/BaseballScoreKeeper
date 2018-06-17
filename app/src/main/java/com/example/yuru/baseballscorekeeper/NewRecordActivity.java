@@ -14,6 +14,7 @@ import android.widget.TimePicker;
 import com.baseball.DatabaseService;
 import com.baseball.Record;
 import com.baseball.RecordItem;
+import com.baseball.RecordTeam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,11 @@ public class NewRecordActivity extends AppCompatActivity {
 
         final ScrollablePanel scrollablePanel = findViewById(R.id.scrollable_panel);
         final ScrollablePanelAdapter scrollablePanelAdapter = new ScrollablePanelAdapter(NewRecordActivity.this);
+
+        // TODO YURU ZENGLA 這兩行是切換隊伍 你們想辦法弄一下 哈哈
+        // currentRecord.setCurrenFaction(RecordTeam.Faction.home);
+        // scrollablePanelAdapter.updateData();
+        //**********************************//
 
         final ScrollablePanel score_scrollable_panel = findViewById(R.id.score_scrollable_panel);
         final ScoreScrollablePanelAdapter score_scrollablePanelAdapter = new ScoreScrollablePanelAdapter(NewRecordActivity.this);
