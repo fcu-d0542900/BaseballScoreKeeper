@@ -162,16 +162,9 @@ public class BaseFirstDialog {
                                         scrifice_hits_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
-                                                //TODO  ahkui  設定顯示觸擊犧牲打格子   recordItemFirstBase.setShowSacrificeHitsVisibility(true);
-                                                //TODO  ahkui  recordItemFirstBase.setShowOneViewVisibility(true);
-                                                //TODO  ahkui  recordItemFirstBase.setShowTwoView(true);
-                                                //TODO  ahkui  recordItemFirstBase.setShowFirstViewOneBottomVisibility(true);
-
                                                 actionOne = (int) spinner_actionOne.getSelectedItemId();
-                                                //TODO  ahkui   存入資料庫， 顯示圖片  數字 actionOne+1  (R.drawable.throw 數字)
                                                 viewHolder.recordItem.setBALL_TOUCH_AC1(actionOne+1);
                                                 actionTwo = (int) spinner_actionTwo.getSelectedItemId();
-                                                //TODO  ahkui   存入資料庫， 顯示圖片  數字 actionTwo+1  (R.drawable.throw 數字)
                                                 viewHolder.recordItem.setBALL_TOUCH_AC2(actionTwo+1);
                                                 viewHolder.updateUI(activity);
                                                 Toast.makeText(activity, "OK " + (actionOne+1) + "," + (actionTwo+1), Toast.LENGTH_SHORT).show();

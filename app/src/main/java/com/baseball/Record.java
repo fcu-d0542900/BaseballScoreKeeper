@@ -14,7 +14,7 @@ public class Record implements Serializable {
     private Date date;
     private RecordTeam away;
     private RecordTeam home;
-    RecordTeam.Faction currenFaction;
+    private RecordTeam.Faction currenFaction;
 
     public Record(String name, String awayTeam, String homeTeam, Date date) {
         this.name=name;

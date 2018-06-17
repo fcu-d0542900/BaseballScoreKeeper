@@ -60,11 +60,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         super();
         this.activity = activity;
         recordItems = new ArrayList<>();
-        updateData();
-    }
+        recordItems = activity.getUpdateData();
 
-    void updateData(){
-        activity.updateData(recordItems);
     }
 
     @Override
@@ -331,7 +328,6 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                                         case 4:
                                             Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
                                             activity.currentRecord.getTeam().nextRound();
-                                            activity.updateData(recordItems);
                                             break;
                                         default:
                                             break;
@@ -626,7 +622,9 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
         void updateUI(NewRecordActivity activity){
             recordItem.updateFirstBaseUI(base1);
-            recordItem.updateFirstBaseUI(base1);
+            recordItem.updateOtherBaseUI(base2,2);
+            recordItem.updateOtherBaseUI(base3,3);
+            recordItem.updateOtherBaseUI(base,0);
             activity.scrollablePanel.notifyDataSetChanged();
             Log.d("position",""+recordItem);
         }
