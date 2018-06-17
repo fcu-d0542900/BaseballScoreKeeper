@@ -350,11 +350,15 @@ public class BaseFirstDialog {
             public void onClick(DialogInterface dialogInterface, int i) {
                 //TODO ahkui   顯示 recordItemFirstBase.setShowTwoViewVisibility(true);
 
-                select_two_direction = (int) spinner_two_direction.getSelectedItemId();
+                select_two_direction = (int) spinner_two_direction.getSelectedItemId();  //TODO ahkui  存入資料庫， 顯示圖片 1~9
                 if(radioGroup_two_Ac.getCheckedRadioButtonId() == radioButton_two_E.getId()) {
+                    //TODO ahkui  recordItemFirstBase.setShowFirstViewTwoAcVisibility(true);
+                    //TODO ahkui   圖片  (R.drawable.error)
                     select_twoAc = "失誤 E";
                 }
                 else if(radioGroup_two_Ac.getCheckedRadioButtonId() == radioButton_two_T.getId()) {
+                    //TODO ahkui  recordItemFirstBase.setShowFirstViewTwoAcVisibility(true);
+                    //TODO ahkui   圖片  (R.drawable.tag)
                     select_twoAc = "觸殺 T";
                 }
                 else {
