@@ -32,6 +32,9 @@ public class RecordItem implements Serializable {
         save();
     }
 
+    int BALL_TOUCH_AC1;
+    int BALL_TOUCH_AC2;
+
     public enum BASE_FIRST_STEP_ONE{
         HIGH,// 高飛犧牲
         TOUCH,//觸及犧牲
@@ -67,6 +70,14 @@ public class RecordItem implements Serializable {
         save();
     }
 
+    public void setBALL_TOUCH_AC1(int BALL_TOUCH_AC1) {
+        this.BALL_TOUCH_AC1 = BALL_TOUCH_AC1;
+    }
+
+    public void setBALL_TOUCH_AC2(int BALL_TOUCH_AC2) {
+        this.BALL_TOUCH_AC2 = BALL_TOUCH_AC2;
+    }
+
     public void updateFirstBaseUI(RecordItemFirstBase base){
         // TODO update base ui with database
         base.setShowSacrificeFlyVisibility(false);
@@ -94,6 +105,7 @@ public class RecordItem implements Serializable {
                     case __:
                         base.setShowOneViewVisibility(false);
                 }
+                base.setShowFirstViewOneAc1Visibility(true);
                 switch (ballDirection){
                     case LEFT:
                         base.setFirstViewOneNumValue(R.drawable.throw7);
@@ -107,6 +119,11 @@ public class RecordItem implements Serializable {
                 }
                 break;
             case TOUCH:
+                base.setShowSacrificeHitsVisibility(true);
+                base.setShowOneViewVisibility(true);
+                base.setShowTwoViewVisibility(true);
+                base.setFirstViewOneAc1Value(getImageByNumber(BALL_TOUCH_AC1));
+                base.setFirstViewOneAc2Value(getImageByNumber(BALL_TOUCH_AC2));
             case NORMAL:
                 break;
             case BADBALL:
@@ -130,6 +147,30 @@ public class RecordItem implements Serializable {
                 }
                 break;
         }
+    }
+
+    private int getImageByNumber(int num){
+        switch (num){
+            case 1:
+                return R.drawable.throw1;
+            case 2:
+                return R.drawable.throw2;
+            case 3:
+                return R.drawable.throw3;
+            case 4:
+                return R.drawable.throw4;
+            case 5:
+                return R.drawable.throw5;
+            case 6:
+                return R.drawable.throw6;
+            case 7:
+                return R.drawable.throw7;
+            case 8:
+                return R.drawable.throw8;
+            case 9:
+                return R.drawable.throw9;
+        }
+        return num;
     }
 
     public void updateOtherBaseUI(RecordItemOtherBase base,int base_int){
