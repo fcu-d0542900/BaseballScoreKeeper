@@ -60,7 +60,7 @@ public class BaseFirstDialog {
         this.newRecordActivity = newRecordActivity;
     }
 
-    public void setBaseHomeDialog(ScrollablePanelAdapter.OrderViewHolder viewHolder) {
+    public void setBaseFirstDialog(ScrollablePanelAdapter.OrderViewHolder viewHolder) {
         recordItemFirstBase = viewHolder.base;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(newRecordActivity);
