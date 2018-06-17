@@ -10,10 +10,9 @@ import java.util.List;
 
 public class RecordTeam implements Serializable {
     private String teamName="";
-    private List<Player> teamMember = new ArrayList<>();
     private int currentRound = 0;
+    private List<Player> teamMember = new ArrayList<>();
     private List<RecordItem> recordItems;
-    private List<BoardNumInfo> recordRoundItem;
 
     public RecordTeam(String homeTeam, Faction team) {
         setTeamName(homeTeam);
@@ -29,10 +28,11 @@ public class RecordTeam implements Serializable {
         while(teamMember.size()<9){
             teamMember.add(new Player());
         }
+        recordItems = new ArrayList<>();
     }
 
     public RecordItem getRecordItems(int row,int column) {
-        if(recordItems!=null)
+        if(recordItems.size()>0)
             for (RecordItem item :
                     recordItems) {
                 if(row == item.row && column==item.column)
@@ -138,9 +138,19 @@ public class RecordTeam implements Serializable {
     }
 
     public int getLastRecordItemsColumn() {
-        if(recordItems!=null)
+        if(recordItems.size()>0)
             return recordItems.get(recordItems.size() - 1).column;
         return 0;
+    }
+
+    public int getRecordItemsPositionRound(int position) {
+        if(recordItems.size() == 0 && position == 1)
+            return 0;
+        for (RecordItem item : recordItems) {
+            if(item.column == position -1)
+                return item.getRound();
+        }
+        return -1;
     }
 
     public enum Faction{

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +16,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baseball.BoardNumInfo;
-import com.baseball.OrderInfo;
 import com.baseball.Player;
+import com.baseball.RecordItem;
 import com.baseball.RecordItemFirstBase;
 import com.baseball.RecordItemOtherBase;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by YURU on 2018/6/11.
@@ -34,17 +29,14 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     private NewRecordActivity activity;
 
-    private List<List<OrderInfo>> ordersList = new ArrayList<>();
-
     private EditText editText_playerName,editText_playerNum;
     private Spinner spinner_position;
     private View view_set_player;
 
-    private TextView choice1;
     private String playerName;
     private int playerNum,playerPosition;
 
-    private BaseOtherDialog baseOther = new BaseOtherDialog();
+    private BaseOtherDialog baseOtherDialog;
     private BaseFirstDialog baseFirstDialog = new BaseFirstDialog();
 
     final String[] center_choice = new String[]{"得分/出局", "安打","替換守備","替換打者","結束半局"};
@@ -58,17 +50,17 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     public ScrollablePanelAdapter(NewRecordActivity activity) {
         super();
-        this.setActivity(activity);
+        this.activity = activity;
     }
 
     @Override
     public int getRowCount() {
-        return activity.currentRecord.getTeam().getTeamMember().size() + 1;
+        return 9;
     }
 
     @Override
     public int getColumnCount() {
-        return activity.currentRecord.getTeam().getLastRecordItemsColumn() + 1;
+        return activity.currentRecord.getTeam().getLastRecordItemsColumn() + 1 + 2 ;
     }
 
 
@@ -111,7 +103,6 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             case BOARDNUM_TYPE:
                 return new BoardNumViewHolder(LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.listitem_board_num, parent, false));
-
             case PLAYERINFO_TYPE:
                 return new PlayerInfoViewHolder(LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.listitem_player_info, parent, false));
@@ -121,7 +112,6 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             case TEAMNAME_TYPE:
                 return new TeamNameViewHolder(LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.listitem_team_name, parent, false));
-
             default:
                 break;
         }
@@ -131,11 +121,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     private void setBoardNumView(int pos, BoardNumViewHolder viewHolder) {
-        Log.v("ahkui",pos+"");
-//        BoardNumInfo boardNumInfo = activity.currentRecord.getTeam()..get(pos - 1);
-//        if (boardNumInfo != null && pos > 0) {
-//            viewHolder.dateTextView.setText(boardNumInfo.getBroadNum_symbol());
-//        }
+        viewHolder.dateTextView.setText(activity.currentRecord.getTeam().getRoundText(activity.currentRecord.getTeam().getRecordItemsPositionRound(pos)));
     }
 
     @SuppressLint("SetTextI18n")
@@ -210,15 +196,15 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     private void setOrderView(final int row, final int column, final OrderViewHolder viewHolder) {
-        final OrderInfo orderInfo = ordersList.get(row - 1).get(column - 1);
-        if (orderInfo != null) {
+        final RecordItem recordItem = activity.currentRecord.getTeam().getRecordItems(row - 1,column - 1);
+        viewHolder.setRecordItem(recordItem);
+        if (recordItem != null) {
             viewHolder.getScoreView.bringToFront();
 
             //中間菱形區域
             viewHolder.getScoreView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     new AlertDialog.Builder(activity)
                             .setItems(center_choice, new DialogInterface.OnClickListener() {
                                 @Override
@@ -316,16 +302,20 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                                         //點擊替換守備
                                         case 2:
                                             Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+                                            // TODO activity.currentRecord.getTeam().changeDefPlayer();
+
                                             break;
 
                                         //點擊替換打者
                                         case 3:
                                             Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+                                            // TODO activity.currentRecord.getTeam().changeAttPlayer();
                                             break;
 
                                         //點擊結束半局
                                         case 4:
                                             Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+                                            activity.currentRecord.getTeam().nextRound();
                                             break;
                                         default:
                                             break;
@@ -335,7 +325,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                                 }
                             })
                             .show();
-                    Toast.makeText(v.getContext(), "得分區域" +orderInfo.getGuestName(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), "得分區域" +recordItem.getAttPlayer().getName(), Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -344,9 +334,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.getFirstView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    baseFirstDialog.setNewRecordActivity(activity);
-                    baseFirstDialog.setBaseHomeDialog(viewHolder);
+                    baseFirstDialog.setActivity(activity);
+                    baseFirstDialog.setBaseFirstDialog(viewHolder);
                     Toast.makeText(v.getContext(), "一壘" , Toast.LENGTH_SHORT).show();
 
                 }
@@ -356,9 +345,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.getSecondView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    baseOther.setNewRecordActivity(activity);
-                    baseOther.setBaseTwoDialog(viewHolder,new String[]{"推進","進壘"});
+                    // TODO 玉鳳 二壘
+                    baseOtherDialog = new BaseOtherDialog();
+                    baseOtherDialog.setNewRecordActivity(activity);
+                    baseOtherDialog.setBaseTwoDialog(viewHolder,new String[]{"推進","進壘"});
                     Toast.makeText(v.getContext(), "二壘" , Toast.LENGTH_SHORT).show();
 
                 }
@@ -369,8 +359,11 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 @Override
                 public void onClick(View v) {
 
-                    Toast.makeText(v.getContext(), "三壘" , Toast.LENGTH_SHORT).show();
+                    baseOtherDialog = new BaseOtherDialog();
+                    baseOtherDialog.setNewRecordActivity(activity);
+                    baseOtherDialog.setBaseTwoDialog(viewHolder,new String[]{"推進","進壘"});
 
+                    Toast.makeText(v.getContext(), "三壘" , Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -378,7 +371,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.getHomeView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    // TODO 玉鳳 本壘
+                    baseOtherDialog = new BaseOtherDialog();
+                    baseOtherDialog.setNewRecordActivity(activity);
+                    baseOtherDialog.setBaseTwoDialog(viewHolder,new String[]{"推進","進壘"});
                     Toast.makeText(v.getContext(), "本壘" , Toast.LENGTH_SHORT).show();
 
                 }
@@ -425,6 +421,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     static class OrderViewHolder extends RecyclerView.ViewHolder {
+        RecordItem recordItem;
+
         TextView getScoreView;
         TextView getFirstView;
         TextView getHomeView;
@@ -603,6 +601,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
             this.getScoreView.bringToFront();
 
+        }
+
+        public void setRecordItem(RecordItem recordItem) {
+            this.recordItem = recordItem;
         }
     }
 

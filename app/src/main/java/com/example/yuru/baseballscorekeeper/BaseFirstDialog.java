@@ -6,18 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.baseball.DatabaseService;
-import com.baseball.Player;
+import com.baseball.RecordItem;
 import com.baseball.RecordItemFirstBase;
-
-import java.util.List;
 
 /**
  * Created by YURU on 2018/6/16.
@@ -27,7 +22,7 @@ public class BaseFirstDialog {
 
     private RecordItemFirstBase recordItemFirstBase;
 
-    private NewRecordActivity newRecordActivity;
+    private NewRecordActivity activity;
 
     //高飛犧牲
     private RadioGroup radioGroup_sacrificeFly_type,radioGroup_sacrificeFly_direction;
@@ -56,29 +51,29 @@ public class BaseFirstDialog {
 
     private String[] nums = {"1","2","3","4","5","6","7","8","9"};
 
-    public void setNewRecordActivity(NewRecordActivity newRecordActivity) {
-        this.newRecordActivity = newRecordActivity;
+    public void setActivity(NewRecordActivity activity) {
+        this.activity = activity;
     }
 
-    public void setBaseHomeDialog(ScrollablePanelAdapter.OrderViewHolder viewHolder) {
-        recordItemFirstBase = viewHolder.base;
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(newRecordActivity);
+    public void setBaseFirstDialog(final ScrollablePanelAdapter.OrderViewHolder viewHolder) {
+        recordItemFirstBase = viewHolder.base1;
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setItems(new String[]{"擊出球","未擊出球"}, new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog,int which) {
                 switch (which) {
                     case 0:
-                        AlertDialog.Builder hit_builder = new AlertDialog.Builder(newRecordActivity);
+                        AlertDialog.Builder hit_builder = new AlertDialog.Builder(activity);
                         hit_builder.setItems(new String[]{"高飛犧牲打", "觸擊犧牲打", "一般"}, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 switch (i) {
                                     case 0:
-                                        Toast.makeText(newRecordActivity, "高飛犧牲打", Toast.LENGTH_SHORT).show();
+                                        viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.HIGH);
+                                        Toast.makeText(activity, "高飛犧牲打", Toast.LENGTH_SHORT).show();
 
-                                        AlertDialog.Builder scrifice_fly_builder = new AlertDialog.Builder(newRecordActivity);
-                                        View view_scrifice_fly_dialog = LayoutInflater.from(newRecordActivity).inflate(R.layout.record_sacrifice_fly, null);
+                                        AlertDialog.Builder scrifice_fly_builder = new AlertDialog.Builder(activity);
+                                        View view_scrifice_fly_dialog = LayoutInflater.from(activity).inflate(R.layout.record_sacrifice_fly, null);
                                         radioGroup_sacrificeFly_type = view_scrifice_fly_dialog.findViewById(R.id.radioGroup_sacrificeFly_type);
                                         radioButton_sacrificeFly_type_high = view_scrifice_fly_dialog.findViewById(R.id.radioButton_sacrificeFly_high);
                                         radioButton_sacrificeFly_type_line = view_scrifice_fly_dialog.findViewById(R.id.radioButton_sacrificeFly_line);
@@ -129,16 +124,18 @@ public class BaseFirstDialog {
                                                 else {
                                                     select_sacrificeFly_direction_str = "未選擇";
                                                 }
-                                                Toast.makeText(newRecordActivity.getApplicationContext(), "OK "+select_sacrificeFly_type_str + "," + select_sacrificeFly_direction_str, Toast.LENGTH_SHORT).show();
+
+                                                Toast.makeText(activity.getApplicationContext(), "OK "+select_sacrificeFly_type_str + "," + select_sacrificeFly_direction_str, Toast.LENGTH_SHORT).show();
                                             }
                                         });
                                         scrifice_fly_builder.show();
                                         break;
                                     case 1:
-                                        Toast.makeText(newRecordActivity, "觸擊犧牲打", Toast.LENGTH_SHORT).show();
+                                        viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.TOUCH);
+                                        Toast.makeText(activity, "觸擊犧牲打", Toast.LENGTH_SHORT).show();
 
-                                        AlertDialog.Builder scrifice_hits_builder = new AlertDialog.Builder(newRecordActivity);
-                                        View view_scrifice_hits_dialog = LayoutInflater.from(newRecordActivity).inflate(R.layout.record_sacrifice_hiits, null);
+                                        AlertDialog.Builder scrifice_hits_builder = new AlertDialog.Builder(activity);
+                                        View view_scrifice_hits_dialog = LayoutInflater.from(activity).inflate(R.layout.record_sacrifice_hiits, null);
                                         spinner_actionOne = view_scrifice_hits_dialog.findViewById(R.id.spinner_actionOne);
                                         spinner_actionTwo = view_scrifice_hits_dialog.findViewById(R.id.spinner_actionTwo);
 
@@ -156,7 +153,7 @@ public class BaseFirstDialog {
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 actionOne = (int) spinner_actionOne.getSelectedItemId();
                                                 actionTwo = (int) spinner_actionTwo.getSelectedItemId();
-                                                Toast.makeText(newRecordActivity, "OK " + (actionOne+1) + "," + (actionTwo+1), Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(activity, "OK " + (actionOne+1) + "," + (actionTwo+1), Toast.LENGTH_SHORT).show();
                                             }
                                         });
                                         scrifice_hits_builder.show();
@@ -164,10 +161,11 @@ public class BaseFirstDialog {
                                         break;
                                     case 2:
                                         //一般
-                                        Toast.makeText(newRecordActivity, "其他", Toast.LENGTH_SHORT).show();
+                                        viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.NORMAL);
+                                        Toast.makeText(activity, "其他", Toast.LENGTH_SHORT).show();
 
-                                        AlertDialog.Builder first_one_builder = new AlertDialog.Builder(newRecordActivity);
-                                        View view_first_one_dialog = LayoutInflater.from(newRecordActivity).inflate(R.layout.record_first_one, null);
+                                        AlertDialog.Builder first_one_builder = new AlertDialog.Builder(activity);
+                                        View view_first_one_dialog = LayoutInflater.from(activity).inflate(R.layout.record_first_one, null);
                                         view_first_one_dialog.setPadding(10,20,10,10);
                                         first_one_builder.setView(view_first_one_dialog);
                                         radioGroup_type = view_first_one_dialog.findViewById(R.id.radioGroup_type);
@@ -206,48 +204,51 @@ public class BaseFirstDialog {
                         hit_builder.show();
                         break;
                     case 1:
-                        AlertDialog.Builder unhit_builder = new AlertDialog.Builder(newRecordActivity);
-                        View view_unhit_dialog = LayoutInflater.from(newRecordActivity).inflate(R.layout.record_unhit_dialog, null);
+                        AlertDialog.Builder unhit_builder = new AlertDialog.Builder(activity);
+                        View view_unhit_dialog = LayoutInflater.from(activity).inflate(R.layout.record_unhit_dialog, null);
                         view_unhit_dialog.setPadding(10,10,10,10);
                         unhit_builder.setView(view_unhit_dialog);
                         final AlertDialog unhit_dialog = unhit_builder.create();
                         view_unhit_dialog.findViewById(R.id.click_b).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(newRecordActivity, "保送", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(activity, "保送", Toast.LENGTH_SHORT).show();
                                 unhit_dialog.dismiss();
-                                recordItemFirstBase.setShowZeroViewVisibility(true);
+//                                recordItemFirstBase.setShowZeroViewVisibility(true);
                                 //TODO: ahkui 存入資料庫， 顯示圖片 B   (R.drawable.bad_ball)
+                                viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.BADBALL);
 
                             }
                         });
                         view_unhit_dialog.findViewById(R.id.click_db).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(newRecordActivity, "觸身", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(activity, "觸身", Toast.LENGTH_SHORT).show();
                                 unhit_dialog.dismiss();
                                 recordItemFirstBase.setShowZeroViewVisibility(true);
                                 //TODO:ahkui 存入資料庫， 顯示圖片 D  (R.drawable.hit_by_pitch)
+                                viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.HITBYPITCH);
 
                             }
                         });
                         view_unhit_dialog.findViewById(R.id.click_k).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(newRecordActivity, "三振", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(activity, "三振", Toast.LENGTH_SHORT).show();
                                 unhit_dialog.dismiss();
                                 recordItemFirstBase.setShowZeroViewVisibility(true);
                                 //TODO:ahkui 存入資料庫， 顯示圖片 K  (R.drawable.killed)
+                                viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.KILLED);
                             }
                         });
                         view_unhit_dialog.findViewById(R.id.click_nok).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(newRecordActivity, "不死三振", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(activity, "不死三振", Toast.LENGTH_SHORT).show();
                                 unhit_dialog.dismiss();
-                                RecordItemFirstBase recordItemFirstBase = new RecordItemFirstBase();
                                 recordItemFirstBase.setShowZeroViewVisibility(true);
                                 //TODO:ahkui 存入資料庫， 顯示圖片 倒K  (R.drawable.no_killed)
+                                viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.NOKILLED);
 
                             }
                         });
@@ -299,12 +300,12 @@ public class BaseFirstDialog {
             select_elseAc = select_elseAc + "," + checkBox_elseAc_T.getText().toString();
             //TODO ahkui  存入資料庫， 顯示圖片T  (R.drawable.tag)
         }
-        Toast.makeText(newRecordActivity, "OK "+select_type_str+","+(select_direction+1) +select_elseAc, Toast.LENGTH_SHORT).show();
+        Toast.makeText(activity, "OK "+select_type_str+","+(select_direction+1) +select_elseAc, Toast.LENGTH_SHORT).show();
     }
 
     public void set_first_view_two() {
-        AlertDialog.Builder first_two_builder = new AlertDialog.Builder(newRecordActivity);
-        View view_first_two_dialog = LayoutInflater.from(newRecordActivity).inflate(R.layout.record_first_two, null);
+        AlertDialog.Builder first_two_builder = new AlertDialog.Builder(activity);
+        View view_first_two_dialog = LayoutInflater.from(activity).inflate(R.layout.record_first_two, null);
         view_first_two_dialog.setPadding(10,20,10,10);
         first_two_builder.setView(view_first_two_dialog);
 
@@ -320,7 +321,7 @@ public class BaseFirstDialog {
         first_two_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(newRecordActivity, "OK ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "OK ", Toast.LENGTH_SHORT).show();
 
 
             }
