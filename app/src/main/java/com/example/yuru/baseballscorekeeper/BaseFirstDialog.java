@@ -87,8 +87,7 @@ public class BaseFirstDialog {
                                         scrifice_fly_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
-                                                //設定顯示高飛犧牲打格子
-                                                recordItemFirstBase.setShowSacrificeFlyVisibility(true);
+                                                //TODO ahkui  設定顯示高飛犧牲打格子  recordItemFirstBase.setShowSacrificeFlyVisibility(true);
 
                                                 int select_sacrificeFly_typeID = radioGroup_sacrificeFly_type.getCheckedRadioButtonId();
                                                 int select_sacrificeFly_directionID = radioGroup_sacrificeFly_direction.getCheckedRadioButtonId();
@@ -162,7 +161,7 @@ public class BaseFirstDialog {
                                     case 2:
                                         //一般
                                         viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.NORMAL);
-                                        Toast.makeText(activity, "其他", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(activity, "一般", Toast.LENGTH_SHORT).show();
 
                                         AlertDialog.Builder first_one_builder = new AlertDialog.Builder(activity);
                                         View view_first_one_dialog = LayoutInflater.from(activity).inflate(R.layout.record_first_one, null);
