@@ -621,6 +621,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
         void setRecordItem(RecordItem recordItem) {
             this.recordItem = recordItem;
+            updateUI();
+        }
+
+        void updateUI(){
             recordItem.updateFirstBaseUI(base1);
             Log.d("position",""+recordItem);
         }
