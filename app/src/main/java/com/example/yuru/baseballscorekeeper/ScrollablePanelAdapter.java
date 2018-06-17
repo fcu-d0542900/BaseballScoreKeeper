@@ -541,7 +541,15 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.getSecondViewBase = view.findViewById(R.id.image_base_1to2);
             base2.setShowActionNameView(getSecondViewActionName);
             base2.setShowActionView(getSecondViewAction);
+            base2.setActionOneNum(getSecondViewActionOneNum);
             base2.setShowActionOneAcView(getSecondViewActionOneAc);
+            base2.setActionTwoNum(getSecondViewActionTwoNum);
+            base2.setShowActionTwoAcView(getSecondViewActionTwoAc);
+            base2.setShowThrowView(getSecondViewThrow);
+            base2.setThrowOne(getSecondViewThrowOne);
+            base2.setThrowTwo(getSecondViewThrowTwo);
+            base2.setShowPushNumView(getSecondViewPushNum);
+            base2.setShowToBaseView(getSecondViewBase);
 
 
             //三壘
@@ -556,6 +564,17 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.getThirdViewThrowTwo = view.findViewById(R.id.image_thirdView_throwTwo);
             this.getThirdViewPushNum = view.findViewById(R.id.image_thirdView_pushNumber);
             this.getThirdViewBase = view.findViewById(R.id.image_base_2to3);
+            base3.setShowActionNameView(getThirdViewActionName);
+            base3.setShowActionView(getThirdViewAction);
+            base3.setActionOneNum(getThirdViewActionOneNum);
+            base3.setShowActionOneAcView(getThirdViewActionOneAc);
+            base3.setActionTwoNum(getThirdViewActionTwoNum);
+            base3.setShowActionTwoAcView(getThirdViewActionTwoAc);
+            base3.setShowThrowView(getThirdViewThrow);
+            base3.setThrowOne(getThirdViewThrowOne);
+            base3.setThrowTwo(getThirdViewThrowTwo);
+            base3.setShowPushNumView(getThirdViewPushNum);
+            base3.setShowToBaseView(getThirdViewBase);
 
             //本壘
             this.getHomeViewActionName = view.findViewById(R.id.image_homeView_actionName);
@@ -569,9 +588,17 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.getHomeViewThrowTwo = view.findViewById(R.id.image_homeView_throwTwo);
             this.getHomeViewPushNum = view.findViewById(R.id.image_homeView_pushNumber);
             this.getHomeViewBase = view.findViewById(R.id.image_base_3tohome);
-            // TODO 把 UI set 進去這邊 YURU 這樣懂了嗎？
-//            base.setShowThreeView(getHomeViewThrow);
-
+            base.setShowActionNameView(getHomeViewActionName);
+            base.setShowActionView(getHomeViewAction);
+            base.setActionOneNum(getHomeViewActionOneNum);
+            base.setShowActionOneAcView(getHomeViewActionOneAc);
+            base.setActionTwoNum(getHomeViewActionTwoNum);
+            base.setShowActionTwoAcView(getHomeViewActionTwoAc);
+            base.setShowThrowView(getHomeViewThrow);
+            base.setThrowOne(getHomeViewThrowOne);
+            base.setThrowTwo(getHomeViewThrowTwo);
+            base.setShowPushNumView(getHomeViewPushNum);
+            base.setShowToBaseView(getHomeViewBase);
 
 
             this.getScoreView.bringToFront();
