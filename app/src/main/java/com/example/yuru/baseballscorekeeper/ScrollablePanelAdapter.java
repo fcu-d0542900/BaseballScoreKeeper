@@ -60,7 +60,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     @Override
     public int getColumnCount() {
-        return activity.currentRecord.getTeam().getLastRecordItemsColumn() + 1 + 1 +5;
+        return activity.currentRecord.getTeam().getLastRecordItemsColumn() + 1 + 2 ;
     }
 
 
@@ -334,9 +334,9 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 @Override
                 public void onClick(View v) {
 //                    baseOtherDialog.setBaseOneDialog(viewHolder,1,new String[]{"推進","進壘"});
+                    baseFirstDialog.setNewRecordActivity(activity);
                     baseFirstDialog.setBaseFirstDialog(viewHolder);
 
-                    baseFirstDialog.setNewRecordActivity(activity);
                     Toast.makeText(v.getContext(), "一壘" , Toast.LENGTH_SHORT).show();
 
                 }
