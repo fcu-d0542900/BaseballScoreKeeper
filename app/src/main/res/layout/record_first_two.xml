@@ -26,6 +26,12 @@
         android:layout_weight="1">
 
         <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="(無)" />
+
+        <RadioButton
             android:id="@+id/radioButton_two_E"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
