@@ -9,13 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.baseball.Record;
-import com.baseball.RecordItem;
+import com.baseball.BASE;
 import com.baseball.RecordItemOtherBase;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by User on 2018/6/16.
@@ -23,17 +18,27 @@ import java.util.List;
 
 public class BaseOtherDialog {
 
-    private NewRecordActivity newRecordActivity;
-    private RecordItemOtherBase recordItemOtherBase;
+    private NewRecordActivity activity;
+    private RecordItemOtherBase recordItemUI;
 
     private String[] nums = {"1","2","3","4","5","6","7","8","9"};
     private String[] isError={"","E"};
     private String[] push = {"(1)","(2)","(3)","(4)","(5)","(6)","(7)","(8)","(9)"};
     private Spinner spinner_left,spinner_right,spinner_left_e,spinner_right_e;
 
-    public void setBaseTwoDialog(ScrollablePanelAdapter.OrderViewHolder viewHolder, final String[] items) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(newRecordActivity);
-        recordItemOtherBase= viewHolder.base2;
+    public void setBaseOtherDialog(ScrollablePanelAdapter.OrderViewHolder viewHolder, final String[] items,BASE base) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        switch (base){
+            case BASE_HOME:
+                recordItemUI = viewHolder.base;
+                break;
+            case BASE_THREE:
+                recordItemUI = viewHolder.base3;
+                break;
+            case BASE_TWO:
+                recordItemUI = viewHolder.base2;
+                break;
+        }
 
         //設定對話框內的項目
         builder.setItems(items, new DialogInterface.OnClickListener(){
@@ -42,7 +47,7 @@ public class BaseOtherDialog {
                 switch (which){
                     //點選推進
                     case 0:
-                        new AlertDialog.Builder(newRecordActivity)
+                        new AlertDialog.Builder(activity)
                                 .setTitle("推進")
                                 .setItems(push, new DialogInterface.OnClickListener() {
                                     @Override
@@ -81,11 +86,11 @@ public class BaseOtherDialog {
                                             default:
                                                 break;
                                         }
-                                        Toast.makeText(newRecordActivity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
 
                                         //下一個選單失誤、上壘
-                                        AlertDialog.Builder push_dialog = new AlertDialog.Builder(newRecordActivity);
-                                        View view_push_choice1 = View.inflate(newRecordActivity, R.layout.record_actionname_dialog, null);      //自訂dialog布局
+                                        AlertDialog.Builder push_dialog = new AlertDialog.Builder(activity);
+                                        View view_push_choice1 = View.inflate(activity, R.layout.record_actionname_dialog, null);      //自訂dialog布局
                                         push_dialog.setView(view_push_choice1);   // 設置view
                                         final AlertDialog new_push_dialog = push_dialog.create();    //根據builder設置好的一系列數據, 来建構一個dialog
 
@@ -95,7 +100,7 @@ public class BaseOtherDialog {
                                         view_push_choice1.findViewById(R.id.click_dp).setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                Toast.makeText(newRecordActivity, "雙殺DP", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(activity, "雙殺DP", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 DP  (R.drawable.double_plays)
                                             }
@@ -105,7 +110,7 @@ public class BaseOtherDialog {
                                         view_push_choice1.findViewById(R.id.click_tp).setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                Toast.makeText(newRecordActivity, "三殺TP", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(activity, "三殺TP", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 TP  (R.drawable.tripple_play)
                                             }
@@ -115,7 +120,7 @@ public class BaseOtherDialog {
                                         view_push_choice1.findViewById(R.id.click_stolen).setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                Toast.makeText(newRecordActivity, "盜壘S", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(activity, "盜壘S", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 S  (R.drawable.stolen_base)
                                             }
@@ -125,7 +130,7 @@ public class BaseOtherDialog {
                                         view_push_choice1.findViewById(R.id.click_cs).setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                Toast.makeText(newRecordActivity, "盜壘失敗CS", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(activity, "盜壘失敗CS", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 CS  (R.drawable.caught_stolen)
                                             }
@@ -135,7 +140,7 @@ public class BaseOtherDialog {
                                         view_push_choice1.findViewById(R.id.click_po).setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                Toast.makeText(newRecordActivity, "投手牽制PO", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(activity, "投手牽制PO", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 PO  (R.drawable.put_outs)
                                             }
@@ -145,7 +150,7 @@ public class BaseOtherDialog {
                                         view_push_choice1.findViewById(R.id.click_w).setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                Toast.makeText(newRecordActivity, "暴投W", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(activity, "暴投W", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 W  (R.drawable.put_outs)
                                             }
@@ -155,7 +160,7 @@ public class BaseOtherDialog {
                                         view_push_choice1.findViewById(R.id.click_p).setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                Toast.makeText(newRecordActivity, "捕逸P", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(activity, "捕逸P", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 P  (R.drawable.passed_ball)
                                             }
@@ -165,7 +170,7 @@ public class BaseOtherDialog {
                                         view_push_choice1.findViewById(R.id.click_bk).setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                Toast.makeText(newRecordActivity, "投手犯規BK", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(activity, "投手犯規BK", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 BK  (R.drawable.balks)
                                             }
@@ -175,9 +180,9 @@ public class BaseOtherDialog {
                                         view_push_choice1.findViewById(R.id.click_error).setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                Toast.makeText(newRecordActivity, "失誤", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(activity, "失誤", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
-                                                setErroeDialog();  // 點擊失誤後的選單
+                                                setErrorDialog();  // 點擊失誤後的選單
                                             }
                                         });
 
@@ -185,7 +190,7 @@ public class BaseOtherDialog {
                                         view_push_choice1.findViewById(R.id.click_null).setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                Toast.makeText(newRecordActivity, "無", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(activity, "無", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
                                             }
                                         });
@@ -197,15 +202,15 @@ public class BaseOtherDialog {
                     //點選進壘
                     case 1:
                         //TODO: ahkui 存入資料庫， 顯示箭頭  (判斷哪一格顯示不同箭頭)
-                        new AlertDialog.Builder(newRecordActivity)
+                        new AlertDialog.Builder(activity)
                                 .setItems(new String[]{"趁傳","失誤","無"}, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, final int which) {
                                                 switch (which)
                                                 {
                                                     case 0:   //點選趁傳
-                                                        View view_throwTo = LayoutInflater.from(newRecordActivity).inflate(R.layout.record_throw_dialog, null);
-                                                        AlertDialog.Builder dialog_throw = new AlertDialog.Builder(newRecordActivity);
+                                                        View view_throwTo = LayoutInflater.from(activity).inflate(R.layout.record_throw_dialog, null);
+                                                        AlertDialog.Builder dialog_throw = new AlertDialog.Builder(activity);
                                                         view_throwTo.setPadding(10,10,10,10);
                                                         dialog_throw.setView(view_throwTo);
                                                         spinner_left = view_throwTo.findViewById(R.id.spinner_left);
@@ -312,7 +317,7 @@ public class BaseOtherDialog {
                                                         dialog_throw.show();
                                                         break;
                                                     case 1:   //點選失誤
-                                                        setErroeDialog();  // 點擊失誤後的選單
+                                                        setErrorDialog();  // 點擊失誤後的選單
                                                         break;
                                                     case 2:   //點選無
                                                         break;
@@ -325,7 +330,7 @@ public class BaseOtherDialog {
                     default:
                         break;
                 }
-                Toast.makeText(newRecordActivity, "您選擇的是"+items[which], Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "您選擇的是"+items[which], Toast.LENGTH_SHORT).show();
             }
         });
         builder.show();
@@ -333,14 +338,14 @@ public class BaseOtherDialog {
     }
 
 
-    public void setNewRecordActivity(NewRecordActivity newRecordActivity) {
-        this.newRecordActivity = newRecordActivity;
+    public void setActivity(NewRecordActivity activity) {
+        this.activity = activity;
     }
 
     //失誤選單 數字E-數字E
-    public void setErroeDialog() {
-        View view_error = LayoutInflater.from(newRecordActivity).inflate(R.layout.record_error_dialog, null);
-        AlertDialog.Builder dialog_error = new AlertDialog.Builder(newRecordActivity);
+    public void setErrorDialog() {
+        View view_error = LayoutInflater.from(activity).inflate(R.layout.record_error_dialog, null);
+        AlertDialog.Builder dialog_error = new AlertDialog.Builder(activity);
         view_error.setPadding(0,10,0,10);
         dialog_error.setView(view_error);
         spinner_left = view_error.findViewById(R.id.spinner_left);
@@ -415,7 +420,7 @@ public class BaseOtherDialog {
                         case 0:   //無失誤
                             break;
                         case 1:   //有失誤
-                            recordItemOtherBase.setShowActionOneAcViewVisibility(true);
+                            recordItemUI.setShowActionOneAcViewVisibility(true);
                             //TODO: ahkui 存入資料庫， 左框顯示E   (R.drawable.error)
 
                             break;
@@ -486,7 +491,7 @@ public class BaseOtherDialog {
                         case 0:   //無失誤
                             break;
                         case 1:   //有失誤
-                            recordItemOtherBase.setShowActionTwoAcViewVisibility(true);
+                            recordItemUI.setShowActionTwoAcViewVisibility(true);
                             //TODO: ahkui 存入資料庫， 右框顯示E   (R.drawable.error)
                             break;
                         default:
@@ -525,7 +530,7 @@ public class BaseOtherDialog {
                     //TODO: ahkui    recordItemOtherBase.setShowActionTwoAcViewVisibility(true);
                 }
 
-                Toast.makeText(newRecordActivity, "OK ," + (select_spinner_left+1) + select_left_E + "," + (select_spinner_right+1) + select_right_E, Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "OK ," + (select_spinner_left+1) + select_left_E + "," + (select_spinner_right+1) + select_right_E, Toast.LENGTH_SHORT).show();
             }
         });
         dialog_error.show();

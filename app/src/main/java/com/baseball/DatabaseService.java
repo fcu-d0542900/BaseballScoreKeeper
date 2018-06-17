@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -58,8 +60,12 @@ public class DatabaseService {
             out = new ObjectOutputStream(context.openFileOutput(filename, Context.MODE_PRIVATE));
             out.writeObject(database);
             out.close();
+            Gson gson = new Gson();
+            String json = gson.toJson(database);
+            Log.v("json",json);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 }

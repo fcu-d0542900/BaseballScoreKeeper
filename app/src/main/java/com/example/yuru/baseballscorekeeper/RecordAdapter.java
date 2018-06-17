@@ -1,12 +1,14 @@
 package com.example.yuru.baseballscorekeeper;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.baseball.DatabaseService;
@@ -28,10 +30,23 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
     private int lastPosition = -1;
     private Context context;
 
+    private OnItemClickLitener   mOnItemClickLitener;
+
+
     public RecordAdapter(Context context) {
         this.item_record = DatabaseService.getInstance().getDatabase().getAllRecord();
         this.context = context;
     }
+
+    //设置回调接口
+    public interface OnItemClickLitener{
+        void onItemClick(View view, int position);
+    }
+
+    public void setOnItemClickLitener(OnItemClickLitener mOnItemClickLitener){
+        this.mOnItemClickLitener = mOnItemClickLitener;
+    }
+
 
     @Override
     public RecordAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -48,6 +63,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         // 編號、名稱、說明與是否選擇
         protected TextView text_gameName;
         protected TextView text_gameDate;
+        protected CardView cardView;
 
         // 包裝元件
         protected View rootView;
@@ -59,7 +75,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
             // 取得背號、名稱
             text_gameName = itemView.findViewById(R.id.card_gameName);
             text_gameDate = itemView.findViewById(R.id.card_gameDate);
-
+            cardView = itemView.findViewById(R.id.card_view_record);
             // 設定包裝元件
             rootView = view;
         }
@@ -76,6 +92,17 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
 
         // 設定動畫效果
         setAnimation(holder.rootView, position);
+
+        //通过为条目设置点击事件触发回调
+        if (mOnItemClickLitener != null) {
+            holder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mOnItemClickLitener.onItemClick(view, position);
+                }
+            });
+        }
+
     }
 
     // 設定動畫效果
@@ -90,6 +117,8 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
             lastPosition = position;
         }
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -145,6 +174,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         // 通知資料項目已經移動
         notifyItemMoved(fromPosition, toPosition);
     }
+
 
 
 }
