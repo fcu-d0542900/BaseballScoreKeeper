@@ -23,11 +23,11 @@ public class ScrollablePanel extends FrameLayout {
     protected PanelAdapter panelAdapter;
     protected FrameLayout firstItemView;
 
-    public ScrollablePanel(Context context, PanelAdapter panelAdapter) {
-        super(context);
-        this.panelAdapter = panelAdapter;
-        initView();
-    }
+//    public ScrollablePanel(Context context, PanelAdapter panelAdapter) {
+//        super(context);
+//        this.panelAdapter = panelAdapter;
+//        initView();
+//    }
 
     public ScrollablePanel(Context context, AttributeSet attrs) {
         super(context, attrs);

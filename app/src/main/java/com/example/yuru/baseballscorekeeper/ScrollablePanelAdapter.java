@@ -59,11 +59,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         super();
         this.activity = activity;
         recordItems = new ArrayList<>();
-        updateData();
-    }
+        recordItems = activity.getUpdateData();
 
-    void updateData(){
-        activity.updateData(recordItems);
     }
 
     @Override
@@ -135,6 +132,9 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     private void setBoardNumView(int pos, BoardNumViewHolder viewHolder) {
         viewHolder.dateTextView.setText(activity.currentRecord.getTeam().getRoundText(activity.currentRecord.getTeam().getRecordItemsPositionRound(pos)));
     }
+
+
+
 
     @SuppressLint("SetTextI18n")
     private void setPlayerInfoView(int pos, final PlayerInfoViewHolder viewHolder) {
@@ -222,9 +222,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                     baseCenterDialog = new BaseCenterDialog();
                     baseCenterDialog.setActivity(activity);
                     baseCenterDialog.setBaseCenterDialog(viewHolder);
-
                     Toast.makeText(v.getContext(), "得分區域" +recordItem.getAttPlayer().getName(), Toast.LENGTH_SHORT).show();
-
                 }
             });
 
@@ -529,11 +527,18 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
         void updateUI(NewRecordActivity activity){
             recordItem.updateFirstBaseUI(base1);
-            recordItem.updateFirstBaseUI(base1);
+            recordItem.updateOtherBaseUI(base2,2);
+            recordItem.updateOtherBaseUI(base3,3);
+            recordItem.updateOtherBaseUI(base,0);
             activity.scrollablePanel.notifyDataSetChanged();
             Log.d("position",""+recordItem);
         }
     }
+
+    public void updateData() {
+        recordItems = activity.getUpdateData();
+    }
+
 
     private static class TeamNameViewHolder extends RecyclerView.ViewHolder {
         TextView titleTextView;

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.baseball.DatabaseService;
 import com.baseball.Record;
@@ -45,16 +46,31 @@ public class NewRecordActivity extends AppCompatActivity {
         scrollablePanel = findViewById(R.id.scrollable_panel);
         scrollablePanelAdapter = new ScrollablePanelAdapter(NewRecordActivity.this);
 
-        // TODO YURU ZENGLA 這兩行是切換隊伍 你們想辦法弄一下 哈哈
-        // currentRecord.setCurrenFaction(RecordTeam.Faction.home);
-        // scrollablePanelAdapter.updateData();
-        //**********************************//
-
         score_scrollable_panel = findViewById(R.id.score_scrollable_panel);
         score_scrollablePanelAdapter = new ScoreScrollablePanelAdapter(NewRecordActivity.this);
 
         scrollablePanel.setPanelAdapter(scrollablePanelAdapter);
         score_scrollable_panel.setPanelAdapter(score_scrollablePanelAdapter);
+
+        score_scrollablePanelAdapter.setOnItemClickLitener(new RecordAdapter.OnItemClickLitener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+                if(position==1){  //點擊away
+                    Toast.makeText(NewRecordActivity.this,"點擊away"+position
+                            ,Toast.LENGTH_LONG).show();
+                    currentRecord.setCurrenFaction(RecordTeam.Faction.away);  //TODO: ahkui這樣切換對嗎
+                    DatabaseService.getInstance().getDatabase().getRecord(DatabaseService.CurrentRecord).setCurrenFaction(RecordTeam.Faction.away);
+                    scrollablePanelAdapter.updateData();
+                }
+                else if(position==2)  //點擊home
+                    Toast.makeText(NewRecordActivity.this,"點擊home"+position
+                            ,Toast.LENGTH_LONG).show();
+                    currentRecord.setCurrenFaction(RecordTeam.Faction.home); //TODO: ahkui這樣切換對嗎
+                    DatabaseService.getInstance().getDatabase().getRecord(DatabaseService.CurrentRecord).setCurrenFaction(RecordTeam.Faction.home);
+                    scrollablePanelAdapter.updateData();
+            }
+        });
 
     }
 
@@ -92,7 +108,8 @@ public class NewRecordActivity extends AppCompatActivity {
         dialog_endTime.show();
     }
 
-    public void updateData(List<List<RecordItem>> recordItems) {
+    public List<List<RecordItem>> getUpdateData() {
+        List<List<RecordItem>> recordItems = new ArrayList<>();
         recordItems.clear();
         int col = currentRecord.getTeam().getLastRecordItemsColumn() + 1+3;
         for (int i = 0; i < 9; i++) {
@@ -102,7 +119,7 @@ public class NewRecordActivity extends AppCompatActivity {
             }
             recordItems.add(tmp);
         }
-        scrollablePanel.notifyDataSetChanged();
+        return recordItems;
     }
 }
 
