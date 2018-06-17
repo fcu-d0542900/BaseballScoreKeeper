@@ -21,7 +21,7 @@ import java.util.List;
  * Created by User on 2018/6/16.
  */
 
-public class Dialog {
+public class BaseOtherDialog {
 
     private NewRecordActivity newRecordActivity;
     private RecordItemOtherBase recordItemOtherBase;
@@ -33,7 +33,7 @@ public class Dialog {
 
     public void setBaseTwoDialog(ScrollablePanelAdapter.OrderViewHolder viewHolder, final String[] items) {
         AlertDialog.Builder builder = new AlertDialog.Builder(newRecordActivity);
-        recordItemOtherBase= new RecordItemOtherBase();
+        recordItemOtherBase= viewHolder.base1;
 
         //設定對話框內的項目
         builder.setItems(items, new DialogInterface.OnClickListener(){

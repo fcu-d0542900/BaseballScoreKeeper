@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,7 @@ import java.util.List;
 
 public class ScrollablePanelAdapter extends PanelAdapter {
 
-    private NewRecordActivity newRecordActivity ;
+    private NewRecordActivity activity;
 
     private List<List<OrderInfo>> ordersList = new ArrayList<>();
 
@@ -43,7 +44,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     private String playerName;
     private int playerNum,playerPosition;
 
-    private Dialog baseOther = new Dialog();
+    private BaseOtherDialog baseOther = new BaseOtherDialog();
     private BaseFirstDialog baseFirstDialog = new BaseFirstDialog();
 
     final String[] center_choice = new String[]{"得分/出局", "安打","替換守備","替換打者","結束半局"};
@@ -55,19 +56,19 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     private static final int ORDER_TYPE = 2;
 
 
-    public ScrollablePanelAdapter(NewRecordActivity newRecordActivity) {
+    public ScrollablePanelAdapter(NewRecordActivity activity) {
         super();
-        this.setNewRecordActivity(newRecordActivity);
+        this.setActivity(activity);
     }
 
     @Override
     public int getRowCount() {
-        return newRecordActivity.currentRecord.getTeam().getTeamMember().size() + 1;
+        return activity.currentRecord.getTeam().getTeamMember().size() + 1;
     }
 
     @Override
     public int getColumnCount() {
-        return newRecordActivity.currentRecord.getTeam().getLastRecordItemsColumn() + 1;
+        return activity.currentRecord.getTeam().getLastRecordItemsColumn() + 1;
     }
 
 
@@ -130,15 +131,16 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     private void setBoardNumView(int pos, BoardNumViewHolder viewHolder) {
-        BoardNumInfo boardNumInfo = newRecordActivity.currentRecord.getTeam()..get(pos - 1);
-        if (boardNumInfo != null && pos > 0) {
-            viewHolder.dateTextView.setText(boardNumInfo.getBroadNum_symbol());
-        }
+        Log.v("ahkui",pos+"");
+//        BoardNumInfo boardNumInfo = activity.currentRecord.getTeam()..get(pos - 1);
+//        if (boardNumInfo != null && pos > 0) {
+//            viewHolder.dateTextView.setText(boardNumInfo.getBroadNum_symbol());
+//        }
     }
 
     @SuppressLint("SetTextI18n")
     private void setPlayerInfoView(int pos, final PlayerInfoViewHolder viewHolder) {
-        final Player playerInfo = newRecordActivity.currentRecord.getTeam().getTeamMember().get(pos - 1);
+        final Player playerInfo = activity.currentRecord.getTeam().getTeamMember().get(pos - 1);
         viewHolder.text_batOrder.setText(Integer.valueOf(pos).toString());
 
 
@@ -160,7 +162,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 @Override
                 public void onClick(View v) {
 
-                    view_set_player = LayoutInflater.from(newRecordActivity).inflate(R.layout.dialog_new_player, null);
+                    view_set_player = LayoutInflater.from(activity).inflate(R.layout.dialog_new_player, null);
                     view_set_player.setPadding(3,0,3,0);
                     ImageView img = view_set_player.findViewById(R.id.image_title_newPlayer);
                     img.setVisibility(View.GONE);
@@ -169,7 +171,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                     editText_playerNum = view_set_player.findViewById(R.id.editText_playerNum);
                     spinner_position = view_set_player.findViewById(R.id.spinner_position);
 
-                    AlertDialog.Builder dialog_setPlayer = new AlertDialog.Builder(newRecordActivity);
+                    AlertDialog.Builder dialog_setPlayer = new AlertDialog.Builder(activity);
                     dialog_setPlayer.setView(view_set_player);
 
                     ArrayAdapter<String> adapter_position = new ArrayAdapter<>(dialog_setPlayer.getContext(),android.R.layout.simple_spinner_item,new String[]{"","P","C","1B","2B","3B","SS","LF","CF","RF"});
@@ -191,10 +193,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                                 viewHolder.text_playerNum.setText(Integer.valueOf(playerNum).toString());
                                 viewHolder.text_playerPosition.setText(playerInfo.getPosition().toString().replaceAll("_",""));
 
-                                Toast.makeText(newRecordActivity.getApplicationContext(), "SET", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(activity.getApplicationContext(), "SET", Toast.LENGTH_SHORT).show();
                             }
                             else {
-                                Toast.makeText(newRecordActivity.getApplicationContext(), "請填入背號!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(activity.getApplicationContext(), "請填入背號!", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -217,18 +219,18 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 @Override
                 public void onClick(View v) {
 
-                    new AlertDialog.Builder(newRecordActivity)
+                    new AlertDialog.Builder(activity)
                             .setItems(center_choice, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     String name = center_choice[which];
-                                    Toast.makeText(newRecordActivity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
 
                                     switch (which) {
                                         //點擊得分/出局
                                         case 0:
-                                            AlertDialog.Builder center_choice1 = new AlertDialog.Builder(newRecordActivity);
-                                            View view_center_choice1 = View.inflate(newRecordActivity, R.layout.record_center_dialog, null);      //自訂dialog布局
+                                            AlertDialog.Builder center_choice1 = new AlertDialog.Builder(activity);
+                                            View view_center_choice1 = View.inflate(activity, R.layout.record_center_dialog, null);      //自訂dialog布局
                                             center_choice1.setView(view_center_choice1);
                                             // 設置view
                                             final AlertDialog center_dialog = center_choice1.create();    //根據builder設置好的一系列數據, 来建構一個dialog
@@ -236,7 +238,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                                             view_center_choice1.findViewById(R.id.click_run).setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
-                                                    Toast.makeText(newRecordActivity, "得分", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(activity, "得分", Toast.LENGTH_SHORT).show();
                                                     center_dialog.dismiss();
                                                 }
                                             });
@@ -244,7 +246,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                                             view_center_choice1.findViewById(R.id.click_out1).setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
-                                                    Toast.makeText(newRecordActivity, "一出局", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(activity, "一出局", Toast.LENGTH_SHORT).show();
                                                     center_dialog.dismiss();
                                                 }
                                             });
@@ -252,7 +254,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                                             view_center_choice1.findViewById(R.id.click_out2).setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
-                                                    Toast.makeText(newRecordActivity, "二出局", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(activity, "二出局", Toast.LENGTH_SHORT).show();
                                                     center_dialog.dismiss();
                                                 }
                                             });
@@ -260,7 +262,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                                             view_center_choice1.findViewById(R.id.click_out3).setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
-                                                    Toast.makeText(newRecordActivity, "三出局", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(activity, "三出局", Toast.LENGTH_SHORT).show();
                                                     center_dialog.dismiss();
                                                 }
                                             });
@@ -268,7 +270,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                                             view_center_choice1.findViewById(R.id.click_left).setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
-                                                    Toast.makeText(newRecordActivity, "殘壘", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(activity, "殘壘", Toast.LENGTH_SHORT).show();
                                                     center_dialog.dismiss();
                                                 }
                                             });
@@ -277,7 +279,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
                                         //點擊安打
                                         case 1:
-                                            new AlertDialog.Builder(newRecordActivity)
+                                            new AlertDialog.Builder(activity)
                                                     .setItems(hits_choice, new DialogInterface.OnClickListener() {
                                                         @Override
                                                         public void onClick(DialogInterface dialog, int which) {
@@ -285,22 +287,22 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                                                             switch (which) {
                                                                 //點擊一壘安打
                                                                 case 0:
-                                                                    Toast.makeText(newRecordActivity.getApplicationContext(), name_h, Toast.LENGTH_SHORT).show();
+                                                                    Toast.makeText(activity.getApplicationContext(), name_h, Toast.LENGTH_SHORT).show();
                                                                     break;
 
                                                                 //點擊二壘安打
                                                                 case 1:
-                                                                    Toast.makeText(newRecordActivity.getApplicationContext(), name_h, Toast.LENGTH_SHORT).show();
+                                                                    Toast.makeText(activity.getApplicationContext(), name_h, Toast.LENGTH_SHORT).show();
                                                                     break;
 
                                                                 //點擊壘安打
                                                                 case 2:
-                                                                    Toast.makeText(newRecordActivity.getApplicationContext(), name_h, Toast.LENGTH_SHORT).show();
+                                                                    Toast.makeText(activity.getApplicationContext(), name_h, Toast.LENGTH_SHORT).show();
                                                                     break;
 
                                                                 //點擊三全壘打
                                                                 case 3:
-                                                                    Toast.makeText(newRecordActivity.getApplicationContext(), name_h, Toast.LENGTH_SHORT).show();
+                                                                    Toast.makeText(activity.getApplicationContext(), name_h, Toast.LENGTH_SHORT).show();
                                                                     break;
 
                                                                 default:
@@ -313,17 +315,17 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
                                         //點擊替換守備
                                         case 2:
-                                            Toast.makeText(newRecordActivity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
                                             break;
 
                                         //點擊替換打者
                                         case 3:
-                                            Toast.makeText(newRecordActivity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
                                             break;
 
                                         //點擊結束半局
                                         case 4:
-                                            Toast.makeText(newRecordActivity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
                                             break;
                                         default:
                                             break;
@@ -343,7 +345,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 @Override
                 public void onClick(View v) {
 
-                    baseFirstDialog.setNewRecordActivity(newRecordActivity);
+                    baseFirstDialog.setNewRecordActivity(activity);
                     baseFirstDialog.setBaseHomeDialog(viewHolder);
                     Toast.makeText(v.getContext(), "一壘" , Toast.LENGTH_SHORT).show();
 
@@ -355,7 +357,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 @Override
                 public void onClick(View v) {
 
-                    baseOther.setNewRecordActivity(newRecordActivity);
+                    baseOther.setNewRecordActivity(activity);
                     baseOther.setBaseTwoDialog(viewHolder,new String[]{"推進","進壘"});
                     Toast.makeText(v.getContext(), "二壘" , Toast.LENGTH_SHORT).show();
 
@@ -565,8 +567,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         }
     }
 
-    public void setNewRecordActivity(NewRecordActivity newRecordActivity) {
-        this.newRecordActivity=newRecordActivity;
+    public void setActivity(NewRecordActivity activity) {
+        this.activity =activity;
     }
 
 

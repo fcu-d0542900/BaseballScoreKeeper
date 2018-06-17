@@ -24,22 +24,22 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
 
     private List<RecordTeam> recordTeam = new ArrayList<>();
     private List<BoardNumInfo> boardNumInfoList = new ArrayList<>();
-    private Record record;
+    private NewRecordActivity activity;
 
     private static final int TITLENAME_TYPE = 7;
     private static final int TEAMINFO_TYPE = 5;
     private static final int BOARDNUM_TYPE = 1;
     private static final int SCOREBOARD_TYPE = 6;
 
-    public ScoreScrollablePanelAdapter(Record currentRecord) {
+    ScoreScrollablePanelAdapter(NewRecordActivity activity) {
         super();
-        record = currentRecord;
-        if (record != null){
+        this.activity = activity;
+        if (activity.currentRecord != null){
             recordTeam.clear();
-            recordTeam.add(record.getAwayTeam());
-            recordTeam.add(record.getHomeTeam());
+            recordTeam.add(activity.currentRecord.getAwayTeam());
+            recordTeam.add(activity.currentRecord.getHomeTeam());
         }
-        RecordItem recordItem = record.getAwayTeam().getRecordItems(0,0);
+        RecordItem recordItem = activity.currentRecord.getAwayTeam().getRecordItems(0,0);
         recordItem.setBASE_B_D_K_KR(true, RecordItem.BASE_B_D_K_KR.B);
 
         boardNumInfoList.clear();
@@ -141,7 +141,7 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
 
     //記分板
     private void setScoreView(final int row, final int column, final ScoreBoardViewHolder viewHolder) {
-        final String scoreInfo = (row == 0 ? record.getAwayTeam() :record.getHomeTeam() ).getScore(column - 1);
+        final String scoreInfo = (row == 0 ? activity.currentRecord.getAwayTeam() :activity.currentRecord.getHomeTeam() ).getScore(column - 1);
         Log.v("score",scoreInfo);
         //TODO: 玉鳳 显示分数在记分板上
     }

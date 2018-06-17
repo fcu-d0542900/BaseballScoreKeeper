@@ -56,14 +56,12 @@ public class BaseFirstDialog {
 
     private String[] nums = {"1","2","3","4","5","6","7","8","9"};
 
-
-
     public void setNewRecordActivity(NewRecordActivity newRecordActivity) {
         this.newRecordActivity = newRecordActivity;
     }
 
     public void setBaseHomeDialog(ScrollablePanelAdapter.OrderViewHolder viewHolder) {
-        recordItemFirstBase = new RecordItemFirstBase();
+        recordItemFirstBase = viewHolder.base;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(newRecordActivity);
         builder.setItems(new String[]{"擊出球","未擊出球"}, new DialogInterface.OnClickListener(){
