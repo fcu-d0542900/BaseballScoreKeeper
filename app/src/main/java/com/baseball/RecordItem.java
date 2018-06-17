@@ -56,26 +56,11 @@ public class RecordItem implements Serializable {
     }
 
     public enum BALL_DIRECTION{
-        ONE(1),
-        TWO(2),
-        THREE(3),
-        FOUR(4),
-        FIVE(5),
-        SIX(6),
-        SEVEN(7),// 左
-        EIGHT(8),// 中
-        NINE(9), // 右
-        __(0);
-
-        private final int value;
-        BALL_DIRECTION(int value) {
-            this.value = value;
+        LEFT,//左
+        MIDDLE,//中
+        RIGHT,//右
+        __
         }
-
-        public int getValue() {
-            return value;
-        }
-    }
 
     public void setBallDirection(BALL_DIRECTION ball_direction) {
         this.ballDirection = ball_direction;
@@ -85,8 +70,6 @@ public class RecordItem implements Serializable {
     public void setBallType(BALL_TYPE ballType) {
         this.ballType = ballType;
         save();
-        BALL_DIRECTION a = BALL_DIRECTION.values()[1];
-        Log.d("ahkui",""+a.getValue());
     }
 
     public void setBALL_TOUCH_AC1(int BALL_TOUCH_AC1) {
@@ -132,7 +115,18 @@ public class RecordItem implements Serializable {
                     case __:
                         base.setShowOneViewVisibility(false);
                 }
-                base.setFirstViewOneNumValue(getImageByNumber(ballDirection));
+                switch (ballDirection){
+                    case LEFT:
+                        base.setFirstViewOneNumValue(R.drawable.throw7);
+                        break;
+                    case MIDDLE:
+                        base.setFirstViewOneNumValue(R.drawable.throw8);
+                        break;
+                    case RIGHT:
+                        base.setFirstViewOneNumValue(R.drawable.throw9);
+                        break;
+                }
+                break;
             case TOUCH:
                 base.setShowSacrificeHitsVisibility(true);
                 base.setShowOneViewVisibility(true);
@@ -163,13 +157,9 @@ public class RecordItem implements Serializable {
                         break;
                 }
                 break;
-            case __:
-                break;
         }
     }
-    private int getImageByNumber(BALL_DIRECTION direction) {
-        return getImageByNumber(direction.getValue());
-    }
+
     private int getImageByNumber(int num){
         switch (num){
             case 1:
@@ -194,7 +184,7 @@ public class RecordItem implements Serializable {
         return num;
     }
 
-    private void updateOtherBaseUI(RecordItemOtherBase base, int base_int){
+    public void updateOtherBaseUI(RecordItemOtherBase base,int base_int){
         if (base_int == 0){
             // TODO update base1 ui with database
             base.setShowActionNameViewVisibility(false);
@@ -235,6 +225,7 @@ public class RecordItem implements Serializable {
 
     public void toggleScore(){
         score = !score;
+
     }
 
     public boolean isGetScore(){
