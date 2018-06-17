@@ -36,7 +36,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     private String playerName;
     private int playerNum,playerPosition;
 
-    private BaseOtherDialog baseOtherDialog = new BaseOtherDialog();
+    private BaseOtherDialog baseOtherDialog;
     private BaseFirstDialog baseFirstDialog = new BaseFirstDialog();
 
     final String[] center_choice = new String[]{"得分/出局", "安打","替換守備","替換打者","結束半局"};
@@ -334,10 +334,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.getFirstView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    baseOtherDialog.setBaseOneDialog(viewHolder,1,new String[]{"推進","進壘"});
                     baseFirstDialog.setActivity(activity);
                     baseFirstDialog.setBaseFirstDialog(viewHolder);
-
                     Toast.makeText(v.getContext(), "一壘" , Toast.LENGTH_SHORT).show();
 
                 }
@@ -348,7 +346,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 @Override
                 public void onClick(View v) {
                     // TODO 玉鳳 二壘
-
+                    baseOtherDialog = new BaseOtherDialog();
                     baseOtherDialog.setNewRecordActivity(activity);
                     baseOtherDialog.setBaseTwoDialog(viewHolder,new String[]{"推進","進壘"});
                     Toast.makeText(v.getContext(), "二壘" , Toast.LENGTH_SHORT).show();
@@ -360,8 +358,11 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.getThirdView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO 玉鳳 三壘
-//                    baseOtherDialog.setBaseThreeDialog(viewHolder,3,new String[]{"推進","進壘"});
+
+                    baseOtherDialog = new BaseOtherDialog();
+                    baseOtherDialog.setNewRecordActivity(activity);
+                    baseOtherDialog.setBaseTwoDialog(viewHolder,new String[]{"推進","進壘"});
+
                     Toast.makeText(v.getContext(), "三壘" , Toast.LENGTH_SHORT).show();
                 }
             });
@@ -371,8 +372,9 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 @Override
                 public void onClick(View v) {
                     // TODO 玉鳳 本壘
-//                    baseFirstDialog.setBaseHomeDialog(viewHolder);
-
+                    baseOtherDialog = new BaseOtherDialog();
+                    baseOtherDialog.setNewRecordActivity(activity);
+                    baseOtherDialog.setBaseTwoDialog(viewHolder,new String[]{"推進","進壘"});
                     Toast.makeText(v.getContext(), "本壘" , Toast.LENGTH_SHORT).show();
 
                 }
