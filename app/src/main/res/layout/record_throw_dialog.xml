@@ -29,7 +29,7 @@
                 app:srcCompat="@drawable/throw_left" />
 
             <Spinner
-                android:id="@+id/spinner_left"
+                android:id="@+id/spinner_throw_left"
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0"
@@ -43,7 +43,7 @@
                 app:srcCompat="@drawable/to" />
 
             <Spinner
-                android:id="@+id/spinner_right"
+                android:id="@+id/spinner_throw_right"
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0"
