@@ -438,7 +438,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         public ImageView getFirstViewTwoNum,getFirstViewTwoAc;
         public ImageView getFirstViewThreeNum,getFirstViewThreeAc;
         public ImageView getSacrificeFly,getSacrificeHits;
-        public RecordItemOtherBase base1;
+        public RecordItemFirstBase base1;
 
         //二壘
         public ImageView getSecondViewActionName,getSecondViewPushNum,getSecondViewBase;
@@ -465,7 +465,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         public ImageView getHomeViewActionTwoNum,getHomeViewActionTwoAc;
         public LinearLayout getHomeViewThrow;
         public ImageView getHomeViewThrowOne,getHomeViewThrowTwo;
-        public RecordItemFirstBase base;
+        public RecordItemOtherBase base;
 
         OrderViewHolder(View view) {
             super(view);

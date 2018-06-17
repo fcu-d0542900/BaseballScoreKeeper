@@ -61,7 +61,7 @@ public class BaseFirstDialog {
     }
 
     public void setBaseFirstDialog(ScrollablePanelAdapter.OrderViewHolder viewHolder) {
-        recordItemFirstBase = viewHolder.base;
+        recordItemFirstBase = viewHolder.base1;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(newRecordActivity);
         builder.setItems(new String[]{"擊出球","未擊出球"}, new DialogInterface.OnClickListener(){
