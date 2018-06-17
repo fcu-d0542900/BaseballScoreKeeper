@@ -33,7 +33,7 @@ public class BaseOtherDialog {
 
     public void setBaseTwoDialog(ScrollablePanelAdapter.OrderViewHolder viewHolder, final String[] items) {
         AlertDialog.Builder builder = new AlertDialog.Builder(newRecordActivity);
-        recordItemOtherBase= viewHolder.base1;
+        recordItemOtherBase= viewHolder.base2;
 
         //設定對話框內的項目
         builder.setItems(items, new DialogInterface.OnClickListener(){

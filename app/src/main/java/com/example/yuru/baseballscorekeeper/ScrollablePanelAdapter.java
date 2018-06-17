@@ -60,7 +60,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     @Override
     public int getColumnCount() {
-        return activity.currentRecord.getTeam().getLastRecordItemsColumn() + 1 + 1 +5;
+        return activity.currentRecord.getTeam().getLastRecordItemsColumn() + 1 + 2 ;
     }
 
 
@@ -333,8 +333,15 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.getFirstView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+<<<<<<< HEAD
                     baseFirstDialog.setNewRecordActivity(activity);
                     baseFirstDialog.setBaseFirstDialog(viewHolder);
+=======
+//                    baseOtherDialog.setBaseOneDialog(viewHolder,1,new String[]{"推進","進壘"});
+                    baseFirstDialog.setNewRecordActivity(activity);
+                    baseFirstDialog.setBaseFirstDialog(viewHolder);
+
+>>>>>>> 00d56eacbeaa0d511eb229e678017e967aaf6cb8
                     Toast.makeText(v.getContext(), "一壘" , Toast.LENGTH_SHORT).show();
 
                 }
@@ -440,7 +447,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         public ImageView getFirstViewTwoNum,getFirstViewTwoAc;
         public ImageView getFirstViewThreeNum,getFirstViewThreeAc;
         public ImageView getSacrificeFly,getSacrificeHits;
-        public RecordItemOtherBase base1;
+        public RecordItemFirstBase base1;
 
         //二壘
         public ImageView getSecondViewActionName,getSecondViewPushNum,getSecondViewBase;
@@ -467,7 +474,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         public ImageView getHomeViewActionTwoNum,getHomeViewActionTwoAc;
         public LinearLayout getHomeViewThrow;
         public ImageView getHomeViewThrowOne,getHomeViewThrowTwo;
-        public RecordItemFirstBase base;
+        public RecordItemOtherBase base;
 
         OrderViewHolder(View view) {
             super(view);
