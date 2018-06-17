@@ -48,6 +48,9 @@ public class BaseFirstDialog {
     private RadioGroup radioGroup_two_Ac;
     private RadioButton radioButton_two_E,radioButton_two_T;
 
+    private int select_two_direction;
+    private String select_twoAc;
+
 
     private String[] nums = {"1","2","3","4","5","6","7","8","9"};
 
@@ -203,7 +206,7 @@ public class BaseFirstDialog {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 set_first_view_one();
-                                                set_first_view_two();
+                                                first_view_two();
                                             }
                                         });
                                         first_one_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -289,7 +292,6 @@ public class BaseFirstDialog {
 
         //TODO ahkui  高飛 平飛  recordItemFirstBase.setFirstViewOneTop(true);
         //TODO ahkui  滾地 recordItemFirstBase.setFirstViewOneBottom(true);
-
         if(radioButton_type_high.getId() == select_typeID) {
             select_type_str = "高飛球";
             //TODO ahkui  存入資料庫， 顯示圖片高飛球  (R.drawable.fly_ball)
@@ -306,6 +308,8 @@ public class BaseFirstDialog {
             select_type_str = "未選擇";
         }
 
+        //TODO  ahkui 如果下面有check   recordItemFirstBase.setShowFirstViewOneAc1Visibility(true);
+        //TODO  ahkui 設定下方圖片值  recordItemFirstBase.setFirstViewOneAc1Value();
         if(checkBox_elseAc_FC.isChecked()) {
             select_elseAc = select_elseAc + "," + checkBox_elseAc_FC.getText().toString();
             //TODO ahkui  存入資料庫， 顯示圖片FC  (R.drawable.fielder_choice)
@@ -326,7 +330,7 @@ public class BaseFirstDialog {
         Toast.makeText(activity, "OK "+select_type_str+","+(select_direction+1) +select_elseAc, Toast.LENGTH_SHORT).show();
     }
 
-    public void set_first_view_two() {
+    public void first_view_two() {
         AlertDialog.Builder first_two_builder = new AlertDialog.Builder(activity);
         View view_first_two_dialog = LayoutInflater.from(activity).inflate(R.layout.record_first_two, null);
         view_first_two_dialog.setPadding(10,20,10,10);
@@ -345,14 +349,26 @@ public class BaseFirstDialog {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 //TODO ahkui   顯示 recordItemFirstBase.setShowTwoViewVisibility(true);
-                
-                Toast.makeText(activity, "OK ", Toast.LENGTH_SHORT).show();
+
+                select_two_direction = (int) spinner_two_direction.getSelectedItemId();
+                if(radioGroup_two_Ac.getCheckedRadioButtonId() == radioButton_two_E.getId()) {
+                    select_twoAc = "失誤 E";
+                }
+                else if(radioGroup_two_Ac.getCheckedRadioButtonId() == radioButton_two_T.getId()) {
+                    select_twoAc = "觸殺 T";
+                }
+                else {
+                    select_twoAc = "未選擇";
+                }
+
+                Toast.makeText(activity, "OK ," + (select_two_direction+1) + "," + select_twoAc, Toast.LENGTH_SHORT).show();
 
 
             }
         });
         first_two_builder.show();
-
     }
+
+
 
 }
