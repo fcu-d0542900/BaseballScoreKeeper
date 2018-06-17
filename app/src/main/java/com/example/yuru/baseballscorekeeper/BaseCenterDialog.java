@@ -26,6 +26,11 @@ public class BaseCenterDialog {
     private EditText editText_playerName,editText_playerNum;
     private Spinner spinner_position;
 
+    private EditText editText_change_P,editText_change_C;
+    private EditText editText_change_1B,editText_change_2B,editText_change_3B,editText_change_SS;
+    private EditText editText_change_LF,editText_change_CF,editText_change_RF;
+    private int change_P,change_C,change_1B,change_2B,change_3B,change_SS,change_LF,change_CF,change_RF;
+
     private String[] center_choice = new String[]{"得分/出局", "安打","替換守備","替換打者","結束半局"};
     private String[] hits_choice = new String[]{"一壘安打", "二壘安打","三壘安打","全壘打"};
 
@@ -128,7 +133,7 @@ public class BaseCenterDialog {
                             case 2:
                                 Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
                                 // TODO activity.currentRecord.getTeam().changeDefPlayer();
-
+                                change_player_garrison();
                                 break;
 
                             //點擊替換打者
@@ -201,6 +206,74 @@ public class BaseCenterDialog {
         });
         dialog_setPlayer.show();
 
+    }
+
+    public void change_player_garrison() {
+        AlertDialog.Builder dialog_change_garrison = new AlertDialog.Builder(activity);
+        View view_change_garrison = LayoutInflater.from(activity).inflate(R.layout.record_change_garrison, null);
+        view_change_garrison.setPadding(30,10,10,10);
+        dialog_change_garrison.setView(view_change_garrison);
+        editText_change_P = view_change_garrison.findViewById(R.id.editText_change_P);
+        editText_change_C = view_change_garrison.findViewById(R.id.editText_change_C);
+        editText_change_1B = view_change_garrison.findViewById(R.id.editText_change_1B);
+        editText_change_2B = view_change_garrison.findViewById(R.id.editText_change_2B);
+        editText_change_3B = view_change_garrison.findViewById(R.id.editText_change_3B);
+        editText_change_SS = view_change_garrison.findViewById(R.id.editText_change_SS);
+        editText_change_LF = view_change_garrison.findViewById(R.id.editText_change_LF);
+        editText_change_CF = view_change_garrison.findViewById(R.id.editText_change_CF);
+        editText_change_RF = view_change_garrison.findViewById(R.id.editText_change_RF);
+
+        dialog_change_garrison.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String change_garrison = "";
+
+                if(!editText_change_P.getText().toString().equals("")) {
+                    change_garrison +=  ", P:" + editText_change_P.getText().toString();
+                    change_P = Integer.valueOf(editText_change_P.getText().toString());
+                }
+                if(!editText_change_C.getText().toString().equals("")) {
+                    change_garrison += ", C:" + editText_change_C.getText().toString();
+                    change_C = Integer.valueOf(editText_change_C.getText().toString());
+                }
+                if(!editText_change_1B.getText().toString().equals("")) {
+                    change_garrison += ", 1B:" + editText_change_1B.getText().toString();
+                    change_1B = Integer.valueOf(editText_change_1B.getText().toString());
+                }
+                if(!editText_change_2B.getText().toString().equals("")) {
+                    change_garrison += ", 2B:" + editText_change_2B.getText().toString();
+                    change_2B = Integer.valueOf(editText_change_2B.getText().toString());
+                }
+                if(!editText_change_3B.getText().toString().equals("")) {
+                    change_garrison += ", 3B:" + editText_change_3B.getText().toString();
+                    change_3B = Integer.valueOf(editText_change_3B.getText().toString());
+                }
+                if(!editText_change_SS.getText().toString().equals("")) {
+                    change_garrison += ", SS:" + editText_change_SS.getText().toString();
+                    change_SS = Integer.valueOf(editText_change_SS.getText().toString());
+                }
+                if(!editText_change_LF.getText().toString().equals("")) {
+                    change_garrison += ", LF " + editText_change_LF.getText().toString();
+                    change_LF = Integer.valueOf(editText_change_LF.getText().toString());
+                }
+                if(!editText_change_CF.getText().toString().equals("")) {
+                    change_garrison += ", CF:" + editText_change_CF.getText().toString();
+                    change_LF = Integer.valueOf(editText_change_CF.getText().toString());
+                }
+                if(!editText_change_RF.getText().toString().equals("")) {
+                    change_garrison += ", RF:" + editText_change_RF.getText().toString();
+                    change_RF = Integer.valueOf(editText_change_RF.getText().toString());
+                }
+
+
+                //TODO ahkui 顯示  recordItemCenter.setShowChangeGarrisonVisibility(true);
+                //TODO ahkui  儲存更改守備資料 change_?
+
+                Toast.makeText(activity.getApplicationContext(), "OK " + change_garrison, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        dialog_change_garrison.show();
     }
 
 }
