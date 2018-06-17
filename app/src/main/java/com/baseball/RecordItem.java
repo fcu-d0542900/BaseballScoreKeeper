@@ -25,21 +25,42 @@ public class RecordItem implements Serializable {
     }
 
     BASE_FIRST_STEP_ONE _BASE_FIRST_STEP_ONE;
-
+    BALL_TYPE ballType;
+    BALL_DIRECTION ballDirection;
     public void set_BASE_FIRST_STEP_ONE(BASE_FIRST_STEP_ONE _BASE_FIRST_STEP_ONE) {
         this._BASE_FIRST_STEP_ONE = _BASE_FIRST_STEP_ONE;
+        save();
     }
 
     public enum BASE_FIRST_STEP_ONE{
-        HIGH,
-        TOUCH,
-        NORMAL,
-        BADBALL,
-        HITBYPITCH,
-        KILLED,
-        NOKILLED
+        HIGH,// 高飛犧牲
+        TOUCH,//觸及犧牲
+        NORMAL,//一般
+        BADBALL, //保送
+        HITBYPITCH, //觸身球
+        KILLED, //三鎮
+        NOKILLED //不死三陣
     }
 
+    public enum BALL_TYPE {
+        HIGH, // 高飛球
+        FLAT, // 平飛球
+        FLOOR // 滾地球
+    }
+
+    public enum BALL_DIRECTION{
+        LEFT,//左
+        MIDDLE,//中
+        RIGHT//右
+    }
+
+    public void setBallDirection(BALL_DIRECTION ball_direction) {
+        this.ballDirection = ball_direction;
+    }
+
+    public void setBallType(BALL_TYPE ballType) {
+        this.ballType = ballType;
+    }
 
     public void updateFirstBaseUI(RecordItemFirstBase base){
         // TODO update base ui with database
@@ -57,6 +78,28 @@ public class RecordItem implements Serializable {
         switch (_BASE_FIRST_STEP_ONE){
             case HIGH:
                 base.setShowSacrificeFlyVisibility(true);
+                switch (ballType){
+                    case HIGH:
+                        // TODO YURU
+                        break;
+                    case FLAT:
+                        // TODO YURU
+                        break;
+                }
+                switch (ballDirection){
+                    case LEFT:
+                        // TODO YURU
+                        break;
+                    case MIDDLE:
+                        // TODO YURU
+                        break;
+                    case RIGHT:
+                        // TODO YURU
+                        break;
+                }
+                break;
+            case TOUCH:
+            case NORMAL:
                 break;
             case BADBALL:
             case HITBYPITCH:

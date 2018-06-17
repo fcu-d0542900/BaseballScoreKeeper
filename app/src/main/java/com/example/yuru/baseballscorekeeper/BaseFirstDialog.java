@@ -97,11 +97,13 @@ public class BaseFirstDialog {
                                                 if(radioButton_sacrificeFly_type_high.getId() == select_sacrificeFly_typeID) {
                                                     select_sacrificeFly_type_str = "高飛球";
                                                     //TODO ahkui  存入資料庫， 顯示圖片高飛球  (R.drawable.fly_ball)
+                                                    viewHolder.recordItem.setBallType(RecordItem.BALL_TYPE.HIGH);
 
                                                 }
                                                 else if(radioButton_sacrificeFly_type_line.getId() == select_sacrificeFly_typeID) {
                                                     select_sacrificeFly_type_str = "平飛球";
                                                     //TODO ahkui  存入資料庫， 顯示圖片平飛球  (R.drawable.line_drive)
+                                                    viewHolder.recordItem.setBallType(RecordItem.BALL_TYPE.FLAT);
 
                                                 }
                                                 else {
@@ -111,15 +113,18 @@ public class BaseFirstDialog {
                                                 if(radioButton_sacrificeFly_direction_7.getId() == select_sacrificeFly_directionID) {
                                                     select_sacrificeFly_direction_str = "左外野";
                                                     //TODO ahkui  存入資料庫， 顯示圖片 7  (R.drawable.throw7)
+                                                    viewHolder.recordItem.setBallDirection(RecordItem.BALL_DIRECTION.LEFT);
 
                                                 }
                                                 else if(radioButton_sacrificeFly_direction_8.getId() == select_sacrificeFly_directionID) {
                                                     select_sacrificeFly_direction_str = "中外野";
                                                     //TODO ahkui  存入資料庫， 顯示圖片 8  (R.drawable.throw8)
+                                                    viewHolder.recordItem.setBallDirection(RecordItem.BALL_DIRECTION.MIDDLE);
                                                 }
                                                 else if(radioButton_sacrificeFly_direction_9.getId() == select_sacrificeFly_directionID) {
                                                     select_sacrificeFly_direction_str = "右外野";
                                                     //TODO ahkui  存入資料庫， 顯示圖片 9  (R.drawable.throw9)
+                                                    viewHolder.recordItem.setBallDirection(RecordItem.BALL_DIRECTION.RIGHT);
                                                 }
                                                 else {
                                                     select_sacrificeFly_direction_str = "未選擇";
