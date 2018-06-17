@@ -187,6 +187,15 @@ public class RecordItem implements Serializable {
     public void updateOtherBaseUI(RecordItemOtherBase base,int base_int){
         if (base_int == 0){
             // TODO update base1 ui with database
+            base.setShowActionNameViewVisibility(false);
+            base.setShowActionViewVisibility(false);
+            base.setShowThrowViewVisibility(false);
+            base.setShowPushNumViewVisibility(false);
+            base.setShowToBaseViewVisibility(false);
+            //action
+            base.setShowActionOneAcViewVisibility(false);
+            base.setShowActionTwoAcViewVisibility(false);
+
         }
     }
 

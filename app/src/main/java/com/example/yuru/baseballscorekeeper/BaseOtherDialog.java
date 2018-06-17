@@ -489,7 +489,7 @@ public class BaseOtherDialog {
                         case 0:   //無失誤
                             break;
                         case 1:   //有失誤
-                            recordItemOtherBase.setShowActionTwoViewVisibility(true);
+                            recordItemOtherBase.setShowActionTwoAcViewVisibility(true);
                             //TODO: ahkui 存入資料庫， 右框顯示E   (R.drawable.error)
                             break;
                         default:
