@@ -43,7 +43,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     private BaseOtherDialog baseOtherDialog;
     private BaseFirstDialog baseFirstDialog;
-    private GoodBadBallDialog goodBadBallDialog = new GoodBadBallDialog();
+    private GoodBadBallDialog goodBadBallDialog;
 
     private List<List<RecordItem>> recordItems;
 
@@ -397,6 +397,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.getBallView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    goodBadBallDialog = new GoodBadBallDialog();
                     goodBadBallDialog.setNewRecordActivity(activity);
                     goodBadBallDialog.setGoodBadBallDialog(viewHolder);
                     Toast.makeText(v.getContext(), "好壞球" , Toast.LENGTH_SHORT).show();
