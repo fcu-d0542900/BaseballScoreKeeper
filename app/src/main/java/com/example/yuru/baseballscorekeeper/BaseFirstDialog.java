@@ -160,6 +160,8 @@ public class BaseFirstDialog {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 //TODO  ahkui  設定顯示觸擊犧牲打格子   recordItemFirstBase.setShowSacrificeHitsVisibility(true);
+                                                //TODO  ahkui  recordItemFirstBase.setShowOneViewVisibility(true);
+                                                //TODO  ahkui  recordItemFirstBase.setShowTwoView(true);
 
                                                 actionOne = (int) spinner_actionOne.getSelectedItemId();
                                                 //TODO  ahkui   存入資料庫， 顯示圖片  數字 actionOne+1  (R.drawable.throw 數字)
