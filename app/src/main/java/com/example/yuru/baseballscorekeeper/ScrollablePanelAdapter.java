@@ -474,7 +474,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
         OrderViewHolder(View view) {
             super(view);
-
+            base  = new RecordItemOtherBase();
+            base2  = new RecordItemOtherBase();
+            base3  = new RecordItemOtherBase();
+            base1  = new RecordItemFirstBase();
             this.getScoreView = view.findViewById(R.id.centerView);
             this.getFirstView = view.findViewById(R.id.firstView);
             this.getHomeView = view.findViewById(R.id.homeView);

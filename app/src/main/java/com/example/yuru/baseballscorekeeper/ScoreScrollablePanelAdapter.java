@@ -39,9 +39,6 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
             recordTeam.add(activity.currentRecord.getAwayTeam());
             recordTeam.add(activity.currentRecord.getHomeTeam());
         }
-        RecordItem recordItem = activity.currentRecord.getAwayTeam().getRecordItems(0,0);
-        recordItem.setBASE_B_D_K_KR(true, RecordItem.BASE_B_D_K_KR.B);
-
         boardNumInfoList.clear();
         for (int i=0;i<9+2;i++){
             boardNumInfoList.add(new BoardNumInfo(i));
