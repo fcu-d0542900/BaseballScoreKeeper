@@ -124,9 +124,10 @@ public class RecordItem implements Serializable {
             case TOUCH:
                 base.setShowSacrificeHitsVisibility(true);
                 base.setShowOneViewVisibility(true);
+                base.setShowFirstViewOneBottomVisibility(true);
                 base.setShowTwoViewVisibility(true);
-                base.setFirstViewOneAc1Value(getImageByNumber(BALL_TOUCH_AC1));
-                base.setFirstViewOneAc2Value(getImageByNumber(BALL_TOUCH_AC2));
+                base.setFirstViewOneNumValue(getImageByNumber(BALL_TOUCH_AC1));
+                base.setFirstViewTwoNumValue(getImageByNumber(BALL_TOUCH_AC2));
                 Log.d("ahkui touch","get into rouch "+ _BASE_FIRST_STEP_ONE.toString());
             case NORMAL:
                 break;
