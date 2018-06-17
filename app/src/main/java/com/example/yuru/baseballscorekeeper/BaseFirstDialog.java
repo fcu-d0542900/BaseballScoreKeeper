@@ -20,8 +20,6 @@ import com.baseball.RecordItemFirstBase;
 
 public class BaseFirstDialog {
 
-    private RecordItemFirstBase recordItemFirstBase;
-
     private NewRecordActivity activity;
 
     //高飛犧牲
@@ -31,7 +29,6 @@ public class BaseFirstDialog {
 
     //犧牲觸擊
     private Spinner spinner_actionOne,spinner_actionTwo;
-
     private int actionOne,actionTwo;
 
     //一般
@@ -39,8 +36,7 @@ public class BaseFirstDialog {
     private RadioButton radioButton_type_high,radioButton_type_line,radioButton_type_ground;
     private Spinner spinner_direction;
     private CheckBox checkBox_elseAc_FC,checkBox_elseAc_u,checkBox_elseAc_E,checkBox_elseAc_T;
-
-    private int select_typeID,select_direction;
+    private int select_direction;
     private String select_type_str,select_elseAc;
 
     //two
@@ -67,7 +63,6 @@ public class BaseFirstDialog {
     }
 
     public void setBaseFirstDialog(final ScrollablePanelAdapter.OrderViewHolder viewHolder) {
-        recordItemFirstBase = viewHolder.base1;
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setItems(new String[]{"擊出球","未擊出球"}, new DialogInterface.OnClickListener(){
             @Override
@@ -81,7 +76,7 @@ public class BaseFirstDialog {
                                 switch (i) {
                                     case 0:
                                         viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.HIGH);
-                                        viewHolder.updateUI();
+                                        activity.scrollablePanel.notifyDataSetChanged();
                                         Toast.makeText(activity, "高飛犧牲打", Toast.LENGTH_SHORT).show();
 
                                         AlertDialog.Builder scrifice_fly_builder = new AlertDialog.Builder(activity);
@@ -145,7 +140,7 @@ public class BaseFirstDialog {
                                                     select_sacrificeFly_direction_str = "未選擇";
                                                     viewHolder.recordItem.setBallDirection(RecordItem.BALL_DIRECTION.__);
                                                 }
-                                                viewHolder.updateUI();
+                                                activity.scrollablePanel.notifyDataSetChanged();
                                                 Toast.makeText(activity.getApplicationContext(), "OK "+select_sacrificeFly_type_str + "," + select_sacrificeFly_direction_str, Toast.LENGTH_SHORT).show();
                                             }
                                         });
@@ -183,7 +178,7 @@ public class BaseFirstDialog {
                                                 actionTwo = (int) spinner_actionTwo.getSelectedItemId();
                                                 //TODO  ahkui   存入資料庫， 顯示圖片  數字 actionTwo+1  (R.drawable.throw 數字)
                                                 viewHolder.recordItem.setBALL_TOUCH_AC2(actionTwo+1);
-                                                viewHolder.updateUI();
+                                                activity.scrollablePanel.notifyDataSetChanged();
                                                 Toast.makeText(activity, "OK " + (actionOne+1) + "," + (actionTwo+1), Toast.LENGTH_SHORT).show();
                                             }
                                         });
@@ -218,14 +213,14 @@ public class BaseFirstDialog {
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 set_first_view_one();
                                                 first_view_two();
-                                                viewHolder.updateUI();
+                                                activity.scrollablePanel.notifyDataSetChanged();
                                             }
                                         });
                                         first_one_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 set_first_view_one();
-                                                viewHolder.updateUI();
+                                                activity.scrollablePanel.notifyDataSetChanged();
                                             }
                                         });
                                         first_one_builder.show();
@@ -249,7 +244,7 @@ public class BaseFirstDialog {
                                 unhit_dialog.dismiss();
                                 //TODO: ahkui 存入資料庫， 顯示圖片 B   (R.drawable.throw_b)
                                 viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.BADBALL);
-                                viewHolder.updateUI();
+                                activity.scrollablePanel.notifyDataSetChanged();
 
                             }
                         });
@@ -260,7 +255,8 @@ public class BaseFirstDialog {
                                 unhit_dialog.dismiss();
                                 //TODO:ahkui 存入資料庫， 顯示圖片 D  (R.drawable.hit_by_pitch)
                                 viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.HITBYPITCH);
-                                viewHolder.updateUI();
+                                activity.scrollablePanel.notifyDataSetChanged();
+                                activity.scrollablePanel.notifyDataSetChanged();
 
                             }
                         });
@@ -271,7 +267,7 @@ public class BaseFirstDialog {
                                 unhit_dialog.dismiss();
                                 //TODO:ahkui 存入資料庫， 顯示圖片 K  (R.drawable.killed)
                                 viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.KILLED);
-                                viewHolder.updateUI();
+                                activity.scrollablePanel.notifyDataSetChanged();
                             }
                         });
                         view_unhit_dialog.findViewById(R.id.click_nok).setOnClickListener(new View.OnClickListener() {
@@ -281,7 +277,7 @@ public class BaseFirstDialog {
                                 unhit_dialog.dismiss();
                                 //TODO:ahkui 存入資料庫， 顯示圖片 倒K  (R.drawable.no_killed)
                                 viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.NOKILLED);
-                                viewHolder.updateUI();
+                                activity.scrollablePanel.notifyDataSetChanged();
 
                             }
                         });
@@ -299,7 +295,7 @@ public class BaseFirstDialog {
     public void set_first_view_one() {
         //TODO ahkui   顯示 recordItemFirstBase.setShowOneViewVisibility(true);
 
-        select_typeID = radioGroup_type.getCheckedRadioButtonId();
+        int select_typeID = radioGroup_type.getCheckedRadioButtonId();
         select_direction = (int)spinner_direction.getSelectedItemId(); //TODO ahkui  存入資料庫， 顯示圖片 1~9
         select_elseAc = "";
 

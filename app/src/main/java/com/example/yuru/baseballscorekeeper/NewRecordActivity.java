@@ -23,7 +23,10 @@ public class NewRecordActivity extends AppCompatActivity {
 
     private TextView text_gameName,text_startTime,text_endTime;
     Record currentRecord;
-
+    ScrollablePanel scrollablePanel;
+    ScrollablePanelAdapter scrollablePanelAdapter;
+    ScrollablePanel score_scrollable_panel;
+    ScoreScrollablePanelAdapter score_scrollablePanelAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,17 +39,17 @@ public class NewRecordActivity extends AppCompatActivity {
         text_gameName.setText(currentRecord.getGameName());
 
 
-        final ScrollablePanel scrollablePanel = findViewById(R.id.scrollable_panel);
-        final ScrollablePanelAdapter scrollablePanelAdapter = new ScrollablePanelAdapter(NewRecordActivity.this);
+        scrollablePanel = findViewById(R.id.scrollable_panel);
+        scrollablePanelAdapter = new ScrollablePanelAdapter(NewRecordActivity.this);
 
         // TODO YURU ZENGLA 這兩行是切換隊伍 你們想辦法弄一下 哈哈
         // currentRecord.setCurrenFaction(RecordTeam.Faction.home);
         // scrollablePanelAdapter.updateData();
         //**********************************//
 
-        final ScrollablePanel score_scrollable_panel = findViewById(R.id.score_scrollable_panel);
-        final ScoreScrollablePanelAdapter score_scrollablePanelAdapter = new ScoreScrollablePanelAdapter(NewRecordActivity.this);
-//        generateTestData(scrollablePanelAdapter);
+        score_scrollable_panel = findViewById(R.id.score_scrollable_panel);
+        score_scrollablePanelAdapter = new ScoreScrollablePanelAdapter(NewRecordActivity.this);
+
         scrollablePanel.setPanelAdapter(scrollablePanelAdapter);
         score_scrollable_panel.setPanelAdapter(score_scrollablePanelAdapter);
 
@@ -96,6 +99,7 @@ public class NewRecordActivity extends AppCompatActivity {
             }
             recordItems.add(tmp);
         }
+        scrollablePanel.notifyDataSetChanged();
     }
 }
 
