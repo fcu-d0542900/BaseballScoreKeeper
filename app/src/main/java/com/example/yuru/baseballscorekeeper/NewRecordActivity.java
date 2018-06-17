@@ -11,13 +11,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.baseball.DatabaseService;
 import com.baseball.Record;
 import com.baseball.RecordItem;
 import com.baseball.RecordTeam;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +51,7 @@ public class NewRecordActivity extends AppCompatActivity {
         scrollablePanel.setPanelAdapter(scrollablePanelAdapter);
         score_scrollable_panel.setPanelAdapter(score_scrollablePanelAdapter);
 
-        score_scrollablePanelAdapter.setOnItemClickLitener(new RecordAdapter.OnItemClickLitener() {
+        score_scrollablePanelAdapter.setOnItemClickListener(new RecordAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
 

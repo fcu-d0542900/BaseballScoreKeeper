@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.baseball.DatabaseService;
@@ -30,7 +29,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
     private int lastPosition = -1;
     private Context context;
 
-    private OnItemClickLitener   mOnItemClickLitener;
+    private OnItemClickListener mOnItemClickListener;
 
 
     public RecordAdapter(Context context) {
@@ -39,12 +38,12 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
     }
 
     //设置回调接口
-    public interface OnItemClickLitener{
+    public interface OnItemClickListener {
         void onItemClick(View view, int position);
     }
 
-    public void setOnItemClickLitener(OnItemClickLitener mOnItemClickLitener){
-        this.mOnItemClickLitener = mOnItemClickLitener;
+    public void setOnItemClickLitener(OnItemClickListener mOnItemClickListener){
+        this.mOnItemClickListener = mOnItemClickListener;
     }
 
 
@@ -94,11 +93,11 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         setAnimation(holder.rootView, position);
 
         //通过为条目设置点击事件触发回调
-        if (mOnItemClickLitener != null) {
+        if (mOnItemClickListener != null) {
             holder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mOnItemClickLitener.onItemClick(view, position);
+                    mOnItemClickListener.onItemClick(view, position);
                 }
             });
         }

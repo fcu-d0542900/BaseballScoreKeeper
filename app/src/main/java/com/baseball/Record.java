@@ -22,7 +22,6 @@ public class Record implements Serializable {
         this.away=new RecordTeam(awayTeam, RecordTeam.Faction.away);
         this.home=new RecordTeam(homeTeam, RecordTeam.Faction.home);
         this.currenFaction = RecordTeam.Faction.away;
-        Log.d("record","add record: "+name);
     }
 
     public void setGameName(String name) {

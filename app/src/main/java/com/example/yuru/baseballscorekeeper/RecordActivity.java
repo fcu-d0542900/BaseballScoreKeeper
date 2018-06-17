@@ -18,13 +18,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.baseball.Database;
 import com.baseball.DatabaseService;
 import com.baseball.Record;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 
 public class RecordActivity extends AppCompatActivity {
@@ -65,7 +62,7 @@ public class RecordActivity extends AppCompatActivity {
         };
 
         //點擊item
-        itemAdapter.setOnItemClickLitener(new RecordAdapter.OnItemClickLitener() {
+        itemAdapter.setOnItemClickLitener(new RecordAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
 

@@ -16,16 +16,18 @@ public class RecordTeam implements Serializable {
     private List<Player> teamMember = new ArrayList<>();
     private List<RecordItem> recordItems;
 
-    public RecordTeam(String homeTeam, Faction team) {
-        if(homeTeam != null)
-            setTeamName(homeTeam);
+    public RecordTeam(String name, Faction team) {
+        if(name != null && !name.equals(""))
+            setTeamName(name);
+        else
+            setTeamName(DatabaseService.getInstance().getDatabase().getTeamName());
         switch (team){
             case away:
                 currentRound =1;
             case home:
                 currentRound=0;
         }
-        if (homeTeam.equals(DatabaseService.getInstance().getDatabase().getTeamName())){
+        if (name.equals(DatabaseService.getInstance().getDatabase().getTeamName())){
             teamMember = new ArrayList<>(DatabaseService.getInstance().getDatabase().getTeamMember());
         }
         while(teamMember.size()<9){

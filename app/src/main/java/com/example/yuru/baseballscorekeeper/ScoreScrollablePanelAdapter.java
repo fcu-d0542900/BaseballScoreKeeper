@@ -2,7 +2,6 @@ package com.example.yuru.baseballscorekeeper;
 
 import android.annotation.SuppressLint;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,7 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
     private List<RecordTeam> recordTeam = new ArrayList<>();
     private List<BoardNumInfo> boardNumInfoList = new ArrayList<>();
     private NewRecordActivity activity;
-    private RecordAdapter.OnItemClickLitener mOnItemClickLitener;
+    private RecordAdapter.OnItemClickListener mOnItemClickListener;
 
     private static final int TITLENAME_TYPE = 7;
     private static final int TEAMINFO_TYPE = 5;
@@ -36,8 +35,8 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
         void onItemClick(View view, String name);
     }
 
-    public void setOnItemClickLitener(RecordAdapter.OnItemClickLitener mOnItemClickLitener){
-        this.mOnItemClickLitener = mOnItemClickLitener;
+    public void setOnItemClickListener(RecordAdapter.OnItemClickListener mOnItemClickListener){
+        this.mOnItemClickListener = mOnItemClickListener;
     }
 
     ScoreScrollablePanelAdapter(NewRecordActivity activity) {
@@ -145,22 +144,22 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
 
             //通过为条目设置点击事件触发回调
             if (pos == 1) {    //點擊away
-                if (mOnItemClickLitener != null) {
+                if (mOnItemClickListener != null) {
                     viewHolder.text_teamName.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            mOnItemClickLitener.onItemClick(view, 1);
+                            mOnItemClickListener.onItemClick(view, 1);
                         }
                     });
                 }
 
             }
             else if (pos == 2) {  //點擊home
-                if (mOnItemClickLitener != null) {
+                if (mOnItemClickListener != null) {
                     viewHolder.text_teamName.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            mOnItemClickLitener.onItemClick(view, 2);
+                            mOnItemClickListener.onItemClick(view, 2);
                         }
                     });
                 }
