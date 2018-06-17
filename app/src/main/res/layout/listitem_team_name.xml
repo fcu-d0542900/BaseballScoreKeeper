@@ -10,7 +10,6 @@
         android:id="@+id/text_teamName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="隊伍名稱"
         android:textColor="@color/text_gray_666666"
         android:textSize="12sp" />
 
