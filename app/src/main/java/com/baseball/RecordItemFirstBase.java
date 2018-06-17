@@ -13,8 +13,19 @@ public class RecordItemFirstBase {
     private FrameLayout showOneView,showTwoView,showThreeView;
     private ImageView showSacrificeFly,showSacrificeHits;
 
+    public ImageView firstViewOneTop,firstViewOneNum,firstViewOneBottom;
+    public ImageView showFirstViewOneAc1,showFirstViewOneAc2;
+
+    public ImageView firstViewTwoNum,showFirstViewTwoAc;
+    public ImageView firstViewThreeNum,showFirstViewThreeAc;
+
+    //ZeroView
     public void setShowZeroView(ImageView showZeroView) {
         this.showZeroView = showZeroView;
+    }
+
+    public  void setShowZeroValue(int imageID) {
+        showZeroView.setImageResource(imageID);
     }
 
     public void setShowZeroViewVisibility(boolean isShow) {
@@ -22,6 +33,7 @@ public class RecordItemFirstBase {
             showZeroView.setVisibility(isShow?View.VISIBLE:View.GONE);
     }
 
+    //OneView
     public void setShowOneView(FrameLayout showOneView) {
         this.showOneView = showOneView;
     }
@@ -31,6 +43,7 @@ public class RecordItemFirstBase {
             showOneView.setVisibility(isShow?View.VISIBLE:View.GONE);
     }
 
+    //TwoView
     public void setShowTwoView(FrameLayout showTwoView) {
         this.showTwoView = showTwoView;
     }
@@ -40,6 +53,7 @@ public class RecordItemFirstBase {
             showTwoView.setVisibility(isShow?View.VISIBLE:View.GONE);
     }
 
+    //ThreeView
     public void setShowThreeView(FrameLayout showThreeView) {
         this.showThreeView = showThreeView;
     }
@@ -49,6 +63,7 @@ public class RecordItemFirstBase {
             showThreeView.setVisibility(isShow?View.VISIBLE:View.GONE);
     }
 
+    //HRView
     public void setShowHRView(ImageView showHRView) {
         this.showHRView = showHRView;
     }
@@ -58,6 +73,7 @@ public class RecordItemFirstBase {
             showHRView.setVisibility(isShow?View.VISIBLE:View.GONE);
     }
 
+    //SacrificeFly
     public void setShowSacrificeFly(ImageView showSacrificeFly) {
         this.showSacrificeFly = showSacrificeFly;
     }
@@ -67,6 +83,7 @@ public class RecordItemFirstBase {
             showSacrificeFly.setVisibility(isShow?View.VISIBLE:View.GONE);
     }
 
+    //SacrificeHits
     public void setShowSacrificeHits(ImageView showSacrificeHits) {
         this.showSacrificeHits = showSacrificeHits;
     }
@@ -74,5 +91,107 @@ public class RecordItemFirstBase {
     public void setShowSacrificeHitsVisibility(boolean isShow) {
         if (showSacrificeHits != null)
             showSacrificeHits.setVisibility(isShow?View.VISIBLE:View.GONE);
+    }
+
+
+    //FirstViewOneTop
+    public void setFirstViewOneTop(ImageView firstViewOneTop) {
+        this.firstViewOneTop = firstViewOneTop;
+    }
+
+    public  void setFirstViewOneTopValue(int imageID) {
+        firstViewOneTop.setImageResource(imageID);
+    }
+
+    //FirstViewOneNum
+    public void setFirstViewOneNum(ImageView firstViewOneNum) {
+        this.firstViewOneNum = firstViewOneNum;
+    }
+
+    public  void setFirstViewOneNumValue(int imageID) {
+        firstViewOneNum.setImageResource(imageID);
+    }
+
+    //FirstViewOneBottom
+    public void setFirstViewOneBottom(ImageView firstViewOneBottom) {
+        this.firstViewOneBottom = firstViewOneBottom;
+    }
+
+    public  void setFirstViewOneBottomValue(int imageID) {
+        firstViewOneBottom.setImageResource(imageID);
+    }
+
+    //FirstViewOneAc1
+    public void setShowFirstViewOneAc1(ImageView showFirstViewOneAc1) {
+        this.showFirstViewOneAc1 = showFirstViewOneAc1;
+    }
+
+    public  void setFirstViewOneAc1Value(int imageID) {
+        showFirstViewOneAc1.setImageResource(imageID);
+    }
+
+    public void setShowFirstViewOneAc1Visibility(boolean isShow) {
+        if (showFirstViewOneAc1 != null)
+            showFirstViewOneAc1.setVisibility(isShow?View.VISIBLE:View.GONE);
+    }
+
+    //FirstViewOneAc2
+    public void setShowFirstViewOneAc2(ImageView showFirstViewOneAc2) {
+        this.showFirstViewOneAc2 = showFirstViewOneAc2;
+    }
+
+    public  void setFirstViewOneAc2Value(int imageID) {
+        showFirstViewOneAc2.setImageResource(imageID);
+    }
+
+    public void setShowFirstViewOneAc2Visibility(boolean isShow) {
+        if (showFirstViewOneAc2 != null)
+            showFirstViewOneAc2.setVisibility(isShow?View.VISIBLE:View.GONE);
+    }
+
+    //FirstViewTwoNum
+    public void setFirstViewTwoNum(ImageView firstViewTwoNum) {
+        this.firstViewTwoNum = firstViewTwoNum;
+    }
+
+    public  void setFirstViewTwoNumValue(int imageID) {
+        firstViewTwoNum.setImageResource(imageID);
+    }
+
+    //ShowFirstViewTwoAc
+    public void setShowFirstViewTwoAc(ImageView showFirstViewTwoAc) {
+        this.showFirstViewTwoAc = showFirstViewTwoAc;
+    }
+
+    public  void setFirstViewTwoAcValue(int imageID) {
+        showFirstViewTwoAc.setImageResource(imageID);
+    }
+
+    public void setShowFirstViewTwoAcVisibility(boolean isShow) {
+        if (showFirstViewTwoAc != null)
+            showFirstViewTwoAc.setVisibility(isShow?View.VISIBLE:View.GONE);
+    }
+
+    //FirstViewThreeNum
+    public void setFirstViewThreeNum(ImageView firstViewThreeNum) {
+        this.firstViewThreeNum = firstViewThreeNum;
+    }
+
+    public  void setFirstViewThreeNumValue(int imageID) {
+        firstViewThreeNum.setImageResource(imageID);
+    }
+
+    //FirstViewThreeAc
+    public void setShowFirstViewThreeAc(ImageView showFirstViewThreeAc) {
+        this.showFirstViewThreeAc = showFirstViewThreeAc;
+    }
+
+    public  void setFirstViewThreeAcValue(int imageID) {
+        showFirstViewThreeAc.setImageResource(imageID);
+    }
+
+    public void setShowFirstViewThreeAcVisibility(boolean isShow) {
+        if (showFirstViewThreeAc != null)
+            showFirstViewThreeAc.setVisibility(isShow?View.VISIBLE:View.GONE);
     }
 }

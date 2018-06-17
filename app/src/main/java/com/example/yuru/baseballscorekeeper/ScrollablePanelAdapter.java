@@ -445,7 +445,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         public ImageView getFirstViewTwoNum,getFirstViewTwoAc;
         public ImageView getFirstViewThreeNum,getFirstViewThreeAc;
         public ImageView getSacrificeFly,getSacrificeHits;
-        public RecordItemOtherBase base1;
+        public RecordItemFirstBase base1;
 
         //二壘
         public ImageView getSecondViewActionName,getSecondViewPushNum,getSecondViewBase;
@@ -472,7 +472,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         public ImageView getHomeViewActionTwoNum,getHomeViewActionTwoAc;
         public LinearLayout getHomeViewThrow;
         public ImageView getHomeViewThrowOne,getHomeViewThrowTwo;
-        public RecordItemFirstBase base;
+        public RecordItemOtherBase base;
 
         OrderViewHolder(View view) {
             super(view);
@@ -509,6 +509,23 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.getFirstViewThreeAc = view.findViewById(R.id.image_firstView_three_ac);
             this.getSacrificeFly = view.findViewById(R.id.image_sacrifice_fly);
             this.getSacrificeHits = view.findViewById(R.id.image_sacrifice_hits);
+            base1.setShowZeroView(getFirstViewZero);
+            base1.setShowOneView(getFirstViewOne);
+            base1.setShowTwoView(getFirstViewTwo);
+            base1.setShowThreeView(getFirstViewThree);
+            base1.setShowHRView(getFirstViewHR);
+            base1.setFirstViewOneTop(getFirstViewOneTop);
+            base1.setFirstViewOneNum(getFirstViewOneNum);
+            base1.setFirstViewOneBottom(getFirstViewOneBottom);
+            base1.setShowFirstViewOneAc1(getFirstViewOneAc1);
+            base1.setShowFirstViewOneAc2(getFirstViewOneAc2);
+            base1.setFirstViewTwoNum(getFirstViewTwoNum);
+            base1.setFirstViewThreeNum(getFirstViewThreeNum);
+            base1.setShowFirstViewThreeAc(getFirstViewThreeAc);
+            base1.setShowSacrificeFly(getSacrificeFly);
+            base1.setShowSacrificeHits(getSacrificeHits);
+
+
 
             //二壘
             this.getSecondViewActionName = view.findViewById(R.id.image_secondView_actionName);
@@ -522,6 +539,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.getSecondViewThrowTwo = view.findViewById(R.id.image_secondView_throwTwo);
             this.getSecondViewPushNum = view.findViewById(R.id.image_secondView_pushNumber);
             this.getSecondViewBase = view.findViewById(R.id.image_base_1to2);
+            base2.setShowActionNameView(getSecondViewActionName);
+            base2.setShowActionView(getSecondViewAction);
+            base2.setShowActionOneAcView(getSecondViewActionOneAc);
+
 
             //三壘
             this.getThirdViewActionName = view.findViewById(R.id.image_thirdView_actionName);
