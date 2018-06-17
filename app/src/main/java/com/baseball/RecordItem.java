@@ -56,10 +56,12 @@ public class RecordItem implements Serializable {
 
     public void setBallDirection(BALL_DIRECTION ball_direction) {
         this.ballDirection = ball_direction;
+        save();
     }
 
     public void setBallType(BALL_TYPE ballType) {
         this.ballType = ballType;
+        save();
     }
 
     public void updateFirstBaseUI(RecordItemFirstBase base){
@@ -78,22 +80,32 @@ public class RecordItem implements Serializable {
         switch (_BASE_FIRST_STEP_ONE){
             case HIGH:
                 base.setShowSacrificeFlyVisibility(true);
+                base.setShowOneViewVisibility(true);
                 switch (ballType){
                     case HIGH:
-                        // TODO YURU
+                        base.setFirstViewOneTopValue(R.drawable.fly_ball);
                         break;
                     case FLAT:
-                        // TODO YURU
+                        base.setFirstViewOneTopValue(R.drawable.line_drive);
                         break;
+                    default:
+                        base.setShowOneViewVisibility(false);
+
                 }
                 switch (ballDirection){
                     case LEFT:
+                        base.setFirstViewOneNumValue(R.drawable.throw7);
+
                         // TODO YURU
                         break;
                     case MIDDLE:
+                        base.setFirstViewOneNumValue(R.drawable.throw8);
+
                         // TODO YURU
                         break;
                     case RIGHT:
+                        base.setFirstViewOneNumValue(R.drawable.throw9);
+
                         // TODO YURU
                         break;
                 }
