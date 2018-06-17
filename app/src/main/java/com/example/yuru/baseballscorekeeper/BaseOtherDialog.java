@@ -25,6 +25,7 @@ public class BaseOtherDialog {
     private String[] isError={"","E"};
     private String[] push = {"(1)","(2)","(3)","(4)","(5)","(6)","(7)","(8)","(9)"};
     private Spinner spinner_left,spinner_right,spinner_left_e,spinner_right_e;
+    private Spinner spinner_throw_left,spinner_throw_right;
 
     public void setBaseOtherDialog(ScrollablePanelAdapter.OrderViewHolder viewHolder, final String[] items,BASE base) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -172,7 +173,7 @@ public class BaseOtherDialog {
 
                     //點選進壘
                     case 1:
-                        //TODO: ahkui 存入資料庫， 顯示箭頭  (判斷哪一格顯示不同箭頭)
+
                         new AlertDialog.Builder(activity)
                                 .setItems(new String[]{"趁傳","失誤","無"}, new DialogInterface.OnClickListener() {
                                             @Override
@@ -184,107 +185,27 @@ public class BaseOtherDialog {
                                                         AlertDialog.Builder dialog_throw = new AlertDialog.Builder(activity);
                                                         view_throwTo.setPadding(10,10,10,10);
                                                         dialog_throw.setView(view_throwTo);
-                                                        spinner_left = view_throwTo.findViewById(R.id.spinner_left);
-                                                        spinner_right=view_throwTo.findViewById(R.id.spinner_right);
+                                                        spinner_throw_left = view_throwTo.findViewById(R.id.spinner_throw_left);
+                                                        spinner_throw_right=view_throwTo.findViewById(R.id.spinner_throw_right);
                                                         ArrayAdapter throw_left = new ArrayAdapter(dialog_throw.getContext(),android.R.layout.simple_spinner_item,nums);
                                                         ArrayAdapter throw_right = new ArrayAdapter(dialog_throw.getContext(),android.R.layout.simple_spinner_item,nums);
                                                         throw_left.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                                         throw_right.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                                        spinner_left.setAdapter(throw_left);
-                                                        spinner_right.setAdapter(throw_left);
+                                                        spinner_throw_left.setAdapter(throw_left);
+                                                        spinner_throw_right.setAdapter(throw_left);
                                                         dialog_throw.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                             public void onClick(DialogInterface dialogInterface, int i) {
+                                                                //TODO: ahkui 存入資料庫， 顯示箭頭  (判斷哪一格顯示不同箭頭)
 
+                                                                int select_throw_left = (int)spinner_throw_left.getSelectedItemId();
+                                                                //TODO  ahkui   存入資料庫， 顯示圖片  數字 select_throw_left+1  (R.drawable.throw 數字)
+                                                                int select_throw_right = (int)spinner_throw_right.getSelectedItemId();
+                                                                //TODO  ahkui   存入資料庫， 顯示圖片  數字 select_throw_right+1  (R.drawable.throw 數字)
+
+                                                                Toast.makeText(activity, "OK " + (select_throw_left+1) + "," + (select_throw_right+1), Toast.LENGTH_SHORT).show();
                                                             }
                                                         });
 
-                                                        //左選單
-                                                        spinner_left.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                                            @Override
-                                                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                                                if(view!=null)
-                                                                {
-                                                                    switch (position){
-                                                                        case 0:
-                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw1)
-                                                                            break;
-                                                                        case 1:
-                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw2)
-                                                                            break;
-                                                                        case 2:
-                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw3)
-                                                                            break;
-                                                                        case 3:
-                                                                            //TODO: ahkui 存入資料庫，顯示棒次   (R.drawable.throw4)
-                                                                            break;
-                                                                        case 4:
-                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw5)
-                                                                            break;
-                                                                        case 5:
-                                                                            //TODO: ahkui 存入資料庫，顯示棒次   (R.drawable.throw6)
-                                                                            break;
-                                                                        case 6:
-                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw7)
-                                                                            break;
-                                                                        case 7:
-                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw8)
-                                                                            break;
-                                                                        case 8:
-                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw9)
-                                                                            break;
-                                                                        default:
-                                                                            break;
-                                                                    }
-                                                                }
-                                                            }
-                                                            @Override
-                                                            public void onNothingSelected(AdapterView<?> parent) {
-                                                            }
-                                                        });
-
-                                                        //右選單
-                                                        spinner_right.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                                            @Override
-                                                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                                                if(view!=null)
-                                                                {
-                                                                    switch (position){
-                                                                        case 0:
-                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw1)
-                                                                            break;
-                                                                        case 1:
-                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw2)
-                                                                            break;
-                                                                        case 2:
-                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw3)
-                                                                            break;
-                                                                        case 3:
-                                                                            //TODO: ahkui 存入資料庫，顯示棒次   (R.drawable.throw4)
-                                                                            break;
-                                                                        case 4:
-                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw5)
-                                                                            break;
-                                                                        case 5:
-                                                                            //TODO: ahkui 存入資料庫，顯示棒次   (R.drawable.throw6)
-                                                                            break;
-                                                                        case 6:
-                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw7)
-                                                                            break;
-                                                                        case 7:
-                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw8)
-                                                                            break;
-                                                                        case 8:
-                                                                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw9)
-                                                                            break;
-                                                                        default:
-                                                                            break;
-                                                                    }
-                                                                }
-                                                            }
-                                                            @Override
-                                                            public void onNothingSelected(AdapterView<?> parent) {
-                                                            }
-                                                        });
                                                         dialog_throw.show();
                                                         break;
                                                     case 1:   //點選失誤
@@ -336,147 +257,6 @@ public class BaseOtherDialog {
         spinner_left_e.setAdapter(left_error);
         spinner_right_e.setAdapter(right_error);
 
-/*
-        //左選單1~9
-        spinner_left.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(view!=null)
-                {
-                    switch (position){
-                        case 0:
-                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw1)
-                            break;
-                        case 1:
-                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw2)
-                            break;
-                        case 2:
-                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw3)
-                            break;
-                        case 3:
-                            //TODO: ahkui 存入資料庫，顯示棒次   (R.drawable.throw4)
-                            break;
-                        case 4:
-                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw5)
-                            break;
-                        case 5:
-                            //TODO: ahkui 存入資料庫，顯示棒次   (R.drawable.throw6)
-                            break;
-                        case 6:
-                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw7)
-                            break;
-                        case 7:
-                             //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw8)
-                            break;
-                        case 8:
-                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw9)
-                            break;
-                        default:
-                            break;
-                    }
-                }
-
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-        //左選單E
-        spinner_left_e.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(view!=null)
-                {
-                    switch (position){
-                        case 0:   //無失誤
-                            break;
-                        case 1:   //有失誤
-                            recordItemUI.setShowActionOneAcViewVisibility(true);
-                            //TODO: ahkui 存入資料庫， 左框顯示E   (R.drawable.error)
-
-                            break;
-                        default:
-                            break;
-                    }
-                }
-
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-        //右選單1~9
-        spinner_right.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(view!=null)
-                {
-                    switch (position){
-                        case 0:
-                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw1)
-                            break;
-                        case 1:
-                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw2)
-                            break;
-                        case 2:
-                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw3)
-                            break;
-                        case 3:
-                            //TODO: ahkui 存入資料庫，顯示棒次   (R.drawable.throw4)
-                            break;
-                        case 4:
-                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw5)
-                            break;
-                        case 5:
-                            //TODO: ahkui 存入資料庫，顯示棒次   (R.drawable.throw6)
-                            break;
-                        case 6:
-                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw7)
-                            break;
-                        case 7:
-                            //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw8)
-                            break;
-                        case 8:
-                           //TODO: ahkui 存入資料庫， 顯示棒次   (R.drawable.throw9)
-                            break;
-                        default:
-                            break;
-                    }
-
-
-                }
-
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        //右選單E
-        spinner_right_e.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(view!=null)
-                {
-                    switch (position){
-                        case 0:   //無失誤
-                            break;
-                        case 1:   //有失誤
-                            recordItemUI.setShowActionTwoAcViewVisibility(true);
-                            //TODO: ahkui 存入資料庫， 右框顯示E   (R.drawable.error)
-                            break;
-                        default:
-                            break;
-                    }
-                }
-
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
-*/
 
         //點擊ok
         dialog_error.setPositiveButton("OK", new DialogInterface.OnClickListener() {
