@@ -220,6 +220,7 @@ public class BaseFirstDialog {
                                 unhit_dialog.dismiss();
                                 //TODO: ahkui 存入資料庫， 顯示圖片 B   (R.drawable.bad_ball)
                                 viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.BADBALL);
+                                viewHolder.recordItem.updateFirstBaseUI(viewHolder.base1);
 
                             }
                         });
@@ -230,6 +231,7 @@ public class BaseFirstDialog {
                                 unhit_dialog.dismiss();
                                 //TODO:ahkui 存入資料庫， 顯示圖片 D  (R.drawable.hit_by_pitch)
                                 viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.HITBYPITCH);
+                                viewHolder.recordItem.updateFirstBaseUI(viewHolder.base1);
 
                             }
                         });
@@ -240,6 +242,7 @@ public class BaseFirstDialog {
                                 unhit_dialog.dismiss();
                                 //TODO:ahkui 存入資料庫， 顯示圖片 K  (R.drawable.killed)
                                 viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.KILLED);
+                                viewHolder.recordItem.updateFirstBaseUI(viewHolder.base1);
                             }
                         });
                         view_unhit_dialog.findViewById(R.id.click_nok).setOnClickListener(new View.OnClickListener() {
@@ -249,11 +252,11 @@ public class BaseFirstDialog {
                                 unhit_dialog.dismiss();
                                 //TODO:ahkui 存入資料庫， 顯示圖片 倒K  (R.drawable.no_killed)
                                 viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.NOKILLED);
+                                viewHolder.recordItem.updateFirstBaseUI(viewHolder.base1);
 
                             }
                         });
                         unhit_dialog.show();
-                        viewHolder.recordItem.updateFirstBaseUI(viewHolder.base1);
 
                         break;
                 }
