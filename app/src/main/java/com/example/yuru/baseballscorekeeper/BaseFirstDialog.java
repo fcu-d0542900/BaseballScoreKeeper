@@ -1,5 +1,6 @@
 package com.example.yuru.baseballscorekeeper;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
@@ -12,15 +13,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.baseball.RecordItem;
-import com.baseball.RecordItemFirstBase;
 
 /**
  * Created by YURU on 2018/6/16.
  */
 
 public class BaseFirstDialog {
-
-    private RecordItemFirstBase recordItemFirstBase;
 
     private NewRecordActivity activity;
 
@@ -31,7 +29,6 @@ public class BaseFirstDialog {
 
     //犧牲觸擊
     private Spinner spinner_actionOne,spinner_actionTwo;
-
     private int actionOne,actionTwo;
 
     //一般
@@ -40,16 +37,10 @@ public class BaseFirstDialog {
     private Spinner spinner_direction;
     private CheckBox checkBox_elseAc_FC,checkBox_elseAc_u,checkBox_elseAc_E,checkBox_elseAc_T;
 
-    private int select_typeID,select_direction;
-    private String select_type_str,select_elseAc;
-
     //two
     private Spinner spinner_two_direction;
     private RadioGroup radioGroup_two_Ac;
     private RadioButton radioButton_two_E,radioButton_two_T;
-
-    private int select_two_direction;
-    private String select_twoAc;
 
     //three
     private Spinner spinner_three_direction;
@@ -60,14 +51,13 @@ public class BaseFirstDialog {
     private String select_threeAc;
 
 
-    private String[] nums = {"1","2","3","4","5","6","7","8","9"};
+    private String[] num = {"1","2","3","4","5","6","7","8","9"};
 
     public void setActivity(NewRecordActivity activity) {
         this.activity = activity;
     }
 
     public void setBaseFirstDialog(final ScrollablePanelAdapter.OrderViewHolder viewHolder) {
-        recordItemFirstBase = viewHolder.base1;
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setItems(new String[]{"擊出球","未擊出球"}, new DialogInterface.OnClickListener(){
             @Override
@@ -81,11 +71,11 @@ public class BaseFirstDialog {
                                 switch (i) {
                                     case 0:
                                         viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.HIGH);
-                                        viewHolder.updateUI();
+                                        viewHolder.updateUI(activity);
                                         Toast.makeText(activity, "高飛犧牲打", Toast.LENGTH_SHORT).show();
 
                                         AlertDialog.Builder scrifice_fly_builder = new AlertDialog.Builder(activity);
-                                        final View view_scrifice_fly_dialog = LayoutInflater.from(activity).inflate(R.layout.record_sacrifice_fly, null);
+                                        @SuppressLint("InflateParams") final View view_scrifice_fly_dialog = LayoutInflater.from(activity).inflate(R.layout.record_sacrifice_fly, null);
                                         radioGroup_sacrificeFly_type = view_scrifice_fly_dialog.findViewById(R.id.radioGroup_sacrificeFly_type);
                                         radioButton_sacrificeFly_type_high = view_scrifice_fly_dialog.findViewById(R.id.radioButton_sacrificeFly_high);
                                         radioButton_sacrificeFly_type_line = view_scrifice_fly_dialog.findViewById(R.id.radioButton_sacrificeFly_line);
@@ -145,7 +135,7 @@ public class BaseFirstDialog {
                                                     select_sacrificeFly_direction_str = "未選擇";
                                                     viewHolder.recordItem.setBallDirection(RecordItem.BALL_DIRECTION.__);
                                                 }
-                                                viewHolder.updateUI();
+                                                viewHolder.updateUI(activity);
                                                 Toast.makeText(activity.getApplicationContext(), "OK "+select_sacrificeFly_type_str + "," + select_sacrificeFly_direction_str, Toast.LENGTH_SHORT).show();
                                             }
                                         });
@@ -156,14 +146,14 @@ public class BaseFirstDialog {
                                         Toast.makeText(activity, "觸擊犧牲打", Toast.LENGTH_SHORT).show();
 
                                         AlertDialog.Builder scrifice_hits_builder = new AlertDialog.Builder(activity);
-                                        View view_scrifice_hits_dialog = LayoutInflater.from(activity).inflate(R.layout.record_sacrifice_hiits, null);
-                                        spinner_actionOne = view_scrifice_hits_dialog.findViewById(R.id.spinner_actionOne);
-                                        spinner_actionTwo = view_scrifice_hits_dialog.findViewById(R.id.spinner_actionTwo);
+                                        @SuppressLint("InflateParams") View view_sacrifice_hits_dialog = LayoutInflater.from(activity).inflate(R.layout.record_sacrifice_hiits, null);
+                                        spinner_actionOne = view_sacrifice_hits_dialog.findViewById(R.id.spinner_actionOne);
+                                        spinner_actionTwo = view_sacrifice_hits_dialog.findViewById(R.id.spinner_actionTwo);
 
-                                        view_scrifice_hits_dialog.setPadding(10,20,10,10);
-                                        scrifice_hits_builder.setView(view_scrifice_hits_dialog);
-                                        ArrayAdapter adapter_actionOne = new ArrayAdapter(scrifice_hits_builder.getContext(),android.R.layout.simple_spinner_item,nums);
-                                        ArrayAdapter adapter_actionTwo = new ArrayAdapter(scrifice_hits_builder.getContext(),android.R.layout.simple_spinner_item,nums);
+                                        view_sacrifice_hits_dialog.setPadding(10,10,10,10);
+                                        scrifice_hits_builder.setView(view_sacrifice_hits_dialog);
+                                        ArrayAdapter<String> adapter_actionOne = new ArrayAdapter<>(scrifice_hits_builder.getContext(),android.R.layout.simple_spinner_item, num);
+                                        ArrayAdapter<String> adapter_actionTwo = new ArrayAdapter<>(scrifice_hits_builder.getContext(),android.R.layout.simple_spinner_item, num);
                                         adapter_actionOne.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                         adapter_actionTwo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                         spinner_actionOne.setAdapter(adapter_actionOne);
@@ -183,7 +173,7 @@ public class BaseFirstDialog {
                                                 actionTwo = (int) spinner_actionTwo.getSelectedItemId();
                                                 //TODO  ahkui   存入資料庫， 顯示圖片  數字 actionTwo+1  (R.drawable.throw 數字)
                                                 viewHolder.recordItem.setBALL_TOUCH_AC2(actionTwo+1);
-                                                viewHolder.updateUI();
+                                                viewHolder.updateUI(activity);
                                                 Toast.makeText(activity, "OK " + (actionOne+1) + "," + (actionTwo+1), Toast.LENGTH_SHORT).show();
                                             }
                                         });
@@ -196,7 +186,7 @@ public class BaseFirstDialog {
                                         Toast.makeText(activity, "一般", Toast.LENGTH_SHORT).show();
 
                                         AlertDialog.Builder first_one_builder = new AlertDialog.Builder(activity);
-                                        View view_first_one_dialog = LayoutInflater.from(activity).inflate(R.layout.record_first_one, null);
+                                        @SuppressLint("InflateParams") View view_first_one_dialog = LayoutInflater.from(activity).inflate(R.layout.record_first_one, null);
                                         view_first_one_dialog.setPadding(10,20,10,10);
                                         first_one_builder.setView(view_first_one_dialog);
                                         radioGroup_type = view_first_one_dialog.findViewById(R.id.radioGroup_type);
@@ -209,7 +199,7 @@ public class BaseFirstDialog {
                                         checkBox_elseAc_E = view_first_one_dialog.findViewById(R.id.checkBox_elseAc_E);
                                         checkBox_elseAc_T = view_first_one_dialog.findViewById(R.id.checkBox_elseAc_T);
 
-                                        ArrayAdapter adapter_direction = new ArrayAdapter(first_one_builder.getContext(),android.R.layout.simple_spinner_item,nums);
+                                        ArrayAdapter<String> adapter_direction = new ArrayAdapter<>(first_one_builder.getContext(),android.R.layout.simple_spinner_item, num);
                                         adapter_direction.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                         spinner_direction.setAdapter(adapter_direction);
 
@@ -218,14 +208,14 @@ public class BaseFirstDialog {
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 set_first_view_one();
                                                 first_view_two();
-                                                viewHolder.updateUI();
+                                                viewHolder.updateUI(activity);
                                             }
                                         });
                                         first_one_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 set_first_view_one();
-                                                viewHolder.updateUI();
+                                                viewHolder.updateUI(activity);
                                             }
                                         });
                                         first_one_builder.show();
@@ -238,7 +228,7 @@ public class BaseFirstDialog {
                         break;
                     case 1:
                         AlertDialog.Builder unhit_builder = new AlertDialog.Builder(activity);
-                        View view_unhit_dialog = LayoutInflater.from(activity).inflate(R.layout.record_unhit_dialog, null);
+                        @SuppressLint("InflateParams") View view_unhit_dialog = LayoutInflater.from(activity).inflate(R.layout.record_unhit_dialog, null);
                         view_unhit_dialog.setPadding(10,10,10,10);
                         unhit_builder.setView(view_unhit_dialog);
                         final AlertDialog unhit_dialog = unhit_builder.create();
@@ -249,7 +239,7 @@ public class BaseFirstDialog {
                                 unhit_dialog.dismiss();
                                 //TODO: ahkui 存入資料庫， 顯示圖片 B   (R.drawable.throw_b)
                                 viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.BADBALL);
-                                viewHolder.updateUI();
+                                viewHolder.updateUI(activity);
 
                             }
                         });
@@ -260,7 +250,8 @@ public class BaseFirstDialog {
                                 unhit_dialog.dismiss();
                                 //TODO:ahkui 存入資料庫， 顯示圖片 D  (R.drawable.hit_by_pitch)
                                 viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.HITBYPITCH);
-                                viewHolder.updateUI();
+                                viewHolder.updateUI(activity);
+                                viewHolder.updateUI(activity);
 
                             }
                         });
@@ -271,7 +262,7 @@ public class BaseFirstDialog {
                                 unhit_dialog.dismiss();
                                 //TODO:ahkui 存入資料庫， 顯示圖片 K  (R.drawable.killed)
                                 viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.KILLED);
-                                viewHolder.updateUI();
+                                viewHolder.updateUI(activity);
                             }
                         });
                         view_unhit_dialog.findViewById(R.id.click_nok).setOnClickListener(new View.OnClickListener() {
@@ -281,7 +272,7 @@ public class BaseFirstDialog {
                                 unhit_dialog.dismiss();
                                 //TODO:ahkui 存入資料庫， 顯示圖片 倒K  (R.drawable.no_killed)
                                 viewHolder.recordItem.set_BASE_FIRST_STEP_ONE(RecordItem.BASE_FIRST_STEP_ONE.NOKILLED);
-                                viewHolder.updateUI();
+                                viewHolder.updateUI(activity);
 
                             }
                         });
@@ -296,15 +287,16 @@ public class BaseFirstDialog {
 
     }
 
-    public void set_first_view_one() {
+    private void set_first_view_one() {
         //TODO ahkui   顯示 recordItemFirstBase.setShowOneViewVisibility(true);
 
-        select_typeID = radioGroup_type.getCheckedRadioButtonId();
-        select_direction = (int)spinner_direction.getSelectedItemId(); //TODO ahkui  存入資料庫， 顯示圖片 1~9
-        select_elseAc = "";
+        int select_typeID = radioGroup_type.getCheckedRadioButtonId();
+        int select_direction = (int) spinner_direction.getSelectedItemId();
+        String select_elseAc = "";
 
         //TODO ahkui  高飛 平飛  recordItemFirstBase.setFirstViewOneTop(true);
         //TODO ahkui  滾地 recordItemFirstBase.setFirstViewOneBottom(true);
+        String select_type_str;
         if(radioButton_type_high.getId() == select_typeID) {
             select_type_str = "高飛球";
             //TODO ahkui  存入資料庫， 顯示圖片高飛球  (R.drawable.fly_ball)
@@ -340,12 +332,12 @@ public class BaseFirstDialog {
             select_elseAc = select_elseAc + "," + checkBox_elseAc_T.getText().toString();
             //TODO ahkui  存入資料庫， 顯示圖片T  (R.drawable.tag)
         }
-        Toast.makeText(activity, "OK "+select_type_str+","+(select_direction+1) +select_elseAc, Toast.LENGTH_SHORT).show();
+        Toast.makeText(activity, "OK "+ select_type_str +","+(select_direction +1) + select_elseAc, Toast.LENGTH_SHORT).show();
     }
 
-    public void first_view_two() {
+    private void first_view_two() {
         AlertDialog.Builder first_two_builder = new AlertDialog.Builder(activity);
-        View view_first_two_dialog = LayoutInflater.from(activity).inflate(R.layout.record_first_two, null);
+        @SuppressLint("InflateParams") View view_first_two_dialog = LayoutInflater.from(activity).inflate(R.layout.record_first_two, null);
         view_first_two_dialog.setPadding(10,20,10,10);
         first_two_builder.setView(view_first_two_dialog);
 
@@ -354,7 +346,7 @@ public class BaseFirstDialog {
         radioButton_two_E = view_first_two_dialog.findViewById(R.id.radioButton_two_E);
         radioButton_two_T = view_first_two_dialog.findViewById(R.id.radioButton_two_T);
 
-        ArrayAdapter adapter_direction_two = new ArrayAdapter(first_two_builder.getContext(),android.R.layout.simple_spinner_item,nums);
+        ArrayAdapter<String> adapter_direction_two = new ArrayAdapter<>(first_two_builder.getContext(),android.R.layout.simple_spinner_item, num);
         adapter_direction_two.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_two_direction.setAdapter(adapter_direction_two);
 
@@ -375,10 +367,11 @@ public class BaseFirstDialog {
         first_two_builder.show();
     }
 
-    public void set_first_view_two() {
+    private void set_first_view_two() {
         //TODO ahkui   顯示 recordItemFirstBase.setShowTwoViewVisibility(true);
 
-        select_two_direction = (int) spinner_two_direction.getSelectedItemId();  //TODO ahkui  存入資料庫， 顯示圖片 1~9
+        int select_two_direction = (int) spinner_two_direction.getSelectedItemId();
+        String select_twoAc;
         if(radioGroup_two_Ac.getCheckedRadioButtonId() == radioButton_two_E.getId()) {
             //TODO ahkui  recordItemFirstBase.setShowFirstViewTwoAcVisibility(true);
             //TODO ahkui   圖片  (R.drawable.error)
@@ -393,13 +386,13 @@ public class BaseFirstDialog {
             select_twoAc = "未選擇";
         }
 
-        Toast.makeText(activity, "OK ," + (select_two_direction+1) + "," + select_twoAc, Toast.LENGTH_SHORT).show();
+        Toast.makeText(activity, "OK ," + (select_two_direction +1) + "," + select_twoAc, Toast.LENGTH_SHORT).show();
 
     }
 
-    public void first_view_three() {
+    private void first_view_three() {
         AlertDialog.Builder first_three_builder = new AlertDialog.Builder(activity);
-        View view_first_three_dialog = LayoutInflater.from(activity).inflate(R.layout.record_first_two, null);
+        @SuppressLint("InflateParams") View view_first_three_dialog = LayoutInflater.from(activity).inflate(R.layout.record_first_two, null);
         view_first_three_dialog.setPadding(10,20,10,10);
         first_three_builder.setView(view_first_three_dialog);
 
@@ -408,7 +401,7 @@ public class BaseFirstDialog {
         radioButton_three_E = view_first_three_dialog.findViewById(R.id.radioButton_two_E);
         radioButton_three_T = view_first_three_dialog.findViewById(R.id.radioButton_two_T);
 
-        ArrayAdapter adapter_direction_two = new ArrayAdapter(first_three_builder.getContext(),android.R.layout.simple_spinner_item,nums);
+        ArrayAdapter<String> adapter_direction_two = new ArrayAdapter<>(first_three_builder.getContext(),android.R.layout.simple_spinner_item, num);
         adapter_direction_two.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_three_direction.setAdapter(adapter_direction_two);
 

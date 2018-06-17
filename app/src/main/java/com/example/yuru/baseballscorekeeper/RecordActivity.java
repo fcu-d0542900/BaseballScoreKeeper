@@ -69,7 +69,6 @@ public class RecordActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
 
-                // TODO:要去哪裡抓資料?
                 Intent intent = new Intent(RecordActivity.this,NewRecordActivity.class);
                 intent.putExtra("recordPosition",position);
                 startActivityForResult(intent,111);
