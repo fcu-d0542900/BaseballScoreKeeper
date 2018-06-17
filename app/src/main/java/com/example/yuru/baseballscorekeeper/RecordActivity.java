@@ -64,6 +64,24 @@ public class RecordActivity extends AppCompatActivity {
             }
         };
 
+        //點擊item
+        itemAdapter.setOnItemClickLitener(new RecordAdapter.OnItemClickLitener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+                // TODO:要去哪裡抓資料?
+                Intent intent = new Intent(RecordActivity.this,NewRecordActivity.class);
+                intent.putExtra("gameName","");
+                intent.putExtra("awayTeam","");
+                intent.putExtra("homeTeam","");
+                intent.putExtra("n",1);
+                startActivityForResult(intent,111);
+                Toast.makeText(RecordActivity.this,"點擊"+position
+                        ,Toast.LENGTH_LONG).show();
+            }
+        });
+
+
         // 設定RecyclerView使用的資料來源物件
         item_list.setAdapter(itemAdapter);
 
@@ -72,6 +90,8 @@ public class RecordActivity extends AppCompatActivity {
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
         touchHelper.attachToRecyclerView(item_list);
     }
+
+
 
 
     public void clickAddRecord(View view) {
