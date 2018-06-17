@@ -62,7 +62,7 @@ public class RecordItemOtherBase {
         this.showActionOneAcView = showActionOneAcView;
     }
 
-    public void setShowwActionOneAcViewVisibility(boolean isShow) {
+    public void setShowActionOneAcViewVisibility(boolean isShow) {
         if (showActionOneAcView != null)
             showActionOneAcView.setVisibility(isShow? View.VISIBLE:View.GONE);
     }
