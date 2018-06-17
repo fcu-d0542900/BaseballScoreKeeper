@@ -108,7 +108,6 @@ public class RecordItem implements Serializable {
                     case __:
                         base.setShowOneViewVisibility(false);
                 }
-                base.setShowFirstViewOneAc1Visibility(true);
                 switch (ballDirection){
                     case LEFT:
                         base.setFirstViewOneNumValue(R.drawable.throw7);
