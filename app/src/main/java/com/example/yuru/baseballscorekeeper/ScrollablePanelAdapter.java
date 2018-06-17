@@ -60,6 +60,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         super();
         this.activity = activity;
         recordItems = new ArrayList<>();
+        updateData();
+    }
+
+    void updateData(){
         activity.updateData(recordItems);
     }
 
@@ -72,7 +76,6 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     public int getColumnCount() {
         return recordItems.get(0).size()+1 ;
     }
-
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int row, int column) {
@@ -373,7 +376,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 public void onClick(View v) {
                     baseOtherDialog = new BaseOtherDialog();
                     baseOtherDialog.setActivity(activity);
-                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"},BASE.BASE_THREE);
+                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"}, BASE.BASE_THREE);
                     Toast.makeText(v.getContext(), "三壘" , Toast.LENGTH_SHORT).show();
                 }
             });
@@ -405,13 +408,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     static class BoardNumViewHolder extends RecyclerView.ViewHolder {
         TextView dateTextView;
-
         BoardNumViewHolder(View itemView) {
             super(itemView);
             this.dateTextView = itemView.findViewById(R.id.text_boardNum);
-
         }
-
     }
 
     static class PlayerInfoViewHolder extends RecyclerView.ViewHolder {
@@ -419,11 +419,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         public TextView text_playerName;
         public TextView text_playerNum;
         public TextView text_batOrder;
-
-
         PlayerInfoViewHolder(View view) {
             super(view);
-
             this.text_playerPosition = view.findViewById(R.id.text_playerPosition);
             this.text_playerName = view.findViewById(R.id.text_playerName);
             this.text_playerNum = view.findViewById(R.id.text_playerNum);
@@ -634,7 +631,6 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     private static class TeamNameViewHolder extends RecyclerView.ViewHolder {
         TextView titleTextView;
-
         TeamNameViewHolder(View view) {
             super(view);
             this.titleTextView = view.findViewById(R.id.title);
