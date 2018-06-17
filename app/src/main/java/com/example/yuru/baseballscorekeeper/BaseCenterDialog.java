@@ -147,6 +147,7 @@ public class BaseCenterDialog {
                             case 4:
                                 Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
                                 activity.currentRecord.getTeam().nextRound();
+                                //TODO ahkui   顯示結束斜線 recordItemFirstBase.setShowEndViewVisibility(true)
                                 //TODO ahkui   updateData
                                 //activity.updateData(recordItems);
                                 break;
@@ -164,7 +165,7 @@ public class BaseCenterDialog {
 
     public void change_player_hitter() {
         View view_set_player = LayoutInflater.from(activity).inflate(R.layout.dialog_new_player, null);
-        view_set_player.setPadding(3,0,3,0);
+        view_set_player.setPadding(10,10,10,10);
         ImageView img = view_set_player.findViewById(R.id.image_title_newPlayer);
         img.setVisibility(View.GONE);
 
@@ -268,6 +269,7 @@ public class BaseCenterDialog {
 
                 //TODO ahkui 顯示  recordItemCenter.setShowChangeGarrisonVisibility(true);
                 //TODO ahkui  儲存更改守備資料 change_?
+                //TODO 看要不要做個顯示更換守備的資料 按下去可以看這時候換了誰的畫面
 
                 Toast.makeText(activity.getApplicationContext(), "OK " + change_garrison, Toast.LENGTH_SHORT).show();
             }
