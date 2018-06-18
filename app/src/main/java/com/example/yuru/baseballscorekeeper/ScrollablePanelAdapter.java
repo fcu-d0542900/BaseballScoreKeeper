@@ -530,6 +530,9 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         void setRecordItem(RecordItem recordItem) {
             this.recordItem = recordItem;
             recordItem.updateFirstBaseUI(base1);
+            recordItem.updateOtherBaseUI(base2,2);
+            recordItem.updateOtherBaseUI(base3,3);
+            recordItem.updateOtherBaseUI(base,0);
         }
 
         void updateUI(NewRecordActivity activity){
@@ -538,7 +541,6 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             recordItem.updateOtherBaseUI(base3,3);
             recordItem.updateOtherBaseUI(base,0);
             activity.scrollablePanel.notifyDataSetChanged();
-            Log.d("position",""+recordItem);
         }
     }
 

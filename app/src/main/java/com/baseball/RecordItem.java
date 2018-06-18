@@ -1,7 +1,5 @@
 package com.baseball;
 
-import android.util.Log;
-
 import com.example.yuru.baseballscorekeeper.R;
 import java.io.Serializable;
 import java.util.List;
@@ -18,9 +16,9 @@ public class RecordItem implements Serializable {
     private List<Player> defPlayer;
     private boolean score=false;
 
-    private BALL_TYPE ballType = BALL_TYPE.__;
+    private com.baseball.RecordItem.BALL_TYPE ballType = RecordItem.BALL_TYPE.__;
     private BALL_DIRECTION ballDirection = BALL_DIRECTION.__;
-    private BASE_FIRST_STEP_ONE _BASE_FIRST_STEP_ONE = BASE_FIRST_STEP_ONE.__;
+    private BALL_TYPE DIETYPE = BALL_TYPE.__;
 
     private int BALL_TOUCH_AC1;
     private int BALL_TOUCH_AC2;
@@ -30,6 +28,11 @@ public class RecordItem implements Serializable {
     private int BALL_TOUCH_AC2_EXTRA;
     private int BALL_TOUCH_AC3_EXTRA;
 
+    private boolean FCUET1;
+    private boolean FCUET2;
+    private BALL_TYPE FCUET1v;
+    private BALL_TYPE FCUET2v;
+
     RecordItem(Player player,int round,int row,int column){
         this.attPlayer = player;
         this.round = round;
@@ -38,8 +41,8 @@ public class RecordItem implements Serializable {
         isNew = true;
     }
 
-    public void set_BASE_FIRST_STEP_ONE(BASE_FIRST_STEP_ONE _BASE_FIRST_STEP_ONE) {
-        this._BASE_FIRST_STEP_ONE = _BASE_FIRST_STEP_ONE;
+    public void setDIETYPE(BALL_TYPE DIETYPE) {
+        this.DIETYPE = DIETYPE;
         save();
     }
 
@@ -48,7 +51,7 @@ public class RecordItem implements Serializable {
         save();
     }
 
-    public void setBallType(BALL_TYPE ballType) {
+    public void setBallType(com.baseball.RecordItem.BALL_TYPE ballType) {
         this.ballType = ballType;
         save();
     }
@@ -75,6 +78,13 @@ public class RecordItem implements Serializable {
 
     public void setBALL_TOUCH_AC3_EXTRA(int BALL_TOUCH_AC3_EXTRA) {
         this.BALL_TOUCH_AC3_EXTRA = BALL_TOUCH_AC3_EXTRA;
+    }
+
+    public void setFCUET(boolean data1, boolean data2, BALL_TYPE data1v, BALL_TYPE data2v) {
+        FCUET1 = data1;
+        FCUET2 = data2;
+        FCUET1v = data1v;
+        FCUET2v = data2v;
     }
 
     public Player getAttPlayer() {
@@ -135,6 +145,35 @@ public class RecordItem implements Serializable {
         }
     }
 
+    private int getImageByBallDirection(BALL_TYPE direction) {
+        switch (direction){
+            case HIGH:
+                return R.drawable.fly_ball;
+            case FLAT:
+                return R.drawable.line_drive;
+            case FLOOR:
+                return R.drawable.ground_ball;
+            case BADBALL:
+                return R.drawable.throw_b;
+            case HITBYPITCH:
+                return R.drawable.hit_by_pitch;
+            case KILLED:
+                return R.drawable.killed;
+            case NOKILLED:
+                return R.drawable.no_killed;
+            case T:
+                return R.drawable.tag;
+            case E:
+                return R.drawable.error;
+            case FC:
+                return R.drawable.fielder_choice;
+            case U:
+                return R.drawable.u;
+            default:
+                return R.drawable.throw1;
+        }
+    }
+
     public void updateFirstBaseUI(RecordItemFirstBase base){
         base.setShowSacrificeFlyVisibility(false);
         base.setShowSacrificeHitsVisibility(false);
@@ -152,57 +191,39 @@ public class RecordItem implements Serializable {
         base.setShowFirstViewTwoAcVisibility(false);
         //three
         base.setShowFirstViewThreeAcVisibility(false);
-
-        switch (_BASE_FIRST_STEP_ONE){
-            case HIGH:
-                base.setShowSacrificeFlyVisibility(true);
-                base.setShowFirstViewOneTopVisibility(true);
-                base.setShowOneViewVisibility(true);
-                switch (ballType){
-                    case HIGH:
-                        base.setShowFirstViewOneTopValue(R.drawable.fly_ball);
-                        break;
-                    case FLAT:
-                        base.setShowFirstViewOneTopValue(R.drawable.line_drive);
-                        break;
-                    default:
-                        base.setShowSacrificeFlyVisibility(false);
-                        base.setShowFirstViewOneTopVisibility(false);
-                        base.setShowOneViewVisibility(false);
-                }
-                switch (ballDirection){
-                    case LEFT:
-                        base.setFirstViewOneNumValue(R.drawable.throw7);
-                        break;
-                    case MIDDLE:
-                        base.setFirstViewOneNumValue(R.drawable.throw8);
-                        break;
-                    case RIGHT:
-                        base.setFirstViewOneNumValue(R.drawable.throw9);
-                        break;
-                    default:
-                        base.setShowSacrificeFlyVisibility(false);
-                        base.setShowFirstViewOneTopVisibility(false);
-                        base.setShowOneViewVisibility(false);
-
+        base.setShowEndViewVisibility(false);
+        switch (DIETYPE){
+            case HIGHDIE:
+                if (ballType != BALL_TYPE.__ && ballDirection!=BALL_DIRECTION.__){
+                    base.setShowSacrificeFlyVisibility(true);
+                    base.setShowFirstViewOneTopVisibility(true);
+                    base.setShowOneViewVisibility(true);
+                    base.setShowFirstViewOneTopValue(getImageByBallDirection(ballType));
+                    base.setFirstViewOneNumValue(getImageByNumber(ballDirection));
                 }
                 break;
-            case TOUCH:
+            case TOUCHDIE:
                 base.setShowSacrificeHitsVisibility(true);
                 base.setShowOneViewVisibility(true);
-                base.setShowFirstViewOneBottomVisibility(true);
                 base.setShowTwoViewVisibility(true);
+                base.setShowFirstViewOneBottomVisibility(true);
                 base.setFirstViewOneNumValue(getImageByNumber(BALL_TOUCH_AC1));
                 base.setFirstViewTwoNumValue(getImageByNumber(BALL_TOUCH_AC2));
-                Log.d("ahkui touch","get into rouch "+ _BASE_FIRST_STEP_ONE.toString());
+                break;
             case NORMAL:
+                if(ballType != BALL_TYPE.__){
+                    base.setShowOneViewVisibility(true);
+                    base.setShowFirstViewOneTopVisibility(true);
+                    base.setShowFirstViewOneBottomVisibility(true);
+                    base.setShowFirstViewOneTopValue(getImageByBallDirection(ballType));
+                }
                 break;
             case BADBALL:
             case HITBYPITCH:
             case KILLED:
             case NOKILLED:
                 base.setShowZeroViewVisibility(true);
-                switch (_BASE_FIRST_STEP_ONE){
+                switch (DIETYPE){
                     case BADBALL:
                         base.setShowZeroValue(R.drawable.throw_b);
                         break;
@@ -239,24 +260,25 @@ public class RecordItem implements Serializable {
             isNew = false;
             DatabaseService.getInstance().getDatabase().getRecord(DatabaseService.CurrentRecord).getTeam().addRecordItems(this);
         }
-        DatabaseService.getInstance().write();
+        else
+            DatabaseService.getInstance().write();
     }
 
-    public enum BASE_FIRST_STEP_ONE{
-        HIGH,// 高飛犧牲
-        TOUCH,//觸及犧牲
+    public enum BALL_TYPE {
+        HIGH,// 高飛犧牲 // 高飛球
+        FLAT, // 平飛球
+        FLOOR, // 滾地球
+        HIGHDIE,// 高飛犧牲 // 高飛球
+        TOUCHDIE,//觸及犧牲
         NORMAL,//一般
         BADBALL, //保送
         HITBYPITCH, //觸身球
         KILLED, //三鎮
         NOKILLED, //不死三陣
-        __
-    }
-
-    public enum BALL_TYPE {
-        HIGH, // 高飛球
-        FLAT, // 平飛球
-        FLOOR, // 滾地球
+        FC,
+        U,
+        E,
+        T,
         __
     }
 
