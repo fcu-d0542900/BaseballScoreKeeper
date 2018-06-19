@@ -10,9 +10,9 @@ import android.widget.ImageView;
 
 public class RecordItemFirstBase {
 
-//    private ImageView showEndView;
+//    private ImageView showEndView,showHRView;
 
-    private ImageView showZeroView,showHRView;
+    private ImageView showZeroView;
     private FrameLayout showOneView,showTwoView,showThreeView;
     private ImageView showSacrificeFly,showSacrificeHits;
 
@@ -79,6 +79,7 @@ public class RecordItemFirstBase {
             showThreeView.setVisibility(isShow?View.VISIBLE:View.GONE);
     }
 
+/*
     //HRView
     public void setShowHRView(ImageView showHRView) {
         this.showHRView = showHRView;
@@ -88,6 +89,7 @@ public class RecordItemFirstBase {
         if (showHRView != null)
             showHRView.setVisibility(isShow?View.VISIBLE:View.GONE);
     }
+*/
 
     //SacrificeFly
     public void setShowSacrificeFly(ImageView showSacrificeFly) {

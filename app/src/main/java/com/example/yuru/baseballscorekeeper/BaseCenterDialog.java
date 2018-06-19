@@ -21,6 +21,7 @@ import com.baseball.RecordItemCenter;
 public class BaseCenterDialog {
 
     private RecordItemCenter recordItemCenter;
+    private ScrollablePanelAdapter.PlayerInfoViewHolder playerInfoViewHolder;
 
     private NewRecordActivity activity;
 
@@ -41,7 +42,7 @@ public class BaseCenterDialog {
         this.activity = activity;
     }
 
-    public void setBaseCenterDialog(final ScrollablePanelAdapter.OrderViewHolder viewHolder) {
+    public void setBaseCenterDialog(final ScrollablePanelAdapter.OrderViewHolder viewHolder, final int pos) {
         new AlertDialog.Builder(activity)
                 .setItems(center_choice, new DialogInterface.OnClickListener() {
                     @Override
@@ -66,6 +67,7 @@ public class BaseCenterDialog {
                                         //顯示得分 (R.drawable.runs)
                                         viewHolder.recordItem.setRUN_OUT_TYPE(RecordItem.RUNS_OUT.RUN);
                                         //TODO 加分
+                                        viewHolder.recordItem.toggleScore(); //TODO ???? 是這樣嗎 好詭異
                                         Toast.makeText(activity, "得分", Toast.LENGTH_SHORT).show();
                                         viewHolder.updateUI(activity);
                                         center_dialog.dismiss();
@@ -131,7 +133,7 @@ public class BaseCenterDialog {
                                                 // whitch=0 一壘安打 顯示下面(1)
                                                 // whitch=1 二壘安打 顯示下面(1) (2)
                                                 // whitch=2 三壘安打 顯示下面(1) (2) (3)
-                                                // whitch=3 四壘安打 顯示下面(1) (2) (3) (4)
+                                                // whitch=3 全壘打 顯示下面(1) (2) (3) (4)
                                                 // (1)  recordItemCenter.setShowHit1ViewVisibility(true);
                                                 // (2)  recordItemCenter.setShowHit2ViewVisibility(true);
                                                 // (3)  recordItemCenter.setShowHit3ViewVisibility(true);
@@ -154,7 +156,7 @@ public class BaseCenterDialog {
                             case 3:
                                 Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
                                 // TODO activity.currentRecord.getTeam().changeAttPlayer();
-                                change_player_hitter();
+                                change_player_hitter(viewHolder,pos);
                                 break;
 
                             //點擊結束半局
@@ -180,8 +182,8 @@ public class BaseCenterDialog {
     }
 
 
-    public void change_player_hitter() {
-        View view_set_player = LayoutInflater.from(activity).inflate(R.layout.dialog_new_player, null);
+    public void change_player_hitter(final ScrollablePanelAdapter.OrderViewHolder viewHolder, final int pos) {
+        final View view_set_player = LayoutInflater.from(activity).inflate(R.layout.dialog_new_player, null);
         view_set_player.setPadding(10,10,10,10);
         ImageView img = view_set_player.findViewById(R.id.image_title_newPlayer);
         img.setVisibility(View.GONE);
@@ -207,6 +209,15 @@ public class BaseCenterDialog {
 
                     //TODO ahkui 顯示 recordItemCenter.setShowChangeHitterVisibility(true);
                     //TODO ahkui  儲存更改球員資料 playerName playerNum  playerPosition
+
+                    Player change_player = new Player(playerNum,playerName,Player.POSITION.values()[playerPosition]);
+                    viewHolder.recordItem.changeAttPlayer(change_player);
+                    viewHolder.updateUI(activity);
+
+                    activity.currentRecord.getTeam().getTeamMember().remove(pos-1);
+                    activity.currentRecord.getTeam().getTeamMember().add(pos-1,change_player);
+
+                    activity.scrollablePanel.notifyDataSetChanged();
 
                     //playerInfo.setName(playerName);
                     //playerInfo.setId(playerNum);

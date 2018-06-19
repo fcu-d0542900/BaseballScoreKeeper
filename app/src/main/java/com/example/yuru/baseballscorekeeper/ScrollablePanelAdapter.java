@@ -148,6 +148,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         final Player playerInfo = activity.currentRecord.getTeam().getTeamMember().get(pos - 1);
         viewHolder.text_batOrder.setText(Integer.valueOf(pos).toString());
 
+        Log.d(">>>>player",playerInfo.getName());
+
 
         if (playerInfo != null && pos>0) {
 
@@ -225,7 +227,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 public void onClick(View v) {
                     baseCenterDialog = new BaseCenterDialog();
                     baseCenterDialog.setActivity(activity);
-                    baseCenterDialog.setBaseCenterDialog(viewHolder);
+                    baseCenterDialog.setBaseCenterDialog(viewHolder,row);
                     Toast.makeText(v.getContext(), "得分區域" +recordItem.getAttPlayer().getName(), Toast.LENGTH_SHORT).show();
                 }
             });
@@ -394,6 +396,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.getChangeGarrison = view.findViewById(R.id.image_change_garrison);
             this.getChangeHitter = view.findViewById(R.id.image_change_hitter);
             this.getEnd = view.findViewById(R.id.image_end);
+            this.getFirstViewHR = view.findViewById(R.id.image_HR);
 
             //center
             this.getCenterView = view.findViewById(R.id.image_centerView);
@@ -411,6 +414,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             center.setShowChangeGarrison(getChangeGarrison);
             center.setShowChangeHitter(getChangeHitter);
             center.setShowEndView(getEnd);
+            center.setShowHRView(getFirstViewHR);
 
 
             //一壘
@@ -418,7 +422,6 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.getFirstViewOne = view.findViewById(R.id.frame_firstView_one);
             this.getFirstViewTwo = view.findViewById(R.id.frame_firstView_two);
             this.getFirstViewThree = view.findViewById(R.id.frame_firstView_three);
-            this.getFirstViewHR = view.findViewById(R.id.image_HR);
             this.getFirstViewOneTop = view.findViewById(R.id.image_firstView_oneTop);
             this.getFirstViewOneNum = view.findViewById(R.id.image_firstView_oneNum);
             this.getFirstViewOneBottom = view.findViewById(R.id.image_firstView_oneBottom);
@@ -435,7 +438,6 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             base1.setShowOneView(getFirstViewOne);
             base1.setShowTwoView(getFirstViewTwo);
             base1.setShowThreeView(getFirstViewThree);
-            base1.setShowHRView(getFirstViewHR);
             base1.setShowFirstViewOneTop(getFirstViewOneTop);
             base1.setFirstViewOneNum(getFirstViewOneNum);
             base1.setShowFirstViewOneBottom(getFirstViewOneBottom);

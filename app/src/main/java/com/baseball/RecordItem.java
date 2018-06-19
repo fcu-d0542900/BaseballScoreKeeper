@@ -4,11 +4,6 @@ import com.example.yuru.baseballscorekeeper.R;
 import java.io.Serializable;
 import java.util.List;
 
-import static com.baseball.RecordItem.RUNS_OUT.LEFT_BASE;
-import static com.baseball.RecordItem.RUNS_OUT.ONE_OUT;
-import static com.baseball.RecordItem.RUNS_OUT.RUN;
-import static com.baseball.RecordItem.RUNS_OUT.THREE_OUT;
-import static com.baseball.RecordItem.RUNS_OUT.TWO_OUT;
 
 public class RecordItem implements Serializable {
     // metric infomation
@@ -23,6 +18,7 @@ public class RecordItem implements Serializable {
     private boolean score=false;
 
     private boolean isEND = false;
+    private boolean isChangeHitter = false;
 
     private com.baseball.RecordItem.BALL_TYPE ballType = RecordItem.BALL_TYPE.__;
     private BALL_DIRECTION ballDirection = BALL_DIRECTION.__;
@@ -148,6 +144,7 @@ public class RecordItem implements Serializable {
         if(player.getId() == attPlayer.getId())
             return false;
         attPlayer = player;
+        isChangeHitter = true;
         save();
         return true;
     }
@@ -234,7 +231,7 @@ public class RecordItem implements Serializable {
         base.setShowOneViewVisibility(false);
         base.setShowTwoViewVisibility(false);
         base.setShowThreeViewVisibility(false);
-        base.setShowHRViewVisibility(false);
+//        base.setShowHRViewVisibility(false);
 //        base.setShowEndViewVisibility(false);
         //one
         base.setShowFirstViewOneTopVisibility(false);
@@ -349,6 +346,7 @@ public class RecordItem implements Serializable {
         center.setShowChangeHitterVisibility(false);
         center.setShowChangeGarrisonVisibility(false);
         center.setShowEndViewVisibility(false);
+        center.setShowHRViewVisibility(false);
         center.setShowHit1ViewVisibility(false);
         center.setShowHit2ViewVisibility(false);
         center.setShowHit3ViewVisibility(false);
@@ -396,14 +394,18 @@ public class RecordItem implements Serializable {
                     center.setShowHit2ViewVisibility(true);
                     center.setShowHit3ViewVisibility(true);
                     center.setShowHit4ViewVisibility(true);
+                    center.setShowHRViewVisibility(true);
                     break;
                 default:
                     break;
             }
         }
 
-        if(isEND) {
+        if(isEND) {  //結束斜線
             center.setShowEndViewVisibility(true);
+        }
+        if(isChangeHitter) {
+            center.setShowChangeHitterVisibility(true);
         }
 
     }
