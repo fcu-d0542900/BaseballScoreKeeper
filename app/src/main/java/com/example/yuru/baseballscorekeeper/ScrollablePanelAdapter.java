@@ -56,6 +56,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     private static final int BOARDNUM_TYPE = 1;
     private static final int ORDER_TYPE = 2;
 
+    private RecordItemOtherBase recordItemUI;
+
+
+
 
     ScrollablePanelAdapter(NewRecordActivity activity) {
         super();

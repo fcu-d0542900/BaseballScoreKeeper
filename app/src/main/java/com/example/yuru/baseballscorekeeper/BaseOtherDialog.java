@@ -28,21 +28,27 @@ public class BaseOtherDialog {
     private Spinner spinner_left,spinner_right,spinner_left_e,spinner_right_e;
     private Spinner spinner_throw_left,spinner_throw_right;
 
+    public void setBase1UI(RecordItemOtherBase viewHolder){
+        recordItemUI=viewHolder;
+    }
+
+    public RecordItemOtherBase getBaseUI(){
+        return recordItemUI;
+    }
+
     public void setBaseOtherDialog(final ScrollablePanelAdapter.OrderViewHolder viewHolder, final String[] items,int base) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+
         switch (base){
             case 0:
                 recordItemUI = viewHolder.base;
-                //recordItemUI.setBase1UI(viewHolder.base);
                 break;
             case 3:
-                //recordItemUI.setBase1UI(viewHolder.base3);
                 recordItemUI = viewHolder.base3;
 
                 break;
             case 2:
                recordItemUI = viewHolder.base2;
-                //recordItemUI.setBase1UI(viewHolder.base2);
                 break;
         }
 
@@ -256,9 +262,7 @@ public class BaseOtherDialog {
 
     }
 
-    public RecordItemOtherBase getBaseUI(){
-        return recordItemUI;
-    }
+
 
 
     public void setActivity(NewRecordActivity activity) {
