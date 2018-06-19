@@ -35,6 +35,9 @@ public class RecordItem implements Serializable {
     private BALL_TYPE FCUET1v;
     private BALL_TYPE FCUET2v;
 
+    private  int LEFT_NUM,RIGHT_NUM;  //數字 e 數字 e 選單用
+    private boolean LEFT_ERROR=false,RIGHT_ERROR=false;
+
     RecordItem(Player player,int round,int row,int column){
         this.attPlayer = player;
         this.round = round;
@@ -53,9 +56,8 @@ public class RecordItem implements Serializable {
         save();
     }
 
-    public void setBallDirection(int int_ball_direction) {  //透過數字傳方向
-        BALL_DIRECTION[] ball_direction = {BALL_DIRECTION.ONE,BALL_DIRECTION.TWO,BALL_DIRECTION.THREE,BALL_DIRECTION.FOUR,BALL_DIRECTION.FIVE,BALL_DIRECTION.SIX,BALL_DIRECTION.SEVEN,BALL_DIRECTION.EIGHT,BALL_DIRECTION.NINE};
-        this.ballDirection = ball_direction[int_ball_direction];
+    public void setBallDirection(int num) {  //透過數字傳方向
+        this.ballDirection = BALL_DIRECTION.values()[num];
         save();
     }
 
@@ -69,7 +71,21 @@ public class RecordItem implements Serializable {
         save();
     }
 
+    public void setLEFT_NUM(int LEFT_NUM) {
+        this.LEFT_NUM = LEFT_NUM;
+    }
 
+    public void setLEFT_ERROR(boolean LEFT_ERROR) {
+        this.LEFT_ERROR = LEFT_ERROR;
+    }
+
+    public void setRIGHT_NUM(int RIGHT_NUM) {
+        this.RIGHT_NUM = RIGHT_NUM;
+    }
+
+    public void setRIGHT_ERROR(boolean RIGHT_ERROR) {
+        this.RIGHT_ERROR = RIGHT_ERROR;
+    }
 
     public void setBALL_TOUCH_AC1(int BALL_TOUCH_AC1) {
         this.BALL_TOUCH_AC1 = BALL_TOUCH_AC1;
@@ -102,6 +118,7 @@ public class RecordItem implements Serializable {
         FCUET2v = data2v;
     }
 
+
     public Player getAttPlayer() {
         return attPlayer;
     }
@@ -131,6 +148,10 @@ public class RecordItem implements Serializable {
         return getImageByNumber(BALL_DIRECTION.values()[num]);
     }
 
+    private int getImageByPushNumber(int num) {
+        return getImageByPushNumber(BALL_DIRECTION.values()[num]);
+    }
+
     private int getImageByNumber(BALL_DIRECTION direction) {
         switch (direction){
             case ONE:
@@ -156,8 +177,34 @@ public class RecordItem implements Serializable {
                 return R.drawable.throw9;
             default:
                 return R.drawable.throw1;
-
         }
+    }
+
+    private int getImageByPushNumber(BALL_DIRECTION direction) {  //有()的數
+
+        switch (direction){
+            case ONE:
+                return R.drawable.push1;
+            case TWO:
+                return R.drawable.push2;
+            case THREE:
+                return R.drawable.push3;
+            case FOUR:
+                return R.drawable.push4;
+            case FIVE:
+                return R.drawable.push5;
+            case SIX:
+                return R.drawable.push6;
+            case SEVEN:
+                return R.drawable.push7;
+            case EIGHT:
+                return R.drawable.push8;
+            case NINE:
+                return R.drawable.push9;
+            default:
+                return R.drawable.push1;
+        }
+
     }
 
     private int getImageByBallDirection(BALL_TYPE direction) {
@@ -188,6 +235,8 @@ public class RecordItem implements Serializable {
                 return R.drawable.throw1;
         }
     }
+
+
 
     public void updateFirstBaseUI(RecordItemFirstBase base){
         base.setShowSacrificeFlyVisibility(false);
@@ -263,19 +312,117 @@ public class RecordItem implements Serializable {
         }
     }
 
+    //二三本壘UI設定
     public void updateOtherBaseUI(RecordItemOtherBase base,int base_int){
-        if (base_int == 0){
-            base.setShowActionNameViewVisibility(false);
-            base.setShowActionViewVisibility(false);
-            base.setShowThrowViewVisibility(false);
-            base.setShowPushNumViewVisibility(false);
-            base.setShowToBaseViewVisibility(false);
-            //action
-            base.setShowActionOneAcViewVisibility(false);
-            base.setShowActionTwoAcViewVisibility(false);
+
+        base.setShowActionNameViewVisibility(false);
+        base.setShowActionViewVisibility(false);
+        base.setShowThrowViewVisibility(false);
+        base.setShowPushNumViewVisibility(false);
+        base.setShowToBaseViewVisibility(false);
+        //action
+        base.setShowActionOneAcViewVisibility(false);
+        base.setShowActionTwoAcViewVisibility(false);
+
+        if(base_int==0){   //本壘
+           otherbase(base);
+           base.setShowToBaseViewVisibility(true);
+       }
+
+       else if(base_int==2){
+            otherbase(base);
+            base.setShowToBaseViewVisibility(true);
+       }
+
+       else if(base_int==3){
+            otherbase(base);
+            base.setShowToBaseViewVisibility(true);
+       }
+
+    }
+
+    public void otherbase(RecordItemOtherBase base)
+    {
+        switch (ballPush){
+
+            case DP:
+                base.setShowPushNumViewVisibility(true);
+                base.setShowActionNameViewVisibility(true);
+                base.setShowPushNumValue(getImageByPushNumber(ballDirection));
+                base.setShowActionNameValue(R.drawable.double_plays);
+                break;
+
+            case TP:
+                base.setShowPushNumViewVisibility(true);
+                base.setShowActionNameViewVisibility(true);
+                base.setShowPushNumValue(getImageByPushNumber(ballDirection));
+                base.setShowActionNameValue(R.drawable.tripple_play);
+                break;
+
+            case CS:
+                base.setShowPushNumViewVisibility(true);
+                base.setShowActionNameViewVisibility(true);
+                base.setShowPushNumValue(getImageByPushNumber(ballDirection));
+                base.setShowActionNameValue(R.drawable.caught_stolen);
+                break;
+
+            case S:
+                base.setShowPushNumViewVisibility(true);
+                base.setShowActionNameViewVisibility(true);
+                base.setShowPushNumValue(getImageByPushNumber(ballDirection));
+                base.setShowActionNameValue(R.drawable.stolen_base);
+                break;
+
+            case PO:
+                base.setShowPushNumViewVisibility(true);
+                base.setShowActionNameViewVisibility(true);
+                base.setShowPushNumValue(getImageByPushNumber(ballDirection));
+                base.setShowActionNameValue(R.drawable.put_outs);
+                break;
+
+            case W:
+                base.setShowPushNumViewVisibility(true);
+                base.setShowActionNameViewVisibility(true);
+                base.setShowPushNumValue(getImageByPushNumber(ballDirection));
+                base.setShowActionNameValue(R.drawable.wild_pitch);
+                break;
+
+            case P:
+                base.setShowPushNumViewVisibility(true);
+                base.setShowActionNameViewVisibility(true);
+                base.setShowPushNumValue(getImageByPushNumber(ballDirection));
+                base.setShowActionNameValue(R.drawable.passed_ball);
+                break;
+
+            case BK:
+                base.setShowPushNumViewVisibility(true);
+                base.setShowActionNameViewVisibility(true);
+                base.setShowPushNumValue(getImageByPushNumber(ballDirection));
+                base.setShowActionNameValue(R.drawable.balks);
+                break;
+
+            case E:
+                // TODO: error 顯示待補
+                base.setShowPushNumViewVisibility(true);
+                base.setShowActionViewVisibility(true);
+                base.setShowPushNumValue(getImageByPushNumber(ballDirection));
+                base.setActionOneNumValue(getImageByNumber(LEFT_NUM));
+                base.setActionTwoNumValue(getImageByNumber(RIGHT_NUM));
+
+                if(LEFT_ERROR){
+                    base.setShowActionOneAcViewVisibility(true);
+                }
+                if(RIGHT_ERROR){
+                    base.setShowActionTwoAcViewVisibility(true);
+                }
+                break;
+
+            default:
+                break;
 
         }
     }
+
 
     private void save(){
         if(isNew) {

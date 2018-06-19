@@ -248,7 +248,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 public void onClick(View v) {
                     baseOtherDialog = new BaseOtherDialog();
                     baseOtherDialog.setActivity(activity);
-                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"}, BASE.BASE_TWO);
+                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"}, 2);
                     Toast.makeText(v.getContext(), "二壘" , Toast.LENGTH_SHORT).show();
 
                 }
@@ -260,7 +260,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 public void onClick(View v) {
                     baseOtherDialog = new BaseOtherDialog();
                     baseOtherDialog.setActivity(activity);
-                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"}, BASE.BASE_THREE);
+                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"}, 3);
                     Toast.makeText(v.getContext(), "三壘" , Toast.LENGTH_SHORT).show();
                 }
             });
@@ -271,7 +271,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 public void onClick(View v) {
                     baseOtherDialog = new BaseOtherDialog();
                     baseOtherDialog.setActivity(activity);
-                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"},BASE.BASE_HOME);
+                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"},0);
                     Toast.makeText(v.getContext(), "本壘" , Toast.LENGTH_SHORT).show();
 
                 }
@@ -316,7 +316,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         }
     }
 
-    static class OrderViewHolder extends RecyclerView.ViewHolder {
+    public static class OrderViewHolder extends RecyclerView.ViewHolder {
         RecordItem recordItem;
 
         TextView getScoreView;

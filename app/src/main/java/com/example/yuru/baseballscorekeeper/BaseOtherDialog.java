@@ -28,19 +28,27 @@ public class BaseOtherDialog {
     private Spinner spinner_left,spinner_right,spinner_left_e,spinner_right_e;
     private Spinner spinner_throw_left,spinner_throw_right;
 
-    public void setBaseOtherDialog(final ScrollablePanelAdapter.OrderViewHolder viewHolder, final String[] items,BASE base) {
+    public void setBaseOtherDialog(final ScrollablePanelAdapter.OrderViewHolder viewHolder, final String[] items,int base) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         switch (base){
-            case BASE_HOME:
+            case 0:
                 recordItemUI = viewHolder.base;
+                //recordItemUI.setBase1UI(viewHolder.base);
                 break;
-            case BASE_THREE:
+            case 3:
+                //recordItemUI.setBase1UI(viewHolder.base3);
                 recordItemUI = viewHolder.base3;
+
                 break;
-            case BASE_TWO:
-                recordItemUI = viewHolder.base2;
+            case 2:
+               recordItemUI = viewHolder.base2;
+                //recordItemUI.setBase1UI(viewHolder.base2);
                 break;
         }
+
+
+
+
 
         //設定對話框內的項目
         builder.setItems(items, new DialogInterface.OnClickListener(){
@@ -55,11 +63,7 @@ public class BaseOtherDialog {
                                     @Override
                                     public void onClick(DialogInterface dialog, final int which) {
                                         String name = push[which];
-                                        switch (which){
-                                            case 1:
-                                             //   viewHolder.recordItemOtherBase.setShowPushNumViewVisibility(true);
-                                                break;
-                                        }
+                                        viewHolder.recordItem.setBallDirection(which+1);
                                         //TODO: ahkui 選擇完後  switch (which)   recordItemOtherBase.setShowPushNumViewVisibility(true);
                                         //TODO: ahkui  圖片id  recordItemOtherBase.setShowPushNumValue();
                                         //TODO: ahkui  (whitch)   存入資料庫， 顯示推進數字 (R.drawable.push1) ~ (R.drawable.push9)
@@ -81,6 +85,7 @@ public class BaseOtherDialog {
                                                 Toast.makeText(activity, "雙殺DP", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
                                                 viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.DP);
+                                                viewHolder.updateUI(activity);
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 DP  (R.drawable.double_plays)
                                             }
                                         });
@@ -91,6 +96,8 @@ public class BaseOtherDialog {
                                             public void onClick(View v) {
                                                 Toast.makeText(activity, "三殺TP", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
+                                                viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.TP);
+                                                viewHolder.updateUI(activity);
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 TP  (R.drawable.tripple_play)
                                             }
                                         });
@@ -101,6 +108,8 @@ public class BaseOtherDialog {
                                             public void onClick(View v) {
                                                 Toast.makeText(activity, "盜壘S", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
+                                                viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.S);
+                                                viewHolder.updateUI(activity);
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 S  (R.drawable.stolen_base)
                                             }
                                         });
@@ -111,6 +120,8 @@ public class BaseOtherDialog {
                                             public void onClick(View v) {
                                                 Toast.makeText(activity, "盜壘失敗CS", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
+                                                viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.CS);
+                                                viewHolder.updateUI(activity);
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 CS  (R.drawable.caught_stolen)
                                             }
                                         });
@@ -121,6 +132,8 @@ public class BaseOtherDialog {
                                             public void onClick(View v) {
                                                 Toast.makeText(activity, "投手牽制PO", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
+                                                viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.PO);
+                                                viewHolder.updateUI(activity);
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 PO  (R.drawable.put_outs)
                                             }
                                         });
@@ -131,6 +144,8 @@ public class BaseOtherDialog {
                                             public void onClick(View v) {
                                                 Toast.makeText(activity, "暴投W", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
+                                                viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.W);
+                                                viewHolder.updateUI(activity);
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 W  (R.drawable.put_outs)
                                             }
                                         });
@@ -141,6 +156,8 @@ public class BaseOtherDialog {
                                             public void onClick(View v) {
                                                 Toast.makeText(activity, "捕逸P", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
+                                                viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.P);
+                                                viewHolder.updateUI(activity);
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 P  (R.drawable.passed_ball)
                                             }
                                         });
@@ -151,6 +168,8 @@ public class BaseOtherDialog {
                                             public void onClick(View v) {
                                                 Toast.makeText(activity, "投手犯規BK", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
+                                                viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.BK);
+                                                viewHolder.updateUI(activity);
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 BK  (R.drawable.balks)
                                             }
                                         });
@@ -161,7 +180,9 @@ public class BaseOtherDialog {
                                             public void onClick(View v) {
                                                 Toast.makeText(activity, "失誤", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
-                                                setErrorDialog();  // 點擊失誤後的選單
+                                                viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.E);
+                                                setErrorDialog(viewHolder);  // 點擊失誤後的選單
+                                                viewHolder.updateUI(activity);
                                             }
                                         });
 
@@ -212,11 +233,10 @@ public class BaseOtherDialog {
                                                                 Toast.makeText(activity, "OK " + (select_throw_left+1) + "," + (select_throw_right+1), Toast.LENGTH_SHORT).show();
                                                             }
                                                         });
-
                                                         dialog_throw.show();
                                                         break;
                                                     case 1:   //點選失誤
-                                                        setErrorDialog();  // 點擊失誤後的選單
+                                                        setErrorDialog(viewHolder);  // 點擊失誤後的選單
                                                         break;
                                                     case 2:   //點選無
                                                         break;
@@ -236,13 +256,17 @@ public class BaseOtherDialog {
 
     }
 
+    public RecordItemOtherBase getBaseUI(){
+        return recordItemUI;
+    }
+
 
     public void setActivity(NewRecordActivity activity) {
         this.activity = activity;
     }
 
     //失誤選單 數字E-數字E
-    public void setErrorDialog() {
+    public void setErrorDialog(final ScrollablePanelAdapter.OrderViewHolder viewHolder) {
         View view_error = LayoutInflater.from(activity).inflate(R.layout.record_error_dialog, null);
         AlertDialog.Builder dialog_error = new AlertDialog.Builder(activity);
         view_error.setPadding(0,10,0,10);
@@ -273,21 +297,21 @@ public class BaseOtherDialog {
                 String select_left_E = "";
                 String select_right_E = "";
                 int select_spinner_left = (int) spinner_left.getSelectedItemId();
-                //TODO  ahkui   存入資料庫， 顯示圖片  數字select_spinner_left+1  (R.drawable.throw 數字)
-                int select_spinner_right = (int) spinner_right.getSelectedItemId();
-                //TODO  ahkui   存入資料庫， 顯示圖片  數字 select_spinner_right+1  (R.drawable.throw 數字)
+                viewHolder.recordItem.setLEFT_NUM(select_spinner_left+1);  //TODO  ahkui   存入資料庫， 顯示圖片  數字select_spinner_left+1  (R.drawable.throw 數字)
+                int select_spinner_right = (int) spinner_right.getSelectedItemId();  //TODO  ahkui   存入資料庫， 顯示圖片  數字 select_spinner_right+1  (R.drawable.throw 數字)
+                viewHolder.recordItem.setRIGHT_NUM(select_spinner_right+1);
                 int select_spinner_left_E = (int) spinner_left_e.getSelectedItemId();
                 int select_spinner_right_E = (int) spinner_right_e.getSelectedItemId();
 
                 if(select_spinner_left_E == 1) {
-                    select_left_E = ",E";
+                    viewHolder.recordItem.setLEFT_ERROR(true);
                     //TODO: ahkui    recordItemOtherBase.setShowActionOneAcViewVisibility(true);
                 }
                 if(select_spinner_right_E == 1) {
-                    select_right_E = ",E";
+                    viewHolder.recordItem.setRIGHT_ERROR(true);
                     //TODO: ahkui    recordItemOtherBase.setShowActionTwoAcViewVisibility(true);
                 }
-
+                viewHolder.updateUI(activity);
                 Toast.makeText(activity, "OK ," + (select_spinner_left+1) + select_left_E + "," + (select_spinner_right+1) + select_right_E, Toast.LENGTH_SHORT).show();
             }
         });
