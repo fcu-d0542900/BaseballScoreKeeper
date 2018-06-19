@@ -19,6 +19,7 @@ public class RecordItem implements Serializable {
 
     private boolean isEND = false;
     private boolean isChangeHitter = false;
+    private boolean isChangeDefPlayer = false;
 
     private com.baseball.RecordItem.BALL_TYPE ballType = RecordItem.BALL_TYPE.__;
     private BALL_DIRECTION ballDirection = BALL_DIRECTION.__;
@@ -148,6 +149,14 @@ public class RecordItem implements Serializable {
         save();
         return true;
     }
+
+   public boolean changeDefPlayer(){ //boolean換掉
+       //TODO　儲存更換之球員
+        isChangeDefPlayer = true;
+        save();
+        return true;
+    }
+
 
     public int getRound() {
         return round;
@@ -406,6 +415,9 @@ public class RecordItem implements Serializable {
         }
         if(isChangeHitter) {
             center.setShowChangeHitterVisibility(true);
+        }
+        if(isChangeDefPlayer) {
+            center.setShowChangeGarrisonVisibility(true);
         }
 
     }

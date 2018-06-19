@@ -170,7 +170,7 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
 
     //記分板
     private void setScoreView(final int row, final int column, final ScoreBoardViewHolder viewHolder) {
-        final String scoreInfo = (row == 0 ? activity.currentRecord.getAwayTeam() :activity.currentRecord.getHomeTeam() ).getScore(column - 1);
+        final String scoreInfo = (row == 0 ? activity.currentRecord.getAwayTeam() :activity.currentRecord.getHomeTeam() ).getScore(column);
         viewHolder.scoreView.setText(scoreInfo);
     }
 

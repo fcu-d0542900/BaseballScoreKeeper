@@ -2,6 +2,7 @@ package com.example.yuru.baseballscorekeeper;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,6 +14,8 @@ import android.widget.Toast;
 import com.baseball.Player;
 import com.baseball.RecordItem;
 import com.baseball.RecordItemCenter;
+
+import java.util.ArrayList;
 
 /**
  * Created by YURU on 2018/6/18.
@@ -68,8 +71,10 @@ public class BaseCenterDialog {
                                         viewHolder.recordItem.setRUN_OUT_TYPE(RecordItem.RUNS_OUT.RUN);
                                         //TODO 加分
                                         viewHolder.recordItem.toggleScore(); //TODO ???? 是這樣嗎 好詭異
-                                        Toast.makeText(activity, "得分", Toast.LENGTH_SHORT).show();
+                                        activity.score_scrollable_panel.notifyDataSetChanged();
                                         viewHolder.updateUI(activity);
+                                        //TODO　分數欄沒有更改
+                                        Toast.makeText(activity, "得分", Toast.LENGTH_SHORT).show();
                                         center_dialog.dismiss();
                                     }
                                 });
@@ -149,7 +154,7 @@ public class BaseCenterDialog {
                             case 2:
                                 Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
                                 // TODO activity.currentRecord.getTeam().changeDefPlayer();
-                                change_player_garrison();
+                                change_player_garrison(viewHolder);
                                 break;
 
                             //點擊替換打者
@@ -207,7 +212,7 @@ public class BaseCenterDialog {
                     int playerNum = Integer.valueOf(editText_playerNum.getText().toString());
                     int playerPosition = (int) spinner_position.getSelectedItemId();
 
-                    //TODO ahkui 顯示 recordItemCenter.setShowChangeHitterVisibility(true);
+                    //顯示 recordItemCenter.setShowChangeHitterVisibility(true);
                     //TODO ahkui  儲存更改球員資料 playerName playerNum  playerPosition
 
                     Player change_player = new Player(playerNum,playerName,Player.POSITION.values()[playerPosition]);
@@ -237,7 +242,7 @@ public class BaseCenterDialog {
 
     }
 
-    public void change_player_garrison() {
+    public void change_player_garrison(final ScrollablePanelAdapter.OrderViewHolder viewHolder) {
         AlertDialog.Builder dialog_change_garrison = new AlertDialog.Builder(activity);
         View view_change_garrison = LayoutInflater.from(activity).inflate(R.layout.record_change_garrison, null);
         view_change_garrison.setPadding(30,10,10,10);
@@ -296,6 +301,11 @@ public class BaseCenterDialog {
 
 
                 //TODO ahkui 顯示  recordItemCenter.setShowChangeGarrisonVisibility(true);
+                if(!change_garrison.equals("")) {  //要再改
+                    viewHolder.recordItem.changeDefPlayer();
+                    viewHolder.updateUI(activity);
+                }
+
                 //TODO ahkui  儲存更改守備資料 change_?
                 //TODO 看要不要做個顯示更換守備的資料 按下去可以看這時候換了誰的畫面
 

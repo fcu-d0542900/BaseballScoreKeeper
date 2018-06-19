@@ -547,6 +547,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             recordItem.updateOtherBaseUI(base3,3);
             recordItem.updateOtherBaseUI(base,0);
             activity.scrollablePanel.notifyDataSetChanged();
+            activity.score_scrollable_panel.notifyDataSetChanged();
         }
     }
 
