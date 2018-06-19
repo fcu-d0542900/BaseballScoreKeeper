@@ -58,12 +58,12 @@ public class BaseCenterDialog {
                                 // 設置view
                                 final AlertDialog center_dialog = center_choice1.create();    //根據builder設置好的一系列數據, 来建構一個dialog
 
-                                //TODO ahkui  點擊(得分 123出局 殘壘)後顯示  recordItemCenter.setShowCenterVisibility(true);
+                                //點擊(得分 123出局 殘壘)後顯示  recordItemCenter.setShowCenterVisibility(true);
                                 //點擊得分
                                 view_center_choice1.findViewById(R.id.click_run).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        //TODO 顯示得分 (R.drawable.runs)
+                                        //顯示得分 (R.drawable.runs)
                                         viewHolder.recordItem.setRUN_OUT_TYPE(RecordItem.RUNS_OUT.RUN);
                                         //TODO 加分
                                         Toast.makeText(activity, "得分", Toast.LENGTH_SHORT).show();
@@ -75,7 +75,7 @@ public class BaseCenterDialog {
                                 view_center_choice1.findViewById(R.id.click_out1).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        //TODO 顯示一出局 (R.drawable.out1)
+                                        //顯示一出局 (R.drawable.out1)
                                         viewHolder.recordItem.setRUN_OUT_TYPE(RecordItem.RUNS_OUT.ONE_OUT);
                                         viewHolder.updateUI(activity);
                                         Toast.makeText(activity, "一出局", Toast.LENGTH_SHORT).show();
@@ -86,7 +86,7 @@ public class BaseCenterDialog {
                                 view_center_choice1.findViewById(R.id.click_out2).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        //TODO 顯示二出局 (R.drawable.out2)
+                                        //顯示二出局 (R.drawable.out2)
                                         viewHolder.recordItem.setRUN_OUT_TYPE(RecordItem.RUNS_OUT.TWO_OUT);
                                         viewHolder.updateUI(activity);
                                         Toast.makeText(activity, "二出局", Toast.LENGTH_SHORT).show();
@@ -97,7 +97,7 @@ public class BaseCenterDialog {
                                 view_center_choice1.findViewById(R.id.click_out3).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        //TODO 顯示三出局 (R.drawable.out3)
+                                        //顯示三出局 (R.drawable.out3)
                                         viewHolder.recordItem.setRUN_OUT_TYPE(RecordItem.RUNS_OUT.THREE_OUT);
                                         viewHolder.updateUI(activity);
                                         Toast.makeText(activity, "三出局", Toast.LENGTH_SHORT).show();
@@ -108,7 +108,7 @@ public class BaseCenterDialog {
                                 view_center_choice1.findViewById(R.id.click_left).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        //TODO 顯示殘壘 (R.drawable.left_on_base)
+                                        //顯示殘壘 (R.drawable.left_on_base)
                                         viewHolder.recordItem.setRUN_OUT_TYPE(RecordItem.RUNS_OUT.LEFT_BASE);
                                         viewHolder.updateUI(activity);
                                         Toast.makeText(activity, "殘壘", Toast.LENGTH_SHORT).show();
@@ -127,7 +127,7 @@ public class BaseCenterDialog {
                                                 String name_h = hits_choice[which];
                                                 viewHolder.recordItem.setHIT_Num(which+1);
                                                 viewHolder.updateUI(activity);
-                                                // TODO ahkui 設定安打紅線顯示
+                                                // 設定安打紅線顯示
                                                 // whitch=0 一壘安打 顯示下面(1)
                                                 // whitch=1 二壘安打 顯示下面(1) (2)
                                                 // whitch=2 三壘安打 顯示下面(1) (2) (3)
@@ -162,6 +162,9 @@ public class BaseCenterDialog {
                                 Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
                                 activity.currentRecord.getTeam().nextRound();
                                 //TODO ahkui   顯示結束斜線 recordItemFirstBase.setShowEndViewVisibility(true)
+                                viewHolder.recordItem.setEND(true);
+                                viewHolder.updateUI(activity);
+
                                 //TODO ahkui   updateData
                                 //activity.updateData(recordItems);
                                 break;

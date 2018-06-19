@@ -22,6 +22,8 @@ public class RecordItem implements Serializable {
     private List<Player> defPlayer;
     private boolean score=false;
 
+    private boolean isEND = false;
+
     private com.baseball.RecordItem.BALL_TYPE ballType = RecordItem.BALL_TYPE.__;
     private BALL_DIRECTION ballDirection = BALL_DIRECTION.__;
     private BALL_TYPE DIETYPE = BALL_TYPE.__;
@@ -55,6 +57,11 @@ public class RecordItem implements Serializable {
         this.row = row;
         this.column = column;
         isNew = true;
+    }
+
+    public void setEND(boolean isEND) {
+        this.isEND = isEND;
+        save();
     }
 
     public void setDIETYPE(BALL_TYPE DIETYPE) {
@@ -228,7 +235,7 @@ public class RecordItem implements Serializable {
         base.setShowTwoViewVisibility(false);
         base.setShowThreeViewVisibility(false);
         base.setShowHRViewVisibility(false);
-        base.setShowEndViewVisibility(false);
+//        base.setShowEndViewVisibility(false);
         //one
         base.setShowFirstViewOneTopVisibility(false);
         base.setShowFirstViewOneBottomVisibility(false);
@@ -341,12 +348,13 @@ public class RecordItem implements Serializable {
         center.setShowCenterVisibility(false);
         center.setShowChangeHitterVisibility(false);
         center.setShowChangeGarrisonVisibility(false);
+        center.setShowEndViewVisibility(false);
         center.setShowHit1ViewVisibility(false);
         center.setShowHit2ViewVisibility(false);
         center.setShowHit3ViewVisibility(false);
         center.setShowHit4ViewVisibility(false);
 
-        if(RUN_OUT_TYPE != RUNS_OUT.__) {
+        if(RUN_OUT_TYPE != RUNS_OUT.__) {  //出局得分
             center.setShowCenterVisibility(true);
             switch (RUN_OUT_TYPE) {
                 case RUN:
@@ -369,7 +377,7 @@ public class RecordItem implements Serializable {
             }
         }
 
-        if(HIT_Num != HITS_NUM.__) {
+        if(HIT_Num != HITS_NUM.__) {  //安打紅線
             switch (HIT_Num) {
                 case ONE:
                     center.setShowHit1ViewVisibility(true);
@@ -392,6 +400,10 @@ public class RecordItem implements Serializable {
                 default:
                     break;
             }
+        }
+
+        if(isEND) {
+            center.setShowEndViewVisibility(true);
         }
 
     }

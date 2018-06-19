@@ -393,6 +393,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
             this.getChangeGarrison = view.findViewById(R.id.image_change_garrison);
             this.getChangeHitter = view.findViewById(R.id.image_change_hitter);
+            this.getEnd = view.findViewById(R.id.image_end);
 
             //center
             this.getCenterView = view.findViewById(R.id.image_centerView);
@@ -409,6 +410,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
             center.setShowChangeGarrison(getChangeGarrison);
             center.setShowChangeHitter(getChangeHitter);
+            center.setShowEndView(getEnd);
 
 
             //一壘
@@ -428,7 +430,6 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.getFirstViewThreeAc = view.findViewById(R.id.image_firstView_three_ac);
             this.getSacrificeFly = view.findViewById(R.id.image_sacrifice_fly);
             this.getSacrificeHits = view.findViewById(R.id.image_sacrifice_hits);
-            this.getEnd = view.findViewById(R.id.image_end);
 
             base1.setShowZeroView(getFirstViewZero);
             base1.setShowOneView(getFirstViewOne);
@@ -446,7 +447,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             base1.setShowFirstViewThreeAc(getFirstViewThreeAc);
             base1.setShowSacrificeFly(getSacrificeFly);
             base1.setShowSacrificeHits(getSacrificeHits);
-            base1.setShowEndView(getEnd);
+
 
 
 

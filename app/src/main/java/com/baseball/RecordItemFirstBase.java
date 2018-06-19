@@ -9,7 +9,8 @@ import android.widget.ImageView;
  */
 
 public class RecordItemFirstBase {
-    private ImageView showEndView;
+
+//    private ImageView showEndView;
 
     private ImageView showZeroView,showHRView;
     private FrameLayout showOneView,showTwoView,showThreeView;
@@ -21,6 +22,7 @@ public class RecordItemFirstBase {
     public ImageView firstViewTwoNum,showFirstViewTwoAc;
     public ImageView firstViewThreeNum,showFirstViewThreeAc;
 
+/*
     //showEndView
     //在Center選擇結束半局後 顯示在一壘
     public void setShowEndView(ImageView showEndView) {
@@ -31,6 +33,7 @@ public class RecordItemFirstBase {
         if (showEndView != null)
             showEndView.setVisibility(isShow?View.VISIBLE:View.GONE);
     }
+*/
 
     //ZeroView
     public void setShowZeroView(ImageView showZeroView) {
