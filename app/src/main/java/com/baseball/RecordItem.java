@@ -4,6 +4,12 @@ import com.example.yuru.baseballscorekeeper.R;
 import java.io.Serializable;
 import java.util.List;
 
+import static com.baseball.RecordItem.RUNS_OUT.LEFT_BASE;
+import static com.baseball.RecordItem.RUNS_OUT.ONE_OUT;
+import static com.baseball.RecordItem.RUNS_OUT.RUN;
+import static com.baseball.RecordItem.RUNS_OUT.THREE_OUT;
+import static com.baseball.RecordItem.RUNS_OUT.TWO_OUT;
+
 public class RecordItem implements Serializable {
     // metric infomation
     int row;
@@ -19,6 +25,7 @@ public class RecordItem implements Serializable {
     private com.baseball.RecordItem.BALL_TYPE ballType = RecordItem.BALL_TYPE.__;
     private BALL_DIRECTION ballDirection = BALL_DIRECTION.__;
     private BALL_TYPE DIETYPE = BALL_TYPE.__;
+    private RUNS_OUT RUN_OUT_TYPE = RUNS_OUT.__;
 
     private int BALL_TOUCH_AC1;
     private int BALL_TOUCH_AC2;
@@ -51,6 +58,11 @@ public class RecordItem implements Serializable {
 
     public void setDIETYPE(BALL_TYPE DIETYPE) {
         this.DIETYPE = DIETYPE;
+        save();
+    }
+
+    public void setRUN_OUT_TYPE(RUNS_OUT type) {
+        this.RUN_OUT_TYPE = type;
         save();
     }
 
@@ -314,6 +326,41 @@ public class RecordItem implements Serializable {
             base.setShowActionTwoAcViewVisibility(false);
 
         }
+    }
+
+    public void  updateCenter(RecordItemCenter center) {
+        center.setShowCenterVisibility(false);
+        center.setShowChangeHitterVisibility(false);
+        center.setShowChangeGarrisonVisibility(false);
+        center.setShowHit1ViewVisibility(false);
+        center.setShowHit2ViewVisibility(false);
+        center.setShowHit3ViewVisibility(false);
+        center.setShowHit4ViewVisibility(false);
+
+        if(RUN_OUT_TYPE != RUNS_OUT.__) {
+            center.setShowCenterVisibility(true);
+            switch (RUN_OUT_TYPE) {
+                case RUN:
+                    center.setShowCenterValue(R.drawable.runs);
+                    break;
+                case ONE_OUT:
+                    center.setShowCenterValue(R.drawable.out1);
+                    break;
+                case TWO_OUT:
+                    center.setShowCenterValue(R.drawable.out2);
+                    break;
+                case THREE_OUT:
+                    center.setShowCenterValue(R.drawable.out3);
+                    break;
+                case LEFT_BASE:
+                    center.setShowCenterValue(R.drawable.left_on_base);
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
     }
 
     private void save(){
