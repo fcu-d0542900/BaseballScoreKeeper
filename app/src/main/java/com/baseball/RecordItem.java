@@ -227,8 +227,17 @@ public class RecordItem implements Serializable {
                         base.setShowFirstViewOneTopValue(getImageByBallDirection(ballType));
                     }
                     base.setFirstViewOneNumValue(getImageByNumber(ballDirection));
-                    
+
+                    if(FCUET1) {
+                        base.setShowFirstViewOneAc1Visibility(true);
+                        base.setFirstViewOneAc1Value(getImageByBallDirection(FCUET1v));
+                        if(FCUET2) {
+                            base.setShowFirstViewOneAc2Visibility(true);
+                            base.setFirstViewOneAc2Value(getImageByBallDirection(FCUET2v));
+                        }
+                    }
                 }
+
 
                 break;
             case BADBALL:

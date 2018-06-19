@@ -310,7 +310,7 @@ public class BaseFirstDialog {
             }
             else {
                 data2 = true;
-                data1v = RecordItem.BALL_TYPE.U;
+                data2v = RecordItem.BALL_TYPE.U;
             }
             select_elseAc = select_elseAc + "," + checkBox_elseAc_u.getText().toString();
             //TODO ahkui  存入資料庫， 顯示圖片u  (R.drawable.u)
@@ -322,7 +322,7 @@ public class BaseFirstDialog {
             }
             else if(!data2) {
                 data2 = true;
-                data1v = RecordItem.BALL_TYPE.E;
+                data2v = RecordItem.BALL_TYPE.E;
             }
             select_elseAc = select_elseAc + "," + checkBox_elseAc_E.getText().toString();
             //TODO ahkui  存入資料庫， 顯示圖片E  (R.drawable.error)
@@ -334,7 +334,7 @@ public class BaseFirstDialog {
             }
             else if(!data2) {
                 data2 = true;
-                data1v = RecordItem.BALL_TYPE.T;
+                data2v = RecordItem.BALL_TYPE.T;
             }
             select_elseAc = select_elseAc + "," + checkBox_elseAc_T.getText().toString();
             //TODO ahkui  存入資料庫， 顯示圖片T  (R.drawable.tag)
