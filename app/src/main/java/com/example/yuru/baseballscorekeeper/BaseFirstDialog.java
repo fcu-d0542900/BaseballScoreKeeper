@@ -270,6 +270,7 @@ public class BaseFirstDialog {
     private void set_first_view_one(ScrollablePanelAdapter.OrderViewHolder viewHolder, NewRecordActivity activity) {
         int select_typeID = radioGroup_type.getCheckedRadioButtonId();
         int select_direction = (int) spinner_direction.getSelectedItemId();
+        viewHolder.recordItem.setBallDirection(select_direction);
         String select_elseAc = "";
         String select_type_str;
         if(radioButton_type_high.getId() == select_typeID) {
@@ -339,6 +340,7 @@ public class BaseFirstDialog {
             //TODO ahkui  存入資料庫， 顯示圖片T  (R.drawable.tag)
         }
         viewHolder.recordItem.setFCUET(data1,data2,data1v,data2v);
+        viewHolder.updateUI(activity);
         Toast.makeText(this.activity, "OK "+ select_type_str +","+(select_direction +1) + select_elseAc, Toast.LENGTH_SHORT).show();
     }
 

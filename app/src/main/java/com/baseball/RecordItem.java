@@ -53,6 +53,12 @@ public class RecordItem implements Serializable {
         save();
     }
 
+    public void setBallDirection(int int_ball_direction) {  //透過數字傳方向
+        BALL_DIRECTION[] ball_direction = {BALL_DIRECTION.ONE,BALL_DIRECTION.TWO,BALL_DIRECTION.THREE,BALL_DIRECTION.FOUR,BALL_DIRECTION.FIVE,BALL_DIRECTION.SIX,BALL_DIRECTION.SEVEN,BALL_DIRECTION.EIGHT,BALL_DIRECTION.NINE};
+        this.ballDirection = ball_direction[int_ball_direction];
+        save();
+    }
+
     public void setBallType(com.baseball.RecordItem.BALL_TYPE ballType) {
         this.ballType = ballType;
         save();
@@ -222,10 +228,17 @@ public class RecordItem implements Serializable {
             case NORMAL:
                 if(ballType != BALL_TYPE.__){
                     base.setShowOneViewVisibility(true);
-                    base.setShowFirstViewOneTopVisibility(true);
-                    base.setShowFirstViewOneBottomVisibility(true);
-                    base.setShowFirstViewOneTopValue(getImageByBallDirection(ballType));
+                    if(ballType == BALL_TYPE.FLOOR) {
+                        base.setShowFirstViewOneBottomVisibility(true);
+                    }
+                    else {
+                        base.setShowFirstViewOneTopVisibility(true);
+                        base.setShowFirstViewOneTopValue(getImageByBallDirection(ballType));
+                    }
+                    base.setFirstViewOneNumValue(getImageByNumber(ballDirection));
+                    
                 }
+
                 break;
             case BADBALL:
             case HITBYPITCH:
