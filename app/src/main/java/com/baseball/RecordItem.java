@@ -19,6 +19,8 @@ public class RecordItem implements Serializable {
     private com.baseball.RecordItem.BALL_TYPE ballType = RecordItem.BALL_TYPE.__;
     private BALL_DIRECTION ballDirection = BALL_DIRECTION.__;
     private BALL_TYPE DIETYPE = BALL_TYPE.__;
+    private BALL_PUSH ballPush=BALL_PUSH.__;
+
 
     private int BALL_TOUCH_AC1;
     private int BALL_TOUCH_AC2;
@@ -55,6 +57,13 @@ public class RecordItem implements Serializable {
         this.ballType = ballType;
         save();
     }
+
+    public void setBallPush(BALL_PUSH ballType) {
+        this.ballPush = ballType;
+        save();
+    }
+
+
 
     public void setBALL_TOUCH_AC1(int BALL_TOUCH_AC1) {
         this.BALL_TOUCH_AC1 = BALL_TOUCH_AC1;
@@ -296,5 +305,18 @@ public class RecordItem implements Serializable {
         LEFT,//左
         MIDDLE,//中
         RIGHT,//右
+    }
+
+    public enum BALL_PUSH{    //二三本壘推進
+        DP,  //雙殺
+        TP,  //三殺
+        CS,  //盜壘失敗
+        S,  //盜壘
+        PO,  //投手牽制
+        W,  //暴投
+        P, //補逸
+        BK,  //投手犯規
+        E, //失誤
+        __,
     }
 }

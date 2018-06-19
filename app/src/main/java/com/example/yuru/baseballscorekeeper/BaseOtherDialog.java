@@ -10,6 +10,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.baseball.BASE;
+import com.baseball.RecordItem;
 import com.baseball.RecordItemOtherBase;
 
 /**
@@ -27,7 +28,7 @@ public class BaseOtherDialog {
     private Spinner spinner_left,spinner_right,spinner_left_e,spinner_right_e;
     private Spinner spinner_throw_left,spinner_throw_right;
 
-    public void setBaseOtherDialog(ScrollablePanelAdapter.OrderViewHolder viewHolder, final String[] items,BASE base) {
+    public void setBaseOtherDialog(final ScrollablePanelAdapter.OrderViewHolder viewHolder, final String[] items,BASE base) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         switch (base){
             case BASE_HOME:
@@ -54,6 +55,11 @@ public class BaseOtherDialog {
                                     @Override
                                     public void onClick(DialogInterface dialog, final int which) {
                                         String name = push[which];
+                                        switch (which){
+                                            case 1:
+                                             //   viewHolder.recordItemOtherBase.setShowPushNumViewVisibility(true);
+                                                break;
+                                        }
                                         //TODO: ahkui 選擇完後  switch (which)   recordItemOtherBase.setShowPushNumViewVisibility(true);
                                         //TODO: ahkui  圖片id  recordItemOtherBase.setShowPushNumValue();
                                         //TODO: ahkui  (whitch)   存入資料庫， 顯示推進數字 (R.drawable.push1) ~ (R.drawable.push9)
@@ -74,6 +80,7 @@ public class BaseOtherDialog {
                                             public void onClick(View v) {
                                                 Toast.makeText(activity, "雙殺DP", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
+                                                viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.DP);
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 DP  (R.drawable.double_plays)
                                             }
                                         });
