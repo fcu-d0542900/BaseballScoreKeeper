@@ -199,7 +199,8 @@ public class BaseFirstDialog {
                                             }
                                         });
                                         first_one_builder.show();
-
+                                        break;
+                                    default:
                                         break;
                                 }
                             }
@@ -230,7 +231,6 @@ public class BaseFirstDialog {
                                 unhit_dialog.dismiss();
                                 //TODO:ahkui 存入資料庫， 顯示圖片 D  (R.drawable.hit_by_pitch)
                                 viewHolder.recordItem.setDIETYPE(RecordItem.BALL_TYPE.HITBYPITCH);
-                                viewHolder.updateUI(activity);
                                 viewHolder.updateUI(activity);
 
                             }
@@ -270,7 +270,7 @@ public class BaseFirstDialog {
     private void set_first_view_one(ScrollablePanelAdapter.OrderViewHolder viewHolder, NewRecordActivity activity) {
         int select_typeID = radioGroup_type.getCheckedRadioButtonId();
         int select_direction = (int) spinner_direction.getSelectedItemId();
-        viewHolder.recordItem.setBallDirection(select_direction);
+        viewHolder.recordItem.setBallDirection(select_direction+1);
         String select_elseAc = "";
         String select_type_str;
         if(radioButton_type_high.getId() == select_typeID) {
@@ -340,11 +340,11 @@ public class BaseFirstDialog {
             //TODO ahkui  存入資料庫， 顯示圖片T  (R.drawable.tag)
         }
         viewHolder.recordItem.setFCUET(data1,data2,data1v,data2v);
-        viewHolder.updateUI(activity);
+
         Toast.makeText(this.activity, "OK "+ select_type_str +","+(select_direction +1) + select_elseAc, Toast.LENGTH_SHORT).show();
     }
 
-    private void first_view_two(ScrollablePanelAdapter.OrderViewHolder viewHolder, NewRecordActivity activity) {
+    private void first_view_two(final ScrollablePanelAdapter.OrderViewHolder viewHolder, final NewRecordActivity activity) {
         AlertDialog.Builder first_two_builder = new AlertDialog.Builder(this.activity);
         @SuppressLint("InflateParams") View view_first_two_dialog = LayoutInflater.from(this.activity).inflate(R.layout.record_first_two, null);
         view_first_two_dialog.setPadding(10,20,10,10);
@@ -362,45 +362,52 @@ public class BaseFirstDialog {
         first_two_builder.setNeutralButton("NEXT", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                set_first_view_two();
-                first_view_three();
+                set_first_view_two(viewHolder,activity);
+                first_view_three(viewHolder,activity);
             }
         });
 
         first_two_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                set_first_view_two();
+                set_first_view_two(viewHolder,activity);
             }
         });
         first_two_builder.show();
     }
 
-    private void set_first_view_two() {
+    private void set_first_view_two(ScrollablePanelAdapter.OrderViewHolder viewHolder, NewRecordActivity activity) {
         //TODO ahkui   顯示 recordItemFirstBase.setShowTwoViewVisibility(true);
-
+        boolean data = false;
+        RecordItem.BALL_TYPE dataV = RecordItem.BALL_TYPE.__;
         int select_two_direction = (int) spinner_two_direction.getSelectedItemId();
 
         String select_twoAc;
         if(radioGroup_two_Ac.getCheckedRadioButtonId() == radioButton_two_E.getId()) {
             //TODO ahkui  recordItemFirstBase.setShowFirstViewTwoAcVisibility(true);
             //TODO ahkui   圖片  (R.drawable.error)
+            data = true;
+            dataV = RecordItem.BALL_TYPE.E;
             select_twoAc = "失誤 E";
         }
         else if(radioGroup_two_Ac.getCheckedRadioButtonId() == radioButton_two_T.getId()) {
             //TODO ahkui  recordItemFirstBase.setShowFirstViewTwoAcVisibility(true);
             //TODO ahkui   圖片  (R.drawable.tag)
+            data = true;
+            dataV = RecordItem.BALL_TYPE.T;
             select_twoAc = "觸殺 T";
         }
         else {
             select_twoAc = "未選擇";
         }
 
+        viewHolder.recordItem.setFirst_Two(select_two_direction+1,data,dataV);
+        viewHolder.updateUI(activity);
         Toast.makeText(activity, "OK ," + (select_two_direction +1) + "," + select_twoAc, Toast.LENGTH_SHORT).show();
 
     }
 
-    private void first_view_three() {
+    private void first_view_three(final ScrollablePanelAdapter.OrderViewHolder viewHolder, final NewRecordActivity activity) {
         AlertDialog.Builder first_three_builder = new AlertDialog.Builder(activity);
         @SuppressLint("InflateParams") View view_first_three_dialog = LayoutInflater.from(activity).inflate(R.layout.record_first_two, null);
         view_first_three_dialog.setPadding(10,20,10,10);
@@ -419,23 +426,30 @@ public class BaseFirstDialog {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 //TODO ahkui   顯示 recordItemFirstBase.setShowThreeViewVisibility(true);
+                boolean data = false;
+                RecordItem.BALL_TYPE dataV = RecordItem.BALL_TYPE.__;
 
                 select_three_direction = (int) spinner_three_direction.getSelectedItemId();  //TODO ahkui  存入資料庫， 顯示圖片 1~9
                 if(radioGroup_three_Ac.getCheckedRadioButtonId() == radioButton_three_E.getId()) {
                     //TODO ahkui  recordItemFirstBase.setShowFirstViewThreeAcVisibility(true);
                     //TODO ahkui   圖片  (R.drawable.error)  recordItemFirstBase.setFirstViewThreeAcValue();
-
+                    data = true;
+                    dataV = RecordItem.BALL_TYPE.E;
                     select_threeAc = "失誤 E";
                 }
                 else if(radioGroup_three_Ac.getCheckedRadioButtonId() == radioButton_three_T.getId()) {
                     //TODO ahkui  recordItemFirstBase.setShowFirstViewThreeAcVisibility(true);
                     //TODO ahkui   圖片  (R.drawable.tag)   recordItemFirstBase.setFirstViewThreeAcValue();
+                    data = true;
+                    dataV = RecordItem.BALL_TYPE.T;
                     select_threeAc = "觸殺 T";
                 }
                 else {
                     select_threeAc = "未選擇";
                 }
 
+                viewHolder.recordItem.setFirst_Three(select_three_direction+1,data,dataV);
+                viewHolder.updateUI(activity);
                 Toast.makeText(activity, "OK ," + (select_three_direction+1) + "," + select_threeAc, Toast.LENGTH_SHORT).show();
             }
         });

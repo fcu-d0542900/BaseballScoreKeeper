@@ -33,6 +33,14 @@ public class RecordItem implements Serializable {
     private BALL_TYPE FCUET1v;
     private BALL_TYPE FCUET2v;
 
+    private BALL_DIRECTION First_two_direction;
+    private boolean First_two_data;
+    private BALL_TYPE First_two_dataV;
+
+    private BALL_DIRECTION First_three_direction;
+    private boolean First_three_data;
+    private BALL_TYPE First_three_dataV;
+
     RecordItem(Player player,int round,int row,int column){
         this.attPlayer = player;
         this.round = round;
@@ -90,6 +98,18 @@ public class RecordItem implements Serializable {
         FCUET2 = data2;
         FCUET1v = data1v;
         FCUET2v = data2v;
+    }
+
+    public void setFirst_Two(int two_direction, boolean data, BALL_TYPE dataV) {
+        First_two_direction = BALL_DIRECTION.values()[two_direction];
+        First_two_data = data;
+        First_two_dataV = dataV;
+    }
+
+    public void setFirst_Three(int three_direction, boolean data, BALL_TYPE dataV) {
+        First_three_direction = BALL_DIRECTION.values()[three_direction];
+        First_three_data = data;
+        First_three_dataV = dataV;
     }
 
     public Player getAttPlayer() {
@@ -187,16 +207,19 @@ public class RecordItem implements Serializable {
         base.setShowTwoViewVisibility(false);
         base.setShowThreeViewVisibility(false);
         base.setShowHRViewVisibility(false);
+        base.setShowEndViewVisibility(false);
         //one
         base.setShowFirstViewOneTopVisibility(false);
         base.setShowFirstViewOneBottomVisibility(false);
         base.setShowFirstViewOneAc1Visibility(false);
         base.setShowFirstViewOneAc2Visibility(false);
         //two
+        base.setShowTwoViewVisibility(false);
         base.setShowFirstViewTwoAcVisibility(false);
         //three
+        base.setShowThreeViewVisibility(false);
         base.setShowFirstViewThreeAcVisibility(false);
-        base.setShowEndViewVisibility(false);
+
         switch (DIETYPE){
             case HIGHDIE:
                 if (ballType != BALL_TYPE.__ && ballDirection!=BALL_DIRECTION.__){
@@ -236,8 +259,24 @@ public class RecordItem implements Serializable {
                         }
                     }
 
-                }
+                    if(First_two_direction != null && First_two_direction != BALL_DIRECTION.__) {
+                        base.setShowTwoViewVisibility(true);
+                        base.setFirstViewTwoNumValue(getImageByNumber(First_two_direction));
+                        if(First_two_data) {
+                            base.setShowFirstViewTwoAcVisibility(true);
+                            base.setFirstViewTwoAcValue(getImageByBallDirection(First_two_dataV));
+                        }
+                    }
 
+                    if(First_three_direction != null && First_three_direction != BALL_DIRECTION.__) {
+                        base.setShowThreeViewVisibility(true);
+                        base.setFirstViewThreeNumValue(getImageByNumber(First_three_direction));
+                        if(First_three_data) {
+                            base.setShowFirstViewThreeAcVisibility(true);
+                            base.setFirstViewThreeAcValue(getImageByBallDirection(First_three_dataV));
+                        }
+                    }
+                }
 
                 break;
             case BADBALL:
@@ -318,5 +357,14 @@ public class RecordItem implements Serializable {
         LEFT,//左
         MIDDLE,//中
         RIGHT,//右
+    }
+
+    public enum RUNS_OUT{
+        __,
+        RUN,
+        ONE_OUT,
+        TWO_OUT,
+        THREE_OUT,
+        LEFT_BASE,
     }
 }
