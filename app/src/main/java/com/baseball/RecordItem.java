@@ -26,6 +26,7 @@ public class RecordItem implements Serializable {
     private BALL_DIRECTION ballDirection = BALL_DIRECTION.__;
     private BALL_TYPE DIETYPE = BALL_TYPE.__;
     private RUNS_OUT RUN_OUT_TYPE = RUNS_OUT.__;
+    private HITS_NUM HIT_Num = HITS_NUM.__;
 
     private int BALL_TOUCH_AC1;
     private int BALL_TOUCH_AC2;
@@ -66,14 +67,22 @@ public class RecordItem implements Serializable {
         save();
     }
 
+    public void setHIT_Num(HITS_NUM num) {
+        HIT_Num = num;
+        save();
+    }
+
+    public void setHIT_Num(int num) {
+        setHIT_Num(HITS_NUM.values()[num]);
+    }
+
     public void setBallDirection(BALL_DIRECTION ball_direction) {
         this.ballDirection = ball_direction;
         save();
     }
 
     public void setBallDirection(int num) {  //透過數字傳方向
-        this.ballDirection = BALL_DIRECTION.values()[num];
-        save();
+        setBallDirection(BALL_DIRECTION.values()[num]);
     }
 
     public void setBallType(com.baseball.RecordItem.BALL_TYPE ballType) {
@@ -358,7 +367,31 @@ public class RecordItem implements Serializable {
                 default:
                     break;
             }
+        }
 
+        if(HIT_Num != HITS_NUM.__) {
+            switch (HIT_Num) {
+                case ONE:
+                    center.setShowHit1ViewVisibility(true);
+                    break;
+                case TWO:
+                    center.setShowHit1ViewVisibility(true);
+                    center.setShowHit2ViewVisibility(true);
+                    break;
+                case THREE:
+                    center.setShowHit1ViewVisibility(true);
+                    center.setShowHit2ViewVisibility(true);
+                    center.setShowHit3ViewVisibility(true);
+                    break;
+                case FOUR:
+                    center.setShowHit1ViewVisibility(true);
+                    center.setShowHit2ViewVisibility(true);
+                    center.setShowHit3ViewVisibility(true);
+                    center.setShowHit4ViewVisibility(true);
+                    break;
+                default:
+                    break;
+            }
         }
 
     }
@@ -413,5 +446,14 @@ public class RecordItem implements Serializable {
         TWO_OUT,
         THREE_OUT,
         LEFT_BASE,
+    }
+
+    public enum HITS_NUM {
+        __,
+        ONE,
+        TWO,
+        THREE,
+        FOUR,
+
     }
 }

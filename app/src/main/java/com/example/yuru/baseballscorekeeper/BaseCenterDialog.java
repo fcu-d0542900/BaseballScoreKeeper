@@ -53,7 +53,7 @@ public class BaseCenterDialog {
                             //點擊得分/出局
                             case 0:
                                 AlertDialog.Builder center_choice1 = new AlertDialog.Builder(activity);
-                                View view_center_choice1 = View.inflate(activity, R.layout.record_center_dialog, null);      //自訂dialog布局
+                                final View view_center_choice1 = View.inflate(activity, R.layout.record_center_dialog, null);      //自訂dialog布局
                                 center_choice1.setView(view_center_choice1);
                                 // 設置view
                                 final AlertDialog center_dialog = center_choice1.create();    //根據builder設置好的一系列數據, 来建構一個dialog
@@ -125,6 +125,8 @@ public class BaseCenterDialog {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 String name_h = hits_choice[which];
+                                                viewHolder.recordItem.setHIT_Num(which+1);
+                                                viewHolder.updateUI(activity);
                                                 // TODO ahkui 設定安打紅線顯示
                                                 // whitch=0 一壘安打 顯示下面(1)
                                                 // whitch=1 二壘安打 顯示下面(1) (2)
