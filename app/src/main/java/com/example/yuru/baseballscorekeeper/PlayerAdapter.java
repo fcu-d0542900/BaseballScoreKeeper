@@ -110,8 +110,8 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
     // 刪除一個項目
     private void remove(int position) {
         item_player.remove(position);
+        DatabaseService.getInstance().write();
         // 通知資料項目已經刪除
-        // 劉永貴這裡要刪掉
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, item_player.size());
     }

@@ -22,6 +22,7 @@ public class RecordItemFirstBase {
     public ImageView firstViewThreeNum,showFirstViewThreeAc;
 
     //showEndView
+    //在Center選擇結束半局後 顯示在一壘
     public void setShowEndView(ImageView showEndView) {
         this.showEndView = showEndView;
     }

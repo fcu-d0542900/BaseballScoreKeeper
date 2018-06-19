@@ -19,9 +19,12 @@ import android.widget.Toast;
 
 import com.baseball.BASE;
 import com.baseball.Player;
+import com.baseball.Record;
 import com.baseball.RecordItem;
+import com.baseball.RecordItemCenter;
 import com.baseball.RecordItemFirstBase;
 import com.baseball.RecordItemOtherBase;
+import com.baseball.RecordTeam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,11 +61,13 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         super();
         this.activity = activity;
         recordItems = new ArrayList<>();
-        updateData();
+        recordItems = activity.getUpdateData();
+
     }
 
-    void updateData(){
-        activity.updateData(recordItems);
+    public void updateData() {
+        recordItems = activity.getUpdateData();
+        activity.scrollablePanel.notifyDataSetChanged();
     }
 
     @Override
@@ -89,6 +94,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 setOrderView(row, column, (OrderViewHolder) holder);
                 break;
             case TEAMNAME_TYPE:
+                setTeamNameView((TeamNameViewHolder) holder);
                 break;
             default:
                 setOrderView(row, column, (OrderViewHolder) holder);
@@ -131,12 +137,11 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     }
 
+
+
     private void setBoardNumView(int pos, BoardNumViewHolder viewHolder) {
         viewHolder.dateTextView.setText(activity.currentRecord.getTeam().getRoundText(activity.currentRecord.getTeam().getRecordItemsPositionRound(pos)));
     }
-
-
-
 
     @SuppressLint("SetTextI18n")
     private void setPlayerInfoView(int pos, final PlayerInfoViewHolder viewHolder) {
@@ -210,13 +215,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     private void setOrderView(final int row, final int column, final OrderViewHolder viewHolder) {
-//        final RecordItem recordItem = activity.currentRecord.getTeam().getRecordItems(row - 1,column - 1);
         final RecordItem recordItem = recordItems.get(row -1).get(column-1);
-
         viewHolder.setRecordItem(recordItem);
         if (recordItem != null) {
             viewHolder.getScoreView.bringToFront();
-
             //中間菱形區域
             viewHolder.getScoreView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -224,9 +226,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                     baseCenterDialog = new BaseCenterDialog();
                     baseCenterDialog.setActivity(activity);
                     baseCenterDialog.setBaseCenterDialog(viewHolder);
-
                     Toast.makeText(v.getContext(), "得分區域" +recordItem.getAttPlayer().getName(), Toast.LENGTH_SHORT).show();
-
                 }
             });
 
@@ -290,6 +290,9 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             });
         }
     }
+    private void setTeamNameView(TeamNameViewHolder viewHolder) {
+        viewHolder.titleTextView.setText(activity.currentRecord.getTeam().getTeamName());
+    }
 
     static class BoardNumViewHolder extends RecyclerView.ViewHolder {
         TextView dateTextView;
@@ -325,8 +328,12 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
         //更改球員
         ImageView getChangeGarrison,getChangeHitter;
+
+        //center
+        ImageView getCenterView;
         //安打
         ImageView getHit1View,getHit2View,getHit3View,getHit4View;
+        public RecordItemCenter center;
 
         //一壘
         ImageView getFirstViewZero,getFirstViewHR;
@@ -367,12 +374,15 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         ImageView getHomeViewThrowOne,getHomeViewThrowTwo;
         public RecordItemOtherBase base;
 
+
         OrderViewHolder(View view) {
             super(view);
-            base  = new RecordItemOtherBase();
+
+            base1  = new RecordItemFirstBase();
             base2  = new RecordItemOtherBase();
             base3  = new RecordItemOtherBase();
-            base1  = new RecordItemFirstBase();
+            base  = new RecordItemOtherBase();
+            center = new RecordItemCenter();
 
             this.getScoreView = view.findViewById(R.id.centerView);
             this.getFirstView = view.findViewById(R.id.firstView);
@@ -383,10 +393,22 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
             this.getChangeGarrison = view.findViewById(R.id.image_change_garrison);
             this.getChangeHitter = view.findViewById(R.id.image_change_hitter);
+
+            //center
+            this.getCenterView = view.findViewById(R.id.image_centerView);
             this.getHit1View = view.findViewById(R.id.image_hit1);
             this.getHit2View = view.findViewById(R.id.image_hit2);
             this.getHit3View = view.findViewById(R.id.image_hit3);
             this.getHit4View = view.findViewById(R.id.image_hit4);
+
+            center.setShowCenterView(getCenterView);
+            center.setShowHit1View(getHit1View);
+            center.setShowHit2View(getHit2View);
+            center.setShowHit3View(getHit3View);
+            center.setShowHit4View(getHit4View);
+
+            center.setShowChangeGarrison(getChangeGarrison);
+            center.setShowChangeHitter(getChangeHitter);
 
 
             //一壘
@@ -423,6 +445,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             base1.setShowFirstViewThreeAc(getFirstViewThreeAc);
             base1.setShowSacrificeFly(getSacrificeFly);
             base1.setShowSacrificeHits(getSacrificeHits);
+            base1.setShowEndView(getEnd);
+
 
 
 
@@ -506,21 +530,25 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         void setRecordItem(RecordItem recordItem) {
             this.recordItem = recordItem;
             recordItem.updateFirstBaseUI(base1);
+            recordItem.updateOtherBaseUI(base2,2);
+            recordItem.updateOtherBaseUI(base3,3);
+            recordItem.updateOtherBaseUI(base,0);
         }
 
         void updateUI(NewRecordActivity activity){
             recordItem.updateFirstBaseUI(base1);
-            recordItem.updateFirstBaseUI(base1);
+            recordItem.updateOtherBaseUI(base2,2);
+            recordItem.updateOtherBaseUI(base3,3);
+            recordItem.updateOtherBaseUI(base,0);
             activity.scrollablePanel.notifyDataSetChanged();
-            Log.d("position",""+recordItem);
         }
     }
 
-    private static class TeamNameViewHolder extends RecyclerView.ViewHolder {
+    static class TeamNameViewHolder extends RecyclerView.ViewHolder {
         TextView titleTextView;
         TeamNameViewHolder(View view) {
             super(view);
-            this.titleTextView = view.findViewById(R.id.title);
+            this.titleTextView = view.findViewById(R.id.text_teamName);
         }
     }
 }

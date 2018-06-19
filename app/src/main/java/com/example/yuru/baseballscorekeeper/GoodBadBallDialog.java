@@ -58,6 +58,7 @@ public class GoodBadBallDialog {
 
         AlertDialog.Builder goodbadball_dialog = new AlertDialog.Builder(newRecordActivity);
         View view_goodbadball_choice = View.inflate(newRecordActivity, R.layout.record_goodbadball_dialog, null);      //自訂dialog布局
+        view_goodbadball_choice.setPadding(10,10,10,10);
         goodbadball_dialog.setView(view_goodbadball_choice);   // 設置view
         final AlertDialog new_goodbadball_dialog = goodbadball_dialog.create();    //根據builder設置好的一系列數據, 来建構一個dialog
 

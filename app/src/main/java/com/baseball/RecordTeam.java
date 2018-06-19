@@ -1,9 +1,14 @@
 package com.baseball;
 
+import android.os.Build;
 import android.util.Log;
+
+import com.google.gson.Gson;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -16,15 +21,18 @@ public class RecordTeam implements Serializable {
     private List<Player> teamMember = new ArrayList<>();
     private List<RecordItem> recordItems;
 
-    public RecordTeam(String homeTeam, Faction team) {
-        setTeamName(homeTeam);
+    public RecordTeam(String name, Faction team) {
+        if(name != null && !name.equals(""))
+            setTeamName(name);
+        else
+            setTeamName(DatabaseService.getInstance().getDatabase().getTeamName());
         switch (team){
             case away:
                 currentRound =1;
             case home:
                 currentRound=0;
         }
-        if (homeTeam.equals(DatabaseService.getInstance().getDatabase().getTeamName())){
+        if (name.equals(DatabaseService.getInstance().getDatabase().getTeamName())){
             teamMember = new ArrayList<>(DatabaseService.getInstance().getDatabase().getTeamMember());
         }
         while(teamMember.size()<9){
@@ -49,6 +57,7 @@ public class RecordTeam implements Serializable {
 
     public void addRecordItems(RecordItem recordItems) {
         this.recordItems.add(recordItems);
+        Collections.sort(this.recordItems,new RecordItemComparator());
     }
 
     public int getCurrentRound() {
@@ -159,5 +168,13 @@ public class RecordTeam implements Serializable {
     public enum Faction{
         away,
         home
+    }
+}
+class RecordItemComparator implements Comparator<RecordItem> {
+    public int compare(RecordItem lhs, RecordItem rhs) {
+        int value1 = Integer.compare(lhs.column, rhs.column);
+        if (value1 == 0)
+            return Integer.compare(lhs.row, rhs.row);;
+        return value1;
     }
 }
