@@ -51,9 +51,8 @@ public class RecordItem implements Serializable {
         save();
     }
 
-    public void setBallDirection(int int_ball_direction) {  //透過數字傳方向
-        BALL_DIRECTION[] ball_direction = {BALL_DIRECTION.ONE,BALL_DIRECTION.TWO,BALL_DIRECTION.THREE,BALL_DIRECTION.FOUR,BALL_DIRECTION.FIVE,BALL_DIRECTION.SIX,BALL_DIRECTION.SEVEN,BALL_DIRECTION.EIGHT,BALL_DIRECTION.NINE};
-        this.ballDirection = ball_direction[int_ball_direction];
+    public void setBallDirection(int num) {  //透過數字傳方向
+        this.ballDirection = BALL_DIRECTION.values()[num];
         save();
     }
 
@@ -236,6 +235,7 @@ public class RecordItem implements Serializable {
                             base.setFirstViewOneAc2Value(getImageByBallDirection(FCUET2v));
                         }
                     }
+
                 }
 
 

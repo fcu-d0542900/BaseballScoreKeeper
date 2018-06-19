@@ -380,6 +380,7 @@ public class BaseFirstDialog {
         //TODO ahkui   顯示 recordItemFirstBase.setShowTwoViewVisibility(true);
 
         int select_two_direction = (int) spinner_two_direction.getSelectedItemId();
+
         String select_twoAc;
         if(radioGroup_two_Ac.getCheckedRadioButtonId() == radioButton_two_E.getId()) {
             //TODO ahkui  recordItemFirstBase.setShowFirstViewTwoAcVisibility(true);
