@@ -152,6 +152,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         final Player playerInfo = activity.currentRecord.getTeam().getTeamMember().get(pos - 1);
         viewHolder.text_batOrder.setText(Integer.valueOf(pos).toString());
 
+        Log.d(">>>>player",playerInfo.getName());
+
 
         if (playerInfo != null && pos>0) {
 
@@ -229,8 +231,12 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 public void onClick(View v) {
                     baseCenterDialog = new BaseCenterDialog();
                     baseCenterDialog.setActivity(activity);
+<<<<<<< HEAD
                     baseCenterDialog.setBaseCenterDialog(viewHolder);
 
+=======
+                    baseCenterDialog.setBaseCenterDialog(viewHolder,row);
+>>>>>>> fb4e9175611e4eb3f5d39f5e84a5787a0286d50a
                     Toast.makeText(v.getContext(), "得分區域" +recordItem.getAttPlayer().getName(), Toast.LENGTH_SHORT).show();
                 }
             });
@@ -401,6 +407,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
             this.getChangeGarrison = view.findViewById(R.id.image_change_garrison);
             this.getChangeHitter = view.findViewById(R.id.image_change_hitter);
+            this.getEnd = view.findViewById(R.id.image_end);
+            this.getFirstViewHR = view.findViewById(R.id.image_HR);
 
             //center
             this.getCenterView = view.findViewById(R.id.image_centerView);
@@ -417,6 +425,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
             center.setShowChangeGarrison(getChangeGarrison);
             center.setShowChangeHitter(getChangeHitter);
+            center.setShowEndView(getEnd);
+            center.setShowHRView(getFirstViewHR);
 
 
             //一壘
@@ -424,7 +434,6 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.getFirstViewOne = view.findViewById(R.id.frame_firstView_one);
             this.getFirstViewTwo = view.findViewById(R.id.frame_firstView_two);
             this.getFirstViewThree = view.findViewById(R.id.frame_firstView_three);
-            this.getFirstViewHR = view.findViewById(R.id.image_HR);
             this.getFirstViewOneTop = view.findViewById(R.id.image_firstView_oneTop);
             this.getFirstViewOneNum = view.findViewById(R.id.image_firstView_oneNum);
             this.getFirstViewOneBottom = view.findViewById(R.id.image_firstView_oneBottom);
@@ -436,24 +445,23 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.getFirstViewThreeAc = view.findViewById(R.id.image_firstView_three_ac);
             this.getSacrificeFly = view.findViewById(R.id.image_sacrifice_fly);
             this.getSacrificeHits = view.findViewById(R.id.image_sacrifice_hits);
-            this.getEnd = view.findViewById(R.id.image_end);
 
             base1.setShowZeroView(getFirstViewZero);
             base1.setShowOneView(getFirstViewOne);
             base1.setShowTwoView(getFirstViewTwo);
             base1.setShowThreeView(getFirstViewThree);
-            base1.setShowHRView(getFirstViewHR);
             base1.setShowFirstViewOneTop(getFirstViewOneTop);
             base1.setFirstViewOneNum(getFirstViewOneNum);
             base1.setShowFirstViewOneBottom(getFirstViewOneBottom);
             base1.setShowFirstViewOneAc1(getFirstViewOneAc1);
             base1.setShowFirstViewOneAc2(getFirstViewOneAc2);
             base1.setFirstViewTwoNum(getFirstViewTwoNum);
+            base1.setShowFirstViewTwoAc(getFirstViewTwoAc);
             base1.setFirstViewThreeNum(getFirstViewThreeNum);
             base1.setShowFirstViewThreeAc(getFirstViewThreeAc);
             base1.setShowSacrificeFly(getSacrificeFly);
             base1.setShowSacrificeHits(getSacrificeHits);
-            base1.setShowEndView(getEnd);
+
 
 
 
@@ -537,6 +545,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
         void setRecordItem(RecordItem recordItem) {
             this.recordItem = recordItem;
+            recordItem.updateCenter(center);
             recordItem.updateFirstBaseUI(base1);
             recordItem.updateOtherBaseUI(base2,2);
             recordItem.updateOtherBaseUI(base3,3);
@@ -544,11 +553,13 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         }
 
         void updateUI(NewRecordActivity activity){
+            recordItem.updateCenter(center);
             recordItem.updateFirstBaseUI(base1);
             recordItem.updateOtherBaseUI(base2,2);
             recordItem.updateOtherBaseUI(base3,3);
             recordItem.updateOtherBaseUI(base,0);
             activity.scrollablePanel.notifyDataSetChanged();
+            activity.score_scrollable_panel.notifyDataSetChanged();
         }
     }
 

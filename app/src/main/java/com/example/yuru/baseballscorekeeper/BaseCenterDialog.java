@@ -2,6 +2,7 @@ package com.example.yuru.baseballscorekeeper;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -11,7 +12,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.baseball.Player;
+import com.baseball.RecordItem;
 import com.baseball.RecordItemCenter;
+
+import java.util.ArrayList;
 
 /**
  * Created by YURU on 2018/6/18.
@@ -20,6 +24,7 @@ import com.baseball.RecordItemCenter;
 public class BaseCenterDialog {
 
     private RecordItemCenter recordItemCenter;
+    private ScrollablePanelAdapter.PlayerInfoViewHolder playerInfoViewHolder;
 
     private NewRecordActivity activity;
 
@@ -40,7 +45,7 @@ public class BaseCenterDialog {
         this.activity = activity;
     }
 
-    public void setBaseCenterDialog(final ScrollablePanelAdapter.OrderViewHolder viewHolder) {
+    public void setBaseCenterDialog(final ScrollablePanelAdapter.OrderViewHolder viewHolder, final int pos) {
         new AlertDialog.Builder(activity)
                 .setItems(center_choice, new DialogInterface.OnClickListener() {
                     @Override
@@ -52,18 +57,23 @@ public class BaseCenterDialog {
                             //點擊得分/出局
                             case 0:
                                 AlertDialog.Builder center_choice1 = new AlertDialog.Builder(activity);
-                                View view_center_choice1 = View.inflate(activity, R.layout.record_center_dialog, null);      //自訂dialog布局
+                                final View view_center_choice1 = View.inflate(activity, R.layout.record_center_dialog, null);      //自訂dialog布局
                                 center_choice1.setView(view_center_choice1);
                                 // 設置view
                                 final AlertDialog center_dialog = center_choice1.create();    //根據builder設置好的一系列數據, 来建構一個dialog
 
-                                //TODO ahkui  點擊(得分 123出局 殘壘)後顯示  recordItemCenter.setShowCenterVisibility(true);
+                                //點擊(得分 123出局 殘壘)後顯示  recordItemCenter.setShowCenterVisibility(true);
                                 //點擊得分
                                 view_center_choice1.findViewById(R.id.click_run).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        //TODO 顯示得分 (R.drawable.runs)
+                                        //顯示得分 (R.drawable.runs)
+                                        viewHolder.recordItem.setRUN_OUT_TYPE(RecordItem.RUNS_OUT.RUN);
                                         //TODO 加分
+                                        viewHolder.recordItem.toggleScore(); //TODO ???? 是這樣嗎 好詭異
+                                        activity.score_scrollable_panel.notifyDataSetChanged();
+                                        viewHolder.updateUI(activity);
+                                        //TODO　分數欄沒有更改
                                         Toast.makeText(activity, "得分", Toast.LENGTH_SHORT).show();
                                         center_dialog.dismiss();
                                     }
@@ -72,7 +82,9 @@ public class BaseCenterDialog {
                                 view_center_choice1.findViewById(R.id.click_out1).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        //TODO 顯示一出局 (R.drawable.out1)
+                                        //顯示一出局 (R.drawable.out1)
+                                        viewHolder.recordItem.setRUN_OUT_TYPE(RecordItem.RUNS_OUT.ONE_OUT);
+                                        viewHolder.updateUI(activity);
                                         Toast.makeText(activity, "一出局", Toast.LENGTH_SHORT).show();
                                         center_dialog.dismiss();
                                     }
@@ -81,7 +93,9 @@ public class BaseCenterDialog {
                                 view_center_choice1.findViewById(R.id.click_out2).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        //TODO 顯示二出局 (R.drawable.out3)
+                                        //顯示二出局 (R.drawable.out2)
+                                        viewHolder.recordItem.setRUN_OUT_TYPE(RecordItem.RUNS_OUT.TWO_OUT);
+                                        viewHolder.updateUI(activity);
                                         Toast.makeText(activity, "二出局", Toast.LENGTH_SHORT).show();
                                         center_dialog.dismiss();
                                     }
@@ -90,7 +104,9 @@ public class BaseCenterDialog {
                                 view_center_choice1.findViewById(R.id.click_out3).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        //TODO 顯示三出局 (R.drawable.out3)
+                                        //顯示三出局 (R.drawable.out3)
+                                        viewHolder.recordItem.setRUN_OUT_TYPE(RecordItem.RUNS_OUT.THREE_OUT);
+                                        viewHolder.updateUI(activity);
                                         Toast.makeText(activity, "三出局", Toast.LENGTH_SHORT).show();
                                         center_dialog.dismiss();
                                     }
@@ -99,7 +115,9 @@ public class BaseCenterDialog {
                                 view_center_choice1.findViewById(R.id.click_left).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        //TODO 顯示殘壘 (R.drawable.left_on_base)
+                                        //顯示殘壘 (R.drawable.left_on_base)
+                                        viewHolder.recordItem.setRUN_OUT_TYPE(RecordItem.RUNS_OUT.LEFT_BASE);
+                                        viewHolder.updateUI(activity);
                                         Toast.makeText(activity, "殘壘", Toast.LENGTH_SHORT).show();
                                         center_dialog.dismiss();
                                     }
@@ -114,11 +132,13 @@ public class BaseCenterDialog {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 String name_h = hits_choice[which];
-                                                // TODO ahkui 設定安打紅線顯示
+                                                viewHolder.recordItem.setHIT_Num(which+1);
+                                                viewHolder.updateUI(activity);
+                                                // 設定安打紅線顯示
                                                 // whitch=0 一壘安打 顯示下面(1)
                                                 // whitch=1 二壘安打 顯示下面(1) (2)
                                                 // whitch=2 三壘安打 顯示下面(1) (2) (3)
-                                                // whitch=3 四壘安打 顯示下面(1) (2) (3) (4)
+                                                // whitch=3 全壘打 顯示下面(1) (2) (3) (4)
                                                 // (1)  recordItemCenter.setShowHit1ViewVisibility(true);
                                                 // (2)  recordItemCenter.setShowHit2ViewVisibility(true);
                                                 // (3)  recordItemCenter.setShowHit3ViewVisibility(true);
@@ -134,14 +154,14 @@ public class BaseCenterDialog {
                             case 2:
                                 Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
                                 // TODO activity.currentRecord.getTeam().changeDefPlayer();
-                                change_player_garrison();
+                                change_player_garrison(viewHolder);
                                 break;
 
                             //點擊替換打者
                             case 3:
                                 Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
                                 // TODO activity.currentRecord.getTeam().changeAttPlayer();
-                                change_player_hitter();
+                                change_player_hitter(viewHolder,pos);
                                 break;
 
                             //點擊結束半局
@@ -149,6 +169,9 @@ public class BaseCenterDialog {
                                 Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
                                 activity.currentRecord.getTeam().nextRound();
                                 //TODO ahkui   顯示結束斜線 recordItemFirstBase.setShowEndViewVisibility(true)
+                                viewHolder.recordItem.setEND(true);
+                                viewHolder.updateUI(activity);
+
                                 //TODO ahkui   updateData
                                 //activity.updateData(recordItems);
                                 break;
@@ -164,8 +187,8 @@ public class BaseCenterDialog {
     }
 
 
-    public void change_player_hitter() {
-        View view_set_player = LayoutInflater.from(activity).inflate(R.layout.dialog_new_player, null);
+    public void change_player_hitter(final ScrollablePanelAdapter.OrderViewHolder viewHolder, final int pos) {
+        final View view_set_player = LayoutInflater.from(activity).inflate(R.layout.dialog_new_player, null);
         view_set_player.setPadding(10,10,10,10);
         ImageView img = view_set_player.findViewById(R.id.image_title_newPlayer);
         img.setVisibility(View.GONE);
@@ -189,8 +212,17 @@ public class BaseCenterDialog {
                     int playerNum = Integer.valueOf(editText_playerNum.getText().toString());
                     int playerPosition = (int) spinner_position.getSelectedItemId();
 
-                    //TODO ahkui 顯示 recordItemCenter.setShowChangeHitterVisibility(true);
+                    //顯示 recordItemCenter.setShowChangeHitterVisibility(true);
                     //TODO ahkui  儲存更改球員資料 playerName playerNum  playerPosition
+
+                    Player change_player = new Player(playerNum,playerName,Player.POSITION.values()[playerPosition]);
+                    viewHolder.recordItem.changeAttPlayer(change_player);
+                    viewHolder.updateUI(activity);
+
+                    activity.currentRecord.getTeam().getTeamMember().remove(pos-1);
+                    activity.currentRecord.getTeam().getTeamMember().add(pos-1,change_player);
+
+                    activity.scrollablePanel.notifyDataSetChanged();
 
                     //playerInfo.setName(playerName);
                     //playerInfo.setId(playerNum);
@@ -210,7 +242,7 @@ public class BaseCenterDialog {
 
     }
 
-    public void change_player_garrison() {
+    public void change_player_garrison(final ScrollablePanelAdapter.OrderViewHolder viewHolder) {
         AlertDialog.Builder dialog_change_garrison = new AlertDialog.Builder(activity);
         View view_change_garrison = LayoutInflater.from(activity).inflate(R.layout.record_change_garrison, null);
         view_change_garrison.setPadding(30,10,10,10);
@@ -269,6 +301,11 @@ public class BaseCenterDialog {
 
 
                 //TODO ahkui 顯示  recordItemCenter.setShowChangeGarrisonVisibility(true);
+                if(!change_garrison.equals("")) {  //要再改
+                    viewHolder.recordItem.changeDefPlayer();
+                    viewHolder.updateUI(activity);
+                }
+
                 //TODO ahkui  儲存更改守備資料 change_?
                 //TODO 看要不要做個顯示更換守備的資料 按下去可以看這時候換了誰的畫面
 

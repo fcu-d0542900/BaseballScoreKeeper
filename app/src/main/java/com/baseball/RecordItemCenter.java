@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 public class RecordItemCenter {
     private ImageView showCenterView;
-//    private ImageView showEndView;
+    private ImageView showEndView,showHRView;
     private ImageView showHit1View,showHit2View,showHit3View,showHit4View;
     private ImageView showChangeGarrison,showChangeHitter;
 
@@ -28,7 +28,7 @@ public class RecordItemCenter {
             showCenterView.setVisibility(isShow? View.VISIBLE:View.GONE);
     }
 
-/*
+
     //ShowEnd
     public void setShowEndView(ImageView showEndView) {
         this.showEndView = showEndView;
@@ -38,7 +38,7 @@ public class RecordItemCenter {
         if (showEndView != null)
             showEndView.setVisibility(isShow? View.VISIBLE:View.GONE);
     }
-*/
+
 
     //ShowHit1
     public void setShowHit1View(ImageView showHit1View) {
@@ -98,5 +98,15 @@ public class RecordItemCenter {
     public void setShowChangeGarrisonVisibility(boolean isShow) {
         if (showChangeGarrison != null)
             showChangeGarrison.setVisibility(isShow? View.VISIBLE:View.GONE);
+    }
+
+    //HR
+    public void setShowHRView(ImageView showHRView) {
+        this.showHRView = showHRView;
+    }
+
+    public void setShowHRViewVisibility(boolean isShow) {
+        if (showHRView != null)
+            showHRView.setVisibility(isShow?View.VISIBLE:View.GONE);
     }
 }

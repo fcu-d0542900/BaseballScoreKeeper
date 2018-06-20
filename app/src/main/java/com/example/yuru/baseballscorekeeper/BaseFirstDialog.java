@@ -199,7 +199,8 @@ public class BaseFirstDialog {
                                             }
                                         });
                                         first_one_builder.show();
-
+                                        break;
+                                    default:
                                         break;
                                 }
                             }
@@ -217,7 +218,7 @@ public class BaseFirstDialog {
                             public void onClick(View v) {
                                 Toast.makeText(activity, "保送", Toast.LENGTH_SHORT).show();
                                 unhit_dialog.dismiss();
-                                //TODO: ahkui 存入資料庫， 顯示圖片 B   (R.drawable.throw_b)
+                                //存入資料庫， 顯示圖片 B   (R.drawable.throw_b)
                                 viewHolder.recordItem.setDIETYPE(RecordItem.BALL_TYPE.BADBALL);
                                 viewHolder.updateUI(activity);
 
@@ -228,9 +229,8 @@ public class BaseFirstDialog {
                             public void onClick(View v) {
                                 Toast.makeText(activity, "觸身", Toast.LENGTH_SHORT).show();
                                 unhit_dialog.dismiss();
-                                //TODO:ahkui 存入資料庫， 顯示圖片 D  (R.drawable.hit_by_pitch)
+                                //存入資料庫， 顯示圖片 D  (R.drawable.hit_by_pitch)
                                 viewHolder.recordItem.setDIETYPE(RecordItem.BALL_TYPE.HITBYPITCH);
-                                viewHolder.updateUI(activity);
                                 viewHolder.updateUI(activity);
 
                             }
@@ -240,7 +240,7 @@ public class BaseFirstDialog {
                             public void onClick(View v) {
                                 Toast.makeText(activity, "三振", Toast.LENGTH_SHORT).show();
                                 unhit_dialog.dismiss();
-                                //TODO:ahkui 存入資料庫， 顯示圖片 K  (R.drawable.killed)
+                                //存入資料庫， 顯示圖片 K  (R.drawable.killed)
                                 viewHolder.recordItem.setDIETYPE(RecordItem.BALL_TYPE.KILLED);
                                 viewHolder.updateUI(activity);
                             }
@@ -250,7 +250,7 @@ public class BaseFirstDialog {
                             public void onClick(View v) {
                                 Toast.makeText(activity, "不死三振", Toast.LENGTH_SHORT).show();
                                 unhit_dialog.dismiss();
-                                //TODO:ahkui 存入資料庫， 顯示圖片 倒K  (R.drawable.no_killed)
+                                //存入資料庫， 顯示圖片 倒K  (R.drawable.no_killed)
                                 viewHolder.recordItem.setDIETYPE(RecordItem.BALL_TYPE.NOKILLED);
                                 viewHolder.updateUI(activity);
 
@@ -270,7 +270,7 @@ public class BaseFirstDialog {
     private void set_first_view_one(ScrollablePanelAdapter.OrderViewHolder viewHolder, NewRecordActivity activity) {
         int select_typeID = radioGroup_type.getCheckedRadioButtonId();
         int select_direction = (int) spinner_direction.getSelectedItemId();
-        viewHolder.recordItem.setBallDirection(select_direction);
+        viewHolder.recordItem.setBallDirection(select_direction+1);
         String select_elseAc = "";
         String select_type_str;
         if(radioButton_type_high.getId() == select_typeID) {
@@ -290,8 +290,8 @@ public class BaseFirstDialog {
             viewHolder.recordItem.setBallType(RecordItem.BALL_TYPE.__);
         }
 
-        //TODO  ahkui 如果下面有check   recordItemFirstBase.setShowFirstViewOneAc1Visibility(true);
-        //TODO  ahkui 設定下方圖片值  recordItemFirstBase.setFirstViewOneAc1Value();
+        //如果下面有check   recordItemFirstBase.setShowFirstViewOneAc1Visibility(true);
+        //設定下方圖片值  recordItemFirstBase.setFirstViewOneAc1Value();
         boolean data1=false;
         boolean data2=false;
         RecordItem.BALL_TYPE data1v = RecordItem.BALL_TYPE.__;
@@ -300,7 +300,7 @@ public class BaseFirstDialog {
             data1 = true;
             data1v = RecordItem.BALL_TYPE.FC;
             select_elseAc = select_elseAc + "," + checkBox_elseAc_FC.getText().toString();
-            //TODO ahkui  存入資料庫， 顯示圖片FC  (R.drawable.fielder_choice)
+            //存入資料庫， 顯示圖片FC  (R.drawable.fielder_choice)
         }
 
         if(checkBox_elseAc_u.isChecked()) {
@@ -310,10 +310,10 @@ public class BaseFirstDialog {
             }
             else {
                 data2 = true;
-                data1v = RecordItem.BALL_TYPE.U;
+                data2v = RecordItem.BALL_TYPE.U;
             }
             select_elseAc = select_elseAc + "," + checkBox_elseAc_u.getText().toString();
-            //TODO ahkui  存入資料庫， 顯示圖片u  (R.drawable.u)
+            //存入資料庫， 顯示圖片u  (R.drawable.u)
         }
         if(checkBox_elseAc_E.isChecked()) {
             if (!data1) {
@@ -322,10 +322,10 @@ public class BaseFirstDialog {
             }
             else if(!data2) {
                 data2 = true;
-                data1v = RecordItem.BALL_TYPE.E;
+                data2v = RecordItem.BALL_TYPE.E;
             }
             select_elseAc = select_elseAc + "," + checkBox_elseAc_E.getText().toString();
-            //TODO ahkui  存入資料庫， 顯示圖片E  (R.drawable.error)
+            //存入資料庫， 顯示圖片E  (R.drawable.error)
         }
         if(checkBox_elseAc_T.isChecked()) {
             if (!data1) {
@@ -334,17 +334,17 @@ public class BaseFirstDialog {
             }
             else if(!data2) {
                 data2 = true;
-                data1v = RecordItem.BALL_TYPE.T;
+                data2v = RecordItem.BALL_TYPE.T;
             }
             select_elseAc = select_elseAc + "," + checkBox_elseAc_T.getText().toString();
-            //TODO ahkui  存入資料庫， 顯示圖片T  (R.drawable.tag)
+            //存入資料庫， 顯示圖片T  (R.drawable.tag)
         }
         viewHolder.recordItem.setFCUET(data1,data2,data1v,data2v);
-        viewHolder.updateUI(activity);
+
         Toast.makeText(this.activity, "OK "+ select_type_str +","+(select_direction +1) + select_elseAc, Toast.LENGTH_SHORT).show();
     }
 
-    private void first_view_two(ScrollablePanelAdapter.OrderViewHolder viewHolder, NewRecordActivity activity) {
+    private void first_view_two(final ScrollablePanelAdapter.OrderViewHolder viewHolder, final NewRecordActivity activity) {
         AlertDialog.Builder first_two_builder = new AlertDialog.Builder(this.activity);
         @SuppressLint("InflateParams") View view_first_two_dialog = LayoutInflater.from(this.activity).inflate(R.layout.record_first_two, null);
         view_first_two_dialog.setPadding(10,20,10,10);
@@ -362,44 +362,52 @@ public class BaseFirstDialog {
         first_two_builder.setNeutralButton("NEXT", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                set_first_view_two();
-                first_view_three();
+                set_first_view_two(viewHolder,activity);
+                first_view_three(viewHolder,activity);
             }
         });
 
         first_two_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                set_first_view_two();
+                set_first_view_two(viewHolder,activity);
             }
         });
         first_two_builder.show();
     }
 
-    private void set_first_view_two() {
-        //TODO ahkui   顯示 recordItemFirstBase.setShowTwoViewVisibility(true);
-
+    private void set_first_view_two(ScrollablePanelAdapter.OrderViewHolder viewHolder, NewRecordActivity activity) {
+        // 顯示 recordItemFirstBase.setShowTwoViewVisibility(true);
+        boolean data = false;
+        RecordItem.BALL_TYPE dataV = RecordItem.BALL_TYPE.__;
         int select_two_direction = (int) spinner_two_direction.getSelectedItemId();
+
         String select_twoAc;
         if(radioGroup_two_Ac.getCheckedRadioButtonId() == radioButton_two_E.getId()) {
-            //TODO ahkui  recordItemFirstBase.setShowFirstViewTwoAcVisibility(true);
-            //TODO ahkui   圖片  (R.drawable.error)
+            //recordItemFirstBase.setShowFirstViewTwoAcVisibility(true);
+            //圖片  (R.drawable.error)
+            data = true;
+            dataV = RecordItem.BALL_TYPE.E;
             select_twoAc = "失誤 E";
         }
         else if(radioGroup_two_Ac.getCheckedRadioButtonId() == radioButton_two_T.getId()) {
-            //TODO ahkui  recordItemFirstBase.setShowFirstViewTwoAcVisibility(true);
-            //TODO ahkui   圖片  (R.drawable.tag)
+            //recordItemFirstBase.setShowFirstViewTwoAcVisibility(true);
+            //圖片  (R.drawable.tag)
+            data = true;
+            dataV = RecordItem.BALL_TYPE.T;
             select_twoAc = "觸殺 T";
         }
         else {
             select_twoAc = "未選擇";
         }
 
+        viewHolder.recordItem.setFirst_Two(select_two_direction+1,data,dataV);
+        viewHolder.updateUI(activity);
         Toast.makeText(activity, "OK ," + (select_two_direction +1) + "," + select_twoAc, Toast.LENGTH_SHORT).show();
 
     }
 
-    private void first_view_three() {
+    private void first_view_three(final ScrollablePanelAdapter.OrderViewHolder viewHolder, final NewRecordActivity activity) {
         AlertDialog.Builder first_three_builder = new AlertDialog.Builder(activity);
         @SuppressLint("InflateParams") View view_first_three_dialog = LayoutInflater.from(activity).inflate(R.layout.record_first_two, null);
         view_first_three_dialog.setPadding(10,20,10,10);
@@ -417,24 +425,31 @@ public class BaseFirstDialog {
         first_three_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                //TODO ahkui   顯示 recordItemFirstBase.setShowThreeViewVisibility(true);
+                //顯示 recordItemFirstBase.setShowThreeViewVisibility(true);
+                boolean data = false;
+                RecordItem.BALL_TYPE dataV = RecordItem.BALL_TYPE.__;
 
-                select_three_direction = (int) spinner_three_direction.getSelectedItemId();  //TODO ahkui  存入資料庫， 顯示圖片 1~9
+                select_three_direction = (int) spinner_three_direction.getSelectedItemId();  //存入資料庫， 顯示圖片 1~9
                 if(radioGroup_three_Ac.getCheckedRadioButtonId() == radioButton_three_E.getId()) {
-                    //TODO ahkui  recordItemFirstBase.setShowFirstViewThreeAcVisibility(true);
-                    //TODO ahkui   圖片  (R.drawable.error)  recordItemFirstBase.setFirstViewThreeAcValue();
-
+                    // recordItemFirstBase.setShowFirstViewThreeAcVisibility(true);
+                    // 圖片  (R.drawable.error)  recordItemFirstBase.setFirstViewThreeAcValue();
+                    data = true;
+                    dataV = RecordItem.BALL_TYPE.E;
                     select_threeAc = "失誤 E";
                 }
                 else if(radioGroup_three_Ac.getCheckedRadioButtonId() == radioButton_three_T.getId()) {
-                    //TODO ahkui  recordItemFirstBase.setShowFirstViewThreeAcVisibility(true);
-                    //TODO ahkui   圖片  (R.drawable.tag)   recordItemFirstBase.setFirstViewThreeAcValue();
+                    //recordItemFirstBase.setShowFirstViewThreeAcVisibility(true);
+                    //圖片  (R.drawable.tag)   recordItemFirstBase.setFirstViewThreeAcValue();
+                    data = true;
+                    dataV = RecordItem.BALL_TYPE.T;
                     select_threeAc = "觸殺 T";
                 }
                 else {
                     select_threeAc = "未選擇";
                 }
 
+                viewHolder.recordItem.setFirst_Three(select_three_direction+1,data,dataV);
+                viewHolder.updateUI(activity);
                 Toast.makeText(activity, "OK ," + (select_three_direction+1) + "," + select_threeAc, Toast.LENGTH_SHORT).show();
             }
         });
