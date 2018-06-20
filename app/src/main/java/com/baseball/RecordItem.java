@@ -28,13 +28,12 @@ public class RecordItem implements Serializable {
     private com.baseball.RecordItem.BALL_TYPE ballType = RecordItem.BALL_TYPE.__;
     private BALL_DIRECTION ballDirection = BALL_DIRECTION.__;
     private BALL_TYPE DIETYPE = BALL_TYPE.__;
-<<<<<<< HEAD
+
     private BALL_PUSH ballPush=BALL_PUSH.__;
 
-=======
+
     private RUNS_OUT RUN_OUT_TYPE = RUNS_OUT.__;
     private HITS_NUM HIT_Num = HITS_NUM.__;
->>>>>>> fb4e9175611e4eb3f5d39f5e84a5787a0286d50a
 
     private int BALL_TOUCH_AC1;
     private int BALL_TOUCH_AC2;
@@ -49,11 +48,11 @@ public class RecordItem implements Serializable {
     private BALL_TYPE FCUET1v;
     private BALL_TYPE FCUET2v;
 
-<<<<<<< HEAD
+
     private  int LEFT_NUM,RIGHT_NUM;  //數字 e 數字 e 選單用
     private  int THROW_LEFT,THROW_RIGHT;  //趁傳
     private boolean LEFT_ERROR=false,RIGHT_ERROR=false;
-=======
+
     private BALL_DIRECTION First_two_direction;
     private boolean First_two_data;
     private BALL_TYPE First_two_dataV;
@@ -61,7 +60,6 @@ public class RecordItem implements Serializable {
     private BALL_DIRECTION First_three_direction;
     private boolean First_three_data;
     private BALL_TYPE First_three_dataV;
->>>>>>> fb4e9175611e4eb3f5d39f5e84a5787a0286d50a
 
     RecordItem(Player player,int round,int row,int column){
         this.attPlayer = player;
@@ -101,12 +99,9 @@ public class RecordItem implements Serializable {
     }
 
     public void setBallDirection(int num) {  //透過數字傳方向
-<<<<<<< HEAD
         this.ballDirection = BALL_DIRECTION.values()[num];
         save();
-=======
         setBallDirection(BALL_DIRECTION.values()[num]);
->>>>>>> fb4e9175611e4eb3f5d39f5e84a5787a0286d50a
     }
 
     public void setBallType(com.baseball.RecordItem.BALL_TYPE ballType) {
@@ -174,8 +169,7 @@ public class RecordItem implements Serializable {
         FCUET2v = data2v;
     }
 
-<<<<<<< HEAD
-=======
+
     public void setFirst_Two(int two_direction, boolean data, BALL_TYPE dataV) {
         First_two_direction = BALL_DIRECTION.values()[two_direction];
         First_two_data = data;
@@ -187,7 +181,7 @@ public class RecordItem implements Serializable {
         First_three_data = data;
         First_three_dataV = dataV;
     }
->>>>>>> fb4e9175611e4eb3f5d39f5e84a5787a0286d50a
+
 
     public Player getAttPlayer() {
         return attPlayer;
@@ -468,7 +462,6 @@ public class RecordItem implements Serializable {
 
     }
 
-<<<<<<< HEAD
     public void otherbase(RecordItemOtherBase base)
     {
         if(base!=null) {
@@ -561,7 +554,7 @@ public class RecordItem implements Serializable {
         }
     }
 
-=======
+
     public void  updateCenter(RecordItemCenter center) {
         center.setShowCenterVisibility(false);
         center.setShowChangeHitterVisibility(false);
@@ -633,7 +626,7 @@ public class RecordItem implements Serializable {
         }
 
     }
->>>>>>> fb4e9175611e4eb3f5d39f5e84a5787a0286d50a
+
 
     private void save(){
         if(isNew) {
@@ -678,8 +671,7 @@ public class RecordItem implements Serializable {
         RIGHT,//右
     }
 
-<<<<<<< HEAD
-    public enum BALL_PUSH{    //二三本壘推進
+    public enum BALL_PUSH {    //二三本壘推進
         DP,  //雙殺
         TP,  //三殺
         CS,  //盜壘失敗
@@ -691,7 +683,8 @@ public class RecordItem implements Serializable {
         E, //失誤
         THROW,  //趁傳
         __,
-=======
+    }
+
     public enum RUNS_OUT{
         __,
         RUN,
@@ -708,6 +701,5 @@ public class RecordItem implements Serializable {
         THREE,
         FOUR,
 
->>>>>>> fb4e9175611e4eb3f5d39f5e84a5787a0286d50a
     }
 }

@@ -231,12 +231,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 public void onClick(View v) {
                     baseCenterDialog = new BaseCenterDialog();
                     baseCenterDialog.setActivity(activity);
-<<<<<<< HEAD
-                    baseCenterDialog.setBaseCenterDialog(viewHolder);
-
-=======
                     baseCenterDialog.setBaseCenterDialog(viewHolder,row);
->>>>>>> fb4e9175611e4eb3f5d39f5e84a5787a0286d50a
                     Toast.makeText(v.getContext(), "得分區域" +recordItem.getAttPlayer().getName(), Toast.LENGTH_SHORT).show();
                 }
             });
