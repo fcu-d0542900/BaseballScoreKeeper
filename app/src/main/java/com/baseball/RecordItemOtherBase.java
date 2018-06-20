@@ -26,11 +26,12 @@ public class RecordItemOtherBase {
     public RecordItemOtherBase getBaseUI(){
         return recordItemUI;
     }
-    //ShowActionName
+
     public void setShowActionNameView(ImageView showActionNameView) {
         this.showActionNameView = showActionNameView;
     }
 
+    //ShowActionName TP、CS等等顯示
     public  void setShowActionNameValue(int imageID) {
         showActionNameView.setImageResource(imageID);
     }
@@ -40,7 +41,7 @@ public class RecordItemOtherBase {
             showActionNameView.setVisibility(isShow? View.VISIBLE:View.GONE);
     }
 
-    //ShowAction
+    //ShowAction  失誤view顯示
     public void setShowActionView(LinearLayout showActionView) {
         this.showActionView = showActionView;
     }
@@ -122,7 +123,7 @@ public class RecordItemOtherBase {
         actionTwoNum.setImageResource(imageID);
     }
 
-    //ThrowOne
+    //ThrowOne    TODO:趁傳數字左  (這邊對嗎)
     public void setThrowOne(ImageView throwOne) {
         this.throwOne = throwOne;
     }
@@ -131,7 +132,7 @@ public class RecordItemOtherBase {
         throwOne.setImageResource(imageID);
     }
 
-    //ThrowTwo
+    //ThrowTwo  TODO:趁傳數字右
     public void setThrowTwo(ImageView throwTwo) {
         this.throwTwo = throwTwo;
     }

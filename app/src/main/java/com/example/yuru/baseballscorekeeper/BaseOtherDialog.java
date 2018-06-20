@@ -20,7 +20,7 @@ import com.baseball.RecordItemOtherBase;
 public class BaseOtherDialog {
 
     private NewRecordActivity activity;
-    private RecordItemOtherBase recordItemUI;
+    private RecordItemOtherBase recordItemUI ;
 
     private String[] nums = {"1","2","3","4","5","6","7","8","9"};
     private String[] isError={"","E"};
@@ -28,31 +28,31 @@ public class BaseOtherDialog {
     private Spinner spinner_left,spinner_right,spinner_left_e,spinner_right_e;
     private Spinner spinner_throw_left,spinner_throw_right;
 
-    public void setBase1UI(RecordItemOtherBase viewHolder){
-        recordItemUI=viewHolder;
-    }
 
     public RecordItemOtherBase getBaseUI(){
         return recordItemUI;
     }
 
+    public void setBaseUI( RecordItemOtherBase recordItemUI){
+        this.recordItemUI = recordItemUI;
+    }
+
     public void setBaseOtherDialog(final ScrollablePanelAdapter.OrderViewHolder viewHolder, final String[] items,int base) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
-        switch (base){
+       switch (base){
             case 0:
-                recordItemUI = viewHolder.base;
+               recordItemUI = viewHolder.base;
                 break;
             case 3:
                 recordItemUI = viewHolder.base3;
-
                 break;
             case 2:
-               recordItemUI = viewHolder.base2;
+                recordItemUI = viewHolder.base2;
+                break;
+            default:
                 break;
         }
-
-
 
 
 
@@ -90,7 +90,9 @@ public class BaseOtherDialog {
                                             public void onClick(View v) {
                                                 Toast.makeText(activity, "雙殺DP", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
-                                                viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.DP);
+                                                recordItemUI.setShowActionNameViewVisibility(true);
+                                                recordItemUI.setShowActionNameValue(R.drawable.double_plays);
+                                                // viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.DP);
                                                 viewHolder.updateUI(activity);
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 DP  (R.drawable.double_plays)
                                             }
@@ -186,7 +188,6 @@ public class BaseOtherDialog {
                                             public void onClick(View v) {
                                                 Toast.makeText(activity, "失誤", Toast.LENGTH_SHORT).show();
                                                 new_push_dialog.dismiss();
-                                                viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.E);
                                                 setErrorDialog(viewHolder);  // 點擊失誤後的選單
                                                 viewHolder.updateUI(activity);
                                             }
@@ -230,12 +231,14 @@ public class BaseOtherDialog {
                                                         dialog_throw.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                                 //TODO: ahkui 存入資料庫， 顯示箭頭  (判斷哪一格顯示不同箭頭)
-
                                                                 int select_throw_left = (int)spinner_throw_left.getSelectedItemId();
                                                                 //TODO  ahkui   存入資料庫， 顯示圖片  數字 select_throw_left+1  (R.drawable.throw 數字)
                                                                 int select_throw_right = (int)spinner_throw_right.getSelectedItemId();
                                                                 //TODO  ahkui   存入資料庫， 顯示圖片  數字 select_throw_right+1  (R.drawable.throw 數字)
-
+                                                                viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.THROW);
+                                                                viewHolder.recordItem.setTHROW_LEFT(select_throw_left+1);
+                                                                viewHolder.recordItem.setTHROW_RIGHT(select_throw_right+1);
+                                                                viewHolder.updateUI(activity);
                                                                 Toast.makeText(activity, "OK " + (select_throw_left+1) + "," + (select_throw_right+1), Toast.LENGTH_SHORT).show();
                                                             }
                                                         });
@@ -264,13 +267,13 @@ public class BaseOtherDialog {
 
 
 
-
     public void setActivity(NewRecordActivity activity) {
         this.activity = activity;
     }
 
     //失誤選單 數字E-數字E
     public void setErrorDialog(final ScrollablePanelAdapter.OrderViewHolder viewHolder) {
+       // viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.E);
         View view_error = LayoutInflater.from(activity).inflate(R.layout.record_error_dialog, null);
         AlertDialog.Builder dialog_error = new AlertDialog.Builder(activity);
         view_error.setPadding(0,10,0,10);
@@ -306,7 +309,7 @@ public class BaseOtherDialog {
                 viewHolder.recordItem.setRIGHT_NUM(select_spinner_right+1);
                 int select_spinner_left_E = (int) spinner_left_e.getSelectedItemId();
                 int select_spinner_right_E = (int) spinner_right_e.getSelectedItemId();
-
+                viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.E);
                 if(select_spinner_left_E == 1) {
                     viewHolder.recordItem.setLEFT_ERROR(true);
                     //TODO: ahkui    recordItemOtherBase.setShowActionOneAcViewVisibility(true);

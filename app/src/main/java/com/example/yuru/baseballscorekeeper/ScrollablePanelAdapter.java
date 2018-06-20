@@ -230,6 +230,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                     baseCenterDialog = new BaseCenterDialog();
                     baseCenterDialog.setActivity(activity);
                     baseCenterDialog.setBaseCenterDialog(viewHolder);
+
                     Toast.makeText(v.getContext(), "得分區域" +recordItem.getAttPlayer().getName(), Toast.LENGTH_SHORT).show();
                 }
             });
@@ -252,6 +253,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 public void onClick(View v) {
                     baseOtherDialog = new BaseOtherDialog();
                     baseOtherDialog.setActivity(activity);
+                    baseOtherDialog.setBaseUI(viewHolder.base2);
                     baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"}, 2);
                     Toast.makeText(v.getContext(), "二壘" , Toast.LENGTH_SHORT).show();
 
@@ -264,6 +266,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 public void onClick(View v) {
                     baseOtherDialog = new BaseOtherDialog();
                     baseOtherDialog.setActivity(activity);
+                    baseOtherDialog.setBaseUI(viewHolder.base3);
                     baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"}, 3);
                     Toast.makeText(v.getContext(), "三壘" , Toast.LENGTH_SHORT).show();
                 }
@@ -275,6 +278,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 public void onClick(View v) {
                     baseOtherDialog = new BaseOtherDialog();
                     baseOtherDialog.setActivity(activity);
+                    baseOtherDialog.setBaseUI(viewHolder.base);  //TODO :viewHolder.base是空值?  WHY? 導致無法顯示此處
                     baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"},0);
                     Toast.makeText(v.getContext(), "本壘" , Toast.LENGTH_SHORT).show();
 
