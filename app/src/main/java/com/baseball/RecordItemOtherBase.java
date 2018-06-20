@@ -4,6 +4,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.example.yuru.baseballscorekeeper.ScrollablePanelAdapter;
+
 /**
  * Created by YURU on 2018/6/16.
  */
@@ -14,13 +16,22 @@ public class RecordItemOtherBase {
     private ImageView showActionOneAcView,showActionTwoAcView;
     private ImageView actionOneNum,actionTwoNum;
     public ImageView throwOne,throwTwo;
+    private RecordItemOtherBase recordItemUI;
 
 
-    //ShowActionName
+    public void setBase1UI(RecordItemOtherBase viewHolder ){
+        recordItemUI=viewHolder;
+    }
+
+    public RecordItemOtherBase getBaseUI(){
+        return recordItemUI;
+    }
+
     public void setShowActionNameView(ImageView showActionNameView) {
         this.showActionNameView = showActionNameView;
     }
 
+    //ShowActionName TP、CS等等顯示
     public  void setShowActionNameValue(int imageID) {
         showActionNameView.setImageResource(imageID);
     }
@@ -30,7 +41,7 @@ public class RecordItemOtherBase {
             showActionNameView.setVisibility(isShow? View.VISIBLE:View.GONE);
     }
 
-    //ShowAction
+    //ShowAction  失誤view顯示
     public void setShowActionView(LinearLayout showActionView) {
         this.showActionView = showActionView;
     }
@@ -74,7 +85,7 @@ public class RecordItemOtherBase {
             showToBaseView.setVisibility(isShow? View.VISIBLE:View.INVISIBLE);
     }
 
-    //ShowActionOneAc
+    //ShowActionOneAc  左失誤
     public void setShowActionOneAcView(ImageView showActionOneAcView) {
         this.showActionOneAcView = showActionOneAcView;
     }
@@ -84,7 +95,7 @@ public class RecordItemOtherBase {
             showActionOneAcView.setVisibility(isShow? View.VISIBLE:View.GONE);
     }
 
-    //ShowActionTwoAc
+    //ShowActionTwoAc   右失誤
     public void setShowActionTwoAcView(ImageView showActionTwoAcView) {
         this.showActionTwoAcView = showActionTwoAcView;
     }
@@ -94,7 +105,7 @@ public class RecordItemOtherBase {
             showActionTwoAcView.setVisibility(isShow? View.VISIBLE:View.GONE);
     }
 
-    //ActionOneNum
+    //ActionOneNum  左數字
     public void setActionOneNum(ImageView actionOneNum) {
         this.actionOneNum = actionOneNum;
     }
@@ -103,7 +114,7 @@ public class RecordItemOtherBase {
         actionOneNum.setImageResource(imageID);
     }
 
-    //ActionTwoNum
+    //ActionTwoNum  右數字
     public void setActionTwoNum(ImageView actionTwoNum) {
         this.actionTwoNum = actionTwoNum;
     }
@@ -112,7 +123,7 @@ public class RecordItemOtherBase {
         actionTwoNum.setImageResource(imageID);
     }
 
-    //ThrowOne
+    //ThrowOne    TODO:趁傳數字左  (這邊對嗎)
     public void setThrowOne(ImageView throwOne) {
         this.throwOne = throwOne;
     }
@@ -121,7 +132,7 @@ public class RecordItemOtherBase {
         throwOne.setImageResource(imageID);
     }
 
-    //ThrowTwo
+    //ThrowTwo  TODO:趁傳數字右
     public void setThrowTwo(ImageView throwTwo) {
         this.throwTwo = throwTwo;
     }

@@ -56,6 +56,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     private static final int BOARDNUM_TYPE = 1;
     private static final int ORDER_TYPE = 2;
 
+    private RecordItemOtherBase recordItemUI;
+
+
+
 
     ScrollablePanelAdapter(NewRecordActivity activity) {
         super();
@@ -250,7 +254,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 public void onClick(View v) {
                     baseOtherDialog = new BaseOtherDialog();
                     baseOtherDialog.setActivity(activity);
-                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"}, BASE.BASE_TWO);
+                    baseOtherDialog.setBaseUI(viewHolder.base2);
+                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"}, 2);
                     Toast.makeText(v.getContext(), "二壘" , Toast.LENGTH_SHORT).show();
 
                 }
@@ -262,7 +267,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 public void onClick(View v) {
                     baseOtherDialog = new BaseOtherDialog();
                     baseOtherDialog.setActivity(activity);
-                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"}, BASE.BASE_THREE);
+                    baseOtherDialog.setBaseUI(viewHolder.base3);
+                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"}, 3);
                     Toast.makeText(v.getContext(), "三壘" , Toast.LENGTH_SHORT).show();
                 }
             });
@@ -273,7 +279,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 public void onClick(View v) {
                     baseOtherDialog = new BaseOtherDialog();
                     baseOtherDialog.setActivity(activity);
-                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"},BASE.BASE_HOME);
+                    baseOtherDialog.setBaseUI(viewHolder.base);  //TODO :viewHolder.base是空值?  WHY? 導致無法顯示此處
+                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"},0);
                     Toast.makeText(v.getContext(), "本壘" , Toast.LENGTH_SHORT).show();
 
                 }
@@ -318,7 +325,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         }
     }
 
-    static class OrderViewHolder extends RecyclerView.ViewHolder {
+    public static class OrderViewHolder extends RecyclerView.ViewHolder {
         RecordItem recordItem;
 
         TextView getScoreView;
