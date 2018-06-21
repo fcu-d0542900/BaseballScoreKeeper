@@ -40,8 +40,17 @@ public class RecordItem implements Serializable {
     private BALL_TYPE FCUET1v;
     private BALL_TYPE FCUET2v;
 
+    private BALL_DIRECTION First_two_direction;
+    private boolean First_two_data;
+    private BALL_TYPE First_two_dataV;
+
+    private BALL_DIRECTION First_three_direction;
+    private boolean First_three_data;
+    private BALL_TYPE First_three_dataV;
+
 
     //other
+    //[本,一,二]
     private BALL_DIRECTION[] ballPushNum = {BALL_DIRECTION.__,BALL_DIRECTION.__,BALL_DIRECTION.__};
     private BALL_PUSH[] ballPush = {BALL_PUSH.__,BALL_PUSH.__,BALL_PUSH.__};
 
@@ -53,14 +62,6 @@ public class RecordItem implements Serializable {
     private BALL_DIRECTION[] ERROR_RIGHT_NUM = {BALL_DIRECTION.__,BALL_DIRECTION.__,BALL_DIRECTION.__};  //數字 e 數字 e 選單用
     private BALL_DIRECTION[] THROW_LEFT = {BALL_DIRECTION.__,BALL_DIRECTION.__,BALL_DIRECTION.__};
     private BALL_DIRECTION[] THROW_RIGHT = {BALL_DIRECTION.__,BALL_DIRECTION.__,BALL_DIRECTION.__};  //趁傳
-
-    private BALL_DIRECTION First_two_direction;
-    private boolean First_two_data;
-    private BALL_TYPE First_two_dataV;
-
-    private BALL_DIRECTION First_three_direction;
-    private boolean First_three_data;
-    private BALL_TYPE First_three_dataV;
 
     RecordItem(Player player,int round,int row,int column){
         this.attPlayer = player;

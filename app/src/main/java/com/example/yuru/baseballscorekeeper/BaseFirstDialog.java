@@ -370,6 +370,7 @@ public class BaseFirstDialog {
         Toast.makeText(this.activity, "OK "+ select_type_str +","+(select_direction +1) + select_elseAc, Toast.LENGTH_SHORT).show();
     }
 
+    //打擊後第二個動作 守備動作
     private void first_view_two(final ScrollablePanelAdapter.OrderViewHolder viewHolder, final NewRecordActivity activity) {
         AlertDialog.Builder first_two_builder = new AlertDialog.Builder(this.activity);
         @SuppressLint("InflateParams") View view_first_two_dialog = LayoutInflater.from(this.activity).inflate(R.layout.record_first_two, null);
@@ -402,6 +403,7 @@ public class BaseFirstDialog {
         first_two_builder.show();
     }
 
+    //儲存打擊後第二個動作 守備動作
     private void set_first_view_two(ScrollablePanelAdapter.OrderViewHolder viewHolder, NewRecordActivity activity) {
         // 顯示 recordItemFirstBase.setShowTwoViewVisibility(true);
         boolean data = false;
@@ -427,12 +429,14 @@ public class BaseFirstDialog {
             select_twoAc = "未選擇";
         }
 
+        //設定傳球方向及動作
         viewHolder.recordItem.setFirst_Two(select_two_direction+1,data,dataV);
         viewHolder.updateUI(activity);
         Toast.makeText(activity, "OK ," + (select_two_direction +1) + "," + select_twoAc, Toast.LENGTH_SHORT).show();
 
     }
 
+    //打擊後第三個動作 守備動作二
     private void first_view_three(final ScrollablePanelAdapter.OrderViewHolder viewHolder, final NewRecordActivity activity) {
         AlertDialog.Builder first_three_builder = new AlertDialog.Builder(activity);
         @SuppressLint("InflateParams") View view_first_three_dialog = LayoutInflater.from(activity).inflate(R.layout.record_first_two, null);
@@ -474,6 +478,7 @@ public class BaseFirstDialog {
                     select_threeAc = "未選擇";
                 }
 
+                //儲存動作
                 viewHolder.recordItem.setFirst_Three(select_three_direction+1,data,dataV);
                 viewHolder.updateUI(activity);
                 Toast.makeText(activity, "OK ," + (select_three_direction+1) + "," + select_threeAc, Toast.LENGTH_SHORT).show();
@@ -481,7 +486,5 @@ public class BaseFirstDialog {
         });
         first_three_builder.show();
     }
-
-
 
 }
