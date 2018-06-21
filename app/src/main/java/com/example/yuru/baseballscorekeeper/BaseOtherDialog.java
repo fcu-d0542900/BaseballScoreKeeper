@@ -69,11 +69,7 @@ public class BaseOtherDialog {
                                     @Override
                                     public void onClick(DialogInterface dialog, final int which) {
                                         String name = push[which];
-                                        viewHolder.recordItem.setBallDirection(which+1);
-                                        //TODO: ahkui 選擇完後  switch (which)   recordItemOtherBase.setShowPushNumViewVisibility(true);
-                                        //TODO: ahkui  圖片id  recordItemOtherBase.setShowPushNumValue();
-                                        //TODO: ahkui  (whitch)   存入資料庫， 顯示推進數字 (R.drawable.push1) ~ (R.drawable.push9)
-
+                                        viewHolder.recordItem.setBallDirection(which+1);  //設定推進數字
                                         Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
 
                                         //下一個選單失誤、上壘
@@ -82,18 +78,14 @@ public class BaseOtherDialog {
                                         push_dialog.setView(view_push_choice1);   // 設置view
                                         final AlertDialog new_push_dialog = push_dialog.create();    //根據builder設置好的一系列數據, 来建構一個dialog
 
-                                        //TODO: ahkui  (DP,TP,S,CS,PO,W,P,BK)   選擇完後   recordItemOtherBase.setShowActionNameViewVisibility(true);
-                                        //TODO: ahkui   沒有失誤喔喔喔 !!!!
                                         //點擊雙殺DP
                                         view_push_choice1.findViewById(R.id.click_dp).setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 Toast.makeText(activity, "雙殺DP", Toast.LENGTH_SHORT).show();
-                                                new_push_dialog.dismiss();
-                                                recordItemUI.setShowActionNameViewVisibility(true);
-                                                recordItemUI.setShowActionNameValue(R.drawable.double_plays);
-                                                // viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.DP);
-                                                viewHolder.updateUI(activity);
+                                                new_push_dialog.dismiss();   //按下選項後dialog消失
+                                                viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.DP);   //設定為DP類型
+                                                viewHolder.updateUI(activity);   //更新頁面
                                                 //TODO:ahkui 存入資料庫， 顯示圖片 DP  (R.drawable.double_plays)
                                             }
                                         });
@@ -208,7 +200,6 @@ public class BaseOtherDialog {
 
                     //點選進壘
                     case 1:
-
                         new AlertDialog.Builder(activity)
                                 .setItems(new String[]{"趁傳","失誤","無"}, new DialogInterface.OnClickListener() {
                                             @Override
@@ -220,6 +211,7 @@ public class BaseOtherDialog {
                                                         AlertDialog.Builder dialog_throw = new AlertDialog.Builder(activity);
                                                         view_throwTo.setPadding(10,10,10,10);
                                                         dialog_throw.setView(view_throwTo);
+                                                        //設定spinner下拉選單
                                                         spinner_throw_left = view_throwTo.findViewById(R.id.spinner_throw_left);
                                                         spinner_throw_right=view_throwTo.findViewById(R.id.spinner_throw_right);
                                                         ArrayAdapter throw_left = new ArrayAdapter(dialog_throw.getContext(),android.R.layout.simple_spinner_item,nums);
@@ -230,11 +222,9 @@ public class BaseOtherDialog {
                                                         spinner_throw_right.setAdapter(throw_left);
                                                         dialog_throw.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                             public void onClick(DialogInterface dialogInterface, int i) {
-                                                                //TODO: ahkui 存入資料庫， 顯示箭頭  (判斷哪一格顯示不同箭頭)
-                                                                int select_throw_left = (int)spinner_throw_left.getSelectedItemId();
-                                                                //TODO  ahkui   存入資料庫， 顯示圖片  數字 select_throw_left+1  (R.drawable.throw 數字)
+                                                                int select_throw_left = (int)spinner_throw_left.getSelectedItemId();    //取得下拉選項數字
                                                                 int select_throw_right = (int)spinner_throw_right.getSelectedItemId();
-                                                                //TODO  ahkui   存入資料庫， 顯示圖片  數字 select_throw_right+1  (R.drawable.throw 數字)
+                                                                //利用recordItem顯示畫面以及寫入資料庫
                                                                 viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.THROW);
                                                                 viewHolder.recordItem.setTHROW_LEFT(select_throw_left+1);
                                                                 viewHolder.recordItem.setTHROW_RIGHT(select_throw_right+1);
@@ -242,7 +232,7 @@ public class BaseOtherDialog {
                                                                 Toast.makeText(activity, "OK " + (select_throw_left+1) + "," + (select_throw_right+1), Toast.LENGTH_SHORT).show();
                                                             }
                                                         });
-                                                        dialog_throw.show();
+                                                        dialog_throw.show();  //顯示dialog
                                                         break;
                                                     case 1:   //點選失誤
                                                         setErrorDialog(viewHolder);  // 點擊失誤後的選單
