@@ -568,10 +568,6 @@ public class RecordItem implements Serializable {
 
     }
 
-    public void updatePitchBall(RecordItemPitchBall pitchBall) {
-        //TODO 阿貴
-    }
-
 
     private void save(){
         if(isNew) {
