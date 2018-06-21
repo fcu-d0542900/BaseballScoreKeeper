@@ -57,10 +57,10 @@ public class BaseCenterDialog {
                             //點擊得分/出局
                             case 0:
                                 AlertDialog.Builder center_choice1 = new AlertDialog.Builder(activity);
-                                final View view_center_choice1 = View.inflate(activity, R.layout.record_center_dialog, null);      //自訂dialog布局
+                                final View view_center_choice1 = View.inflate(activity, R.layout.record_center_dialog, null);  //自訂dialog布局
                                 center_choice1.setView(view_center_choice1);
                                 // 設置view
-                                final AlertDialog center_dialog = center_choice1.create();    //根據builder設置好的一系列數據, 来建構一個dialog
+                                final AlertDialog center_dialog = center_choice1.create();  //根據builder設置好的一系列數據, 来建構一個dialog
 
                                 //點擊(得分 123出局 殘壘)後顯示  recordItemCenter.setShowCenterVisibility(true);
                                 //點擊得分
@@ -78,6 +78,7 @@ public class BaseCenterDialog {
                                         center_dialog.dismiss();
                                     }
                                 });
+
                                 //點擊一出局
                                 view_center_choice1.findViewById(R.id.click_out1).setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -89,6 +90,7 @@ public class BaseCenterDialog {
                                         center_dialog.dismiss();
                                     }
                                 });
+
                                 //點擊二出局
                                 view_center_choice1.findViewById(R.id.click_out2).setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -100,6 +102,7 @@ public class BaseCenterDialog {
                                         center_dialog.dismiss();
                                     }
                                 });
+
                                 //點擊三出局
                                 view_center_choice1.findViewById(R.id.click_out3).setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -305,7 +308,7 @@ public class BaseCenterDialog {
                 }
 
 
-                //TODO ahkui 顯示  recordItemCenter.setShowChangeGarrisonVisibility(true);
+                //  recordItemCenter.setShowChangeGarrisonVisibility(true);
                 if(!change_garrison.equals("")) {  //要再改
                     viewHolder.recordItem.changeDefPlayer();
                     viewHolder.updateUI(activity);

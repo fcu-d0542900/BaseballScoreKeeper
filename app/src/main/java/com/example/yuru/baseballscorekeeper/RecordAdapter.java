@@ -173,6 +173,4 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         notifyItemMoved(fromPosition, toPosition);
     }
 
-
-
 }

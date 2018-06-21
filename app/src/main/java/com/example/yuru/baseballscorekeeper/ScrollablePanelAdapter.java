@@ -285,7 +285,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 public void onClick(View v) {
                     baseOtherDialog = new BaseOtherDialog();  //設定baseOtherDialog並顯示
                     baseOtherDialog.setActivity(activity);
-                    baseOtherDialog.setBaseUI(viewHolder.base);  //TODO :viewHolder.base是空值?  WHY? 導致無法顯示此處
+                    baseOtherDialog.setBaseUI(viewHolder.base);
                     baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"},0);
                     Toast.makeText(v.getContext(), "本壘" , Toast.LENGTH_SHORT).show();
 
@@ -311,6 +311,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         //去資料庫拿資料並設定到view裡
         viewHolder.titleTextView.setText(activity.currentRecord.getTeam().getTeamName());
     }
+
     //找出各個view的畫面元件
     static class BoardNumViewHolder extends RecyclerView.ViewHolder {
         TextView dateTextView;
@@ -319,6 +320,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.dateTextView = itemView.findViewById(R.id.text_boardNum);
         }
     }
+
     static class PlayerInfoViewHolder extends RecyclerView.ViewHolder {
         public TextView text_playerPosition;
         public TextView text_playerName;
@@ -332,6 +334,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.text_batOrder = view.findViewById(R.id.text_batOrder);
         }
     }
+
+    //連接xml之id
     public static class OrderViewHolder extends RecyclerView.ViewHolder {
         RecordItem recordItem;
 
@@ -564,6 +568,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             activity.score_scrollable_panel.notifyDataSetChanged();
         }
     }
+
+
     static class TeamNameViewHolder extends RecyclerView.ViewHolder {
         TextView titleTextView;
         TeamNameViewHolder(View view) {
