@@ -58,14 +58,14 @@ public class NewRecordActivity extends AppCompatActivity {
 
                 if(position==1){  //點擊away
                     Toast.makeText(NewRecordActivity.this,"點擊away"+position,Toast.LENGTH_LONG).show();
-                    currentRecord.setCurrenFaction(RecordTeam.Faction.away);  //TODO: ahkui這樣切換對嗎
+                    currentRecord.setCurrenFaction(RecordTeam.Faction.away);
                     DatabaseService.getInstance().getDatabase().getRecord(DatabaseService.CurrentRecord).setCurrenFaction(RecordTeam.Faction.away);
                     scrollablePanelAdapter.updateData();
                 }
                 else if(position==2)  //點擊home/
                     {
                     Toast.makeText(NewRecordActivity.this,"點擊home"+position,Toast.LENGTH_LONG).show();
-                    currentRecord.setCurrenFaction(RecordTeam.Faction.home); //TODO: ahkui這樣切換對嗎
+                    currentRecord.setCurrenFaction(RecordTeam.Faction.home);
                     DatabaseService.getInstance().getDatabase().getRecord(DatabaseService.CurrentRecord).setCurrenFaction(RecordTeam.Faction.home);
                     scrollablePanelAdapter.updateData();
                 }
