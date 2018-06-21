@@ -26,6 +26,9 @@ public class RecordItem implements Serializable {
     private BALL_DIRECTION ballDirection = BALL_DIRECTION.__;
     private BALL_TYPE DIETYPE = BALL_TYPE.__;
 
+    //好壞球
+    private List<PITCH_BALL_TYPE> pitch_ball_types;  //TODO
+
     //得分/出局種類
     private RUNS_OUT RUN_OUT_TYPE = RUNS_OUT.__;
     //幾壘安打
@@ -196,11 +199,17 @@ public class RecordItem implements Serializable {
         return true;
     }
 
-   public boolean changeDefPlayer(){ //boolean換掉
+    public boolean changeDefPlayer(){ //boolean換掉
        //TODO　儲存更換之球員
         isChangeDefPlayer = true;
         save();
         return true;
+    }
+
+
+    public void addPitchBall(PITCH_BALL_TYPE ball) {  //TODO 阿貴 增加球
+       pitch_ball_types.add(ball);
+       save();
     }
 
 
@@ -559,6 +568,10 @@ public class RecordItem implements Serializable {
 
     }
 
+    public void updatePitchBall(RecordItemPitchBall pitchBall) {
+        //TODO 阿貴
+    }
+
 
     private void save(){
         if(isNew) {
@@ -632,6 +645,17 @@ public class RecordItem implements Serializable {
         TWO,
         THREE,
         FOUR,
+
+    }
+
+    public enum PITCH_BALL_TYPE {  //TODO 阿貴 球種在這
+        __,
+        STRIKE,  //好球
+        MISS_STRIKE,  //好球揮空
+        BALL,  //壞球
+        FOUL_BALL, //界外
+        BUNT_FOUL,  //觸擊界外
+        HIT,  //擊出球
 
     }
 }

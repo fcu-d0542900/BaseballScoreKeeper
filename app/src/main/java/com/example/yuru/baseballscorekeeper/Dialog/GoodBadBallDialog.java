@@ -66,6 +66,7 @@ public class GoodBadBallDialog {
         goodbadball_dialog.setView(view_goodbadball_choice);   // 設置view
         final AlertDialog new_goodbadball_dialog = goodbadball_dialog.create();    //根據builder設置好的一系列數據, 来建構一個dialog
 
+        //TODO ahkui   R.id.relativeLayout_ballView
         //點擊好球
         view_goodbadball_choice.findViewById(R.id.click_strike).setOnClickListener(new View.OnClickListener() {
             @Override
