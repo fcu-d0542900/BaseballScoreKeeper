@@ -14,7 +14,7 @@ import java.util.List;
 
 public class RecordTeam implements Serializable {
     private String teamName="";
-    private int currentRound = 0;
+    private int currentRound = 1;
     private List<Player> teamMember = new ArrayList<>();
     private List<RecordItem> recordItems;
 
@@ -23,12 +23,6 @@ public class RecordTeam implements Serializable {
             setTeamName(name);
         else
             setTeamName(DatabaseService.getInstance().getDatabase().getTeamName());
-        switch (team){
-            case away:
-                currentRound =1;
-            case home:
-                currentRound=0;
-        }
         if (name.equals(DatabaseService.getInstance().getDatabase().getTeamName())){
             teamMember = new ArrayList<>(DatabaseService.getInstance().getDatabase().getTeamMember());
         }
@@ -39,7 +33,6 @@ public class RecordTeam implements Serializable {
     }
 
     public RecordItem getRecordItems(int row,int column) {
-        Log.d("position","row: "+row+" column: "+column);
         if(recordItems.size()>0)
             for (RecordItem item :
                     recordItems) {
@@ -68,7 +61,7 @@ public class RecordTeam implements Serializable {
 
     public String getRoundText(int round) {
         String text = "";
-        switch(round){
+        switch(round-1){
             case 0:
                 text="一";
                 break;

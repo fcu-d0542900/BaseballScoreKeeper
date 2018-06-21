@@ -69,11 +69,9 @@ public class BaseCenterDialog {
                                     public void onClick(View v) {
                                         //顯示得分 (R.drawable.runs)
                                         viewHolder.recordItem.setRUN_OUT_TYPE(RecordItem.RUNS_OUT.RUN);
-                                        //TODO 加分
-                                        viewHolder.recordItem.toggleScore(); //TODO ???? 是這樣嗎 好詭異
+                                        viewHolder.recordItem.toggleScore();
                                         viewHolder.updateUI(activity);
                                         activity.score_scrollablePanelAdapter.updateData();
-                                        //TODO　分數欄沒有更改
                                         Toast.makeText(activity, "得分", Toast.LENGTH_SHORT).show();
                                         center_dialog.dismiss();
                                     }
@@ -170,18 +168,11 @@ public class BaseCenterDialog {
                             //點擊結束半局
                             case 4:
                                 Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
-                                int nextRound = activity.currentRecord.getTeam().nextRound();
-
-                                //TODO ahkui  要增加下一局數字
                                 // 顯示結束斜線 recordItemFirstBase.setShowEndViewVisibility(true)
                                 viewHolder.recordItem.setEND(true);
-                                viewHolder.updateUI(activity);
-
-
-                                activity.scrollablePanel.notifyDataSetChanged();
-
-                                //TODO ahkui   updateData
-                                //activity.updateData(recordItems);
+                                activity.currentRecord.getTeam().nextRound();
+                                activity.scrollablePanelAdapter.updateData();
+                                activity.score_scrollablePanelAdapter.updateData();
                                 break;
                             default:
                                 break;
