@@ -153,24 +153,29 @@ public class BaseCenterDialog {
                             //點擊替換守備
                             case 2:
                                 Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
-                                // TODO activity.currentRecord.getTeam().changeDefPlayer();
+                                //activity.currentRecord.getTeam().changeDefPlayer();
                                 change_player_garrison(viewHolder);
                                 break;
 
                             //點擊替換打者
                             case 3:
                                 Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
-                                // TODO activity.currentRecord.getTeam().changeAttPlayer();
+                                // activity.currentRecord.getTeam().changeAttPlayer();
                                 change_player_hitter(viewHolder,pos);
                                 break;
 
                             //點擊結束半局
                             case 4:
                                 Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
-                                activity.currentRecord.getTeam().nextRound();
-                                //TODO ahkui   顯示結束斜線 recordItemFirstBase.setShowEndViewVisibility(true)
+                                int nextRound = activity.currentRecord.getTeam().nextRound();
+
+                                //TODO ahkui  要增加下一局數字
+                                // 顯示結束斜線 recordItemFirstBase.setShowEndViewVisibility(true)
                                 viewHolder.recordItem.setEND(true);
                                 viewHolder.updateUI(activity);
+
+
+                                activity.scrollablePanel.notifyDataSetChanged();
 
                                 //TODO ahkui   updateData
                                 //activity.updateData(recordItems);
@@ -213,7 +218,7 @@ public class BaseCenterDialog {
                     int playerPosition = (int) spinner_position.getSelectedItemId();
 
                     //顯示 recordItemCenter.setShowChangeHitterVisibility(true);
-                    //TODO ahkui  儲存更改球員資料 playerName playerNum  playerPosition
+                    // 儲存更改球員資料 playerName playerNum  playerPosition
 
                     Player change_player = new Player(playerNum,playerName,Player.POSITION.values()[playerPosition]);
                     viewHolder.recordItem.changeAttPlayer(change_player);
