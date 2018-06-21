@@ -63,12 +63,14 @@ public class BaseFirstDialog {
             @Override
             public void onClick(DialogInterface dialog,int which) {
                 switch (which) {
+                    //擊出球
                     case 0:
                         AlertDialog.Builder hit_builder = new AlertDialog.Builder(activity);
                         hit_builder.setItems(new String[]{"高飛犧牲打", "觸擊犧牲打", "一般"}, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 switch (i) {
+                                    //高飛犧牲
                                     case 0:
                                         viewHolder.recordItem.setDIETYPE(RecordItem.BALL_TYPE.HIGHDIE);
                                         viewHolder.updateUI(activity);
@@ -93,10 +95,10 @@ public class BaseFirstDialog {
                                                 int select_sacrificeFly_directionID = radioGroup_sacrificeFly_direction.getCheckedRadioButtonId();
                                                 String select_sacrificeFly_type_str;
                                                 String select_sacrificeFly_direction_str;
+                                                //儲存選擇球種、方向
                                                 if(radioButton_sacrificeFly_type_high.getId() == select_sacrificeFly_typeID) {
                                                     select_sacrificeFly_type_str = "高飛球";
                                                     viewHolder.recordItem.setBallType(RecordItem.BALL_TYPE.HIGH);
-
                                                 }
                                                 else if(radioButton_sacrificeFly_type_line.getId() == select_sacrificeFly_typeID) {
                                                     select_sacrificeFly_type_str = "平飛球";
@@ -128,6 +130,7 @@ public class BaseFirstDialog {
                                         });
                                         sacrifice_fly_builder.show();
                                         break;
+                                    //觸擊犧牲
                                     case 1:
                                         viewHolder.recordItem.setDIETYPE(RecordItem.BALL_TYPE.TOUCHDIE);
                                         Toast.makeText(activity, "觸擊犧牲打", Toast.LENGTH_SHORT).show();
@@ -149,6 +152,7 @@ public class BaseFirstDialog {
                                         scrifice_hits_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
+                                                //儲存觸擊之方向擊守備動作
                                                 actionOne = (int) spinner_actionOne.getSelectedItemId();
                                                 viewHolder.recordItem.setBALL_TOUCH_AC1(actionOne+1);
                                                 actionTwo = (int) spinner_actionTwo.getSelectedItemId();
@@ -160,8 +164,8 @@ public class BaseFirstDialog {
                                         scrifice_hits_builder.show();
 
                                         break;
+                                    //一般
                                     case 2:
-                                        //一般
                                         viewHolder.recordItem.setDIETYPE(RecordItem.BALL_TYPE.NORMAL);
                                         Toast.makeText(activity, "一般", Toast.LENGTH_SHORT).show();
 
@@ -183,6 +187,7 @@ public class BaseFirstDialog {
                                         adapter_direction.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                         spinner_direction.setAdapter(adapter_direction);
 
+                                        //NEXT 守備還有下一動作
                                         first_one_builder.setNeutralButton("NEXT", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -191,6 +196,8 @@ public class BaseFirstDialog {
                                                 viewHolder.updateUI(activity);
                                             }
                                         });
+
+                                        //OK 守備動作結束
                                         first_one_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -207,12 +214,15 @@ public class BaseFirstDialog {
                         });
                         hit_builder.show();
                         break;
+                    //未擊出球
                     case 1:
                         AlertDialog.Builder unhit_builder = new AlertDialog.Builder(activity);
                         @SuppressLint("InflateParams") View view_unhit_dialog = LayoutInflater.from(activity).inflate(R.layout.record_unhit_dialog, null);
                         view_unhit_dialog.setPadding(10,10,10,10);
                         unhit_builder.setView(view_unhit_dialog);
                         final AlertDialog unhit_dialog = unhit_builder.create();
+
+                        //保送 B
                         view_unhit_dialog.findViewById(R.id.click_b).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -224,6 +234,8 @@ public class BaseFirstDialog {
 
                             }
                         });
+
+                        //觸身球 D
                         view_unhit_dialog.findViewById(R.id.click_db).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -235,6 +247,8 @@ public class BaseFirstDialog {
 
                             }
                         });
+
+                        //三振 K
                         view_unhit_dialog.findViewById(R.id.click_k).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -245,6 +259,8 @@ public class BaseFirstDialog {
                                 viewHolder.updateUI(activity);
                             }
                         });
+
+                        //不死三振
                         view_unhit_dialog.findViewById(R.id.click_nok).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -264,15 +280,17 @@ public class BaseFirstDialog {
         });
         builder.show();
 
-
     }
 
+    //儲存打擊方向 及狀態
     private void set_first_view_one(ScrollablePanelAdapter.OrderViewHolder viewHolder, NewRecordActivity activity) {
         int select_typeID = radioGroup_type.getCheckedRadioButtonId();
         int select_direction = (int) spinner_direction.getSelectedItemId();
+        //設定打擊方向
         viewHolder.recordItem.setBallDirection(select_direction+1);
         String select_elseAc = "";
         String select_type_str;
+        //設定打擊球種
         if(radioButton_type_high.getId() == select_typeID) {
             select_type_str = "高飛球";
             viewHolder.recordItem.setBallType(RecordItem.BALL_TYPE.HIGH);
@@ -296,6 +314,9 @@ public class BaseFirstDialog {
         boolean data2=false;
         RecordItem.BALL_TYPE data1v = RecordItem.BALL_TYPE.__;
         RecordItem.BALL_TYPE data2v = RecordItem.BALL_TYPE.__;
+
+        //多選 最多2個動作
+        //野手選擇
         if(checkBox_elseAc_FC.isChecked()) {
             data1 = true;
             data1v = RecordItem.BALL_TYPE.FC;
@@ -303,6 +324,7 @@ public class BaseFirstDialog {
             //存入資料庫， 顯示圖片FC  (R.drawable.fielder_choice)
         }
 
+        //自踩壘包
         if(checkBox_elseAc_u.isChecked()) {
             if (!data1) {
                 data1 = true;
@@ -315,6 +337,8 @@ public class BaseFirstDialog {
             select_elseAc = select_elseAc + "," + checkBox_elseAc_u.getText().toString();
             //存入資料庫， 顯示圖片u  (R.drawable.u)
         }
+
+        //失誤
         if(checkBox_elseAc_E.isChecked()) {
             if (!data1) {
                 data1 = true;
@@ -327,6 +351,8 @@ public class BaseFirstDialog {
             select_elseAc = select_elseAc + "," + checkBox_elseAc_E.getText().toString();
             //存入資料庫， 顯示圖片E  (R.drawable.error)
         }
+
+        //觸殺
         if(checkBox_elseAc_T.isChecked()) {
             if (!data1) {
                 data1 = true;

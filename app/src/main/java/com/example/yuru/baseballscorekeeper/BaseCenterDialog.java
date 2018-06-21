@@ -194,7 +194,7 @@ public class BaseCenterDialog {
 
     }
 
-
+    // 更改打者
     public void change_player_hitter(final ScrollablePanelAdapter.OrderViewHolder viewHolder, final int pos) {
         final View view_set_player = LayoutInflater.from(activity).inflate(R.layout.dialog_new_player, null);
         view_set_player.setPadding(10,10,10,10);
@@ -208,6 +208,7 @@ public class BaseCenterDialog {
         AlertDialog.Builder dialog_setPlayer = new AlertDialog.Builder(activity);
         dialog_setPlayer.setView(view_set_player);
 
+        //設定選單
         ArrayAdapter<String> adapter_position = new ArrayAdapter<>(dialog_setPlayer.getContext(),android.R.layout.simple_spinner_item,new String[]{"","P","C","1B","2B","3B","SS","LF","CF","RF"});
         adapter_position.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_position.setAdapter(adapter_position);
@@ -221,8 +222,8 @@ public class BaseCenterDialog {
                     int playerPosition = (int) spinner_position.getSelectedItemId();
 
                     //顯示 recordItemCenter.setShowChangeHitterVisibility(true);
-                    // 儲存更改球員資料 playerName playerNum  playerPosition
-
+                    //儲存更改球員資料 playerName playerNum  playerPosition
+                    //更換球員顯示名稱
                     Player change_player = new Player(playerNum,playerName,Player.POSITION.values()[playerPosition]);
                     viewHolder.recordItem.changeAttPlayer(change_player);
                     viewHolder.updateUI(activity);
@@ -231,13 +232,6 @@ public class BaseCenterDialog {
                     activity.currentRecord.getTeam().getTeamMember().add(pos-1,change_player);
 
                     activity.scrollablePanel.notifyDataSetChanged();
-
-                    //playerInfo.setName(playerName);
-                    //playerInfo.setId(playerNum);
-                    //playerInfo.setPosition(Player.POSITION.values()[playerPosition]);
-                    //viewHolder.text_playerName.setText(playerName);
-                    //viewHolder.text_playerNum.setText(Integer.valueOf(playerNum).toString());
-                    //viewHolder.text_playerPosition.setText(playerInfo.getPosition().toString().replaceAll("_",""));
 
                     Toast.makeText(activity.getApplicationContext(), "SET " + playerName + "," + playerNum + ","  + playerPosition, Toast.LENGTH_SHORT).show();
                 }
@@ -250,6 +244,7 @@ public class BaseCenterDialog {
 
     }
 
+    //更換守備
     public void change_player_garrison(final ScrollablePanelAdapter.OrderViewHolder viewHolder) {
         AlertDialog.Builder dialog_change_garrison = new AlertDialog.Builder(activity);
         View view_change_garrison = LayoutInflater.from(activity).inflate(R.layout.record_change_garrison, null);
@@ -270,7 +265,8 @@ public class BaseCenterDialog {
             public void onClick(DialogInterface dialogInterface, int i) {
                 String change_garrison = "";
 
-                if(!editText_change_P.getText().toString().equals("")) {   //若輸入框不為空
+                //若輸入框不為空 更改其背號
+                if(!editText_change_P.getText().toString().equals("")) {
                     change_garrison +=  ", P:" + editText_change_P.getText().toString();
                     change_P = Integer.valueOf(editText_change_P.getText().toString());
                 }
@@ -309,7 +305,9 @@ public class BaseCenterDialog {
 
 
                 //  recordItemCenter.setShowChangeGarrisonVisibility(true);
-                if(!change_garrison.equals("")) {  //要再改
+                //TODO 要再改 要傳入更改之位置、背號 ，儲存
+                //現在只有顯示更換守備符號
+                if(!change_garrison.equals("")) {
                     viewHolder.recordItem.changeDefPlayer();
                     viewHolder.updateUI(activity);
                 }
