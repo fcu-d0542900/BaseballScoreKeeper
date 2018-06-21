@@ -45,12 +45,15 @@ public class MainActivity extends AppCompatActivity {
         DatabaseService.getInstance().write();
     }
 
+    //我的球員畫面
     public void fn_player(View view) {
         Intent intent = new Intent(MainActivity.this,PlayerActivity.class);
         intent.putExtra("n",1);
         startActivityForResult(intent,111);
 
     }
+
+    //我的紀錄畫面
     public void fn_record(View view) {
         Intent intent = new Intent(MainActivity.this,RecordActivity.class);
         intent.putExtra("teamName",myTeamName);
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent,111);
     }
 
+    //點選棒球設定隊伍名稱
     public void fn_setTeamName(View view) {
         view_setTeamName = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog_set_team_name, null);
         view_setTeamName.setPadding(10,30,10,0);

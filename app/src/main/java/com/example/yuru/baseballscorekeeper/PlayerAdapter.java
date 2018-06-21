@@ -139,7 +139,6 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
                 Collections.swap(item_player, i, i - 1);
             }
         }
-
         // 通知資料項目已經移動
         notifyItemMoved(fromPosition, toPosition);
     }

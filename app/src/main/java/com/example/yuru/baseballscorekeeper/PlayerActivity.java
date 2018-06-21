@@ -23,6 +23,8 @@ import java.util.List;
 
 public class PlayerActivity extends AppCompatActivity {
 
+    String[] position_item = {"","P","C","1B","2B","3B","SS","LF","CF","RF"};
+
     private RecyclerView item_list;
     private PlayerAdapter itemAdapter;
     private RecyclerView.LayoutManager rLayoutManager;
@@ -41,13 +43,6 @@ public class PlayerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_player);
 
         item_list = findViewById(R.id.player_list);
-
-
-//        item_player.add(new Player(35, "弘承", 8));
-//        item_player.add(new Player(16, "YURU", 10));
-//        item_player.add(new Player(56, "童", 7));
-
-
 
         // 執行RecyclerView元件的設定
         item_list.setHasFixedSize(true);
@@ -85,7 +80,7 @@ public class PlayerActivity extends AppCompatActivity {
         AlertDialog.Builder dialog_addPlayer = new AlertDialog.Builder(this);
 
         dialog_addPlayer.setView(view_new_player);
-        ArrayAdapter adapter_position = new ArrayAdapter(dialog_addPlayer.getContext(),android.R.layout.simple_spinner_item,new String[]{"","P","C","1B","2B","3B","SS","LF","CF","RF"});
+        ArrayAdapter adapter_position = new ArrayAdapter(dialog_addPlayer.getContext(),android.R.layout.simple_spinner_item,position_item);
         adapter_position.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_position.setAdapter(adapter_position);
 
@@ -96,6 +91,7 @@ public class PlayerActivity extends AppCompatActivity {
                     playerName = editText_playerName.getText().toString();
                     playerNum = Integer.valueOf(editText_playerNum.getText().toString());
                     playerPosition = (int) spinner_position.getSelectedItemId();
+                    //新增球員至Database
                     int position = DatabaseService.getInstance().getDatabase().addTeamMember(new Player(playerNum,playerName, Player.POSITION.values()[playerPosition]));
                     item_list.scrollToPosition(position);  // 控制列表元件移到最後一個項目
 

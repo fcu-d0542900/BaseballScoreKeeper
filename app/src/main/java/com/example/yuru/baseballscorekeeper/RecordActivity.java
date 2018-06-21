@@ -35,7 +35,6 @@ public class RecordActivity extends AppCompatActivity {
     private EditText editText_gameName,editText_gameDate;
     private EditText editText_awayTeam,editText_homeTeam;
     private Spinner spinner_awayTeam,spinner_homeTeam;
-    private CheckBox checkBox_isSetPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +64,6 @@ public class RecordActivity extends AppCompatActivity {
         itemAdapter.setOnItemClickLitener(new RecordAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
                 Intent intent = new Intent(RecordActivity.this,NewRecordActivity.class);
                 intent.putExtra("recordPosition",position);
                 startActivityForResult(intent,111);
@@ -73,7 +71,6 @@ public class RecordActivity extends AppCompatActivity {
                         ,Toast.LENGTH_LONG).show();
             }
         });
-
 
         // 設定RecyclerView使用的資料來源物件
         item_list.setAdapter(itemAdapter);
@@ -114,11 +111,10 @@ public class RecordActivity extends AppCompatActivity {
         spinner_awayTeam.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView adapterView, View view, int position, long id) {
-                if(adapterView.getSelectedItem().toString() == "自訂") {
+                if(adapterView.getSelectedItem().toString().equals("自訂")) {  //選擇自訂 顯示輸入框
                     editText_awayTeam.setVisibility(View.VISIBLE);
                 }
                 else {
-
                     editText_awayTeam.setText(teamName);
                     editText_awayTeam.setVisibility(View.GONE);
                 }
@@ -132,7 +128,7 @@ public class RecordActivity extends AppCompatActivity {
         spinner_homeTeam.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView adapterView, View view, int position, long id) {
-                if(adapterView.getSelectedItem().toString() == "自訂") {
+                if(adapterView.getSelectedItem().toString().equals("自訂")) {  //選擇自訂 顯示輸入框
                     editText_homeTeam.setVisibility(View.VISIBLE);
                 }
                 else {
@@ -159,6 +155,7 @@ public class RecordActivity extends AppCompatActivity {
                 int position = DatabaseService.getInstance().getDatabase().addRecord(new Record(gameName, awayTeam,homeTeam,Calendar.getInstance().getTime()));
                 itemAdapter.update();
 
+                //顯示紀錄畫面
                 Intent intent = new Intent(RecordActivity.this,NewRecordActivity.class);
                 intent.putExtra("recordPosition",position);
                 intent.putExtra("gameName",gameName);
