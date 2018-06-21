@@ -27,6 +27,12 @@
                     android:layout_height="200dp"
                     android:background="@drawable/outline">
 
+                    <LinearLayout
+                        android:id="@+id/relativeLayout__ballView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"></LinearLayout>
+
                     <ImageView
                         android:id="@+id/image_change_hitter"
                         android:layout_width="5dp"
@@ -34,13 +40,6 @@
                         android:layout_gravity="left|right"
                         android:visibility="gone"
                         app:srcCompat="@drawable/change_hitter" />
-
-                    <RelativeLayout
-                        android:id="@+id/relativeLayout__ballView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                    </RelativeLayout>
 
                     <ImageView
                         android:id="@+id/image_ballView"
@@ -50,7 +49,8 @@
                     <TextView
                         android:id="@+id/ballView"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:text="       " />
                 </FrameLayout>
 
                 <FrameLayout

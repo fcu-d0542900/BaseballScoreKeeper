@@ -1,8 +1,13 @@
 package com.example.yuru.baseballscorekeeper.Modal;
 
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
+import com.example.yuru.baseballscorekeeper.NewRecordActivity;
 import com.example.yuru.baseballscorekeeper.R;
+import com.google.gson.Gson;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -616,6 +621,25 @@ public class RecordItem implements Serializable {
         if (defPlayer.size() == 0)
             defPlayer.add(new Player());
         return defPlayer.get(defPlayer.size()-1);
+    }
+
+    public void updatePitchBallView(LinearLayout pitchBallView, NewRecordActivity activity) {
+        pitchBallView.removeAllViews();
+        Log.d("ahkui pitch ball",new Gson().toJson(getPitchBall()));
+        pitchBallView.removeAllViews();
+        int index = 0;
+        for (int id :
+                getPitchBall()) {
+            ImageView imageView = new ImageView(activity);
+            imageView.setImageResource(id);
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+                    30,
+                    30
+            );
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            pitchBallView.addView(imageView, layoutParams);
+            index++;
+        }
     }
 
     public enum BALL_TYPE {

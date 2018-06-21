@@ -343,7 +343,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     public static class OrderViewHolder extends RecyclerView.ViewHolder {
-        private final RelativeLayout pitchBallView;
+        private final LinearLayout pitchBallView;
         public RecordItem recordItem;
 
         TextView getScoreView;
@@ -571,32 +571,9 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             recordItem.updateOtherBaseUI(base2,2);
             recordItem.updateOtherBaseUI(base3,3);
             recordItem.updateOtherBaseUI(base,0);
+            recordItem.updatePitchBallView(pitchBallView,activity);
             activity.scrollablePanel.notifyDataSetChanged();
             activity.score_scrollable_panel.notifyDataSetChanged();
-        }
-
-        public void updatePitchBallUI(NewRecordActivity activity) {
-            // TODO update pitch ball ui with auto generate image
-            Log.d("ahkui",new Gson().toJson(recordItem.getPitchBall()));
-            this.pitchBallView.removeAllViews();
-            int index = 0;
-            for (int id :
-                    recordItem.getPitchBall()) {
-                ImageView imageView = new ImageView(activity);
-                imageView.layout(0,30*index,0,0);
-                imageView.setMaxWidth(30);
-                imageView.setImageResource(id);
-                LayoutParams layoutParams = new LayoutParams(
-                        LayoutParams.WRAP_CONTENT,
-                        LayoutParams.WRAP_CONTENT
-                );
-                layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-
-
-                this.pitchBallView.addView(imageView, layoutParams);
-                index++;
-            }
-
         }
     }
 
