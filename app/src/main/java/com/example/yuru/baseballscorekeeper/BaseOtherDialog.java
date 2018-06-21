@@ -69,16 +69,13 @@ public class BaseOtherDialog {
                                     @Override
                                     public void onClick(DialogInterface dialog, final int which) {
                                         String name = push[which];
-<<<<<<< HEAD
                                         viewHolder.recordItem.setBallDirection(which+1);  //設定推進數字
-=======
                                         viewHolder.recordItem.setBallPushNum(RecordItem.BALL_DIRECTION.values()[which+1],base);
                                         //viewHolder.updateUI(activity);
                                         // 選擇完後  switch (which)   recordItemOtherBase.setShowPushNumViewVisibility(true);
                                         // 圖片id  recordItemOtherBase.setShowPushNumValue();
                                         // 存入資料庫， 顯示推進數字 (R.drawable.push1) ~ (R.drawable.push9)
 
->>>>>>> e798c08392e7a42928cb532f179261a30bcc1881
                                         Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
 
                                         //下一個選單失誤、上壘
@@ -87,27 +84,17 @@ public class BaseOtherDialog {
                                         push_dialog.setView(view_push_choice1);   // 設置view
                                         final AlertDialog new_push_dialog = push_dialog.create();    //根據builder設置好的一系列數據, 来建構一個dialog
 
-<<<<<<< HEAD
-=======
                                         // (DP,TP,S,CS,PO,W,P,BK)   選擇完後   recordItemOtherBase.setShowActionNameViewVisibility(true);
                                         //   沒有失誤喔喔喔 !!!!
->>>>>>> e798c08392e7a42928cb532f179261a30bcc1881
                                         //點擊雙殺DP
                                         view_push_choice1.findViewById(R.id.click_dp).setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 Toast.makeText(activity, "雙殺DP", Toast.LENGTH_SHORT).show();
-<<<<<<< HEAD
                                                 new_push_dialog.dismiss();   //按下選項後dialog消失
-                                                viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.DP);   //設定為DP類型
-                                                viewHolder.updateUI(activity);   //更新頁面
-                                                //TODO:ahkui 存入資料庫， 顯示圖片 DP  (R.drawable.double_plays)
-=======
-                                                new_push_dialog.dismiss();
-                                                viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.DP,base);
+                                                viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.DP,base);  //設定為DP類型
                                                 viewHolder.updateUI(activity);
                                                 //存入資料庫， 顯示圖片 DP  (R.drawable.double_plays)
->>>>>>> e798c08392e7a42928cb532f179261a30bcc1881
                                             }
                                         });
 
@@ -245,14 +232,6 @@ public class BaseOtherDialog {
                                                         spinner_throw_right.setAdapter(throw_left);
                                                         dialog_throw.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                             public void onClick(DialogInterface dialogInterface, int i) {
-<<<<<<< HEAD
-                                                                int select_throw_left = (int)spinner_throw_left.getSelectedItemId();    //取得下拉選項數字
-                                                                int select_throw_right = (int)spinner_throw_right.getSelectedItemId();
-                                                                //利用recordItem顯示畫面以及寫入資料庫
-                                                                viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.THROW);
-                                                                viewHolder.recordItem.setTHROW_LEFT(select_throw_left+1);
-                                                                viewHolder.recordItem.setTHROW_RIGHT(select_throw_right+1);
-=======
                                                                 viewHolder.recordItem.setIsTo_BASE(true,base);
                                                                 // 存入資料庫， 顯示箭頭  (判斷哪一格顯示不同箭頭)
                                                                 int select_throw_left = (int)spinner_throw_left.getSelectedItemId();
@@ -261,7 +240,6 @@ public class BaseOtherDialog {
                                                                 //  存入資料庫， 顯示圖片  數字 select_throw_right+1  (R.drawable.throw 數字)
                                                                 viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.THROW,base);
                                                                 viewHolder.recordItem.setThrow(RecordItem.BALL_DIRECTION.values()[select_throw_left+1],RecordItem.BALL_DIRECTION.values()[select_throw_right+1],base);
->>>>>>> e798c08392e7a42928cb532f179261a30bcc1881
                                                                 viewHolder.updateUI(activity);
                                                                 Toast.makeText(activity, "OK " + (select_throw_left+1) + "," + (select_throw_right+1), Toast.LENGTH_SHORT).show();
                                                             }
