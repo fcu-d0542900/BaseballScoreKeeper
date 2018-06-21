@@ -132,11 +132,23 @@ public class NewRecordActivity extends AppCompatActivity {
         for (int j = 0;j<9;j++){
             tmp.add(currentRecord.getAwayTeam().getScore(j));
         }
+        int total1 = 0;
+        for (String str :
+                tmp) {
+            total1 += Integer.parseInt(str);
+        }
+        tmp.add(total1+"");
         data.add(tmp);
         List<String> tmp2 = new ArrayList<>();
         for (int j = 0;j<9;j++){
             tmp2.add(currentRecord.getHomeTeam().getScore(j));
         }
+        int total2 = 0;
+        for (String str :
+                tmp2) {
+            total2 += Integer.parseInt(str);
+        }
+        tmp2.add(total2+"");
         data.add(tmp2);
         return data;
     }
