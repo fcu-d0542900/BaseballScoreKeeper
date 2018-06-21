@@ -485,25 +485,6 @@ public class RecordItem implements Serializable {
             }
         }
     }
-/*
-    public void otherbase(RecordItemOtherBase base)
-    {
-
-                case THROW:
-                    base.setShowThrowViewVisibility(true);
-
-                    break;
-
-                default:
-                    break;
-
-            }
-        }
-        else{
-            Log.d("base物件為空","yes");
-        }
-    }
-*/
 
     public void  updateCenter(RecordItemCenter center) {
         center.setShowCenterVisibility(false);
