@@ -22,15 +22,15 @@ import java.util.ArrayList;
 
 public class GoodBadBallDialog {
 
-    private NewRecordActivity newRecordActivity;
+    private NewRecordActivity activity;
     private Spinner spinner;
 
-    public void setNewRecordActivity(NewRecordActivity newRecordActivity) {
-        this.newRecordActivity = newRecordActivity;
+    public void setActivity(NewRecordActivity activity) {
+        this.activity = activity;
     }
 
     public void setGoodBadBallDialog(final ScrollablePanelAdapter.OrderViewHolder viewHolder) {
-        new AlertDialog.Builder(newRecordActivity)
+        new AlertDialog.Builder(activity)
                 .setTitle("新增/修改好壞球")
                 .setItems(new String[]{"新增", "修改"}, new DialogInterface.OnClickListener() {
                     @Override
@@ -44,7 +44,7 @@ public class GoodBadBallDialog {
                                     setChangeGoodbadballeDialog(viewHolder);
                                 }
                                 else
-                                    Toast.makeText(newRecordActivity, "無欄位可以修改", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(activity, "無欄位可以修改", Toast.LENGTH_SHORT).show();
                                 break;
                             default:
                                 break;
@@ -56,8 +56,8 @@ public class GoodBadBallDialog {
 
     public void setGoodbadballChoiceDialog(final ScrollablePanelAdapter.OrderViewHolder viewHolder) {
 
-        AlertDialog.Builder goodbadball_dialog = new AlertDialog.Builder(newRecordActivity);
-        View view_goodbadball_choice = View.inflate(newRecordActivity, R.layout.record_goodbadball_dialog, null);      //自訂dialog布局
+        AlertDialog.Builder goodbadball_dialog = new AlertDialog.Builder(activity);
+        View view_goodbadball_choice = View.inflate(activity, R.layout.record_goodbadball_dialog, null);      //自訂dialog布局
         view_goodbadball_choice.setPadding(10,10,10,10);
         goodbadball_dialog.setView(view_goodbadball_choice);   // 設置view
         final AlertDialog new_goodbadball_dialog = goodbadball_dialog.create();    //根據builder設置好的一系列數據, 来建構一個dialog
@@ -67,9 +67,9 @@ public class GoodBadBallDialog {
         view_goodbadball_choice.findViewById(R.id.click_strike).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(newRecordActivity, "好球", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "好球", Toast.LENGTH_SHORT).show();
                 viewHolder.recordItem.addPitchBall(RecordItem.PITCH_BALL_TYPE.STRIKE);
-                viewHolder.updatePitchBallUI();
+                viewHolder.updatePitchBallUI(activity);
                 new_goodbadball_dialog.dismiss();
             }
         });
@@ -78,9 +78,9 @@ public class GoodBadBallDialog {
         view_goodbadball_choice.findViewById(R.id.click_miss_strike).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(newRecordActivity, "好球(揮空)", Toast.LENGTH_SHORT).show();
-                viewHolder.recordItem.addPitchBall(RecordItem.PITCH_BALL_TYPE.STRIKE);
-                viewHolder.updatePitchBallUI();
+                Toast.makeText(activity, "好球(揮空)", Toast.LENGTH_SHORT).show();
+                viewHolder.recordItem.addPitchBall(RecordItem.PITCH_BALL_TYPE.MISS_STRIKE);
+                viewHolder.updatePitchBallUI(activity);
                 new_goodbadball_dialog.dismiss();
             }
         });
@@ -89,9 +89,9 @@ public class GoodBadBallDialog {
         view_goodbadball_choice.findViewById(R.id.click_bad_ball).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(newRecordActivity, "壞球", Toast.LENGTH_SHORT).show();
-                viewHolder.recordItem.addPitchBall(RecordItem.PITCH_BALL_TYPE.STRIKE);
-                viewHolder.updatePitchBallUI();
+                Toast.makeText(activity, "壞球", Toast.LENGTH_SHORT).show();
+                viewHolder.recordItem.addPitchBall(RecordItem.PITCH_BALL_TYPE.BALL);
+                viewHolder.updatePitchBallUI(activity);
                 new_goodbadball_dialog.dismiss();
             }
         });
@@ -100,9 +100,9 @@ public class GoodBadBallDialog {
         view_goodbadball_choice.findViewById(R.id.click_foul_ball).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(newRecordActivity, "界外球", Toast.LENGTH_SHORT).show();
-                viewHolder.recordItem.addPitchBall(RecordItem.PITCH_BALL_TYPE.STRIKE);
-                viewHolder.updatePitchBallUI();
+                Toast.makeText(activity, "界外球", Toast.LENGTH_SHORT).show();
+                viewHolder.recordItem.addPitchBall(RecordItem.PITCH_BALL_TYPE.FOUL_BALL);
+                viewHolder.updatePitchBallUI(activity);
                 new_goodbadball_dialog.dismiss();
             }
         });
@@ -111,9 +111,9 @@ public class GoodBadBallDialog {
         view_goodbadball_choice.findViewById(R.id.click_bunt_foul).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(newRecordActivity, "觸擊界外", Toast.LENGTH_SHORT).show();
-                viewHolder.recordItem.addPitchBall(RecordItem.PITCH_BALL_TYPE.STRIKE);
-                viewHolder.updatePitchBallUI();
+                Toast.makeText(activity, "觸擊界外", Toast.LENGTH_SHORT).show();
+                viewHolder.recordItem.addPitchBall(RecordItem.PITCH_BALL_TYPE.BUNT_FOUL);
+                viewHolder.updatePitchBallUI(activity);
                 new_goodbadball_dialog.dismiss();
             }
         });
@@ -122,9 +122,9 @@ public class GoodBadBallDialog {
         view_goodbadball_choice.findViewById(R.id.click_hit_ball).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(newRecordActivity, "擊出球", Toast.LENGTH_SHORT).show();
-                viewHolder.recordItem.addPitchBall(RecordItem.PITCH_BALL_TYPE.STRIKE);
-                viewHolder.updatePitchBallUI();
+                Toast.makeText(activity, "擊出球", Toast.LENGTH_SHORT).show();
+                viewHolder.recordItem.addPitchBall(RecordItem.PITCH_BALL_TYPE.HIT);
+                viewHolder.updatePitchBallUI(activity);
                 new_goodbadball_dialog.dismiss();
             }
         });
@@ -140,8 +140,8 @@ public class GoodBadBallDialog {
         {
             numsList.add(i+1);
         }
-        View view_change_goodbadball = LayoutInflater.from(newRecordActivity).inflate(R.layout.record_change_goodbadball_dialog, null);
-        AlertDialog.Builder dialog_change_goodbadball = new AlertDialog.Builder(newRecordActivity);
+        View view_change_goodbadball = LayoutInflater.from(activity).inflate(R.layout.record_change_goodbadball_dialog, null);
+        AlertDialog.Builder dialog_change_goodbadball = new AlertDialog.Builder(activity);
         dialog_change_goodbadball.setView(view_change_goodbadball);
         spinner = view_change_goodbadball.findViewById(R.id.spinner);
         ArrayAdapter change = new ArrayAdapter( dialog_change_goodbadball.getContext(),android.R.layout.simple_spinner_item, numsList);
@@ -164,8 +164,8 @@ public class GoodBadBallDialog {
         dialog_change_goodbadball.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogInterface, int i) {
 
-                AlertDialog.Builder goodbadball_dialog = new AlertDialog.Builder(newRecordActivity);
-                View view_goodbadball_choice = View.inflate(newRecordActivity, R.layout.record_goodbadball_dialog, null);      //自訂dialog布局
+                AlertDialog.Builder goodbadball_dialog = new AlertDialog.Builder(activity);
+                View view_goodbadball_choice = View.inflate(activity, R.layout.record_goodbadball_dialog, null);      //自訂dialog布局
                 view_goodbadball_choice.setPadding(10,10,10,10);
                 goodbadball_dialog.setView(view_goodbadball_choice);   // 設置view
                 final AlertDialog new_goodbadball_dialog = goodbadball_dialog.create();    //根據builder設置好的一系列數據, 来建構一個dialog
@@ -175,9 +175,9 @@ public class GoodBadBallDialog {
                 view_goodbadball_choice.findViewById(R.id.click_strike).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(newRecordActivity, "好球", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, "好球", Toast.LENGTH_SHORT).show();
                         viewHolder.recordItem.updatePitchBall(currentPitchBallSelect,RecordItem.PITCH_BALL_TYPE.STRIKE);
-                        viewHolder.updatePitchBallUI();
+                        viewHolder.updatePitchBallUI(activity);
                         new_goodbadball_dialog.dismiss();
                     }
                 });
@@ -186,9 +186,9 @@ public class GoodBadBallDialog {
                 view_goodbadball_choice.findViewById(R.id.click_miss_strike).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(newRecordActivity, "好球(揮空)", Toast.LENGTH_SHORT).show();
-                        viewHolder.recordItem.updatePitchBall(currentPitchBallSelect,RecordItem.PITCH_BALL_TYPE.STRIKE);
-                        viewHolder.updatePitchBallUI();
+                        Toast.makeText(activity, "好球(揮空)", Toast.LENGTH_SHORT).show();
+                        viewHolder.recordItem.updatePitchBall(currentPitchBallSelect,RecordItem.PITCH_BALL_TYPE.MISS_STRIKE);
+                        viewHolder.updatePitchBallUI(activity);
                         new_goodbadball_dialog.dismiss();
                     }
                 });
@@ -197,9 +197,9 @@ public class GoodBadBallDialog {
                 view_goodbadball_choice.findViewById(R.id.click_bad_ball).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(newRecordActivity, "壞球", Toast.LENGTH_SHORT).show();
-                        viewHolder.recordItem.updatePitchBall(currentPitchBallSelect,RecordItem.PITCH_BALL_TYPE.STRIKE);
-                        viewHolder.updatePitchBallUI();
+                        Toast.makeText(activity, "壞球", Toast.LENGTH_SHORT).show();
+                        viewHolder.recordItem.updatePitchBall(currentPitchBallSelect,RecordItem.PITCH_BALL_TYPE.BALL);
+                        viewHolder.updatePitchBallUI(activity);
                         new_goodbadball_dialog.dismiss();
                     }
                 });
@@ -208,9 +208,9 @@ public class GoodBadBallDialog {
                 view_goodbadball_choice.findViewById(R.id.click_foul_ball).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(newRecordActivity, "界外球", Toast.LENGTH_SHORT).show();
-                        viewHolder.recordItem.updatePitchBall(currentPitchBallSelect,RecordItem.PITCH_BALL_TYPE.STRIKE);
-                        viewHolder.updatePitchBallUI();
+                        Toast.makeText(activity, "界外球", Toast.LENGTH_SHORT).show();
+                        viewHolder.recordItem.updatePitchBall(currentPitchBallSelect,RecordItem.PITCH_BALL_TYPE.FOUL_BALL);
+                        viewHolder.updatePitchBallUI(activity);
                         new_goodbadball_dialog.dismiss();
                     }
                 });
@@ -219,9 +219,9 @@ public class GoodBadBallDialog {
                 view_goodbadball_choice.findViewById(R.id.click_bunt_foul).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(newRecordActivity, "觸擊界外", Toast.LENGTH_SHORT).show();
-                        viewHolder.recordItem.updatePitchBall(currentPitchBallSelect,RecordItem.PITCH_BALL_TYPE.STRIKE);
-                        viewHolder.updatePitchBallUI();
+                        Toast.makeText(activity, "觸擊界外", Toast.LENGTH_SHORT).show();
+                        viewHolder.recordItem.updatePitchBall(currentPitchBallSelect,RecordItem.PITCH_BALL_TYPE.BUNT_FOUL);
+                        viewHolder.updatePitchBallUI(activity);
                         new_goodbadball_dialog.dismiss();
                     }
                 });
@@ -230,9 +230,9 @@ public class GoodBadBallDialog {
                 view_goodbadball_choice.findViewById(R.id.click_hit_ball).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(newRecordActivity, "擊出球", Toast.LENGTH_SHORT).show();
-                        viewHolder.recordItem.updatePitchBall(currentPitchBallSelect,RecordItem.PITCH_BALL_TYPE.STRIKE);
-                        viewHolder.updatePitchBallUI();
+                        Toast.makeText(activity, "擊出球", Toast.LENGTH_SHORT).show();
+                        viewHolder.recordItem.updatePitchBall(currentPitchBallSelect,RecordItem.PITCH_BALL_TYPE.HIT);
+                        viewHolder.updatePitchBallUI(activity);
                         new_goodbadball_dialog.dismiss();
                     }
                 });

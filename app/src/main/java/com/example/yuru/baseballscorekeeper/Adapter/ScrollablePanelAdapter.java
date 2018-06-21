@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -301,7 +303,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 @Override
                 public void onClick(View v) {
                     goodBadBallDialog = new GoodBadBallDialog();   //設定goodBadBallDialog並顯示
-                    goodBadBallDialog.setNewRecordActivity(activity);
+                    goodBadBallDialog.setActivity(activity);
                     goodBadBallDialog.setGoodBadBallDialog(viewHolder);
                     Toast.makeText(v.getContext(), "好壞球" , Toast.LENGTH_SHORT).show();
 
@@ -341,6 +343,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     public static class OrderViewHolder extends RecyclerView.ViewHolder {
+        private final RelativeLayout pitchBallView;
         public RecordItem recordItem;
 
         TextView getScoreView;
@@ -401,7 +404,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
         OrderViewHolder(View view) {
             super(view);
-
+            this.pitchBallView = view.findViewById(R.id.relativeLayout__ballView);
             base1  = new RecordItemFirstBase();
             base2  = new RecordItemOtherBase();
             base3  = new RecordItemOtherBase();
@@ -572,9 +575,27 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             activity.score_scrollable_panel.notifyDataSetChanged();
         }
 
-        public void updatePitchBallUI() {
+        public void updatePitchBallUI(NewRecordActivity activity) {
             // TODO update pitch ball ui with auto generate image
             Log.d("ahkui",new Gson().toJson(recordItem.getPitchBall()));
+            this.pitchBallView.removeAllViews();
+            int index = 0;
+            for (int id :
+                    recordItem.getPitchBall()) {
+                ImageView imageView = new ImageView(activity);
+                imageView.layout(0,30*index,0,0);
+                imageView.setMaxWidth(30);
+                imageView.setImageResource(id);
+                LayoutParams layoutParams = new LayoutParams(
+                        LayoutParams.WRAP_CONTENT,
+                        LayoutParams.WRAP_CONTENT
+                );
+                layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+
+
+                this.pitchBallView.addView(imageView, layoutParams);
+                index++;
+            }
 
         }
     }
