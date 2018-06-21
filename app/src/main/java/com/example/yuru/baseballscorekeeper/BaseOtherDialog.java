@@ -82,8 +82,8 @@ public class BaseOtherDialog {
                                         push_dialog.setView(view_push_choice1);   // 設置view
                                         final AlertDialog new_push_dialog = push_dialog.create();    //根據builder設置好的一系列數據, 来建構一個dialog
 
-                                        // (DP,TP,S,CS,PO,W,P,BK)   選擇完後   recordItemOtherBase.setShowActionNameViewVisibility(true);
-                                        //   沒有失誤喔喔喔 !!!!
+                                        //(DP,TP,S,CS,PO,W,P,BK)   選擇完後   recordItemOtherBase.setShowActionNameViewVisibility(true);
+                                        //沒有失誤喔喔喔 !!!!
                                         //點擊雙殺DP
                                         view_push_choice1.findViewById(R.id.click_dp).setOnClickListener(new View.OnClickListener() {
                                             @Override

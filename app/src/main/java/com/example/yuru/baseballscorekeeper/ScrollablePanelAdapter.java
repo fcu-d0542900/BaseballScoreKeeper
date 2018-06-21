@@ -321,6 +321,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         }
     }
 
+    //連接xml之id
     static class PlayerInfoViewHolder extends RecyclerView.ViewHolder {
         public TextView text_playerPosition;
         public TextView text_playerName;
@@ -335,7 +336,6 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         }
     }
 
-    //連接xml之id
     public static class OrderViewHolder extends RecyclerView.ViewHolder {
         RecordItem recordItem;
 

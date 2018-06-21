@@ -72,8 +72,6 @@ public class BaseFirstDialog {
                                 switch (i) {
                                     //高飛犧牲
                                     case 0:
-                                        viewHolder.recordItem.setDIETYPE(RecordItem.BALL_TYPE.HIGHDIE);
-                                        viewHolder.updateUI(activity);
                                         Toast.makeText(activity, "高飛犧牲打", Toast.LENGTH_SHORT).show();
 
                                         AlertDialog.Builder sacrifice_fly_builder = new AlertDialog.Builder(activity);
@@ -124,6 +122,7 @@ public class BaseFirstDialog {
                                                     select_sacrificeFly_direction_str = "未選擇";
                                                     viewHolder.recordItem.setBallDirection(RecordItem.BALL_DIRECTION.__);
                                                 }
+                                                viewHolder.recordItem.setDIETYPE(RecordItem.BALL_TYPE.HIGHDIE);
                                                 viewHolder.updateUI(activity);
                                                 Toast.makeText(activity.getApplicationContext(), "OK "+select_sacrificeFly_type_str + "," + select_sacrificeFly_direction_str, Toast.LENGTH_SHORT).show();
                                             }
@@ -154,8 +153,8 @@ public class BaseFirstDialog {
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 //儲存觸擊之方向擊守備動作
                                                 actionOne = (int) spinner_actionOne.getSelectedItemId();
-                                                viewHolder.recordItem.setBALL_TOUCH_AC1(actionOne+1);
                                                 actionTwo = (int) spinner_actionTwo.getSelectedItemId();
+                                                viewHolder.recordItem.setBALL_TOUCH_AC1(actionOne+1);
                                                 viewHolder.recordItem.setBALL_TOUCH_AC2(actionTwo+1);
                                                 viewHolder.updateUI(activity);
                                                 Toast.makeText(activity, "OK " + (actionOne+1) + "," + (actionTwo+1), Toast.LENGTH_SHORT).show();
@@ -166,7 +165,6 @@ public class BaseFirstDialog {
                                         break;
                                     //一般
                                     case 2:
-                                        viewHolder.recordItem.setDIETYPE(RecordItem.BALL_TYPE.NORMAL);
                                         Toast.makeText(activity, "一般", Toast.LENGTH_SHORT).show();
 
                                         AlertDialog.Builder first_one_builder = new AlertDialog.Builder(activity);
@@ -187,6 +185,7 @@ public class BaseFirstDialog {
                                         adapter_direction.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                         spinner_direction.setAdapter(adapter_direction);
 
+                                        viewHolder.recordItem.setDIETYPE(RecordItem.BALL_TYPE.NORMAL);
                                         //NEXT 守備還有下一動作
                                         first_one_builder.setNeutralButton("NEXT", new DialogInterface.OnClickListener() {
                                             @Override
@@ -208,6 +207,8 @@ public class BaseFirstDialog {
                                         first_one_builder.show();
                                         break;
                                     default:
+                                        viewHolder.recordItem.setDIETYPE(RecordItem.BALL_TYPE.__);
+                                        viewHolder.updateUI(activity);
                                         break;
                                 }
                             }
@@ -279,7 +280,6 @@ public class BaseFirstDialog {
             }
         });
         builder.show();
-
     }
 
     //儲存打擊方向 及狀態
