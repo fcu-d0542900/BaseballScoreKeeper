@@ -28,6 +28,7 @@ import com.example.yuru.baseballscorekeeper.Modal.RecordItemFirstBase;
 import com.example.yuru.baseballscorekeeper.Modal.RecordItemOtherBase;
 import com.example.yuru.baseballscorekeeper.NewRecordActivity;
 import com.example.yuru.baseballscorekeeper.R;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -569,6 +570,12 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             recordItem.updateOtherBaseUI(base,0);
             activity.scrollablePanel.notifyDataSetChanged();
             activity.score_scrollable_panel.notifyDataSetChanged();
+        }
+
+        public void updatePitchBallUI() {
+            // TODO update pitch ball ui with auto generate image
+            Log.d("ahkui",new Gson().toJson(recordItem.getPitchBall()));
+
         }
     }
 

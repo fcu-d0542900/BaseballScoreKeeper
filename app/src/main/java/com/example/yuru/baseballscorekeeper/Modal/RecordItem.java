@@ -1,8 +1,11 @@
 package com.example.yuru.baseballscorekeeper.Modal;
 
+import android.util.Log;
+
 import com.example.yuru.baseballscorekeeper.R;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,7 +30,7 @@ public class RecordItem implements Serializable {
     private BALL_TYPE DIETYPE = BALL_TYPE.__;
 
     //好壞球
-    private List<PITCH_BALL_TYPE> pitch_ball_types;  //TODO
+    private List<PITCH_BALL_TYPE> pitch_ball_types = new ArrayList<>();
 
     //得分/出局種類
     private RUNS_OUT RUN_OUT_TYPE = RUNS_OUT.__;
@@ -199,17 +202,48 @@ public class RecordItem implements Serializable {
         return true;
     }
 
-    public boolean changeDefPlayer(){ //boolean換掉
-       //TODO　儲存更換之球員
+    public void addDefPlayer(Player player){ //boolean換掉
         isChangeDefPlayer = true;
+        defPlayer.add(player);
         save();
-        return true;
     }
 
 
-    public void addPitchBall(PITCH_BALL_TYPE ball) {  //TODO 阿貴 增加球
-       pitch_ball_types.add(ball);
-       save();
+    public void addPitchBall(PITCH_BALL_TYPE ball) {
+        pitch_ball_types.add(ball);
+        save();
+    }
+
+    public List<Integer> getPitchBall() {
+        List<Integer> imageID = new ArrayList<>();
+        for (PITCH_BALL_TYPE item:
+                pitch_ball_types) {
+            imageID.add(getPitchBallImageID(item));
+        }
+        return imageID;
+    }
+
+    public void updatePitchBall(int pos,PITCH_BALL_TYPE ball) {
+        Log.d("ahkui","position: "+pos+" recent: "+pitch_ball_types.get(pos).toString() + " new: "+ball.toString());
+        pitch_ball_types.set(pos,ball);
+    }
+
+    private Integer getPitchBallImageID(PITCH_BALL_TYPE item) {
+        switch (item){
+            case STRIKE:
+                return R.drawable.strike;
+            case MISS_STRIKE:
+                return R.drawable.miss_strike;
+            case BALL:
+                return R.drawable.bad_ball;
+            case FOUL_BALL:
+                return R.drawable.foul_ball;
+            case BUNT_FOUL:
+                return R.drawable.bunt_foul;
+            case HIT:
+                return R.drawable.hit_ball;
+        }
+        return R.drawable.strike;
     }
 
 
@@ -578,6 +612,12 @@ public class RecordItem implements Serializable {
             DatabaseService.getInstance().write();
     }
 
+    public Player getCurrentDefPlayer() {
+        if (defPlayer.size() == 0)
+            defPlayer.add(new Player());
+        return defPlayer.get(defPlayer.size()-1);
+    }
+
     public enum BALL_TYPE {
         HIGH,// 高飛犧牲 // 高飛球
         FLAT, // 平飛球
@@ -644,7 +684,7 @@ public class RecordItem implements Serializable {
 
     }
 
-    public enum PITCH_BALL_TYPE {  //TODO 阿貴 球種在這
+    public enum PITCH_BALL_TYPE {
         __,
         STRIKE,  //好球
         MISS_STRIKE,  //好球揮空

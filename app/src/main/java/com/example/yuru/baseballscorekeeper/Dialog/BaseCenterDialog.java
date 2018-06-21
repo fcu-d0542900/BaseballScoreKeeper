@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.example.yuru.baseballscorekeeper.Modal.Player;
 import com.example.yuru.baseballscorekeeper.Modal.RecordItem;
-import com.example.yuru.baseballscorekeeper.Modal.RecordItemCenter;
 import com.example.yuru.baseballscorekeeper.NewRecordActivity;
 import com.example.yuru.baseballscorekeeper.R;
 import com.example.yuru.baseballscorekeeper.Adapter.ScrollablePanelAdapter;
@@ -23,7 +22,6 @@ import com.example.yuru.baseballscorekeeper.Adapter.ScrollablePanelAdapter;
 
 public class BaseCenterDialog {
 
-    private RecordItemCenter recordItemCenter;
     private ScrollablePanelAdapter.PlayerInfoViewHolder playerInfoViewHolder;
 
     private NewRecordActivity activity;
@@ -154,7 +152,7 @@ public class BaseCenterDialog {
                             //點擊替換守備
                             case 2:
                                 Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
-                                //activity.currentRecord.getTeam().changeDefPlayer();
+                                //activity.currentRecord.getTeam().addDefPlayer();
                                 change_player_garrison(viewHolder);
                                 break;
 
@@ -295,17 +293,17 @@ public class BaseCenterDialog {
                 }
 
 
-                //  recordItemCenter.setShowChangeGarrisonVisibility(true);
-                //TODO 要再改 要傳入更改之位置、背號 ，儲存
+                viewHolder.center.setShowChangeGarrisonVisibility(true);
+                //TODO YURU 填資料咯
                 //現在只有顯示更換守備符號
                 if(!change_garrison.equals("")) {
-                    viewHolder.recordItem.changeDefPlayer();
+//                    viewHolder.recordItem.addDefPlayer(new Player(x,x,x)); //TODO YURU 填資料進去
                     viewHolder.updateUI(activity);
                 }
 
-                //TODO ahkui  儲存更改守備資料 change_?
-                //TODO 看要不要做個顯示更換守備的資料 按下去可以看這時候換了誰的畫面
-
+                //TODO YURU 更換守備資料直接叫下面的 method 然後改 player 的內容就好
+                //TODO YURU viewHolder.recordItem.getCurrentDefPlayer();
+                viewHolder.recordItem.getCurrentDefPlayer();
                 Toast.makeText(activity.getApplicationContext(), "OK " + change_garrison, Toast.LENGTH_SHORT).show();
             }
         });
