@@ -24,7 +24,7 @@ public class RecordItem implements Serializable {
     // user infomation
     private Player attPlayer;
     private List<Player> defPlayer;
-    private boolean score=false;
+    private boolean score = false;
 
     private boolean isEND = false;
     private boolean isChangeHitter = false;
@@ -61,19 +61,19 @@ public class RecordItem implements Serializable {
 
     //other
     //[本,一,二]
-    private BALL_DIRECTION[] ballPushNum = {BALL_DIRECTION.__,BALL_DIRECTION.__,BALL_DIRECTION.__};
-    private BALL_PUSH[] ballPush = {BALL_PUSH.__,BALL_PUSH.__,BALL_PUSH.__};
+    private BALL_DIRECTION[] ballPushNum = {BALL_DIRECTION.__, BALL_DIRECTION.__, BALL_DIRECTION.__};
+    private BALL_PUSH[] ballPush = {BALL_PUSH.__, BALL_PUSH.__, BALL_PUSH.__};
 
-    private boolean[] isERROR_LEFT = {false,false,false};
-    private boolean[] isERRPR_RIGHT = {false,false,false};
-    private boolean[] isTo_BASE = {false,false,false};
+    private boolean[] isERROR_LEFT = {false, false, false};
+    private boolean[] isERRPR_RIGHT = {false, false, false};
+    private boolean[] isTo_BASE = {false, false, false};
 
-    private BALL_DIRECTION[] ERROR_LEFT_NUM = {BALL_DIRECTION.__,BALL_DIRECTION.__,BALL_DIRECTION.__};  // 本 二 三
-    private BALL_DIRECTION[] ERROR_RIGHT_NUM = {BALL_DIRECTION.__,BALL_DIRECTION.__,BALL_DIRECTION.__};  //數字 e 數字 e 選單用
-    private BALL_DIRECTION[] THROW_LEFT = {BALL_DIRECTION.__,BALL_DIRECTION.__,BALL_DIRECTION.__};
-    private BALL_DIRECTION[] THROW_RIGHT = {BALL_DIRECTION.__,BALL_DIRECTION.__,BALL_DIRECTION.__};  //趁傳
+    private BALL_DIRECTION[] ERROR_LEFT_NUM = {BALL_DIRECTION.__, BALL_DIRECTION.__, BALL_DIRECTION.__};  // 本 二 三
+    private BALL_DIRECTION[] ERROR_RIGHT_NUM = {BALL_DIRECTION.__, BALL_DIRECTION.__, BALL_DIRECTION.__};  //數字 e 數字 e 選單用
+    private BALL_DIRECTION[] THROW_LEFT = {BALL_DIRECTION.__, BALL_DIRECTION.__, BALL_DIRECTION.__};
+    private BALL_DIRECTION[] THROW_RIGHT = {BALL_DIRECTION.__, BALL_DIRECTION.__, BALL_DIRECTION.__};  //趁傳
 
-    RecordItem(Player player,int round,int row,int column){
+    RecordItem(Player player, int round, int row, int column) {
         this.attPlayer = player;
         this.round = round;
         this.row = row;
@@ -121,28 +121,28 @@ public class RecordItem implements Serializable {
         save();
     }
 
-    public void setBallPushNum(BALL_DIRECTION ballPushNum,int base_int) {
-        if(base_int>0)
-            base_int = base_int-1;
-        if(ballPushNum != BALL_DIRECTION.__) {
+    public void setBallPushNum(BALL_DIRECTION ballPushNum, int base_int) {
+        if (base_int > 0)
+            base_int = base_int - 1;
+        if (ballPushNum != BALL_DIRECTION.__) {
             isTo_BASE[base_int] = false;
         }
         this.ballPushNum[base_int] = ballPushNum;
         save();
     }
 
-    public void setBallPush(BALL_PUSH ballType,int base_int) {
-        if(base_int>0)
-            base_int = base_int-1;
+    public void setBallPush(BALL_PUSH ballType, int base_int) {
+        if (base_int > 0)
+            base_int = base_int - 1;
         this.ballPush[base_int] = ballType;
         save();
     }
 
-    public void setIsTo_BASE(boolean isToBase,int base_int) {
-        if(base_int>0) {
-            base_int = base_int-1;
+    public void setIsTo_BASE(boolean isToBase, int base_int) {
+        if (base_int > 0) {
+            base_int = base_int - 1;
         }
-        if(isToBase) {
+        if (isToBase) {
             ballPushNum[base_int] = BALL_DIRECTION.__;
         }
         this.isTo_BASE[base_int] = isToBase;
@@ -178,15 +178,15 @@ public class RecordItem implements Serializable {
     }
 
     public void setThrow(BALL_DIRECTION throw_left, BALL_DIRECTION throw_right, int base_int) {
-        if(base_int>0)
-            base_int = base_int-1;
+        if (base_int > 0)
+            base_int = base_int - 1;
         this.THROW_LEFT[base_int] = throw_left;
         this.THROW_RIGHT[base_int] = throw_right;
     }
 
-    public void setError(BALL_DIRECTION ERROR_LEFT_NUM, boolean isERROR_LEFT,BALL_DIRECTION ERROR_RIGHT_NUM,boolean isERROR_RIGHT,int base_int) {
-        if(base_int>0)
-            base_int = base_int-1;
+    public void setError(BALL_DIRECTION ERROR_LEFT_NUM, boolean isERROR_LEFT, BALL_DIRECTION ERROR_RIGHT_NUM, boolean isERROR_RIGHT, int base_int) {
+        if (base_int > 0)
+            base_int = base_int - 1;
         this.ERROR_LEFT_NUM[base_int] = ERROR_LEFT_NUM;
         this.ERROR_RIGHT_NUM[base_int] = ERROR_RIGHT_NUM;
         this.isERROR_LEFT[base_int] = isERROR_LEFT;
@@ -198,8 +198,8 @@ public class RecordItem implements Serializable {
         return attPlayer;
     }
 
-    public boolean changeAttPlayer(Player player){
-        if(player.getId() == attPlayer.getId())
+    public boolean changeAttPlayer(Player player) {
+        if (player.getId() == attPlayer.getId())
             return false;
         attPlayer = player;
         isChangeHitter = true;
@@ -207,7 +207,7 @@ public class RecordItem implements Serializable {
         return true;
     }
 
-    public void addDefPlayer(Player player){ //boolean換掉
+    public void addDefPlayer(Player player) { //boolean換掉
         isChangeDefPlayer = true;
         defPlayer.add(player);
         save();
@@ -221,20 +221,20 @@ public class RecordItem implements Serializable {
 
     public List<Integer> getPitchBall() {
         List<Integer> imageID = new ArrayList<>();
-        for (PITCH_BALL_TYPE item:
+        for (PITCH_BALL_TYPE item :
                 pitch_ball_types) {
             imageID.add(getPitchBallImageID(item));
         }
         return imageID;
     }
 
-    public void updatePitchBall(int pos,PITCH_BALL_TYPE ball) {
-        Log.d("ahkui","position: "+pos+" recent: "+pitch_ball_types.get(pos).toString() + " new: "+ball.toString());
-        pitch_ball_types.set(pos,ball);
+    public void updatePitchBall(int pos, PITCH_BALL_TYPE ball) {
+        Log.d("ahkui", "position: " + pos + " recent: " + pitch_ball_types.get(pos).toString() + " new: " + ball.toString());
+        pitch_ball_types.set(pos, ball);
     }
 
     private Integer getPitchBallImageID(PITCH_BALL_TYPE item) {
-        switch (item){
+        switch (item) {
             case STRIKE:
                 return R.drawable.strike;
             case MISS_STRIKE:
@@ -256,12 +256,12 @@ public class RecordItem implements Serializable {
         return round;
     }
 
-    public void toggleScore(){
+    public void toggleScore() {
         score = !score;
         save();
     }
 
-    public boolean isGetScore(){
+    public boolean isGetScore() {
         return score;
     }
 
@@ -274,7 +274,7 @@ public class RecordItem implements Serializable {
     }
 
     private int getImageByNumber(BALL_DIRECTION direction) {
-        switch (direction){
+        switch (direction) {
             case ONE:
                 return R.drawable.throw1;
             case TWO:
@@ -303,7 +303,7 @@ public class RecordItem implements Serializable {
 
     private int getImageByPushNumber(BALL_DIRECTION direction) {  //有()的數
 
-        switch (direction){
+        switch (direction) {
             case ONE:
                 return R.drawable.push1;
             case TWO:
@@ -329,7 +329,7 @@ public class RecordItem implements Serializable {
     }
 
     private int getImageByBallDirection(BALL_TYPE direction) {
-        switch (direction){
+        switch (direction) {
             case HIGH:
                 return R.drawable.fly_ball;
             case FLAT:
@@ -358,8 +358,7 @@ public class RecordItem implements Serializable {
     }
 
 
-
-    public void updateFirstBaseUI(RecordItemFirstBase base){
+    public void updateFirstBaseUI(RecordItemFirstBase base) {
         base.setShowSacrificeFlyVisibility(false);
         base.setShowSacrificeHitsVisibility(false);
         base.setShowZeroViewVisibility(false);
@@ -380,9 +379,9 @@ public class RecordItem implements Serializable {
         base.setShowThreeViewVisibility(false);
         base.setShowFirstViewThreeAcVisibility(false);
 
-        switch (DIETYPE){
+        switch (DIETYPE) {
             case HIGHDIE:
-                if (ballType != BALL_TYPE.__ && ballDirection!=BALL_DIRECTION.__){
+                if (ballType != BALL_TYPE.__ && ballDirection != BALL_DIRECTION.__) {
                     base.setShowSacrificeFlyVisibility(true);
                     base.setShowFirstViewOneTopVisibility(true);
                     base.setShowOneViewVisibility(true);
@@ -399,39 +398,38 @@ public class RecordItem implements Serializable {
                 base.setFirstViewTwoNumValue(getImageByNumber(BALL_TOUCH_AC2));
                 break;
             case NORMAL:
-                if(ballType != BALL_TYPE.__){
+                if (ballType != BALL_TYPE.__) {
                     base.setShowOneViewVisibility(true);
-                    if(ballType == BALL_TYPE.FLOOR) {
+                    if (ballType == BALL_TYPE.FLOOR) {
                         base.setShowFirstViewOneBottomVisibility(true);
-                    }
-                    else {
+                    } else {
                         base.setShowFirstViewOneTopVisibility(true);
                         base.setShowFirstViewOneTopValue(getImageByBallDirection(ballType));
                     }
                     base.setFirstViewOneNumValue(getImageByNumber(ballDirection));
 
-                    if(FCUET1) {
+                    if (FCUET1) {
                         base.setShowFirstViewOneAc1Visibility(true);
                         base.setFirstViewOneAc1Value(getImageByBallDirection(FCUET1v));
-                        if(FCUET2) {
+                        if (FCUET2) {
                             base.setShowFirstViewOneAc2Visibility(true);
                             base.setFirstViewOneAc2Value(getImageByBallDirection(FCUET2v));
                         }
                     }
 
-                    if(First_two_direction != null && First_two_direction != BALL_DIRECTION.__) {
+                    if (First_two_direction != null && First_two_direction != BALL_DIRECTION.__) {
                         base.setShowTwoViewVisibility(true);
                         base.setFirstViewTwoNumValue(getImageByNumber(First_two_direction));
-                        if(First_two_data) {
+                        if (First_two_data) {
                             base.setShowFirstViewTwoAcVisibility(true);
                             base.setFirstViewTwoAcValue(getImageByBallDirection(First_two_dataV));
                         }
                     }
 
-                    if(First_three_direction != null && First_three_direction != BALL_DIRECTION.__) {
+                    if (First_three_direction != null && First_three_direction != BALL_DIRECTION.__) {
                         base.setShowThreeViewVisibility(true);
                         base.setFirstViewThreeNumValue(getImageByNumber(First_three_direction));
-                        if(First_three_data) {
+                        if (First_three_data) {
                             base.setShowFirstViewThreeAcVisibility(true);
                             base.setFirstViewThreeAcValue(getImageByBallDirection(First_three_dataV));
                         }
@@ -444,7 +442,7 @@ public class RecordItem implements Serializable {
             case KILLED:
             case NOKILLED:
                 base.setShowZeroViewVisibility(true);
-                switch (DIETYPE){
+                switch (DIETYPE) {
                     case BADBALL:
                         base.setShowZeroValue(R.drawable.throw_b);
                         break;
@@ -463,9 +461,9 @@ public class RecordItem implements Serializable {
     }
 
     //二三本壘UI設定
-    public void updateOtherBaseUI(RecordItemOtherBase base,int base_int){
-        if(base_int>0)
-            base_int = base_int-1;
+    public void updateOtherBaseUI(RecordItemOtherBase base, int base_int) {
+        if (base_int > 0)
+            base_int = base_int - 1;
 
         base.setShowActionNameViewVisibility(false);
         base.setShowActionViewVisibility(false);
@@ -476,15 +474,15 @@ public class RecordItem implements Serializable {
         base.setShowActionOneAcViewVisibility(false);
         base.setShowActionTwoAcViewVisibility(false);
 
-        if(ballPushNum[base_int] != BALL_DIRECTION.__) {
+        if (ballPushNum[base_int] != BALL_DIRECTION.__) {
             base.setShowPushNumViewVisibility(true);
             base.setShowPushNumValue(getImageByPushNumber(ballPushNum[base_int]));
         }
-        if(isTo_BASE[base_int] == true) {
+        if (isTo_BASE[base_int] == true) {
             base.setShowToBaseViewVisibility(true);
         }
 
-        if(ballPush[base_int] == BALL_PUSH.E) {
+        if (ballPush[base_int] == BALL_PUSH.E) {
             base.setShowActionViewVisibility(true);
             base.setActionOneNumValue(getImageByNumber(ERROR_LEFT_NUM[base_int]));
             base.setActionTwoNumValue(getImageByNumber(ERROR_RIGHT_NUM[base_int]));
@@ -494,13 +492,11 @@ public class RecordItem implements Serializable {
             if (isERRPR_RIGHT[base_int]) {
                 base.setShowActionTwoAcViewVisibility(true);
             }
-        }
-        else if(ballPush[base_int] == BALL_PUSH.THROW) {
+        } else if (ballPush[base_int] == BALL_PUSH.THROW) {
             base.setShowThrowViewVisibility(true);
             base.setThrowOneValue(getImageByNumber(THROW_LEFT[base_int]));
             base.setThrowTwoValue(getImageByNumber(THROW_RIGHT[base_int]));
-        }
-        else if(ballPush[base_int] != BALL_PUSH.__) {
+        } else if (ballPush[base_int] != BALL_PUSH.__) {
             base.setShowActionNameViewVisibility(true);
             switch (ballPush[base_int]) {
                 case DP:
@@ -534,7 +530,7 @@ public class RecordItem implements Serializable {
         }
     }
 
-    public void  updateCenter(RecordItemCenter center) {
+    public void updateCenter(RecordItemCenter center) {
         center.setShowCenterVisibility(false);
         center.setShowChangeHitterVisibility(false);
         center.setShowChangeGarrisonVisibility(false);
@@ -545,7 +541,7 @@ public class RecordItem implements Serializable {
         center.setShowHit3ViewVisibility(false);
         center.setShowHit4ViewVisibility(false);
 
-        if(RUN_OUT_TYPE != RUNS_OUT.__) {  //出局得分
+        if (RUN_OUT_TYPE != RUNS_OUT.__) {  //出局得分
             center.setShowCenterVisibility(true);
             switch (RUN_OUT_TYPE) {
                 case RUN:
@@ -569,7 +565,7 @@ public class RecordItem implements Serializable {
             }
         }
 
-        if(HIT_Num != HITS_NUM.__) {  //安打紅線
+        if (HIT_Num != HITS_NUM.__) {  //安打紅線
             switch (HIT_Num) {
                 case ONE:
                     center.setShowHit1ViewVisibility(true);
@@ -595,37 +591,36 @@ public class RecordItem implements Serializable {
             }
         }
 
-        if(isEND) {  //結束斜線
+        if (isEND) {  //結束斜線
             center.setShowEndViewVisibility(true);
         }
-        if(isChangeHitter) {
+        if (isChangeHitter) {
             center.setShowChangeHitterVisibility(true);
         }
-        if(isChangeDefPlayer) {
+        if (isChangeDefPlayer) {
             center.setShowChangeGarrisonVisibility(true);
         }
 
     }
 
 
-    private void save(){
-        if(isNew) {
+    private void save() {
+        if (isNew) {
             isNew = false;
             DatabaseService.getInstance().getDatabase().getRecord(DatabaseService.CurrentRecord).getTeam().addRecordItems(this);
-        }
-        else
+        } else
             DatabaseService.getInstance().write();
     }
 
     public Player getCurrentDefPlayer() {
         if (defPlayer.size() == 0)
             defPlayer.add(new Player());
-        return defPlayer.get(defPlayer.size()-1);
+        return defPlayer.get(defPlayer.size() - 1);
     }
 
     public void updatePitchBallView(LinearLayout pitchBallView, NewRecordActivity activity) {
         pitchBallView.removeAllViews();
-        Log.d("ahkui pitch ball",new Gson().toJson(getPitchBall()));
+        Log.d("ahkui pitch ball", new Gson().toJson(getPitchBall()));
         pitchBallView.removeAllViews();
         int index = 0;
         for (int id :
@@ -660,7 +655,7 @@ public class RecordItem implements Serializable {
         __
     }
 
-    public enum BALL_DIRECTION{
+    public enum BALL_DIRECTION {
         __,
         ONE,
         TWO,
@@ -690,7 +685,7 @@ public class RecordItem implements Serializable {
         __,
     }
 
-    public enum RUNS_OUT{
+    public enum RUNS_OUT {
         __,
         RUN,
         ONE_OUT,

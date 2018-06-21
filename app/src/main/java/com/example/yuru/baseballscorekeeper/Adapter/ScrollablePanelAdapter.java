@@ -13,8 +13,6 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,7 +28,6 @@ import com.example.yuru.baseballscorekeeper.Modal.RecordItemFirstBase;
 import com.example.yuru.baseballscorekeeper.Modal.RecordItemOtherBase;
 import com.example.yuru.baseballscorekeeper.NewRecordActivity;
 import com.example.yuru.baseballscorekeeper.R;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,28 +38,21 @@ import java.util.List;
 
 public class ScrollablePanelAdapter extends PanelAdapter {
 
-    private NewRecordActivity activity;
-
-    private EditText editText_playerName,editText_playerNum;
-    private Spinner spinner_position;
-    private View view_set_player;
-
-    private String playerName;
-    private int playerNum,playerPosition;
-
-    private BaseCenterDialog baseCenterDialog;
-    private BaseOtherDialog baseOtherDialog;
-    private BaseFirstDialog baseFirstDialog;
-    private GoodBadBallDialog goodBadBallDialog;
-
-    private List<List<RecordItem>> recordItems;
-
     private static final int TEAMNAME_TYPE = 4;
     private static final int PLAYERINFO_TYPE = 0;
     private static final int BOARDNUM_TYPE = 1;
     private static final int ORDER_TYPE = 2;
-
-    private RecordItemOtherBase recordItemUI;
+    private NewRecordActivity activity;
+    private EditText editText_playerName, editText_playerNum;
+    private Spinner spinner_position;
+    private View view_set_player;
+    private String playerName;
+    private int playerNum, playerPosition;
+    private BaseCenterDialog baseCenterDialog;
+    private BaseOtherDialog baseOtherDialog;
+    private BaseFirstDialog baseFirstDialog;
+    private GoodBadBallDialog goodBadBallDialog;
+    private List<List<RecordItem>> recordItems;
 
     public ScrollablePanelAdapter(NewRecordActivity activity) {
         super();
@@ -79,12 +69,12 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     @Override
     public int getRowCount() {
-        return recordItems.size()+1;
+        return recordItems.size() + 1;
     }
 
     @Override
     public int getColumnCount() {
-        return recordItems.get(0).size()+1 ;
+        return recordItems.get(0).size() + 1;
     }
 
     @Override
@@ -147,7 +137,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     }
 
-   //設定局數顯示
+    //設定局數顯示
     private void setBoardNumView(int pos, BoardNumViewHolder viewHolder) {
         viewHolder.dateTextView.setText(activity.currentRecord.getTeam().getRoundText(activity.currentRecord.getTeam().getRecordItemsPositionRound(pos)));
     }
@@ -158,18 +148,17 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         final Player playerInfo = activity.currentRecord.getTeam().getTeamMember().get(pos - 1);  //取得player物件
         viewHolder.text_batOrder.setText(Integer.valueOf(pos).toString());
 
-        Log.d(">>>>player",playerInfo.getName());
+        Log.d(">>>>player", playerInfo.getName());
 
-        if (playerInfo != null && pos>0) {
+        if (pos > 0) {
 
             //設定資料
             viewHolder.text_playerPosition.setText(playerInfo.getPosition().toString().replaceAll("_", ""));
             viewHolder.text_playerName.setText(playerInfo.getName());
             //設定球員背號
-            if(playerInfo.getId() == -1) {
+            if (playerInfo.getId() == -1) {
                 viewHolder.text_playerNum.setText("");
-            }
-            else {
+            } else {
                 viewHolder.text_playerNum.setText(Long.valueOf(playerInfo.getId()).toString());
             }
 
@@ -180,7 +169,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 public void onClick(View v) {
                     //透過 LayoutInflater的inflate()方法將xml定義的一個布局找出来
                     view_set_player = LayoutInflater.from(activity).inflate(R.layout.dialog_new_player, null);
-                    view_set_player.setPadding(3,0,3,0);
+                    view_set_player.setPadding(3, 0, 3, 0);
                     ImageView img = view_set_player.findViewById(R.id.image_title_newPlayer);
                     img.setVisibility(View.GONE);
                     editText_playerName = view_set_player.findViewById(R.id.editText_playerName);
@@ -191,14 +180,14 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                     dialog_setPlayer.setView(view_set_player);  //透過Builder創建AlertDialog
 
                     // spinner下拉選單設定
-                    ArrayAdapter<String> adapter_position = new ArrayAdapter<>(dialog_setPlayer.getContext(),android.R.layout.simple_spinner_item,new String[]{"","P","C","1B","2B","3B","SS","LF","CF","RF"});
+                    ArrayAdapter<String> adapter_position = new ArrayAdapter<>(dialog_setPlayer.getContext(), android.R.layout.simple_spinner_item, new String[]{"", "P", "C", "1B", "2B", "3B", "SS", "LF", "CF", "RF"});
                     adapter_position.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinner_position.setAdapter(adapter_position);
 
                     dialog_setPlayer.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            if(!editText_playerNum.getText().toString().equals("")) {
+                            if (!editText_playerNum.getText().toString().equals("")) {
                                 playerName = editText_playerName.getText().toString();
                                 playerNum = Integer.valueOf(editText_playerNum.getText().toString());
                                 playerPosition = (int) spinner_position.getSelectedItemId();
@@ -210,11 +199,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                                 //在畫面顯示使用者輸入資料
                                 viewHolder.text_playerName.setText(playerName);
                                 viewHolder.text_playerNum.setText(Integer.valueOf(playerNum).toString());
-                                viewHolder.text_playerPosition.setText(playerInfo.getPosition().toString().replaceAll("_",""));
+                                viewHolder.text_playerPosition.setText(playerInfo.getPosition().toString().replaceAll("_", ""));
 
                                 Toast.makeText(activity.getApplicationContext(), "SET", Toast.LENGTH_SHORT).show();
-                            }
-                            else {
+                            } else {
                                 Toast.makeText(activity.getApplicationContext(), "請填入背號!", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -230,7 +218,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     //設定紀錄版畫面
     private void setOrderView(final int row, final int column, final OrderViewHolder viewHolder) {
-        final RecordItem recordItem = recordItems.get(row -1).get(column-1);
+        final RecordItem recordItem = recordItems.get(row - 1).get(column - 1);
         viewHolder.setRecordItem(recordItem);
         if (recordItem != null) {
             viewHolder.getScoreView.bringToFront();
@@ -242,8 +230,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                     //設定baseCenterDialog
                     baseCenterDialog = new BaseCenterDialog();
                     baseCenterDialog.setActivity(activity);  //設定dialog切換的activity
-                    baseCenterDialog.setBaseCenterDialog(viewHolder,row);  //設定按下後的dialog並顯示
-                    Toast.makeText(v.getContext(), "得分區域" +recordItem.getAttPlayer().getName(), Toast.LENGTH_SHORT).show();
+                    baseCenterDialog.setBaseCenterDialog(viewHolder, row);  //設定按下後的dialog並顯示
+                    Toast.makeText(v.getContext(), "得分區域" + recordItem.getAttPlayer().getName(), Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -255,7 +243,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                     baseFirstDialog = new BaseFirstDialog();
                     baseFirstDialog.setActivity(activity);
                     baseFirstDialog.setBaseFirstDialog(viewHolder);
-                    Toast.makeText(v.getContext(), "一壘" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), "一壘", Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -267,8 +255,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                     baseOtherDialog = new BaseOtherDialog();      //設定baseOtherDialog並顯示
                     baseOtherDialog.setActivity(activity);
                     baseOtherDialog.setBaseUI(viewHolder.base2);
-                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進(數字)","進壘(箭頭)"}, 2);
-                    Toast.makeText(v.getContext(), "二壘" , Toast.LENGTH_SHORT).show();
+                    baseOtherDialog.setBaseOtherDialog(viewHolder, new String[]{"推進(數字)", "進壘(箭頭)"}, 2);
+                    Toast.makeText(v.getContext(), "二壘", Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -280,8 +268,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                     baseOtherDialog = new BaseOtherDialog();  //設定baseOtherDialog並顯示
                     baseOtherDialog.setActivity(activity);
                     baseOtherDialog.setBaseUI(viewHolder.base3);
-                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進(數字)","進壘(箭頭)"}, 3);
-                    Toast.makeText(v.getContext(), "三壘" , Toast.LENGTH_SHORT).show();
+                    baseOtherDialog.setBaseOtherDialog(viewHolder, new String[]{"推進(數字)", "進壘(箭頭)"}, 3);
+                    Toast.makeText(v.getContext(), "三壘", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -292,8 +280,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                     baseOtherDialog = new BaseOtherDialog();  //設定baseOtherDialog並顯示
                     baseOtherDialog.setActivity(activity);
                     baseOtherDialog.setBaseUI(viewHolder.base);
-                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進(數字)","進壘(箭頭)"},0);
-                    Toast.makeText(v.getContext(), "本壘" , Toast.LENGTH_SHORT).show();
+                    baseOtherDialog.setBaseOtherDialog(viewHolder, new String[]{"推進(數字)", "進壘(箭頭)"}, 0);
+                    Toast.makeText(v.getContext(), "本壘", Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -305,7 +293,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                     goodBadBallDialog = new GoodBadBallDialog();   //設定goodBadBallDialog並顯示
                     goodBadBallDialog.setActivity(activity);
                     goodBadBallDialog.setGoodBadBallDialog(viewHolder);
-                    Toast.makeText(v.getContext(), "好壞球" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), "好壞球", Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -321,6 +309,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     //找出各個view的畫面元件
     static class BoardNumViewHolder extends RecyclerView.ViewHolder {
         TextView dateTextView;
+
         BoardNumViewHolder(View itemView) {
             super(itemView);
             this.dateTextView = itemView.findViewById(R.id.text_boardNum);
@@ -333,6 +322,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         public TextView text_playerName;
         public TextView text_playerNum;
         public TextView text_batOrder;
+
         PlayerInfoViewHolder(View view) {
             super(view);
             this.text_playerPosition = view.findViewById(R.id.text_playerPosition);
@@ -345,70 +335,63 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     public static class OrderViewHolder extends RecyclerView.ViewHolder {
         private final LinearLayout pitchBallView;
         public RecordItem recordItem;
-
+        public RecordItemCenter center;
+        public RecordItemOtherBase base2;
+        public RecordItemOtherBase base3;
+        public RecordItemOtherBase base;
         TextView getScoreView;
         TextView getFirstView;
         TextView getHomeView;
         TextView getSecondView;
         TextView getThirdView;
         TextView getBallView;
-
         //更改球員
-        ImageView getChangeGarrison,getChangeHitter;
-
+        ImageView getChangeGarrison, getChangeHitter;
         //center
         ImageView getCenterView;
         //安打
-        ImageView getHit1View,getHit2View,getHit3View,getHit4View;
-        public RecordItemCenter center;
-
+        ImageView getHit1View, getHit2View, getHit3View, getHit4View;
         //一壘
-        ImageView getFirstViewZero,getFirstViewHR;
-        FrameLayout getFirstViewOne,getFirstViewTwo,getFirstViewThree;
-        ImageView getFirstViewOneTop,getFirstViewOneNum,getFirstViewOneBottom;
-        ImageView getFirstViewOneAc1,getFirstViewOneAc2;
-        ImageView getFirstViewTwoNum,getFirstViewTwoAc;
-        ImageView getFirstViewThreeNum,getFirstViewThreeAc;
-        ImageView getSacrificeFly,getSacrificeHits;
+        ImageView getFirstViewZero, getFirstViewHR;
+        FrameLayout getFirstViewOne, getFirstViewTwo, getFirstViewThree;
+        ImageView getFirstViewOneTop, getFirstViewOneNum, getFirstViewOneBottom;
+        ImageView getFirstViewOneAc1, getFirstViewOneAc2;
+        ImageView getFirstViewTwoNum, getFirstViewTwoAc;
+        ImageView getFirstViewThreeNum, getFirstViewThreeAc;
+        ImageView getSacrificeFly, getSacrificeHits;
         //
         ImageView getEnd;
         RecordItemFirstBase base1;
-
         //二壘
-        ImageView getSecondViewActionName,getSecondViewPushNum,getSecondViewBase;
+        ImageView getSecondViewActionName, getSecondViewPushNum, getSecondViewBase;
         LinearLayout getSecondViewAction;
-        ImageView getSecondViewActionOneNum,getSecondViewActionOneAc;
-        ImageView getSecondViewActionTwoNum,getSecondViewActionTwoAc;
+        ImageView getSecondViewActionOneNum, getSecondViewActionOneAc;
+        ImageView getSecondViewActionTwoNum, getSecondViewActionTwoAc;
         LinearLayout getSecondViewThrow;
-        ImageView getSecondViewThrowOne,getSecondViewThrowTwo;
-        public RecordItemOtherBase base2;
-
+        ImageView getSecondViewThrowOne, getSecondViewThrowTwo;
         //三壘
-        ImageView getThirdViewActionName,getThirdViewPushNum,getThirdViewBase;
+        ImageView getThirdViewActionName, getThirdViewPushNum, getThirdViewBase;
         LinearLayout getThirdViewAction;
-        ImageView getThirdViewActionOneNum,getThirdViewActionOneAc;
-        ImageView getThirdViewActionTwoNum,getThirdViewActionTwoAc;
+        ImageView getThirdViewActionOneNum, getThirdViewActionOneAc;
+        ImageView getThirdViewActionTwoNum, getThirdViewActionTwoAc;
         LinearLayout getThirdViewThrow;
-        ImageView getThirdViewThrowOne,getThirdViewThrowTwo;
-        public RecordItemOtherBase base3;
-
+        ImageView getThirdViewThrowOne, getThirdViewThrowTwo;
         //本壘
-        ImageView getHomeViewActionName,getHomeViewPushNum,getHomeViewBase;
+        ImageView getHomeViewActionName, getHomeViewPushNum, getHomeViewBase;
         LinearLayout getHomeViewAction;
-        ImageView getHomeViewActionOneNum,getHomeViewActionOneAc;
-        ImageView getHomeViewActionTwoNum,getHomeViewActionTwoAc;
+        ImageView getHomeViewActionOneNum, getHomeViewActionOneAc;
+        ImageView getHomeViewActionTwoNum, getHomeViewActionTwoAc;
         LinearLayout getHomeViewThrow;
-        ImageView getHomeViewThrowOne,getHomeViewThrowTwo;
-        public RecordItemOtherBase base;
+        ImageView getHomeViewThrowOne, getHomeViewThrowTwo;
 
 
         OrderViewHolder(View view) {
             super(view);
             this.pitchBallView = view.findViewById(R.id.relativeLayout__ballView);
-            base1  = new RecordItemFirstBase();
-            base2  = new RecordItemOtherBase();
-            base3  = new RecordItemOtherBase();
-            base  = new RecordItemOtherBase();
+            base1 = new RecordItemFirstBase();
+            base2 = new RecordItemOtherBase();
+            base3 = new RecordItemOtherBase();
+            base = new RecordItemOtherBase();
             center = new RecordItemCenter();
 
             this.getScoreView = view.findViewById(R.id.centerView);
@@ -416,7 +399,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.getHomeView = view.findViewById(R.id.homeView);
             this.getSecondView = view.findViewById(R.id.secondView);
             this.getThirdView = view.findViewById(R.id.thirdView);
-            this.getBallView= view.findViewById(R.id.ballView);
+            this.getBallView = view.findViewById(R.id.ballView);
 
             this.getChangeGarrison = view.findViewById(R.id.image_change_garrison);
             this.getChangeHitter = view.findViewById(R.id.image_change_hitter);
@@ -474,9 +457,6 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             base1.setShowFirstViewThreeAc(getFirstViewThreeAc);
             base1.setShowSacrificeFly(getSacrificeFly);
             base1.setShowSacrificeHits(getSacrificeHits);
-
-
-
 
 
             //二壘
@@ -560,18 +540,18 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.recordItem = recordItem;
             recordItem.updateCenter(center);
             recordItem.updateFirstBaseUI(base1);
-            recordItem.updateOtherBaseUI(base2,2);
-            recordItem.updateOtherBaseUI(base3,3);
-            recordItem.updateOtherBaseUI(base,0);
+            recordItem.updateOtherBaseUI(base2, 2);
+            recordItem.updateOtherBaseUI(base3, 3);
+            recordItem.updateOtherBaseUI(base, 0);
         }
 
-        public void updateUI(NewRecordActivity activity){
+        public void updateUI(NewRecordActivity activity) {
             recordItem.updateCenter(center);
             recordItem.updateFirstBaseUI(base1);
-            recordItem.updateOtherBaseUI(base2,2);
-            recordItem.updateOtherBaseUI(base3,3);
-            recordItem.updateOtherBaseUI(base,0);
-            recordItem.updatePitchBallView(pitchBallView,activity);
+            recordItem.updateOtherBaseUI(base2, 2);
+            recordItem.updateOtherBaseUI(base3, 3);
+            recordItem.updateOtherBaseUI(base, 0);
+            recordItem.updatePitchBallView(pitchBallView, activity);
             activity.scrollablePanel.notifyDataSetChanged();
             activity.score_scrollable_panel.notifyDataSetChanged();
         }
@@ -580,6 +560,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     static class TeamNameViewHolder extends RecyclerView.ViewHolder {
         TextView titleTextView;
+
         TeamNameViewHolder(View view) {
             super(view);
             this.titleTextView = view.findViewById(R.id.text_teamName);

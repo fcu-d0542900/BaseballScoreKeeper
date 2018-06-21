@@ -43,31 +43,6 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
         return new ViewHolder(v);
     }
 
-    // 使用 ViewHolder 包裝項目使用的畫面元件
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
-        // 編號、名稱、說明與是否選擇
-        protected TextView id_text;
-        protected TextView name_text;
-        protected TextView position_text;
-
-        // 包裝元件
-        View rootView;
-
-        ViewHolder(View view) {
-            super(view);
-
-            // 使用父類別 ViewHolder 宣告的「itemView」欄位變數，
-            // 取得背號、名稱
-            id_text = itemView.findViewById(R.id.id_text);
-            name_text = itemView.findViewById(R.id.name_text);
-            position_text = itemView.findViewById(R.id.position_text);
-
-            // 設定包裝元件
-            rootView = view;
-        }
-    }
-
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
@@ -77,7 +52,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
         // 設定編號、名稱、說明與是否選擇
         holder.id_text.setText(Long.toString(player.getId()));
         holder.name_text.setText(player.getName());
-        holder.position_text.setText(player.getPosition().toString().replaceAll("_",""));  //String.valueOf(player.getPosition())
+        holder.position_text.setText(player.getPosition().toString().replaceAll("_", ""));  //String.valueOf(player.getPosition())
 
         // 設定動畫效果
         setAnimation(holder.rootView, position);
@@ -142,6 +117,31 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
         }
         // 通知資料項目已經移動
         notifyItemMoved(fromPosition, toPosition);
+    }
+
+    // 使用 ViewHolder 包裝項目使用的畫面元件
+    protected class ViewHolder extends RecyclerView.ViewHolder {
+
+        // 編號、名稱、說明與是否選擇
+        protected TextView id_text;
+        protected TextView name_text;
+        protected TextView position_text;
+
+        // 包裝元件
+        View rootView;
+
+        ViewHolder(View view) {
+            super(view);
+
+            // 使用父類別 ViewHolder 宣告的「itemView」欄位變數，
+            // 取得背號、名稱
+            id_text = itemView.findViewById(R.id.id_text);
+            name_text = itemView.findViewById(R.id.name_text);
+            position_text = itemView.findViewById(R.id.position_text);
+
+            // 設定包裝元件
+            rootView = view;
+        }
     }
 
 

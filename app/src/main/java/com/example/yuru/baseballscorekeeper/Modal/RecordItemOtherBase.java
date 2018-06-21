@@ -9,19 +9,19 @@ import android.widget.LinearLayout;
  */
 
 public class RecordItemOtherBase {
-    private ImageView showActionNameView,showPushNumView,showToBaseView;
-    private LinearLayout showActionView,showThrowView;
-    private ImageView showActionOneAcView,showActionTwoAcView;
-    private ImageView actionOneNum,actionTwoNum;
-    public ImageView throwOne,throwTwo;
+    public ImageView throwOne, throwTwo;
+    private ImageView showActionNameView, showPushNumView, showToBaseView;
+    private LinearLayout showActionView, showThrowView;
+    private ImageView showActionOneAcView, showActionTwoAcView;
+    private ImageView actionOneNum, actionTwoNum;
     private RecordItemOtherBase recordItemUI;
 
 
-    public void setBase1UI(RecordItemOtherBase viewHolder ){
-        recordItemUI=viewHolder;
+    public void setBase1UI(RecordItemOtherBase viewHolder) {
+        recordItemUI = viewHolder;
     }
 
-    public RecordItemOtherBase getBaseUI(){
+    public RecordItemOtherBase getBaseUI() {
         return recordItemUI;
     }
 
@@ -30,13 +30,13 @@ public class RecordItemOtherBase {
     }
 
     //ShowActionName TP、CS等等顯示
-    public  void setShowActionNameValue(int imageID) {
+    public void setShowActionNameValue(int imageID) {
         showActionNameView.setImageResource(imageID);
     }
 
     public void setShowActionNameViewVisibility(boolean isShow) {
         if (showActionNameView != null)
-            showActionNameView.setVisibility(isShow? View.VISIBLE:View.GONE);
+            showActionNameView.setVisibility(isShow ? View.VISIBLE : View.GONE);
     }
 
     //ShowAction  失誤view顯示
@@ -46,7 +46,7 @@ public class RecordItemOtherBase {
 
     public void setShowActionViewVisibility(boolean isShow) {
         if (showActionView != null)
-            showActionView.setVisibility(isShow? View.VISIBLE:View.GONE);
+            showActionView.setVisibility(isShow ? View.VISIBLE : View.GONE);
     }
 
     //ShowThrow
@@ -56,7 +56,7 @@ public class RecordItemOtherBase {
 
     public void setShowThrowViewVisibility(boolean isShow) {
         if (showThrowView != null)
-            showThrowView.setVisibility(isShow? View.VISIBLE:View.GONE);
+            showThrowView.setVisibility(isShow ? View.VISIBLE : View.GONE);
     }
 
     //ShowPushNum
@@ -64,13 +64,13 @@ public class RecordItemOtherBase {
         this.showPushNumView = showPushNumView;
     }
 
-    public  void setShowPushNumValue(int imageID) {
+    public void setShowPushNumValue(int imageID) {
         showPushNumView.setImageResource(imageID);
     }
 
     public void setShowPushNumViewVisibility(boolean isShow) {
         if (showPushNumView != null)
-            showPushNumView.setVisibility(isShow? View.VISIBLE:View.INVISIBLE);
+            showPushNumView.setVisibility(isShow ? View.VISIBLE : View.INVISIBLE);
     }
 
     //ShowToBase
@@ -80,7 +80,7 @@ public class RecordItemOtherBase {
 
     public void setShowToBaseViewVisibility(boolean isShow) {
         if (showToBaseView != null)
-            showToBaseView.setVisibility(isShow? View.VISIBLE:View.INVISIBLE);
+            showToBaseView.setVisibility(isShow ? View.VISIBLE : View.INVISIBLE);
     }
 
     //ShowActionOneAc  左失誤
@@ -90,7 +90,7 @@ public class RecordItemOtherBase {
 
     public void setShowActionOneAcViewVisibility(boolean isShow) {
         if (showActionOneAcView != null)
-            showActionOneAcView.setVisibility(isShow? View.VISIBLE:View.GONE);
+            showActionOneAcView.setVisibility(isShow ? View.VISIBLE : View.GONE);
     }
 
     //ShowActionTwoAc   右失誤
@@ -100,7 +100,7 @@ public class RecordItemOtherBase {
 
     public void setShowActionTwoAcViewVisibility(boolean isShow) {
         if (showActionTwoAcView != null)
-            showActionTwoAcView.setVisibility(isShow? View.VISIBLE:View.GONE);
+            showActionTwoAcView.setVisibility(isShow ? View.VISIBLE : View.GONE);
     }
 
     //ActionOneNum  左數字
@@ -108,7 +108,7 @@ public class RecordItemOtherBase {
         this.actionOneNum = actionOneNum;
     }
 
-    public  void setActionOneNumValue(int imageID) {
+    public void setActionOneNumValue(int imageID) {
         actionOneNum.setImageResource(imageID);
     }
 
@@ -117,7 +117,7 @@ public class RecordItemOtherBase {
         this.actionTwoNum = actionTwoNum;
     }
 
-    public  void setActionTwoNumValue(int imageID) {
+    public void setActionTwoNumValue(int imageID) {
         actionTwoNum.setImageResource(imageID);
     }
 
@@ -126,7 +126,7 @@ public class RecordItemOtherBase {
         this.throwOne = throwOne;
     }
 
-    public  void setThrowOneValue(int imageID) {
+    public void setThrowOneValue(int imageID) {
         throwOne.setImageResource(imageID);
     }
 
@@ -135,7 +135,7 @@ public class RecordItemOtherBase {
         this.throwTwo = throwTwo;
     }
 
-    public  void setThrowTwoValue(int imageID) {
+    public void setThrowTwoValue(int imageID) {
         throwTwo.setImageResource(imageID);
     }
 }

@@ -15,20 +15,24 @@ public class Record implements Serializable {
     private RecordTeam.Faction currenFaction;
 
     public Record(String name, String awayTeam, String homeTeam, Date date) {
-        this.name=name;
-        this.date=date;
-        this.away=new RecordTeam(awayTeam, RecordTeam.Faction.away);
-        this.home=new RecordTeam(homeTeam, RecordTeam.Faction.home);
+        this.name = name;
+        this.date = date;
+        this.away = new RecordTeam(awayTeam, RecordTeam.Faction.away);
+        this.home = new RecordTeam(homeTeam, RecordTeam.Faction.home);
         this.currenFaction = RecordTeam.Faction.away;
     }
 
+    public String getGameName() {
+        return name;
+    }
+
     public void setGameName(String name) {
-        this.name=name;
+        this.name = name;
         DatabaseService.getInstance().write();
     }
 
-    public String getGameName() {
-        return  name;
+    public Date getGameDate() {
+        return date;
     }
 
     public void setGameDate(Date date) {
@@ -37,12 +41,8 @@ public class Record implements Serializable {
 
     }
 
-    public Date getGameDate() {
-        return date;
-    }
-
-    public RecordTeam getTeam(){
-        switch (currenFaction){
+    public RecordTeam getTeam() {
+        switch (currenFaction) {
             case home:
                 return getHomeTeam();
             case away:

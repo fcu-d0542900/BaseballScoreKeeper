@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.yuru.baseballscorekeeper.Modal.BoardNumInfo;
-import com.example.yuru.baseballscorekeeper.Modal.RecordItem;
 import com.example.yuru.baseballscorekeeper.Modal.RecordTeam;
 import com.example.yuru.baseballscorekeeper.NewRecordActivity;
 import com.example.yuru.baseballscorekeeper.R;
@@ -25,40 +24,39 @@ import java.util.List;
 
 public class ScoreScrollablePanelAdapter extends PanelAdapter {
 
+    private static final int TITLENAME_TYPE = 7;
+    private static final int TEAMINFO_TYPE = 5;
+    private static final int BOARDNUM_TYPE = 1;
+    private static final int SCOREBOARD_TYPE = 6;
     private List<RecordTeam> recordTeam = new ArrayList<>();
     private List<BoardNumInfo> boardNumInfoList = new ArrayList<>();
     private NewRecordActivity activity;
     private RecordAdapter.OnItemClickListener mOnItemClickListener;
     private List<List<String>> scoreList;
 
-    private static final int TITLENAME_TYPE = 7;
-    private static final int TEAMINFO_TYPE = 5;
-    private static final int BOARDNUM_TYPE = 1;
-    private static final int SCOREBOARD_TYPE = 6;
-
-
-    public void setOnItemClickListener(RecordAdapter.OnItemClickListener mOnItemClickListener){
-        this.mOnItemClickListener = mOnItemClickListener;
-    }
 
     public ScoreScrollablePanelAdapter(NewRecordActivity activity) {
         super();
         this.activity = activity;
-        if (activity.currentRecord != null){
+        if (activity.currentRecord != null) {
             recordTeam.clear();
             recordTeam.add(activity.currentRecord.getAwayTeam());
             recordTeam.add(activity.currentRecord.getHomeTeam());
         }
         boardNumInfoList.clear();
-        for (int i=0;i<9+2;i++){
+        for (int i = 0; i < 9 + 2; i++) {
             boardNumInfoList.add(new BoardNumInfo(i));
         }
         scoreList = activity.getUpdateScore();
     }
 
+    public void setOnItemClickListener(RecordAdapter.OnItemClickListener mOnItemClickListener) {
+        this.mOnItemClickListener = mOnItemClickListener;
+    }
+
     public void updateData() {
         scoreList = activity.getUpdateScore();
-        Log.d("ahkui",new Gson().toJson(scoreList));
+        Log.d("ahkui", new Gson().toJson(scoreList));
         activity.score_scrollable_panel.notifyDataSetChanged();
     }
 
@@ -135,10 +133,9 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
     private void setBoardNumView(int pos, BoardNumViewHolder viewHolder) {
         BoardNumInfo boardNumInfo = boardNumInfoList.get(pos - 1);
         if (boardNumInfo != null && pos > 0) {
-            if(pos == boardNumInfoList.size()-1) {
+            if (pos == boardNumInfoList.size() - 1) {
                 viewHolder.boaredTextView.setText("R");
-            }
-            else {
+            } else {
                 viewHolder.boaredTextView.setText(Integer.valueOf(boardNumInfo.getBroadNum_num()).toString());
             }
 
@@ -163,8 +160,7 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
                     });
                 }
 
-            }
-            else if (pos == 2) {  //點擊home
+            } else if (pos == 2) {  //點擊home
                 if (mOnItemClickListener != null) {
                     viewHolder.text_teamName.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -180,7 +176,7 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
 
     //記分板
     private void setScoreView(final int row, final int column, final ScoreBoardViewHolder viewHolder) {
-        viewHolder.scoreView.setText(scoreList.get(row-1).get(column-1));
+        viewHolder.scoreView.setText(scoreList.get(row - 1).get(column - 1));
     }
 
     //上方局數欄
@@ -206,9 +202,8 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
 
     //記分板
     private static class ScoreBoardViewHolder extends RecyclerView.ViewHolder {
-        TextView scoreView;
-
         public View view;
+        TextView scoreView;
 
         ScoreBoardViewHolder(View view) {
             super(view);

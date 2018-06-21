@@ -1,5 +1,6 @@
 package com.example.yuru.baseballscorekeeper.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -32,56 +33,25 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
 
     private OnItemClickListener mOnItemClickListener;
 
-    public RecordAdapter(Context context) {
+    protected RecordAdapter(Context context) {
         this.item_record = DatabaseService.getInstance().getDatabase().getAllRecord();
         this.context = context;
     }
 
-    //設置回調接口
-    public interface OnItemClickListener {
-        void onItemClick(View view, int position);
-    }
-
-    public void setOnItemClickLitener(OnItemClickListener mOnItemClickListener){
+    public void setOnItemClickLitener(OnItemClickListener mOnItemClickListener) {
         this.mOnItemClickListener = mOnItemClickListener;
     }
-
 
     @Override
     public RecordAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // 建立項目使用的畫面配置元件
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_item02, parent, false);
         // 建立與回傳包裝好的畫面配置元件
-        RecordAdapter.ViewHolder viewHolder = new RecordAdapter.ViewHolder(v);
-        return viewHolder;
-    }
-
-    // 使用 ViewHolder 包裝項目使用的畫面元件
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
-        // 編號、名稱、說明與是否選擇
-        protected TextView text_gameName;
-        protected TextView text_gameDate;
-        protected CardView cardView;
-
-        // 包裝元件
-        protected View rootView;
-
-        public ViewHolder(View view) {
-            super(view);
-
-            // 使用父類別 ViewHolder 宣告的「itemView」欄位變數，
-            // 取得背號、名稱
-            text_gameName = itemView.findViewById(R.id.card_gameName);
-            text_gameDate = itemView.findViewById(R.id.card_gameDate);
-            cardView = itemView.findViewById(R.id.card_view_record);
-            // 設定包裝元件
-            rootView = view;
-        }
+        return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(final RecordAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final RecordAdapter.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         // 讀取目前位置的項目物件
         final Record record = item_record.get(position);
 
@@ -117,22 +87,13 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         }
     }
 
-
-
     @Override
     public int getItemCount() {
         return item_record.size();
     }
 
-    // 新增一個項目
-//    public void add(Record record) {
-//        item_record.add(record);
-//        // 通知資料項目已經新增
-//        notifyItemInserted(item_record.size());
-//    }
-
     // 刪除一個項目
-    public void remove(int position) {
+    private void remove(int position) {
         item_record.remove(position);
         DatabaseService.getInstance().write();
         // 通知資料項目已經刪除
@@ -145,6 +106,13 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         // 通知資料項目已經刪除
         notifyDataSetChanged();
     }
+
+    // 新增一個項目
+//    public void add(Record record) {
+//        item_record.add(record);
+//        // 通知資料項目已經新增
+//        notifyItemInserted(item_record.size());
+//    }
 
     // 實作 ItemTouchHelperAdapter 介面的方法
     // 左右滑動項目
@@ -172,6 +140,35 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
 
         // 通知資料項目已經移動
         notifyItemMoved(fromPosition, toPosition);
+    }
+
+    //設置回調接口
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
+    // 使用 ViewHolder 包裝項目使用的畫面元件
+    protected class ViewHolder extends RecyclerView.ViewHolder {
+
+        // 編號、名稱、說明與是否選擇
+        protected TextView text_gameName;
+        TextView text_gameDate;
+        CardView cardView;
+
+        // 包裝元件
+        private View rootView;
+
+        ViewHolder(View view) {
+            super(view);
+
+            // 使用父類別 ViewHolder 宣告的「itemView」欄位變數，
+            // 取得背號、名稱
+            text_gameName = itemView.findViewById(R.id.card_gameName);
+            text_gameDate = itemView.findViewById(R.id.card_gameDate);
+            cardView = itemView.findViewById(R.id.card_view_record);
+            // 設定包裝元件
+            rootView = view;
+        }
     }
 
 }

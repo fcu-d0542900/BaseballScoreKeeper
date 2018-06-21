@@ -1,7 +1,9 @@
 package com.example.yuru.baseballscorekeeper.Dialog;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -10,11 +12,11 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.yuru.baseballscorekeeper.Adapter.ScrollablePanelAdapter;
 import com.example.yuru.baseballscorekeeper.Modal.Player;
 import com.example.yuru.baseballscorekeeper.Modal.RecordItem;
 import com.example.yuru.baseballscorekeeper.NewRecordActivity;
 import com.example.yuru.baseballscorekeeper.R;
-import com.example.yuru.baseballscorekeeper.Adapter.ScrollablePanelAdapter;
 
 /**
  * Created by YURU on 2018/6/18.
@@ -22,21 +24,19 @@ import com.example.yuru.baseballscorekeeper.Adapter.ScrollablePanelAdapter;
 
 public class BaseCenterDialog {
 
-    private ScrollablePanelAdapter.PlayerInfoViewHolder playerInfoViewHolder;
 
     private NewRecordActivity activity;
 
-    private EditText editText_playerName,editText_playerNum;
+    private EditText editText_playerName, editText_playerNum;
     private Spinner spinner_position;
 
-    private EditText editText_change_P,editText_change_C;
-    private EditText editText_change_1B,editText_change_2B,editText_change_3B,editText_change_SS;
-    private EditText editText_change_LF,editText_change_CF,editText_change_RF;
-    private int change_P,change_C,change_1B,change_2B,change_3B,change_SS,change_LF,change_CF,change_RF;
+    private EditText editText_change_P, editText_change_C;
+    private EditText editText_change_1B, editText_change_2B, editText_change_3B, editText_change_SS;
+    private EditText editText_change_LF, editText_change_CF, editText_change_RF;
+    private int change_P, change_C, change_1B, change_2B, change_3B, change_SS, change_LF, change_CF, change_RF;
 
-    private String[] center_choice = new String[]{"得分/出局", "安打","替換守備","替換打者","結束半局"};
-    private String[] hits_choice = new String[]{"一壘安打", "二壘安打","三壘安打","全壘打"};
-
+    private String[] center_choice = new String[]{"得分/出局", "安打", "替換守備", "替換打者", "結束半局"};
+    private String[] hits_choice = new String[]{"一壘安打", "二壘安打", "三壘安打", "全壘打"};
 
 
     public void setActivity(NewRecordActivity activity) {
@@ -131,7 +131,7 @@ public class BaseCenterDialog {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 String name_h = hits_choice[which];
-                                                viewHolder.recordItem.setHIT_Num(which+1);
+                                                viewHolder.recordItem.setHIT_Num(which + 1);
                                                 viewHolder.updateUI(activity);
                                                 // 設定安打紅線顯示
                                                 // whitch=0 一壘安打 顯示下面(1)
@@ -160,7 +160,7 @@ public class BaseCenterDialog {
                             case 3:
                                 Toast.makeText(activity.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
                                 // activity.currentRecord.getTeam().changeAttPlayer();
-                                change_player_hitter(viewHolder,pos);
+                                change_player_hitter(viewHolder, pos);
                                 break;
 
                             //點擊結束半局
@@ -184,9 +184,9 @@ public class BaseCenterDialog {
     }
 
     // 更改打者
-    public void change_player_hitter(final ScrollablePanelAdapter.OrderViewHolder viewHolder, final int pos) {
-        final View view_set_player = LayoutInflater.from(activity).inflate(R.layout.dialog_new_player, null);
-        view_set_player.setPadding(10,10,10,10);
+    private void change_player_hitter(final ScrollablePanelAdapter.OrderViewHolder viewHolder, final int pos) {
+        @SuppressLint("InflateParams") final View view_set_player = LayoutInflater.from(activity).inflate(R.layout.dialog_new_player, null);
+        view_set_player.setPadding(10, 10, 10, 10);
         ImageView img = view_set_player.findViewById(R.id.image_title_newPlayer);
         img.setVisibility(View.GONE);
 
@@ -198,14 +198,14 @@ public class BaseCenterDialog {
         dialog_setPlayer.setView(view_set_player);
 
         //設定選單
-        ArrayAdapter<String> adapter_position = new ArrayAdapter<>(dialog_setPlayer.getContext(),android.R.layout.simple_spinner_item,new String[]{"","P","C","1B","2B","3B","SS","LF","CF","RF"});
+        ArrayAdapter<String> adapter_position = new ArrayAdapter<>(dialog_setPlayer.getContext(), android.R.layout.simple_spinner_item, new String[]{"", "P", "C", "1B", "2B", "3B", "SS", "LF", "CF", "RF"});
         adapter_position.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_position.setAdapter(adapter_position);
 
         dialog_setPlayer.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(!editText_playerNum.getText().toString().equals("")) {
+                if (!editText_playerNum.getText().toString().equals("")) {
                     String playerName = editText_playerName.getText().toString();
                     int playerNum = Integer.valueOf(editText_playerNum.getText().toString());
                     int playerPosition = (int) spinner_position.getSelectedItemId();
@@ -213,18 +213,17 @@ public class BaseCenterDialog {
                     //顯示 recordItemCenter.setShowChangeHitterVisibility(true);
                     //儲存更改球員資料 playerName playerNum  playerPosition
                     //更換球員顯示名稱
-                    Player change_player = new Player(playerNum,playerName,Player.POSITION.values()[playerPosition]);
+                    Player change_player = new Player(playerNum, playerName, Player.POSITION.values()[playerPosition]);
                     viewHolder.recordItem.changeAttPlayer(change_player);
                     viewHolder.updateUI(activity);
 
-                    activity.currentRecord.getTeam().getTeamMember().remove(pos-1);
-                    activity.currentRecord.getTeam().getTeamMember().add(pos-1,change_player);
+                    activity.currentRecord.getTeam().getTeamMember().remove(pos - 1);
+                    activity.currentRecord.getTeam().getTeamMember().add(pos - 1, change_player);
 
                     activity.scrollablePanel.notifyDataSetChanged();
 
-                    Toast.makeText(activity.getApplicationContext(), "SET " + playerName + "," + playerNum + ","  + playerPosition, Toast.LENGTH_SHORT).show();
-                }
-                else {
+                    Toast.makeText(activity.getApplicationContext(), "SET " + playerName + "," + playerNum + "," + playerPosition, Toast.LENGTH_SHORT).show();
+                } else {
                     Toast.makeText(activity.getApplicationContext(), "請填入背號!", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -234,10 +233,10 @@ public class BaseCenterDialog {
     }
 
     //更換守備
-    public void change_player_garrison(final ScrollablePanelAdapter.OrderViewHolder viewHolder) {
+    private void change_player_garrison(final ScrollablePanelAdapter.OrderViewHolder viewHolder) {
         AlertDialog.Builder dialog_change_garrison = new AlertDialog.Builder(activity);
-        View view_change_garrison = LayoutInflater.from(activity).inflate(R.layout.record_change_garrison, null);
-        view_change_garrison.setPadding(30,10,10,10);
+        @SuppressLint("InflateParams") View view_change_garrison = LayoutInflater.from(activity).inflate(R.layout.record_change_garrison, null);
+        view_change_garrison.setPadding(30, 10, 10, 10);
         dialog_change_garrison.setView(view_change_garrison);
         editText_change_P = view_change_garrison.findViewById(R.id.editText_change_P);
         editText_change_C = view_change_garrison.findViewById(R.id.editText_change_C);
@@ -255,39 +254,39 @@ public class BaseCenterDialog {
                 String change_garrison = "";
 
                 //若輸入框不為空 更改其背號
-                if(!editText_change_P.getText().toString().equals("")) {
-                    change_garrison +=  ", P:" + editText_change_P.getText().toString();
+                if (!editText_change_P.getText().toString().equals("")) {
+                    change_garrison += ", P:" + editText_change_P.getText().toString();
                     change_P = Integer.valueOf(editText_change_P.getText().toString());
                 }
-                if(!editText_change_C.getText().toString().equals("")) {
+                if (!editText_change_C.getText().toString().equals("")) {
                     change_garrison += ", C:" + editText_change_C.getText().toString();
                     change_C = Integer.valueOf(editText_change_C.getText().toString());
                 }
-                if(!editText_change_1B.getText().toString().equals("")) {
+                if (!editText_change_1B.getText().toString().equals("")) {
                     change_garrison += ", 1B:" + editText_change_1B.getText().toString();
                     change_1B = Integer.valueOf(editText_change_1B.getText().toString());
                 }
-                if(!editText_change_2B.getText().toString().equals("")) {
+                if (!editText_change_2B.getText().toString().equals("")) {
                     change_garrison += ", 2B:" + editText_change_2B.getText().toString();
                     change_2B = Integer.valueOf(editText_change_2B.getText().toString());
                 }
-                if(!editText_change_3B.getText().toString().equals("")) {
+                if (!editText_change_3B.getText().toString().equals("")) {
                     change_garrison += ", 3B:" + editText_change_3B.getText().toString();
                     change_3B = Integer.valueOf(editText_change_3B.getText().toString());
                 }
-                if(!editText_change_SS.getText().toString().equals("")) {
+                if (!editText_change_SS.getText().toString().equals("")) {
                     change_garrison += ", SS:" + editText_change_SS.getText().toString();
                     change_SS = Integer.valueOf(editText_change_SS.getText().toString());
                 }
-                if(!editText_change_LF.getText().toString().equals("")) {
+                if (!editText_change_LF.getText().toString().equals("")) {
                     change_garrison += ", LF " + editText_change_LF.getText().toString();
                     change_LF = Integer.valueOf(editText_change_LF.getText().toString());
                 }
-                if(!editText_change_CF.getText().toString().equals("")) {
+                if (!editText_change_CF.getText().toString().equals("")) {
                     change_garrison += ", CF:" + editText_change_CF.getText().toString();
-                    change_LF = Integer.valueOf(editText_change_CF.getText().toString());
+                    change_CF = Integer.valueOf(editText_change_CF.getText().toString());
                 }
-                if(!editText_change_RF.getText().toString().equals("")) {
+                if (!editText_change_RF.getText().toString().equals("")) {
                     change_garrison += ", RF:" + editText_change_RF.getText().toString();
                     change_RF = Integer.valueOf(editText_change_RF.getText().toString());
                 }
@@ -296,7 +295,8 @@ public class BaseCenterDialog {
                 viewHolder.center.setShowChangeGarrisonVisibility(true);
                 //TODO YURU 填資料咯
                 //現在只有顯示更換守備符號
-                if(!change_garrison.equals("")) {
+                if (!change_garrison.equals("")) {
+                    Log.d("ahkui",change_P+ change_C+ change_1B+ change_2B+ change_3B+ change_SS+ change_LF+ change_CF+ change_RF+"");
 //                    viewHolder.recordItem.addDefPlayer(new Player(x,x,x)); //TODO YURU 填資料進去
                     viewHolder.updateUI(activity);
                 }

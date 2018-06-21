@@ -54,7 +54,6 @@ public abstract class PanelAdapter {
 
     /**
      * see {@link RecyclerView.Adapter#onCreateViewHolder(ViewGroup, int)}  }
-     *
      */
     public abstract RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType);
 

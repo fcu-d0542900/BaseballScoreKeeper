@@ -1,23 +1,19 @@
 package com.example.yuru.baseballscorekeeper.Dialog;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.yuru.baseballscorekeeper.Adapter.ScrollablePanelAdapter;
 import com.example.yuru.baseballscorekeeper.Modal.RecordItem;
 import com.example.yuru.baseballscorekeeper.NewRecordActivity;
 import com.example.yuru.baseballscorekeeper.R;
-import com.example.yuru.baseballscorekeeper.Adapter.ScrollablePanelAdapter;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -28,7 +24,7 @@ import java.util.ArrayList;
 public class GoodBadBallDialog {
 
     private NewRecordActivity activity;
-    private Spinner spinner;
+    private int currentPitchBallSelect;
 
     public void setActivity(NewRecordActivity activity) {
         this.activity = activity;
@@ -45,10 +41,9 @@ public class GoodBadBallDialog {
                                 setGoodbadballChoiceDialog(viewHolder);
                                 break;
                             case 1:  //點選修改
-                                if(viewHolder.recordItem.getPitchBall().size() > 0){
-                                    setChangeGoodbadballeDialog(viewHolder);
-                                }
-                                else
+                                if (viewHolder.recordItem.getPitchBall().size() > 0) {
+                                    setChangeGoodBadBallDialog(viewHolder);
+                                } else
                                     Toast.makeText(activity, "無欄位可以修改", Toast.LENGTH_SHORT).show();
                                 break;
                             default:
@@ -59,11 +54,11 @@ public class GoodBadBallDialog {
 
     }
 
-    public void setGoodbadballChoiceDialog(final ScrollablePanelAdapter.OrderViewHolder viewHolder) {
+    private void setGoodbadballChoiceDialog(final ScrollablePanelAdapter.OrderViewHolder viewHolder) {
 
         AlertDialog.Builder goodbadball_dialog = new AlertDialog.Builder(activity);
         View view_goodbadball_choice = View.inflate(activity, R.layout.record_goodbadball_dialog, null);      //自訂dialog布局
-        view_goodbadball_choice.setPadding(10,10,10,10);
+        view_goodbadball_choice.setPadding(10, 10, 10, 10);
         goodbadball_dialog.setView(view_goodbadball_choice);   // 設置view
         final AlertDialog new_goodbadball_dialog = goodbadball_dialog.create();    //根據builder設置好的一系列數據, 来建構一個dialog
 
@@ -135,20 +130,20 @@ public class GoodBadBallDialog {
         new_goodbadball_dialog.show();
     }
 
-    private int currentPitchBallSelect;
+    @SuppressLint("InflateParams")
+    private void setChangeGoodBadBallDialog(final ScrollablePanelAdapter.OrderViewHolder viewHolder) {
 
-    public void setChangeGoodbadballeDialog(final ScrollablePanelAdapter.OrderViewHolder viewHolder) {
-
-        ArrayList numsList = new ArrayList();
-        for(int i=0;i<viewHolder.recordItem.getPitchBall().size();i++)
-        {
-            numsList.add(i+1);
+        ArrayList<Integer> numsList = new ArrayList<>();
+        for (int i = 0; i < viewHolder.recordItem.getPitchBall().size(); i++) {
+            numsList.add(i + 1);
         }
-        View view_change_goodbadball = LayoutInflater.from(activity).inflate(R.layout.record_change_goodbadball_dialog, null);
-        AlertDialog.Builder dialog_change_goodbadball = new AlertDialog.Builder(activity);
-        dialog_change_goodbadball.setView(view_change_goodbadball);
-        spinner = view_change_goodbadball.findViewById(R.id.spinner);
-        ArrayAdapter change = new ArrayAdapter( dialog_change_goodbadball.getContext(),android.R.layout.simple_spinner_item, numsList);
+        View view_change_goodbadball;
+        view_change_goodbadball = LayoutInflater.from(activity).inflate(R.layout.record_change_goodbadball_dialog, null);
+        AlertDialog.Builder dialog_change_goodBadBall = new AlertDialog.Builder(activity);
+        dialog_change_goodBadBall.setView(view_change_goodbadball);
+        Spinner spinner = view_change_goodbadball.findViewById(R.id.spinner);
+        ArrayAdapter<Integer> change;
+        change = new ArrayAdapter<>(dialog_change_goodBadBall.getContext(), android.R.layout.simple_spinner_item, numsList);
         change.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(change);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -159,18 +154,19 @@ public class GoodBadBallDialog {
                     currentPitchBallSelect = position;
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 currentPitchBallSelect = -1;
             }
 
         });
-        dialog_change_goodbadball.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        dialog_change_goodBadBall.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogInterface, int i) {
 
                 AlertDialog.Builder goodbadball_dialog = new AlertDialog.Builder(activity);
                 View view_goodbadball_choice = View.inflate(activity, R.layout.record_goodbadball_dialog, null);      //自訂dialog布局
-                view_goodbadball_choice.setPadding(10,10,10,10);
+                view_goodbadball_choice.setPadding(10, 10, 10, 10);
                 goodbadball_dialog.setView(view_goodbadball_choice);   // 設置view
                 final AlertDialog new_goodbadball_dialog = goodbadball_dialog.create();    //根據builder設置好的一系列數據, 来建構一個dialog
 
@@ -179,7 +175,7 @@ public class GoodBadBallDialog {
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(activity, "好球", Toast.LENGTH_SHORT).show();
-                        viewHolder.recordItem.updatePitchBall(currentPitchBallSelect,RecordItem.PITCH_BALL_TYPE.STRIKE);
+                        viewHolder.recordItem.updatePitchBall(currentPitchBallSelect, RecordItem.PITCH_BALL_TYPE.STRIKE);
                         viewHolder.updateUI(activity);
                         new_goodbadball_dialog.dismiss();
                     }
@@ -190,7 +186,7 @@ public class GoodBadBallDialog {
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(activity, "好球(揮空)", Toast.LENGTH_SHORT).show();
-                        viewHolder.recordItem.updatePitchBall(currentPitchBallSelect,RecordItem.PITCH_BALL_TYPE.MISS_STRIKE);
+                        viewHolder.recordItem.updatePitchBall(currentPitchBallSelect, RecordItem.PITCH_BALL_TYPE.MISS_STRIKE);
                         viewHolder.updateUI(activity);
                         new_goodbadball_dialog.dismiss();
                     }
@@ -201,7 +197,7 @@ public class GoodBadBallDialog {
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(activity, "壞球", Toast.LENGTH_SHORT).show();
-                        viewHolder.recordItem.updatePitchBall(currentPitchBallSelect,RecordItem.PITCH_BALL_TYPE.BALL);
+                        viewHolder.recordItem.updatePitchBall(currentPitchBallSelect, RecordItem.PITCH_BALL_TYPE.BALL);
                         viewHolder.updateUI(activity);
                         new_goodbadball_dialog.dismiss();
                     }
@@ -212,7 +208,7 @@ public class GoodBadBallDialog {
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(activity, "界外球", Toast.LENGTH_SHORT).show();
-                        viewHolder.recordItem.updatePitchBall(currentPitchBallSelect,RecordItem.PITCH_BALL_TYPE.FOUL_BALL);
+                        viewHolder.recordItem.updatePitchBall(currentPitchBallSelect, RecordItem.PITCH_BALL_TYPE.FOUL_BALL);
                         viewHolder.updateUI(activity);
                         new_goodbadball_dialog.dismiss();
                     }
@@ -223,7 +219,7 @@ public class GoodBadBallDialog {
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(activity, "觸擊界外", Toast.LENGTH_SHORT).show();
-                        viewHolder.recordItem.updatePitchBall(currentPitchBallSelect,RecordItem.PITCH_BALL_TYPE.BUNT_FOUL);
+                        viewHolder.recordItem.updatePitchBall(currentPitchBallSelect, RecordItem.PITCH_BALL_TYPE.BUNT_FOUL);
                         viewHolder.updateUI(activity);
                         new_goodbadball_dialog.dismiss();
                     }
@@ -234,7 +230,7 @@ public class GoodBadBallDialog {
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(activity, "擊出球", Toast.LENGTH_SHORT).show();
-                        viewHolder.recordItem.updatePitchBall(currentPitchBallSelect,RecordItem.PITCH_BALL_TYPE.HIT);
+                        viewHolder.recordItem.updatePitchBall(currentPitchBallSelect, RecordItem.PITCH_BALL_TYPE.HIT);
                         viewHolder.updateUI(activity);
                         new_goodbadball_dialog.dismiss();
                     }
@@ -242,7 +238,7 @@ public class GoodBadBallDialog {
                 new_goodbadball_dialog.show();
             }
         });
-        dialog_change_goodbadball.show();
+        dialog_change_goodBadBall.show();
     }
 }
 
