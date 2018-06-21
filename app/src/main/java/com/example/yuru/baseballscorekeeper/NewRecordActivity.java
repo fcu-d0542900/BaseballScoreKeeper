@@ -42,30 +42,29 @@ public class NewRecordActivity extends AppCompatActivity {
         DatabaseService.CurrentRecord = intent.getIntExtra("recordPosition",0);
         Log.d("ahkui","Record id: "+intent.getIntExtra("recordPosition",0)+"");
 
-
+        //設定頁面
         scrollablePanel = findViewById(R.id.scrollable_panel);
         scrollablePanelAdapter = new ScrollablePanelAdapter(NewRecordActivity.this);
-
         score_scrollable_panel = findViewById(R.id.score_scrollable_panel);
         score_scrollablePanelAdapter = new ScoreScrollablePanelAdapter(NewRecordActivity.this);
-
         scrollablePanel.setPanelAdapter(scrollablePanelAdapter);
         score_scrollable_panel.setPanelAdapter(score_scrollablePanelAdapter);
 
+        //點擊隊伍切換紀錄頁面
         score_scrollablePanelAdapter.setOnItemClickListener(new RecordAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
 
                 if(position==1){  //點擊away
                     Toast.makeText(NewRecordActivity.this,"點擊away"+position,Toast.LENGTH_LONG).show();
-                    currentRecord.setCurrenFaction(RecordTeam.Faction.away);  //TODO: ahkui這樣切換對嗎
+                    currentRecord.setCurrenFaction(RecordTeam.Faction.away);     //將目前隊伍切換away
                     DatabaseService.getInstance().getDatabase().getRecord(DatabaseService.CurrentRecord).setCurrenFaction(RecordTeam.Faction.away);
-                    scrollablePanelAdapter.updateData();
+                    scrollablePanelAdapter.updateData();   //顯示頁面
                 }
                 else if(position==2)  //點擊home/
                     {
                     Toast.makeText(NewRecordActivity.this,"點擊home"+position,Toast.LENGTH_LONG).show();
-                    currentRecord.setCurrenFaction(RecordTeam.Faction.home); //TODO: ahkui這樣切換對嗎
+                    currentRecord.setCurrenFaction(RecordTeam.Faction.home);     //將目前隊伍切換homw
                     DatabaseService.getInstance().getDatabase().getRecord(DatabaseService.CurrentRecord).setCurrenFaction(RecordTeam.Faction.home);
                     scrollablePanelAdapter.updateData();
                 }

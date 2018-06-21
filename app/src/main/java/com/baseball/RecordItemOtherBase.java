@@ -123,7 +123,7 @@ public class RecordItemOtherBase {
         actionTwoNum.setImageResource(imageID);
     }
 
-    //ThrowOne    TODO:趁傳數字左  (這邊對嗎)
+    //ThrowOne
     public void setThrowOne(ImageView throwOne) {
         this.throwOne = throwOne;
     }
@@ -132,7 +132,7 @@ public class RecordItemOtherBase {
         throwOne.setImageResource(imageID);
     }
 
-    //ThrowTwo  TODO:趁傳數字右
+    //ThrowTwo
     public void setThrowTwo(ImageView throwTwo) {
         this.throwTwo = throwTwo;
     }

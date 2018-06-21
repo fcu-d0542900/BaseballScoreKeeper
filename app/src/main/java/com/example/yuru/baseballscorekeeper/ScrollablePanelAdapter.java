@@ -58,9 +58,6 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     private RecordItemOtherBase recordItemUI;
 
-
-
-
     ScrollablePanelAdapter(NewRecordActivity activity) {
         super();
         this.activity = activity;
@@ -85,6 +82,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     @Override
+    // 當物件顯示於畫面時被調用，可利用此方法更新該物件之內容
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int row, int column) {
         int viewType = getItemViewType(row, column);
         switch (viewType) {
@@ -105,6 +103,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         }
     }
 
+    // 取得item的類型
     public int getItemViewType(int row, int column) {
         if (column == 0 && row == 0) {
             return TEAMNAME_TYPE;
@@ -119,6 +118,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     @Override
+    //根據不同類型創建不同item的ViewHolder
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case BOARDNUM_TYPE:
@@ -141,25 +141,25 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     }
 
-
-
+   //設定局數顯示
     private void setBoardNumView(int pos, BoardNumViewHolder viewHolder) {
         viewHolder.dateTextView.setText(activity.currentRecord.getTeam().getRoundText(activity.currentRecord.getTeam().getRecordItemsPositionRound(pos)));
     }
 
+    //設定球員顯示畫面
     @SuppressLint("SetTextI18n")
     private void setPlayerInfoView(int pos, final PlayerInfoViewHolder viewHolder) {
-        final Player playerInfo = activity.currentRecord.getTeam().getTeamMember().get(pos - 1);
+        final Player playerInfo = activity.currentRecord.getTeam().getTeamMember().get(pos - 1);  //取得player物件
         viewHolder.text_batOrder.setText(Integer.valueOf(pos).toString());
 
         Log.d(">>>>player",playerInfo.getName());
-
 
         if (playerInfo != null && pos>0) {
 
             //設定資料
             viewHolder.text_playerPosition.setText(playerInfo.getPosition().toString().replaceAll("_", ""));
             viewHolder.text_playerName.setText(playerInfo.getName());
+            //設定球員背號
             if(playerInfo.getId() == -1) {
                 viewHolder.text_playerNum.setText("");
             }
@@ -172,19 +172,19 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 @SuppressLint("InflateParams")
                 @Override
                 public void onClick(View v) {
-
+                    //透過 LayoutInflater的inflate()方法將xml定義的一個布局找出来
                     view_set_player = LayoutInflater.from(activity).inflate(R.layout.dialog_new_player, null);
                     view_set_player.setPadding(3,0,3,0);
                     ImageView img = view_set_player.findViewById(R.id.image_title_newPlayer);
                     img.setVisibility(View.GONE);
-
                     editText_playerName = view_set_player.findViewById(R.id.editText_playerName);
                     editText_playerNum = view_set_player.findViewById(R.id.editText_playerNum);
                     spinner_position = view_set_player.findViewById(R.id.spinner_position);
 
-                    AlertDialog.Builder dialog_setPlayer = new AlertDialog.Builder(activity);
-                    dialog_setPlayer.setView(view_set_player);
+                    AlertDialog.Builder dialog_setPlayer = new AlertDialog.Builder(activity);  //透過Builder創建AlertDialog
+                    dialog_setPlayer.setView(view_set_player);  //透過Builder創建AlertDialog
 
+                    // spinner下拉選單設定
                     ArrayAdapter<String> adapter_position = new ArrayAdapter<>(dialog_setPlayer.getContext(),android.R.layout.simple_spinner_item,new String[]{"","P","C","1B","2B","3B","SS","LF","CF","RF"});
                     adapter_position.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinner_position.setAdapter(adapter_position);
@@ -197,9 +197,11 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                                 playerNum = Integer.valueOf(editText_playerNum.getText().toString());
                                 playerPosition = (int) spinner_position.getSelectedItemId();
 
+                                //設定使用者輸入的資料到物件裡
                                 playerInfo.setName(playerName);
                                 playerInfo.setId(playerNum);
                                 playerInfo.setPosition(Player.POSITION.values()[playerPosition]);
+                                //在畫面顯示使用者輸入資料
                                 viewHolder.text_playerName.setText(playerName);
                                 viewHolder.text_playerNum.setText(Integer.valueOf(playerNum).toString());
                                 viewHolder.text_playerPosition.setText(playerInfo.getPosition().toString().replaceAll("_",""));
@@ -220,26 +222,30 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         }
     }
 
+    //設定紀錄版畫面
     private void setOrderView(final int row, final int column, final OrderViewHolder viewHolder) {
         final RecordItem recordItem = recordItems.get(row -1).get(column-1);
         viewHolder.setRecordItem(recordItem);
         if (recordItem != null) {
             viewHolder.getScoreView.bringToFront();
-            //中間菱形區域
+
+            //按下中間菱形區域
             viewHolder.getScoreView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    //設定baseCenterDialog
                     baseCenterDialog = new BaseCenterDialog();
-                    baseCenterDialog.setActivity(activity);
-                    baseCenterDialog.setBaseCenterDialog(viewHolder,row);
+                    baseCenterDialog.setActivity(activity);  //設定dialog切換的activity
+                    baseCenterDialog.setBaseCenterDialog(viewHolder,row);  //設定按下後的dialog並顯示
                     Toast.makeText(v.getContext(), "得分區域" +recordItem.getAttPlayer().getName(), Toast.LENGTH_SHORT).show();
                 }
             });
 
-            //一壘
+            //按下一壘
             viewHolder.getFirstView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    //設定baseFirstDialog並顯示
                     baseFirstDialog = new BaseFirstDialog();
                     baseFirstDialog.setActivity(activity);
                     baseFirstDialog.setBaseFirstDialog(viewHolder);
@@ -248,11 +254,11 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 }
             });
 
-            //二壘
+            //按下二壘
             viewHolder.getSecondView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    baseOtherDialog = new BaseOtherDialog();
+                    baseOtherDialog = new BaseOtherDialog();      //設定baseOtherDialog並顯示
                     baseOtherDialog.setActivity(activity);
                     baseOtherDialog.setBaseUI(viewHolder.base2);
                     baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"}, 2);
@@ -261,11 +267,11 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 }
             });
 
-            //三壘
+            //按下三壘
             viewHolder.getThirdView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    baseOtherDialog = new BaseOtherDialog();
+                    baseOtherDialog = new BaseOtherDialog();  //設定baseOtherDialog並顯示
                     baseOtherDialog.setActivity(activity);
                     baseOtherDialog.setBaseUI(viewHolder.base3);
                     baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"}, 3);
@@ -273,11 +279,11 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 }
             });
 
-            //本壘
+            //按下本壘
             viewHolder.getHomeView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    baseOtherDialog = new BaseOtherDialog();
+                    baseOtherDialog = new BaseOtherDialog();  //設定baseOtherDialog並顯示
                     baseOtherDialog.setActivity(activity);
                     baseOtherDialog.setBaseUI(viewHolder.base);  //TODO :viewHolder.base是空值?  WHY? 導致無法顯示此處
                     baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"},0);
@@ -290,7 +296,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             viewHolder.getBallView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    goodBadBallDialog = new GoodBadBallDialog();
+                    goodBadBallDialog = new GoodBadBallDialog();   //設定goodBadBallDialog並顯示
                     goodBadBallDialog.setNewRecordActivity(activity);
                     goodBadBallDialog.setGoodBadBallDialog(viewHolder);
                     Toast.makeText(v.getContext(), "好壞球" , Toast.LENGTH_SHORT).show();
@@ -299,10 +305,13 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             });
         }
     }
+
+    //設定隊名顯示畫面
     private void setTeamNameView(TeamNameViewHolder viewHolder) {
+        //去資料庫拿資料並設定到view裡
         viewHolder.titleTextView.setText(activity.currentRecord.getTeam().getTeamName());
     }
-
+    //找出各個view的畫面元件
     static class BoardNumViewHolder extends RecyclerView.ViewHolder {
         TextView dateTextView;
         BoardNumViewHolder(View itemView) {
@@ -310,7 +319,6 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.dateTextView = itemView.findViewById(R.id.text_boardNum);
         }
     }
-
     static class PlayerInfoViewHolder extends RecyclerView.ViewHolder {
         public TextView text_playerPosition;
         public TextView text_playerName;
@@ -324,7 +332,6 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             this.text_batOrder = view.findViewById(R.id.text_batOrder);
         }
     }
-
     public static class OrderViewHolder extends RecyclerView.ViewHolder {
         RecordItem recordItem;
 
@@ -557,7 +564,6 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             activity.score_scrollable_panel.notifyDataSetChanged();
         }
     }
-
     static class TeamNameViewHolder extends RecyclerView.ViewHolder {
         TextView titleTextView;
         TeamNameViewHolder(View view) {

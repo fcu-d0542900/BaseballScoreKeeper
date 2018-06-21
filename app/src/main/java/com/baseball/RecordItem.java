@@ -29,19 +29,11 @@ public class RecordItem implements Serializable {
     private BALL_DIRECTION ballDirection = BALL_DIRECTION.__;
     private BALL_TYPE DIETYPE = BALL_TYPE.__;
 
-    private BALL_PUSH ballPush=BALL_PUSH.__;
-
-
     private RUNS_OUT RUN_OUT_TYPE = RUNS_OUT.__;
     private HITS_NUM HIT_Num = HITS_NUM.__;
 
     private int BALL_TOUCH_AC1;
     private int BALL_TOUCH_AC2;
-    private int BALL_TOUCH_AC3;
-
-    private int BALL_TOUCH_AC1_EXTRA;
-    private int BALL_TOUCH_AC2_EXTRA;
-    private int BALL_TOUCH_AC3_EXTRA;
 
     private boolean FCUET1;
     private boolean FCUET2;
@@ -49,9 +41,18 @@ public class RecordItem implements Serializable {
     private BALL_TYPE FCUET2v;
 
 
-    private  int LEFT_NUM,RIGHT_NUM;  //數字 e 數字 e 選單用
-    private  int THROW_LEFT,THROW_RIGHT;  //趁傳
-    private boolean LEFT_ERROR=false,RIGHT_ERROR=false;
+    //other
+    private BALL_DIRECTION[] ballPushNum = {BALL_DIRECTION.__,BALL_DIRECTION.__,BALL_DIRECTION.__};
+    private BALL_PUSH[] ballPush = {BALL_PUSH.__,BALL_PUSH.__,BALL_PUSH.__};
+
+    private boolean[] isERROR_LEFT = {false,false,false};
+    private boolean[] isERRPR_RIGHT = {false,false,false};
+    private boolean[] isTo_BASE = {false,false,false};
+
+    private BALL_DIRECTION[] ERROR_LEFT_NUM = {BALL_DIRECTION.__,BALL_DIRECTION.__,BALL_DIRECTION.__};  // 本 二 三
+    private BALL_DIRECTION[] ERROR_RIGHT_NUM = {BALL_DIRECTION.__,BALL_DIRECTION.__,BALL_DIRECTION.__};  //數字 e 數字 e 選單用
+    private BALL_DIRECTION[] THROW_LEFT = {BALL_DIRECTION.__,BALL_DIRECTION.__,BALL_DIRECTION.__};
+    private BALL_DIRECTION[] THROW_RIGHT = {BALL_DIRECTION.__,BALL_DIRECTION.__,BALL_DIRECTION.__};  //趁傳
 
     private BALL_DIRECTION First_two_direction;
     private boolean First_two_data;
@@ -109,33 +110,32 @@ public class RecordItem implements Serializable {
         save();
     }
 
-    public void setBallPush(BALL_PUSH ballType) {
-        this.ballPush = ballType;
+    public void setBallPushNum(BALL_DIRECTION ballPushNum,int base_int) {
+        if(base_int>0)
+            base_int = base_int-1;
+        if(ballPushNum != BALL_DIRECTION.__) {
+            isTo_BASE[base_int] = false;
+        }
+        this.ballPushNum[base_int] = ballPushNum;
         save();
     }
 
-    public void setTHROW_LEFT(int LEFT_NUM) {
-        this.THROW_LEFT = LEFT_NUM;
+    public void setBallPush(BALL_PUSH ballType,int base_int) {
+        if(base_int>0)
+            base_int = base_int-1;
+        this.ballPush[base_int] = ballType;
+        save();
     }
 
-    public void setTHROW_RIGHT(int RIGHT_NUM) {
-        this.THROW_RIGHT = RIGHT_NUM;
-    }
-
-    public void setLEFT_NUM(int LEFT_NUM) {
-        this.LEFT_NUM = LEFT_NUM;
-    }
-
-    public void setLEFT_ERROR(boolean LEFT_ERROR) {
-        this.LEFT_ERROR = LEFT_ERROR;
-    }
-
-    public void setRIGHT_NUM(int RIGHT_NUM) {
-        this.RIGHT_NUM = RIGHT_NUM;
-    }
-
-    public void setRIGHT_ERROR(boolean RIGHT_ERROR) {
-        this.RIGHT_ERROR = RIGHT_ERROR;
+    public void setIsTo_BASE(boolean isToBase,int base_int) {
+        if(base_int>0) {
+            base_int = base_int-1;
+        }
+        if(isToBase) {
+            ballPushNum[base_int] = BALL_DIRECTION.__;
+        }
+        this.isTo_BASE[base_int] = isToBase;
+        save();
     }
 
     public void setBALL_TOUCH_AC1(int BALL_TOUCH_AC1) {
@@ -144,22 +144,6 @@ public class RecordItem implements Serializable {
 
     public void setBALL_TOUCH_AC2(int BALL_TOUCH_AC2) {
         this.BALL_TOUCH_AC2 = BALL_TOUCH_AC2;
-    }
-
-    public void setBALL_TOUCH_AC3(int BALL_TOUCH_AC3) {
-        this.BALL_TOUCH_AC3 = BALL_TOUCH_AC3;
-    }
-
-    public void setBALL_TOUCH_AC1_EXTRA(int BALL_TOUCH_AC1_EXTRA) {
-        this.BALL_TOUCH_AC1_EXTRA = BALL_TOUCH_AC1_EXTRA;
-    }
-
-    public void setBALL_TOUCH_AC2_EXTRA(int BALL_TOUCH_AC2_EXTRA) {
-        this.BALL_TOUCH_AC2_EXTRA = BALL_TOUCH_AC2_EXTRA;
-    }
-
-    public void setBALL_TOUCH_AC3_EXTRA(int BALL_TOUCH_AC3_EXTRA) {
-        this.BALL_TOUCH_AC3_EXTRA = BALL_TOUCH_AC3_EXTRA;
     }
 
     public void setFCUET(boolean data1, boolean data2, BALL_TYPE data1v, BALL_TYPE data2v) {
@@ -180,6 +164,22 @@ public class RecordItem implements Serializable {
         First_three_direction = BALL_DIRECTION.values()[three_direction];
         First_three_data = data;
         First_three_dataV = dataV;
+    }
+
+    public void setThrow(BALL_DIRECTION throw_left, BALL_DIRECTION throw_right, int base_int) {
+        if(base_int>0)
+            base_int = base_int-1;
+        this.THROW_LEFT[base_int] = throw_left;
+        this.THROW_RIGHT[base_int] = throw_right;
+    }
+
+    public void setError(BALL_DIRECTION ERROR_LEFT_NUM, boolean isERROR_LEFT,BALL_DIRECTION ERROR_RIGHT_NUM,boolean isERROR_RIGHT,int base_int) {
+        if(base_int>0)
+            base_int = base_int-1;
+        this.ERROR_LEFT_NUM[base_int] = ERROR_LEFT_NUM;
+        this.ERROR_RIGHT_NUM[base_int] = ERROR_RIGHT_NUM;
+        this.isERROR_LEFT[base_int] = isERROR_LEFT;
+        this.isERRPR_RIGHT[base_int] = isERROR_RIGHT;
     }
 
 
@@ -416,6 +416,8 @@ public class RecordItem implements Serializable {
 
     //二三本壘UI設定
     public void updateOtherBaseUI(RecordItemOtherBase base,int base_int){
+        if(base_int>0)
+            base_int = base_int-1;
 
         base.setShowActionNameViewVisibility(false);
         base.setShowActionViewVisibility(false);
@@ -426,122 +428,70 @@ public class RecordItem implements Serializable {
         base.setShowActionOneAcViewVisibility(false);
         base.setShowActionTwoAcViewVisibility(false);
 
-        Log.d("base_int",""+base_int);
-        switch (base_int){
-            case 0:
-                otherbase(base);
-                base.setShowToBaseViewVisibility(true);
-                break;
-            case 2:
-                otherbase(base);
-                base.setShowToBaseViewVisibility(true);
-                break;
-            case 3:
-                otherbase(base);
-                base.setShowToBaseViewVisibility(true);
-                break;
-            default:
-                break;
-
+        if(ballPushNum[base_int] != BALL_DIRECTION.__) {
+            base.setShowPushNumViewVisibility(true);
+            base.setShowPushNumValue(getImageByPushNumber(ballPushNum[base_int]));
         }
-      /*  if(base_int==0){   //本壘
-
-           otherbase(base);
-           base.setShowToBaseViewVisibility(true);
-       }
-
-       else if(base_int==2){
-            otherbase(base);
+        if(isTo_BASE[base_int] == true) {
             base.setShowToBaseViewVisibility(true);
-       }
+        }
 
-       else if(base_int==3){
-            otherbase(base);
-            base.setShowToBaseViewVisibility(true);
-       }*/
-
-    }
-
-    public void otherbase(RecordItemOtherBase base)
-    {
-        if(base!=null) {
-            switch (ballPush) {
-
+        if(ballPush[base_int] == BALL_PUSH.E) {
+            base.setShowActionViewVisibility(true);
+            base.setActionOneNumValue(getImageByNumber(ERROR_LEFT_NUM[base_int]));
+            base.setActionTwoNumValue(getImageByNumber(ERROR_RIGHT_NUM[base_int]));
+            if (isERROR_LEFT[base_int]) {
+                base.setShowActionOneAcViewVisibility(true);
+            }
+            if (isERRPR_RIGHT[base_int]) {
+                base.setShowActionTwoAcViewVisibility(true);
+            }
+        }
+        else if(ballPush[base_int] == BALL_PUSH.THROW) {
+            base.setShowThrowViewVisibility(true);
+            base.setThrowOneValue(getImageByNumber(THROW_LEFT[base_int]));
+            base.setThrowTwoValue(getImageByNumber(THROW_RIGHT[base_int]));
+        }
+        else if(ballPush[base_int] != BALL_PUSH.__) {
+            base.setShowActionNameViewVisibility(true);
+            switch (ballPush[base_int]) {
                 case DP:
-                    base.setShowPushNumViewVisibility(true);
-                    base.setShowActionNameViewVisibility(true);
-                    base.setShowPushNumValue(getImageByPushNumber(ballDirection));
                     base.setShowActionNameValue(R.drawable.double_plays);
                     break;
-
                 case TP:
-                    base.setShowPushNumViewVisibility(true);
-                    base.setShowActionNameViewVisibility(true);
-                    base.setShowPushNumValue(getImageByPushNumber(ballDirection));
                     base.setShowActionNameValue(R.drawable.tripple_play);
                     break;
-
                 case CS:
-                    base.setShowPushNumViewVisibility(true);
-                    base.setShowActionNameViewVisibility(true);
-                    base.setShowPushNumValue(getImageByPushNumber(ballDirection));
                     base.setShowActionNameValue(R.drawable.caught_stolen);
                     break;
-
                 case S:
-                    base.setShowPushNumViewVisibility(true);
-                    base.setShowActionNameViewVisibility(true);
-                    base.setShowPushNumValue(getImageByPushNumber(ballDirection));
                     base.setShowActionNameValue(R.drawable.stolen_base);
                     break;
-
                 case PO:
-                    base.setShowPushNumViewVisibility(true);
-                    base.setShowActionNameViewVisibility(true);
-                    base.setShowPushNumValue(getImageByPushNumber(ballDirection));
                     base.setShowActionNameValue(R.drawable.put_outs);
                     break;
-
                 case W:
-                    base.setShowPushNumViewVisibility(true);
-                    base.setShowActionNameViewVisibility(true);
-                    base.setShowPushNumValue(getImageByPushNumber(ballDirection));
                     base.setShowActionNameValue(R.drawable.wild_pitch);
                     break;
-
                 case P:
-                    base.setShowPushNumViewVisibility(true);
-                    base.setShowActionNameViewVisibility(true);
-                    base.setShowPushNumValue(getImageByPushNumber(ballDirection));
                     base.setShowActionNameValue(R.drawable.passed_ball);
                     break;
-
                 case BK:
-                    base.setShowPushNumViewVisibility(true);
-                    base.setShowActionNameViewVisibility(true);
-                    base.setShowPushNumValue(getImageByPushNumber(ballDirection));
                     base.setShowActionNameValue(R.drawable.balks);
                     break;
-
-                case E:
-                    base.setShowPushNumViewVisibility(true);
-                    base.setShowActionViewVisibility(true);
-                    base.setShowPushNumValue(getImageByPushNumber(ballDirection));
-                    base.setActionOneNumValue(getImageByNumber(LEFT_NUM));
-                    base.setActionTwoNumValue(getImageByNumber(RIGHT_NUM));
-
-                    if (LEFT_ERROR) {
-                        base.setShowActionOneAcViewVisibility(true);
-                    }
-                    if (RIGHT_ERROR) {
-                        base.setShowActionTwoAcViewVisibility(true);
-                    }
+                default:
+                    base.setShowActionNameViewVisibility(false);
                     break;
+            }
+        }
+    }
+/*
+    public void otherbase(RecordItemOtherBase base)
+    {
 
                 case THROW:
                     base.setShowThrowViewVisibility(true);
-                    base.setThrowOneValue(getImageByNumber(THROW_LEFT));
-                    base.setThrowTwoValue(getImageByNumber(THROW_RIGHT));
+
                     break;
 
                 default:
@@ -553,7 +503,7 @@ public class RecordItem implements Serializable {
             Log.d("base物件為空","yes");
         }
     }
-
+*/
 
     public void  updateCenter(RecordItemCenter center) {
         center.setShowCenterVisibility(false);
@@ -585,6 +535,7 @@ public class RecordItem implements Serializable {
                     center.setShowCenterValue(R.drawable.left_on_base);
                     break;
                 default:
+                    center.setShowCenterVisibility(false);
                     break;
             }
         }

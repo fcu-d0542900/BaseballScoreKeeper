@@ -262,7 +262,7 @@ public class BaseCenterDialog {
             public void onClick(DialogInterface dialogInterface, int i) {
                 String change_garrison = "";
 
-                if(!editText_change_P.getText().toString().equals("")) {
+                if(!editText_change_P.getText().toString().equals("")) {   //若輸入框不為空
                     change_garrison +=  ", P:" + editText_change_P.getText().toString();
                     change_P = Integer.valueOf(editText_change_P.getText().toString());
                 }
