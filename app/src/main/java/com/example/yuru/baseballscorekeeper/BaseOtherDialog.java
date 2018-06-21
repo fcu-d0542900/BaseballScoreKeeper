@@ -250,7 +250,8 @@ public class BaseOtherDialog {
                                                         setErrorDialog(viewHolder,base);  // 點擊失誤後的選單
                                                         break;
                                                     case 2:   //點選無
-
+                                                        viewHolder.recordItem.setIsTo_BASE(true,base);
+                                                        viewHolder.recordItem.setBallPush(RecordItem.BALL_PUSH.__,base);
                                                         viewHolder.updateUI(activity);
                                                         break;
                                                     default:
