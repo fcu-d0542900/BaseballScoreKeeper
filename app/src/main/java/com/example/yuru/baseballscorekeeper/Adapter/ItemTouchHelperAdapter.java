@@ -1,4 +1,4 @@
-package com.example.yuru.baseballscorekeeper;
+package com.example.yuru.baseballscorekeeper.Adapter;
 
 public interface ItemTouchHelperAdapter {
 

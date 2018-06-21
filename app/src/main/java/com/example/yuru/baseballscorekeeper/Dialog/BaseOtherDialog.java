@@ -1,17 +1,18 @@
-package com.example.yuru.baseballscorekeeper;
+package com.example.yuru.baseballscorekeeper.Dialog;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.baseball.BASE;
-import com.baseball.RecordItem;
-import com.baseball.RecordItemOtherBase;
+import com.example.yuru.baseballscorekeeper.Modal.RecordItem;
+import com.example.yuru.baseballscorekeeper.Modal.RecordItemOtherBase;
+import com.example.yuru.baseballscorekeeper.NewRecordActivity;
+import com.example.yuru.baseballscorekeeper.R;
+import com.example.yuru.baseballscorekeeper.Adapter.ScrollablePanelAdapter;
 
 /**
  * Created by User on 2018/6/16.

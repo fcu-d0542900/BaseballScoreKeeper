@@ -1,4 +1,4 @@
-package com.example.yuru.baseballscorekeeper;
+package com.example.yuru.baseballscorekeeper.Adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;

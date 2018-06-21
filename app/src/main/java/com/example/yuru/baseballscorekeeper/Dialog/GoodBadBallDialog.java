@@ -1,4 +1,4 @@
-package com.example.yuru.baseballscorekeeper;
+package com.example.yuru.baseballscorekeeper.Dialog;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -8,6 +8,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.example.yuru.baseballscorekeeper.NewRecordActivity;
+import com.example.yuru.baseballscorekeeper.R;
+import com.example.yuru.baseballscorekeeper.Adapter.ScrollablePanelAdapter;
 
 import java.util.ArrayList;
 

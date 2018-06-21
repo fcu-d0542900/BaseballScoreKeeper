@@ -1,9 +1,6 @@
-package com.baseball;
-
-import android.util.Log;
+package com.example.yuru.baseballscorekeeper.Modal;
 
 import com.example.yuru.baseballscorekeeper.R;
-import com.example.yuru.baseballscorekeeper.ScrollablePanelAdapter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -25,7 +22,7 @@ public class RecordItem implements Serializable {
     private boolean isChangeHitter = false;
     private boolean isChangeDefPlayer = false;
 
-    private com.baseball.RecordItem.BALL_TYPE ballType = RecordItem.BALL_TYPE.__;
+    private RecordItem.BALL_TYPE ballType = RecordItem.BALL_TYPE.__;
     private BALL_DIRECTION ballDirection = BALL_DIRECTION.__;
     private BALL_TYPE DIETYPE = BALL_TYPE.__;
 
@@ -108,7 +105,7 @@ public class RecordItem implements Serializable {
         setBallDirection(BALL_DIRECTION.values()[num]);
     }
 
-    public void setBallType(com.baseball.RecordItem.BALL_TYPE ballType) {
+    public void setBallType(RecordItem.BALL_TYPE ballType) {
         this.ballType = ballType;
         save();
     }

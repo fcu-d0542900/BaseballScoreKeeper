@@ -12,14 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.baseball.DatabaseService;
-import com.baseball.Record;
+import com.example.yuru.baseballscorekeeper.Adapter.RecordAdapter;
+import com.example.yuru.baseballscorekeeper.Modal.DatabaseService;
+import com.example.yuru.baseballscorekeeper.Modal.Record;
 
 import java.util.Calendar;
 

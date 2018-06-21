@@ -1,10 +1,8 @@
-package com.baseball;
+package com.example.yuru.baseballscorekeeper.Modal;
 
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
-import com.example.yuru.baseballscorekeeper.ScrollablePanelAdapter;
 
 /**
  * Created by YURU on 2018/6/16.

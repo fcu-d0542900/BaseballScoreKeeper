@@ -1,4 +1,4 @@
-package com.example.yuru.baseballscorekeeper;
+package com.example.yuru.baseballscorekeeper.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -10,8 +10,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import com.baseball.DatabaseService;
-import com.baseball.Record;
+import com.example.yuru.baseballscorekeeper.Modal.DatabaseService;
+import com.example.yuru.baseballscorekeeper.Modal.Record;
+import com.example.yuru.baseballscorekeeper.R;
 
 import java.util.Collections;
 import java.util.List;

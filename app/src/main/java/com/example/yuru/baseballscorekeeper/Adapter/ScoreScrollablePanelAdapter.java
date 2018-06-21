@@ -1,4 +1,4 @@
-package com.example.yuru.baseballscorekeeper;
+package com.example.yuru.baseballscorekeeper.Adapter;
 
 import android.annotation.SuppressLint;
 import android.support.v7.widget.RecyclerView;
@@ -7,8 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.baseball.BoardNumInfo;
-import com.baseball.RecordTeam;
+import com.example.yuru.baseballscorekeeper.Modal.BoardNumInfo;
+import com.example.yuru.baseballscorekeeper.Modal.RecordTeam;
+import com.example.yuru.baseballscorekeeper.NewRecordActivity;
+import com.example.yuru.baseballscorekeeper.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +41,7 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
         this.mOnItemClickListener = mOnItemClickListener;
     }
 
-    ScoreScrollablePanelAdapter(NewRecordActivity activity) {
+    public ScoreScrollablePanelAdapter(NewRecordActivity activity) {
         super();
         this.activity = activity;
         if (activity.currentRecord != null){

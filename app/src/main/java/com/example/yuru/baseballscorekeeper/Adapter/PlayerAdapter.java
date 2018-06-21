@@ -1,4 +1,4 @@
-package com.example.yuru.baseballscorekeeper;
+package com.example.yuru.baseballscorekeeper.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,8 +10,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import com.baseball.DatabaseService;
-import com.baseball.Player;
+import com.example.yuru.baseballscorekeeper.Modal.DatabaseService;
+import com.example.yuru.baseballscorekeeper.Modal.Player;
+import com.example.yuru.baseballscorekeeper.R;
 
 import java.util.Collections;
 import java.util.List;
@@ -29,7 +30,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
     private int lastPosition = -1;
     private Context context;
 
-    PlayerAdapter(Context context) {
+    protected PlayerAdapter(Context context) {
         this.item_player = DatabaseService.getInstance().getDatabase().getTeamMember();
         this.context = context;
     }

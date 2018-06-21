@@ -1,4 +1,4 @@
-package com.example.yuru.baseballscorekeeper;
+package com.example.yuru.baseballscorekeeper.Dialog;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -12,7 +12,10 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.baseball.RecordItem;
+import com.example.yuru.baseballscorekeeper.Modal.RecordItem;
+import com.example.yuru.baseballscorekeeper.NewRecordActivity;
+import com.example.yuru.baseballscorekeeper.R;
+import com.example.yuru.baseballscorekeeper.Adapter.ScrollablePanelAdapter;
 
 /**
  * Created by YURU on 2018/6/16.

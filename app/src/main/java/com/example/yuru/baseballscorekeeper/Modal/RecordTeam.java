@@ -1,9 +1,6 @@
-package com.baseball;
+package com.example.yuru.baseballscorekeeper.Modal;
 
-import android.os.Build;
 import android.util.Log;
-
-import com.google.gson.Gson;
 
 import java.io.Serializable;
 import java.util.ArrayList;

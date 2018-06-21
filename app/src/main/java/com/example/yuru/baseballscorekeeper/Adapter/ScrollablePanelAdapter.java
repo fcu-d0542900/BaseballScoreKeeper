@@ -1,4 +1,4 @@
-package com.example.yuru.baseballscorekeeper;
+package com.example.yuru.baseballscorekeeper.Adapter;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -17,14 +17,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baseball.BASE;
-import com.baseball.Player;
-import com.baseball.Record;
-import com.baseball.RecordItem;
-import com.baseball.RecordItemCenter;
-import com.baseball.RecordItemFirstBase;
-import com.baseball.RecordItemOtherBase;
-import com.baseball.RecordTeam;
+import com.example.yuru.baseballscorekeeper.Dialog.BaseCenterDialog;
+import com.example.yuru.baseballscorekeeper.Dialog.BaseFirstDialog;
+import com.example.yuru.baseballscorekeeper.Dialog.BaseOtherDialog;
+import com.example.yuru.baseballscorekeeper.Dialog.GoodBadBallDialog;
+import com.example.yuru.baseballscorekeeper.Modal.Player;
+import com.example.yuru.baseballscorekeeper.Modal.RecordItem;
+import com.example.yuru.baseballscorekeeper.Modal.RecordItemCenter;
+import com.example.yuru.baseballscorekeeper.Modal.RecordItemFirstBase;
+import com.example.yuru.baseballscorekeeper.Modal.RecordItemOtherBase;
+import com.example.yuru.baseballscorekeeper.NewRecordActivity;
+import com.example.yuru.baseballscorekeeper.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +61,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     private RecordItemOtherBase recordItemUI;
 
-    ScrollablePanelAdapter(NewRecordActivity activity) {
+    public ScrollablePanelAdapter(NewRecordActivity activity) {
         super();
         this.activity = activity;
         recordItems = new ArrayList<>();
@@ -322,7 +325,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     //連接xml之id
-    static class PlayerInfoViewHolder extends RecyclerView.ViewHolder {
+    public static class PlayerInfoViewHolder extends RecyclerView.ViewHolder {
         public TextView text_playerPosition;
         public TextView text_playerName;
         public TextView text_playerNum;
@@ -337,7 +340,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     public static class OrderViewHolder extends RecyclerView.ViewHolder {
-        RecordItem recordItem;
+        public RecordItem recordItem;
 
         TextView getScoreView;
         TextView getFirstView;
@@ -383,7 +386,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
         ImageView getThirdViewActionTwoNum,getThirdViewActionTwoAc;
         LinearLayout getThirdViewThrow;
         ImageView getThirdViewThrowOne,getThirdViewThrowTwo;
-        RecordItemOtherBase base3;
+        public RecordItemOtherBase base3;
 
         //本壘
         ImageView getHomeViewActionName,getHomeViewPushNum,getHomeViewBase;
@@ -558,7 +561,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
             recordItem.updateOtherBaseUI(base,0);
         }
 
-        void updateUI(NewRecordActivity activity){
+        public void updateUI(NewRecordActivity activity){
             recordItem.updateCenter(center);
             recordItem.updateFirstBaseUI(base1);
             recordItem.updateOtherBaseUI(base2,2);

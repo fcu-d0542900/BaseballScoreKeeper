@@ -1,6 +1,4 @@
-package com.baseball;
-
-import android.util.Log;
+package com.example.yuru.baseballscorekeeper.Modal;
 
 import java.io.Serializable;
 import java.util.Date;

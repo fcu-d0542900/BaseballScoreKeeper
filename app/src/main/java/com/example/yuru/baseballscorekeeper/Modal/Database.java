@@ -1,4 +1,4 @@
-package com.baseball;
+package com.example.yuru.baseballscorekeeper.Modal;
 
 import java.io.Serializable;
 import java.util.ArrayList;

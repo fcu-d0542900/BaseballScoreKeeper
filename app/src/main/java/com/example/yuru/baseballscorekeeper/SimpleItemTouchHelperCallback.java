@@ -3,6 +3,8 @@ package com.example.yuru.baseballscorekeeper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
+import com.example.yuru.baseballscorekeeper.Adapter.ItemTouchHelperAdapter;
+
 // 項目操作類別, 繼承 ItemTouchHelper.Callback 類別
 public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
 

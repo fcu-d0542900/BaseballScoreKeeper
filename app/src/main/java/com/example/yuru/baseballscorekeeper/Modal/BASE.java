@@ -1,4 +1,4 @@
-package com.baseball;
+package com.example.yuru.baseballscorekeeper.Modal;
 
 public enum BASE {
     BASE_ONE,

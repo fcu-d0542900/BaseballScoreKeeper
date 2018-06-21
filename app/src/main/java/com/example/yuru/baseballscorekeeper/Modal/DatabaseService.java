@@ -1,4 +1,4 @@
-package com.baseball;
+package com.example.yuru.baseballscorekeeper.Modal;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -6,15 +6,10 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
-import java.io.StreamCorruptedException;
 
 public class DatabaseService {
     public static int CurrentRecord = 0;

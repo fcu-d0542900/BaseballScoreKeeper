@@ -13,10 +13,13 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.baseball.DatabaseService;
-import com.baseball.Record;
-import com.baseball.RecordItem;
-import com.baseball.RecordTeam;
+import com.example.yuru.baseballscorekeeper.Adapter.RecordAdapter;
+import com.example.yuru.baseballscorekeeper.Adapter.ScoreScrollablePanelAdapter;
+import com.example.yuru.baseballscorekeeper.Adapter.ScrollablePanelAdapter;
+import com.example.yuru.baseballscorekeeper.Modal.DatabaseService;
+import com.example.yuru.baseballscorekeeper.Modal.Record;
+import com.example.yuru.baseballscorekeeper.Modal.RecordItem;
+import com.example.yuru.baseballscorekeeper.Modal.RecordTeam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +27,10 @@ import java.util.List;
 public class NewRecordActivity extends AppCompatActivity {
 
     private TextView text_gameName,text_startTime,text_endTime;
-    Record currentRecord;
-    ScrollablePanel scrollablePanel;
+    public Record currentRecord;
+    public ScrollablePanel scrollablePanel;
     ScrollablePanelAdapter scrollablePanelAdapter;
-    ScrollablePanel score_scrollable_panel;
+    public ScrollablePanel score_scrollable_panel;
     ScoreScrollablePanelAdapter score_scrollablePanelAdapter;
 
     @Override
