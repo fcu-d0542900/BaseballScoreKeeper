@@ -31,13 +31,12 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
 
     private OnItemClickListener mOnItemClickListener;
 
-
     public RecordAdapter(Context context) {
         this.item_record = DatabaseService.getInstance().getDatabase().getAllRecord();
         this.context = context;
     }
 
-    //设置回调接口
+    //設置回調接口
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
     }
