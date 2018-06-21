@@ -10,8 +10,6 @@ import android.widget.ImageView;
 
 public class RecordItemFirstBase {
 
-//    private ImageView showEndView,showHRView;
-
     private ImageView showZeroView;
     private FrameLayout showOneView,showTwoView,showThreeView;
     private ImageView showSacrificeFly,showSacrificeHits;
@@ -21,19 +19,6 @@ public class RecordItemFirstBase {
 
     public ImageView firstViewTwoNum,showFirstViewTwoAc;
     public ImageView firstViewThreeNum,showFirstViewThreeAc;
-
-/*
-    //showEndView
-    //在Center選擇結束半局後 顯示在一壘
-    public void setShowEndView(ImageView showEndView) {
-        this.showEndView = showEndView;
-    }
-
-    public void setShowEndViewVisibility(boolean isShow) {
-        if (showEndView != null)
-            showEndView.setVisibility(isShow?View.VISIBLE:View.GONE);
-    }
-*/
 
     //ZeroView
     public void setShowZeroView(ImageView showZeroView) {
@@ -78,18 +63,6 @@ public class RecordItemFirstBase {
         if (showThreeView != null)
             showThreeView.setVisibility(isShow?View.VISIBLE:View.GONE);
     }
-
-/*
-    //HRView
-    public void setShowHRView(ImageView showHRView) {
-        this.showHRView = showHRView;
-    }
-
-    public void setShowHRViewVisibility(boolean isShow) {
-        if (showHRView != null)
-            showHRView.setVisibility(isShow?View.VISIBLE:View.GONE);
-    }
-*/
 
     //SacrificeFly
     public void setShowSacrificeFly(ImageView showSacrificeFly) {
