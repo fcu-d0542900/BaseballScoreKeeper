@@ -71,8 +71,8 @@ public class BaseCenterDialog {
                                         viewHolder.recordItem.setRUN_OUT_TYPE(RecordItem.RUNS_OUT.RUN);
                                         //TODO 加分
                                         viewHolder.recordItem.toggleScore(); //TODO ???? 是這樣嗎 好詭異
-                                        activity.score_scrollable_panel.notifyDataSetChanged();
                                         viewHolder.updateUI(activity);
+                                        activity.score_scrollablePanelAdapter.updateData();
                                         //TODO　分數欄沒有更改
                                         Toast.makeText(activity, "得分", Toast.LENGTH_SHORT).show();
                                         center_dialog.dismiss();

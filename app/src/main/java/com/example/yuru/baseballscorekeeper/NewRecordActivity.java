@@ -29,9 +29,9 @@ public class NewRecordActivity extends AppCompatActivity {
     private TextView text_gameName,text_startTime,text_endTime;
     public Record currentRecord;
     public ScrollablePanel scrollablePanel;
-    ScrollablePanelAdapter scrollablePanelAdapter;
+    public ScrollablePanelAdapter scrollablePanelAdapter;
     public ScrollablePanel score_scrollable_panel;
-    ScoreScrollablePanelAdapter score_scrollablePanelAdapter;
+    public ScoreScrollablePanelAdapter score_scrollablePanelAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,10 +133,11 @@ public class NewRecordActivity extends AppCompatActivity {
             tmp.add(currentRecord.getAwayTeam().getScore(j));
         }
         data.add(tmp);
+        List<String> tmp2 = new ArrayList<>();
         for (int j = 0;j<9;j++){
-            tmp.add(currentRecord.getHomeTeam().getScore(j));
+            tmp2.add(currentRecord.getHomeTeam().getScore(j));
         }
-        data.add(tmp);
+        data.add(tmp2);
         return data;
     }
 }
