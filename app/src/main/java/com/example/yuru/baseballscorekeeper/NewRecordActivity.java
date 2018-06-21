@@ -63,13 +63,15 @@ public class NewRecordActivity extends AppCompatActivity {
                     currentRecord.setCurrenFaction(RecordTeam.Faction.away);     //將目前隊伍切換away
                     DatabaseService.getInstance().getDatabase().getRecord(DatabaseService.CurrentRecord).setCurrenFaction(RecordTeam.Faction.away);
                     scrollablePanelAdapter.updateData();   //顯示頁面
+                    score_scrollablePanelAdapter.updateData();
                 }
                 else if(position==2)  //點擊home/
-                    {
+                {
                     Toast.makeText(NewRecordActivity.this,"點擊home"+position,Toast.LENGTH_LONG).show();
                     currentRecord.setCurrenFaction(RecordTeam.Faction.home);     //將目前隊伍切換homw
                     DatabaseService.getInstance().getDatabase().getRecord(DatabaseService.CurrentRecord).setCurrenFaction(RecordTeam.Faction.home);
                     scrollablePanelAdapter.updateData();
+                    score_scrollablePanelAdapter.updateData();
                 }
             }
         });
@@ -122,6 +124,20 @@ public class NewRecordActivity extends AppCompatActivity {
             recordItems.add(tmp);
         }
         return recordItems;
+    }
+
+    public List<List<String>> getUpdateScore() {
+        List<List<String>> data = new ArrayList<>();
+        List<String> tmp = new ArrayList<>();
+        for (int j = 0;j<9;j++){
+            tmp.add(currentRecord.getAwayTeam().getScore(j));
+        }
+        data.add(tmp);
+        for (int j = 0;j<9;j++){
+            tmp.add(currentRecord.getHomeTeam().getScore(j));
+        }
+        data.add(tmp);
+        return data;
     }
 }
 

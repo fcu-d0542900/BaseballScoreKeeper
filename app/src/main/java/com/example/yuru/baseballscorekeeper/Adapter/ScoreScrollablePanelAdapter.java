@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.yuru.baseballscorekeeper.Modal.BoardNumInfo;
+import com.example.yuru.baseballscorekeeper.Modal.RecordItem;
 import com.example.yuru.baseballscorekeeper.Modal.RecordTeam;
 import com.example.yuru.baseballscorekeeper.NewRecordActivity;
 import com.example.yuru.baseballscorekeeper.R;
@@ -26,16 +27,13 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
     private List<BoardNumInfo> boardNumInfoList = new ArrayList<>();
     private NewRecordActivity activity;
     private RecordAdapter.OnItemClickListener mOnItemClickListener;
+    private List<List<String>> scoreList;
 
     private static final int TITLENAME_TYPE = 7;
     private static final int TEAMINFO_TYPE = 5;
     private static final int BOARDNUM_TYPE = 1;
     private static final int SCOREBOARD_TYPE = 6;
 
-    //设置回调接口
-    public interface OnItemClickLitener{
-        void onItemClick(View view, String name);
-    }
 
     public void setOnItemClickListener(RecordAdapter.OnItemClickListener mOnItemClickListener){
         this.mOnItemClickListener = mOnItemClickListener;
@@ -53,7 +51,14 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
         for (int i=0;i<9+2;i++){
             boardNumInfoList.add(new BoardNumInfo(i));
         }
+        scoreList = activity.getUpdateScore();
     }
+
+    public void updateData() {
+        scoreList = activity.getUpdateScore();
+        activity.score_scrollable_panel.notifyDataSetChanged();
+    }
+
 
     @Override
     public int getRowCount() {
@@ -172,8 +177,7 @@ public class ScoreScrollablePanelAdapter extends PanelAdapter {
 
     //記分板
     private void setScoreView(final int row, final int column, final ScoreBoardViewHolder viewHolder) {
-        final String scoreInfo = (row == 0 ? activity.currentRecord.getAwayTeam() :activity.currentRecord.getHomeTeam() ).getScore(column);
-        viewHolder.scoreView.setText(scoreInfo);
+        viewHolder.scoreView.setText(scoreList.get(row-1).get(column-1));
     }
 
     //上方局數欄
