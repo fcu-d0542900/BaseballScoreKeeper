@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by YURU on 2018/6/8.
@@ -18,12 +19,12 @@ public class RecordTeam implements Serializable {
     private List<Player> teamMember = new ArrayList<>();
     private List<RecordItem> recordItems;
 
-    public RecordTeam(String name, Faction team) {
+    RecordTeam(String name) {
         if (name != null && !name.equals(""))
             setTeamName(name);
         else
             setTeamName(DatabaseService.getInstance().getDatabase().getTeamName());
-        if (name.equals(DatabaseService.getInstance().getDatabase().getTeamName())) {
+        if (Objects.requireNonNull(name).equals(DatabaseService.getInstance().getDatabase().getTeamName())) {
             teamMember = new ArrayList<>(DatabaseService.getInstance().getDatabase().getTeamMember());
         }
         while (teamMember.size() < 9) {
@@ -50,13 +51,8 @@ public class RecordTeam implements Serializable {
         Collections.sort(this.recordItems, new RecordItemComparator());
     }
 
-    public int getCurrentRound() {
-        return currentRound;
-    }
-
-    public int nextRound() {
+    public void nextRound() {
         currentRound = currentRound + 1;
-        return currentRound;
     }
 
     public String getRoundText(int round) {
@@ -115,16 +111,8 @@ public class RecordTeam implements Serializable {
         return teamName;
     }
 
-    public void setTeamName(String name) {
+    private void setTeamName(String name) {
         this.teamName = name;
-    }
-
-    public List<Player> addTeamMember(String name) {
-        Player player = new Player();
-        player.setName(name);
-        this.teamMember.add(player);
-        DatabaseService.getInstance().write();
-        return getTeamMember();
     }
 
     public List<Player> getTeamMember() {

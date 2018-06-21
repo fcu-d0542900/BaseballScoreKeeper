@@ -1,5 +1,6 @@
 package com.example.yuru.baseballscorekeeper;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -44,7 +45,7 @@ public class ScrollablePanel extends FrameLayout {
         headerRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         headerRecyclerView.setHasFixedSize(true);
         if (panelAdapter != null) {
-            panelLineAdapter = new PanelLineAdapter(panelAdapter, recyclerView, headerRecyclerView);
+            panelLineAdapter = new PanelLineAdapter(panelAdapter, headerRecyclerView);
             recyclerView.setAdapter(panelLineAdapter);
             setUpFirstItemView(panelAdapter);
         }
@@ -71,7 +72,7 @@ public class ScrollablePanel extends FrameLayout {
             panelLineAdapter.setPanelAdapter(panelAdapter);
             panelLineAdapter.notifyDataSetChanged();
         } else {
-            panelLineAdapter = new PanelLineAdapter(panelAdapter, recyclerView, headerRecyclerView);
+            panelLineAdapter = new PanelLineAdapter(panelAdapter, headerRecyclerView);
             recyclerView.setAdapter(panelLineAdapter);
         }
         this.panelAdapter = panelAdapter;
@@ -87,7 +88,7 @@ public class ScrollablePanel extends FrameLayout {
         private PanelAdapter panelAdapter;
         private int row;
 
-        public PanelLineItemAdapter(int row, PanelAdapter panelAdapter) {
+        PanelLineItemAdapter(int row, PanelAdapter panelAdapter) {
             this.row = row;
             this.panelAdapter = panelAdapter;
         }
@@ -127,22 +128,20 @@ public class ScrollablePanel extends FrameLayout {
 
         private PanelAdapter panelAdapter;
         private RecyclerView headerRecyclerView;
-        private RecyclerView contentRV;
         private HashSet<RecyclerView> observerList = new HashSet<>();
         private int firstPos = -1;
         private int firstOffset = -1;
 
 
-        public PanelLineAdapter(PanelAdapter panelAdapter, RecyclerView contentRV, RecyclerView headerRecyclerView) {
+        PanelLineAdapter(PanelAdapter panelAdapter, RecyclerView headerRecyclerView) {
             this.panelAdapter = panelAdapter;
             this.headerRecyclerView = headerRecyclerView;
-            this.contentRV = contentRV;
             initRecyclerView(headerRecyclerView);
             setUpHeaderRecyclerView();
 
         }
 
-        public void setPanelAdapter(PanelAdapter panelAdapter) {
+        void setPanelAdapter(PanelAdapter panelAdapter) {
             this.panelAdapter = panelAdapter;
             setUpHeaderRecyclerView();
         }
@@ -187,7 +186,7 @@ public class ScrollablePanel extends FrameLayout {
         }
 
 
-        public void notifyDataChanged() {
+        void notifyDataChanged() {
             setUpHeaderRecyclerView();
             notifyDataSetChanged();
         }
@@ -204,7 +203,8 @@ public class ScrollablePanel extends FrameLayout {
             }
         }
 
-        public void initRecyclerView(RecyclerView recyclerView) {
+        @SuppressLint("ClickableViewAccessibility")
+        void initRecyclerView(RecyclerView recyclerView) {
             recyclerView.setHasFixedSize(true);
             LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
             if (layoutManager != null && firstPos > 0 && firstOffset > 0) {
@@ -253,23 +253,13 @@ public class ScrollablePanel extends FrameLayout {
             });
         }
 
-        private HashSet<RecyclerView> getRecyclerViews() {
-            HashSet<RecyclerView> recyclerViewHashSet = new HashSet<>();
-            recyclerViewHashSet.add(headerRecyclerView);
-
-            for (int i = 0; i < contentRV.getChildCount(); i++) {
-                recyclerViewHashSet.add((RecyclerView) contentRV.getChildAt(i).findViewById(R.id.recycler_line_list));
-            }
-            return recyclerViewHashSet;
-        }
-
 
         static class ViewHolder extends RecyclerView.ViewHolder {
-            public RecyclerView recyclerView;
-            public FrameLayout firstColumnItemView;
-            public RecyclerView.ViewHolder firstColumnItemVH;
+            RecyclerView recyclerView;
+            FrameLayout firstColumnItemView;
+            RecyclerView.ViewHolder firstColumnItemVH;
 
-            public ViewHolder(View view) {
+            ViewHolder(View view) {
                 super(view);
                 this.recyclerView = view.findViewById(R.id.recycler_line_list);
                 this.firstColumnItemView = view.findViewById(R.id.first_column_item);

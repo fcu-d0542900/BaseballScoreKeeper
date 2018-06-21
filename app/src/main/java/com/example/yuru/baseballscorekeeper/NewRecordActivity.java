@@ -26,7 +26,8 @@ import java.util.List;
 
 public class NewRecordActivity extends AppCompatActivity {
 
-    private TextView text_gameName,text_startTime,text_endTime;
+    private TextView text_startTime;
+    private TextView text_endTime;
     public Record currentRecord;
     public ScrollablePanel scrollablePanel;
     public ScrollablePanelAdapter scrollablePanelAdapter;
@@ -40,7 +41,7 @@ public class NewRecordActivity extends AppCompatActivity {
 
         Intent intent = this.getIntent();
         currentRecord = DatabaseService.getInstance().getDatabase().getRecord(intent.getIntExtra("recordPosition",0));
-        text_gameName = findViewById(R.id.text_gameName);
+        TextView text_gameName = findViewById(R.id.text_gameName);
         text_gameName.setText(currentRecord.getGameName());
         DatabaseService.CurrentRecord = intent.getIntExtra("recordPosition",0);
         Log.d("ahkui","Record id: "+intent.getIntExtra("recordPosition",0)+"");

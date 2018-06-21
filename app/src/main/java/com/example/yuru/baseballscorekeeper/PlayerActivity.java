@@ -23,10 +23,7 @@ public class PlayerActivity extends AppCompatActivity {
     String[] position_item = {"","P","C","1B","2B","3B","SS","LF","CF","RF"};
 
     private RecyclerView item_list;
-    private PlayerAdapter itemAdapter;
-    private RecyclerView.LayoutManager rLayoutManager;
 
-    private View view_new_player;
     private EditText editText_playerName,editText_playerNum;
     private Spinner spinner_position;
 
@@ -44,11 +41,11 @@ public class PlayerActivity extends AppCompatActivity {
         // 執行RecyclerView元件的設定
         item_list.setHasFixedSize(true);
         // 建立與設定RecyclerView元件的配置元件
-        rLayoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager rLayoutManager = new LinearLayoutManager(this);
         item_list.setLayoutManager(rLayoutManager);
 
         // 建立RecyclerView元件的資料來源物件
-        itemAdapter = new PlayerAdapter(this) {
+        PlayerAdapter itemAdapter = new PlayerAdapter(this) {
             @Override
             public void onBindViewHolder(final ViewHolder holder, final int position) {
                 super.onBindViewHolder(holder, position);
@@ -67,7 +64,7 @@ public class PlayerActivity extends AppCompatActivity {
 
 
     public void clickAddPlayer(View view) {
-        view_new_player = LayoutInflater.from(PlayerActivity.this).inflate(R.layout.dialog_new_player, null);
+        View view_new_player = LayoutInflater.from(PlayerActivity.this).inflate(R.layout.dialog_new_player, null);
         view_new_player.setPadding(3,0,3,0);
 
         editText_playerName = view_new_player.findViewById(R.id.editText_playerName);
@@ -77,7 +74,7 @@ public class PlayerActivity extends AppCompatActivity {
         AlertDialog.Builder dialog_addPlayer = new AlertDialog.Builder(this);
 
         dialog_addPlayer.setView(view_new_player);
-        ArrayAdapter adapter_position = new ArrayAdapter(dialog_addPlayer.getContext(),android.R.layout.simple_spinner_item,position_item);
+        ArrayAdapter<String> adapter_position = new ArrayAdapter<>(dialog_addPlayer.getContext(),android.R.layout.simple_spinner_item,position_item);
         adapter_position.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_position.setAdapter(adapter_position);
 

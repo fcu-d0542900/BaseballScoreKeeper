@@ -9,21 +9,12 @@ import android.widget.LinearLayout;
  */
 
 public class RecordItemOtherBase {
-    public ImageView throwOne, throwTwo;
+    private ImageView throwOne, throwTwo;
     private ImageView showActionNameView, showPushNumView, showToBaseView;
     private LinearLayout showActionView, showThrowView;
     private ImageView showActionOneAcView, showActionTwoAcView;
     private ImageView actionOneNum, actionTwoNum;
-    private RecordItemOtherBase recordItemUI;
 
-
-    public void setBase1UI(RecordItemOtherBase viewHolder) {
-        recordItemUI = viewHolder;
-    }
-
-    public RecordItemOtherBase getBaseUI() {
-        return recordItemUI;
-    }
 
     public void setShowActionNameView(ImageView showActionNameView) {
         this.showActionNameView = showActionNameView;

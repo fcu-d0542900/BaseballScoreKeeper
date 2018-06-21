@@ -303,7 +303,7 @@ public class BaseCenterDialog {
 
                 //TODO YURU 更換守備資料直接叫下面的 method 然後改 player 的內容就好
                 //TODO YURU viewHolder.recordItem.getCurrentDefPlayer();
-                viewHolder.recordItem.getCurrentDefPlayer();
+                Player player = viewHolder.recordItem.getCurrentDefPlayer();
                 Toast.makeText(activity.getApplicationContext(), "OK " + change_garrison, Toast.LENGTH_SHORT).show();
             }
         });

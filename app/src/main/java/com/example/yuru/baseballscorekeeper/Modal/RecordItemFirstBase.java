@@ -10,10 +10,10 @@ import android.widget.ImageView;
 
 public class RecordItemFirstBase {
 
-    public ImageView showFirstViewOneTop, firstViewOneNum, showFirstViewOneBottom;
-    public ImageView showFirstViewOneAc1, showFirstViewOneAc2;
-    public ImageView firstViewTwoNum, showFirstViewTwoAc;
-    public ImageView firstViewThreeNum, showFirstViewThreeAc;
+    private ImageView showFirstViewOneTop, firstViewOneNum, showFirstViewOneBottom;
+    private ImageView showFirstViewOneAc1, showFirstViewOneAc2;
+    private ImageView firstViewTwoNum, showFirstViewTwoAc;
+    private ImageView firstViewThreeNum, showFirstViewThreeAc;
     private ImageView showZeroView;
     private FrameLayout showOneView, showTwoView, showThreeView;
     private ImageView showSacrificeFly, showSacrificeHits;

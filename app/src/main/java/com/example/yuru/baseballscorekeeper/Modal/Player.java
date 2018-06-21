@@ -1,7 +1,5 @@
 package com.example.yuru.baseballscorekeeper.Modal;
 
-import android.annotation.SuppressLint;
-
 import java.io.Serializable;
 
 /**
@@ -14,7 +12,7 @@ public class Player implements Serializable {
     private String name = "    ";  //姓名
     private POSITION position;  //守備位置
 
-    public Player() {
+    Player() {
         id = -1;
         name = "   ";
         position = POSITION.__;
@@ -54,12 +52,6 @@ public class Player implements Serializable {
         this.position = position;
         DatabaseService.getInstance().write();
 
-    }
-
-    @SuppressLint("DefaultLocale")
-    @Override
-    public String toString() {
-        return String.format("%d, %s, %d", getId(), getName(), getPosition());
     }
 
     public enum POSITION {

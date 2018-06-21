@@ -1,5 +1,6 @@
 package com.example.yuru.baseballscorekeeper;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,14 +28,11 @@ import java.util.Calendar;
 public class RecordActivity extends AppCompatActivity {
 
     String teamName;
-    private RecyclerView item_list;
     private RecordAdapter itemAdapter;
-    private RecyclerView.LayoutManager rLayoutManager;
 
     private View view_new_record;
     private EditText editText_gameName,editText_gameDate;
     private EditText editText_awayTeam,editText_homeTeam;
-    private Spinner spinner_awayTeam,spinner_homeTeam;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +42,12 @@ public class RecordActivity extends AppCompatActivity {
         Intent intent = this.getIntent();
         teamName = intent.getStringExtra("teamName");
 
-        item_list = findViewById(R.id.record_list);
+        RecyclerView item_list = findViewById(R.id.record_list);
 
         // 執行RecyclerView元件的設定
         item_list.setHasFixedSize(true);
         // 建立與設定RecyclerView元件的配置元件
-        rLayoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager rLayoutManager = new LinearLayoutManager(this);
         item_list.setLayoutManager(rLayoutManager);
 
         // 建立RecyclerView元件的資料來源物件
@@ -84,6 +82,7 @@ public class RecordActivity extends AppCompatActivity {
 
 
 
+    @SuppressLint("InflateParams")
     public void clickAddRecord(View view) {
 
         view_new_record = LayoutInflater.from(RecordActivity.this).inflate(R.layout.dialog_new_record, null);
@@ -93,16 +92,16 @@ public class RecordActivity extends AppCompatActivity {
         editText_gameDate = view_new_record.findViewById(R.id.editText_gameDate);
         editText_awayTeam = view_new_record.findViewById(R.id.editText_awayTeam);
         editText_homeTeam = view_new_record.findViewById(R.id.editText_homeTeam);
-        spinner_awayTeam = view_new_record.findViewById(R.id.spinner_awayTeam);
-        spinner_homeTeam = view_new_record.findViewById(R.id.spinner_homeTeam);
+        Spinner spinner_awayTeam = view_new_record.findViewById(R.id.spinner_awayTeam);
+        Spinner spinner_homeTeam = view_new_record.findViewById(R.id.spinner_homeTeam);
 
         AlertDialog.Builder dialog_addRecord = new AlertDialog.Builder(this);
 
         //建立一個ArrayAdapter物件，並放置下拉選單的內容
-        ArrayAdapter adapter_away = new ArrayAdapter(dialog_addRecord.getContext(),android.R.layout.simple_spinner_item,new String[]{"我的隊伍","自訂"});
+        ArrayAdapter<String> adapter_away = new ArrayAdapter<>(dialog_addRecord.getContext(),android.R.layout.simple_spinner_item,new String[]{"我的隊伍","自訂"});
         //設定下拉選單的樣式
         adapter_away.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        ArrayAdapter adapter_home = new ArrayAdapter(dialog_addRecord.getContext(),android.R.layout.simple_spinner_item,new String[]{"我的隊伍","自訂"});
+        ArrayAdapter<String> adapter_home = new ArrayAdapter<>(dialog_addRecord.getContext(),android.R.layout.simple_spinner_item,new String[]{"我的隊伍","自訂"});
         adapter_home.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinner_awayTeam.setAdapter(adapter_away);

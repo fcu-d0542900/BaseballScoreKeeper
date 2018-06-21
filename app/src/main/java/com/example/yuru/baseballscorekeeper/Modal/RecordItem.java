@@ -23,7 +23,7 @@ public class RecordItem implements Serializable {
 
     // user infomation
     private Player attPlayer;
-    private List<Player> defPlayer;
+    private List<Player> defPlayer = new ArrayList<>();
     private boolean score = false;
 
     private boolean isEND = false;
@@ -96,7 +96,7 @@ public class RecordItem implements Serializable {
         save();
     }
 
-    public void setHIT_Num(HITS_NUM num) {
+    private void setHIT_Num(HITS_NUM num) {
         HIT_Num = num;
         save();
     }
@@ -198,13 +198,12 @@ public class RecordItem implements Serializable {
         return attPlayer;
     }
 
-    public boolean changeAttPlayer(Player player) {
+    public void changeAttPlayer(Player player) {
         if (player.getId() == attPlayer.getId())
-            return false;
+            return;
         attPlayer = player;
         isChangeHitter = true;
         save();
-        return true;
     }
 
     public void addDefPlayer(Player player) { //boolean換掉
@@ -267,10 +266,6 @@ public class RecordItem implements Serializable {
 
     private int getImageByNumber(int num) {
         return getImageByNumber(BALL_DIRECTION.values()[num]);
-    }
-
-    private int getImageByPushNumber(int num) {
-        return getImageByPushNumber(BALL_DIRECTION.values()[num]);
     }
 
     private int getImageByNumber(BALL_DIRECTION direction) {
@@ -478,7 +473,7 @@ public class RecordItem implements Serializable {
             base.setShowPushNumViewVisibility(true);
             base.setShowPushNumValue(getImageByPushNumber(ballPushNum[base_int]));
         }
-        if (isTo_BASE[base_int] == true) {
+        if (isTo_BASE[base_int]) {
             base.setShowToBaseViewVisibility(true);
         }
 
@@ -622,7 +617,6 @@ public class RecordItem implements Serializable {
         pitchBallView.removeAllViews();
         Log.d("ahkui pitch ball", new Gson().toJson(getPitchBall()));
         pitchBallView.removeAllViews();
-        int index = 0;
         for (int id :
                 getPitchBall()) {
             ImageView imageView = new ImageView(activity);
@@ -633,7 +627,6 @@ public class RecordItem implements Serializable {
             );
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
             pitchBallView.addView(imageView, layoutParams);
-            index++;
         }
     }
 

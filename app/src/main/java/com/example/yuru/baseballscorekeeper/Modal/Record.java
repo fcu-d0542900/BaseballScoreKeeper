@@ -17,8 +17,8 @@ public class Record implements Serializable {
     public Record(String name, String awayTeam, String homeTeam, Date date) {
         this.name = name;
         this.date = date;
-        this.away = new RecordTeam(awayTeam, RecordTeam.Faction.away);
-        this.home = new RecordTeam(homeTeam, RecordTeam.Faction.home);
+        this.away = new RecordTeam(awayTeam);
+        this.home = new RecordTeam(homeTeam);
         this.currenFaction = RecordTeam.Faction.away;
     }
 

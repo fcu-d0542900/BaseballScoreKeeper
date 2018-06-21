@@ -21,9 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private String myTeamName;
     private DatabaseService database = DatabaseService.getInstance();
 
-    private TextView text_setTeamName ;
     private EditText editText_setTeamName ;
-    private View view_setTeamName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +60,9 @@ public class MainActivity extends AppCompatActivity {
 
     //點選棒球設定隊伍名稱
     public void fn_setTeamName(View view) {
-        view_setTeamName = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog_set_team_name, null);
+        View view_setTeamName = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog_set_team_name, null);
         view_setTeamName.setPadding(10,30,10,0);
-        text_setTeamName = view_setTeamName.findViewById(R.id.text_setTeamName);
+        TextView text_setTeamName = view_setTeamName.findViewById(R.id.text_setTeamName);
         editText_setTeamName = view_setTeamName.findViewById(R.id.editText_setTeamName);
         if(database.getDatabase().getTeamName() != null) {
             text_setTeamName.setText(database.getDatabase().getTeamName());
@@ -85,11 +83,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /* remove later */
-    private void test(){
-        DatabaseService.getInstance().getDatabase().addRecord(new Record("大專盃預賽","2018/6/8","a", Calendar.getInstance().getTime()));
-        DatabaseService.getInstance().getDatabase().addRecord(new Record("人言盃","2018/6/10","a",Calendar.getInstance().getTime()));
-        DatabaseService.getInstance().getDatabase().addRecord(new Record("大專盃複賽","2018/6/15","a",Calendar.getInstance().getTime()));
-
-    }
 }
