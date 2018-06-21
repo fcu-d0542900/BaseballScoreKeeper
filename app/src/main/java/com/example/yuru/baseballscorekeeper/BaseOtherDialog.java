@@ -54,8 +54,6 @@ public class BaseOtherDialog {
                 break;
         }
 
-
-
         //設定對話框內的項目
         builder.setItems(items, new DialogInterface.OnClickListener(){
             @Override

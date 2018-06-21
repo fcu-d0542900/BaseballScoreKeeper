@@ -10,10 +10,10 @@ import java.util.Date;
  */
 
 public class Record implements Serializable {
-    private String name;
-    private Date date;
-    private RecordTeam away;
-    private RecordTeam home;
+    private String name;  //比賽名稱
+    private Date date;  //比賽日期
+    private RecordTeam away;  //客隊名稱
+    private RecordTeam home;  //主隊名稱
     private RecordTeam.Faction currenFaction;
 
     public Record(String name, String awayTeam, String homeTeam, Date date) {

@@ -261,7 +261,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                     baseOtherDialog = new BaseOtherDialog();      //設定baseOtherDialog並顯示
                     baseOtherDialog.setActivity(activity);
                     baseOtherDialog.setBaseUI(viewHolder.base2);
-                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"}, 2);
+                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進(數字)","進壘(箭頭)"}, 2);
                     Toast.makeText(v.getContext(), "二壘" , Toast.LENGTH_SHORT).show();
 
                 }
@@ -274,7 +274,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                     baseOtherDialog = new BaseOtherDialog();  //設定baseOtherDialog並顯示
                     baseOtherDialog.setActivity(activity);
                     baseOtherDialog.setBaseUI(viewHolder.base3);
-                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"}, 3);
+                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進(數字)","進壘(箭頭)"}, 3);
                     Toast.makeText(v.getContext(), "三壘" , Toast.LENGTH_SHORT).show();
                 }
             });
@@ -286,7 +286,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                     baseOtherDialog = new BaseOtherDialog();  //設定baseOtherDialog並顯示
                     baseOtherDialog.setActivity(activity);
                     baseOtherDialog.setBaseUI(viewHolder.base);
-                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進","進壘"},0);
+                    baseOtherDialog.setBaseOtherDialog(viewHolder,new String[]{"推進(數字)","進壘(箭頭)"},0);
                     Toast.makeText(v.getContext(), "本壘" , Toast.LENGTH_SHORT).show();
 
                 }

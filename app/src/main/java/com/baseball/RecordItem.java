@@ -29,7 +29,9 @@ public class RecordItem implements Serializable {
     private BALL_DIRECTION ballDirection = BALL_DIRECTION.__;
     private BALL_TYPE DIETYPE = BALL_TYPE.__;
 
+    //得分/出局種類
     private RUNS_OUT RUN_OUT_TYPE = RUNS_OUT.__;
+    //幾壘安打
     private HITS_NUM HIT_Num = HITS_NUM.__;
 
     private int BALL_TOUCH_AC1;
