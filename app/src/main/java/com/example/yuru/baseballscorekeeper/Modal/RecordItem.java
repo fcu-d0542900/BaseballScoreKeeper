@@ -246,8 +246,9 @@ public class RecordItem implements Serializable {
                 return R.drawable.bunt_foul;
             case HIT:
                 return R.drawable.hit_ball;
+            default:
+                return R.drawable.empty;
         }
-        return R.drawable.strike;
     }
 
 
