@@ -31,6 +31,7 @@
                         android:id="@+id/relativeLayout__ballView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
                         android:orientation="vertical"></LinearLayout>
 
                     <ImageView
@@ -789,6 +790,7 @@
                             android:layout_gravity="center"
                             android:rotation="-45"
                             android:scaleType="centerInside"
+                            android:visibility="gone"
                             app:srcCompat="@drawable/runs" />
 
                         <TextView
